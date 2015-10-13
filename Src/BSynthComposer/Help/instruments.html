@@ -1,0 +1,265 @@
+<html>
+<head>
+<title>Instruments</title>
+</head>
+<body>
+<h1><i>BasicSynth</i> Instruments</h1>
+<p>
+    <i>BasicSynth</i> includes nine different synthesis instruments. Each instrument
+    is a collection of unit generators, the fundamental signal processing unit in a software synthesizer. 
+    A unit generator may generate an audio signal,
+    a control signal, or process an input same in some manner. 
+</p>
+<ul>
+	<li><a href="toneinstr.html">Tone Instrument</a><br /></li>
+	<li><a href="tonefminstr.html">FM Tone Instrument</a><br /></li>
+	<li><a href="fmsynthinstr.html">FM Synthesis Instrument</a><br /></li>
+	<li><a href="addsynthinstr.html">Additive Synthesis Instrument</a><br /></li>
+	<li><a href="subsynthinstr.html">Subtractive Synthesis Instrument</a><br /></li>
+	<li><a href="buzzsynthinstr.html">Subtractive Synthesis Instrument using BUZZ</a><br /></li>
+	<li><a href="wfsynthinstr.html">Wave File Playback Instrument</a><br /></li>
+	<li><a href="matsynthinstr.html">Matrix Synthesis Instrument</a><br /></li>
+	<li><a href="chufferinstr.html">Chuffer (Noise) Instrument</a><br /></li>
+	<li><a href="modsynthinstr.html">Modular Instrument</a><br/></li>
+	<li><a href="gminstr.html">General MIDI Instrument</a><br/></li>
+	<li><a href="sfinstr.html">Sound Bank Instrument</a><br/></li>
+</ul>
+ <p>
+An instrument patch defines the connections between unit generators. 
+Instruments can be pre-patched, partially-patched, or un-patched. 
+The connections in a pre-patched instrument are made internally by the 
+program and cannot be changed. Pre-patched 
+instruments can be quickly configured since you only need to set the parameters
+to the instrument. A partially-patched instrument makes some connections
+internally, but the patch can be varied somewhtat by enabling or disabling
+one or more unit generators. Partially-patched instruments require more
+effort to configure, but allow for a wider range of sounds.
+An un-patched instrument requires you to select
+the unit generators, create a patch, and then set the parameters for each unit generator.
+Un-patched instruments require the most effort (and knowledge) to configure, but
+allow use of a wide range of synthesis techniques.
+</p>
+<p>
+An instrument, patch, and parameters together define an instrument configuration. Each instrument
+configuration is given a name and can be referenced in the score by that name. Although there
+are a limited number of instruments in <i>BasicSynth,</i> there can be an unlimited number
+of instrument configurations. 
+</p>
+
+<h3>Patch Diagrams</h3>
+<p>Each instrument is represented by a patch diagram using the symbols shown in the
+following table. </p>
+<table border="1" cellspacing="0" cellpadding="4">
+ <tr valign="top" style="background-color: Black; color: White;">
+<td>Symbol</td>
+<td>Meaning</td>
+</tr>
+    <tr>
+        <td><img alt="osc" src="images/oscillator.jpg" /></td>
+        <td>Oscillator. The symbol used in BasicSynth is slightly different than the 
+	one commonly used in books on computer music. The amplitude of the
+	oscillator is not shown as an input because the instruments typically
+	control amplitude by multiplying the output by an amplitude control.
+	The middle input is a phase modulation input. The waveform input
+	is an ID value that must match a table defined in the project.</td>
+    </tr>
+    <tr>
+        <td><img alt="envelope" src="images/envelope.jpg" /></td>
+        <td>Envelope generator. The number of rates and levels varies
+	with the type of envelope.</td>
+    </tr>
+    <tr>
+        <td><img alt="filter" src="images/filter.jpg" /></td>
+        <td>Filter. Bandpass filters, and filters with resonance, have an additional input to control the bandwidth.</td>
+    </tr>
+    <tr>
+        <td><img alt="amplifier" src="images/amp.jpg" /></td>
+        <td>Amplifier (volume control). Patch diagrams also use a multiply to indicated volume level modification.</td>
+    </tr>
+    <tr>
+        <td><img alt="delay line" src="images/delay.jpg" /></td>
+        <td>Delay line.</td>
+    </tr>
+    <tr>
+        <td><img alt="sum" src="images/sum.jpg" /></td>
+        <td>Addition of two signals</td>
+    </tr>
+    <tr>
+        <td><img alt="multiply" src="images/multiply.jpg" /></td>
+        <td>Multiply two signals</td>
+    </tr>
+    <tr>
+        <td><img alt="label" src="images/label.jpg" /></td>
+        <td>Generic generator or connection to another part of the diagram.</td>
+    </tr>
+    <tr>
+        <td><img alt="switch" src="images/switch.jpg" /></td>
+        <td>Selection between inputs (switch).</td>
+    </tr>
+    <tr>
+        <td><img alt="param" src="images/param.jpg" /></td>
+        <td>Input parameter value.</td>
+    </tr>
+</table>
+<h3>Instrument Editors</h3>
+<p>
+Because each instrument implements a different patch, and has different parameters,
+each instrument is configured with a specialized editor. However, all instrument
+editors are built from a common set of display controls. 
+</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr valign="top">
+<td><img src="images/formlabel.jpg" alt="form label"> </td>
+<td>Labels are used to identify input controls or groups. A label with a black background is an input
+field. When you click on the input field a popup form allows you to enter a value.
+</td>
+</tr>
+<tr valign="top">
+<td><img src="images/formswitch.jpg" alt="form switch"> </td>
+<td>Switches are used to turn an option on and off. Button switches are rectangular and appear pressed-in when
+selected. Lamp switches have a circular or rectangle "lamp" that changes color when selected. Switches are
+used to select a wavetable, an envelope curve type, or change the range of a parameter.
+</td>
+</tr>
+<tr valign="top">
+<td><img src="images/formwtsel.jpg" alt="form wavetable select"> </td>
+<td>Oscillators typically have a wavetable select group on the form. Standard waveforms are given
+separate switches and labeled with the waveform. User defined waveforms are selected by clicking
+on the [Select] button and then selecting the waveform from a popup form. The [Other] button will
+be selected when a waveform other than the standard list has been selected.
+</td>
+</tr>
+<tr valign="top">
+<td><img src="images/formknob.jpg" alt="form knob"></td>
+<td><p>Knobs and sliders are used to change a value that varies over a specified range. Typical uses are
+to vary the frequency of an oscillator, or set an envelope rate and level. To enter a value with a knob, hold
+the mouse button down over the knob image while moving the mouse in a circular motion. The rate
+of change for a knob can be varied using the control and shift keys. When the control key is held
+down, the value changes at 1/10th the normal rate. When the shift key is held down, the value changes
+at 10 times the normal rate. When both the control and shift keys are held down, the value
+increments at 100 times the normal rate. The normal rate for a knob varies depending on the
+range of the value, but typically changes the value by 0.01 for each pixel of movement on the screen.
+Knobs have a label placed below or to the side of the knob that shows the current value. 
+You can click on the label and enter the value directly in a pop-up form.
+</p>
+</td>
+</tr>
+<tr valign="top">
+<td><img src="images/formfrqgrp.jpg" alt="form frequency group"></td>
+<td>A frequency group is used on some instruments to set frequency using a combination of course and fine
+selection. The course knob increments in integers while the fine increments over the range of [0,1] in
+thousandths. The frequency multiple is the sum of the two controls.
+</td>
+</tr>
+<tr valign="top">
+<td><img src="images/formenvseg.jpg" alt="form envelope segment"></td>
+<td>Some envelopes have a variable number of segments where each segment is configured with
+a pair of knob controls. One knob sets the rate while the other sets the end level.
+Two switch groups apply to each segment. The rate group defines the interpretation of the
+rate value. When the "%" mode is selected, the rate value indicates a portion of the note 
+duration. When the "T" (time) mode is selected, the rate value is a fixed time in seconds.
+When the "R" (remainder) mode is selected, the rate value is a portion of the remainder
+of the duration minus all other segment rates. Only one segment should be configured
+as a "R" segment. The curve type group changes the segment from linear (Li), exponential (Ex) or logarithmic (Ln).
+</td>
+</tr>
+<tr valign="top">
+<td><img src="images/formcmd.jpg" alt="form command"></td>
+<td>Forms have two common command buttons labeled <b>Set</b> and <b>Restore</b>. The <b>Set</b>
+button takes a snapshot of the current settings. If you make changes and want to go back to a 
+previous configuration, the <b>Restore</b> button sets the instrument back to the last set of
+values saved with <b>Set</b>.
+</td>
+</tr>
+</table>
+<h3>Oscillators</h3>
+<p>
+Oscillator frequency is configured by setting the either the fundamental frequency or a frequency multiple.
+The frequency multiple is a value that will be multiplied by the frequency of the note when the
+instrument is started. 
+</p>
+<p>
+Almost all oscillators used in <i>BasicSynth</i> are wavetable oscillators. One cycle of the waveform
+is stored in a table and then repeatedly scanned. During configuration you must select which wavetable
+is to be used. Ten wavetables are predefined, but you may add as many wavetables as you need using
+the wavetable editor.
+</p>
+<p>
+For most instruments, oscillator amplitude is controlled by multiplying the oscillator output
+with an envelope generator output. 
+The modular synthesis instrument, however, provides an amplitude input to the oscillators so that you
+can set the amplitude to a fixed level, or set the amplitude from another unit generator. 
+</p>
+<h3>Envelope Generators</h3>
+<p>
+Three different envelope generators are used in <i>BasicSynth</i>, AR, ADSR, and variable-segment. 
+An AR envelope consists of attack, optional sustain, and decay segments. The ADSR envelope consists
+of attack, decay, sustain, and release segments. For some instruments, the start and end
+level of an ADSR envelope can be set specifically. This is typically the case when the envelope
+is applied to a modulator oscillator.
+A variable-segment envelope has a variable number of segments, each defined by a rate and a level. 
+To configure a variable-segment envelope, you first select the number of segments you want, set the
+start value, and then set the rate and level for each segment.
+</p>
+<p>
+Envelopes can be constructed from linear, exponential or logarithmic curves. For the AR and ADSR
+envelopes, the same curve applies to all segments. For a variable-segment envelope, the curve can be
+set separately for each segment.
+</p>
+<p>
+The rate value for an envelope segment is typically defined as a fixed amount of time in seconds. 
+However, the rate can also be configured to specify an amount of time relative to the duration
+of the note. For example, if the attack rate is configured to 0.5 and note duration is one second, 
+the attack would last 0.5 seconds. If the note duration is shortened to one-half second, the attack
+rate would be reduced to 0.25 seconds. A rate can also be specified as the remainder of the duration
+after all other segments have been computed. Obviously, only one segment should be configured
+as a remainder value. Note: not all instrument editors provide these variations. The simpler, pre-patched
+instruments only allow a fixed rate value.
+</p>
+<p>
+Envelope level values can cover any appropriate range. When used for amplitude control, the
+range should be set to [0,1]. However, when an oscillator is used as a modulator, the range
+may indicate an index of modulation and will typically vary over the range [0,20]. Likewise,
+when an envelope is used to set the cutoff frequency of a filter, the range can vary from
+0 to 10kHz.
+</p>
+<p>
+Envelopes generators provide an automatic sustain feature. When sustain is enabled, the
+final segment of the envelope will be delayed until a release event is recieved. When
+sustain is turned off, the envelope will begin the final segment without waiting for
+the release event. The ADSR envelope always has sustain on, but, since the
+sustain level can be set to zero, it can function as if the sustain was turned off.
+</p>
+<h3>Filters</h3>
+<p>
+The center frequency on most filters can be set anywhere between zero and 10kHz. The editor
+controls for filter frequency are set to range from 0 to 10. 
+A value of 1 represents 1kHz, 0.5 represents 500Hz, etc.
+</p>
+<h3>LFO and Pitch Bend</h3>
+<p>
+Several instruments include LFO and Pitch bend units. The LFO unit includes a wavetable
+oscillator and a single segment envelope. The envelope provides a delayed application
+of the LFO oscillator to the instrument, set by the LFO attack rate. The LFO amp
+parameter is interpreted as semi-tones of variation. The actual amplitude of the
+LFO unit is calculated based on the instrument frequency in order that the frequency
+variation is a consistent portion of the instrument frequency.
+</p>
+<p>
+The pitch bend operates in one of two modes. In the first mode, the unit defines
+three amounts and two rates. The first amount defines the starting pitch offset,
+the second amount defines the held pitch level, and the third the amount at the
+end of the note. All levels are specified in semi-tones above or below the instrument
+base frequency. The first rate defines the time in seconds to transition from level
+one to level two, while the second rate defines the time to transition from level
+two to level three. In the second mode, the unit scans a wavetable once during the
+duration of the note and multiplies the wavetable values by an scale. Mode 1 is
+enabled when the "on" parameter is set. Mode 2 is enabled whenever the "amp" value
+is non-zero.
+</p>
+<p>
+Instrument parameters are identified by a number, an XML tag and a short name that
+is used in a <a href="Notelist.html#map">Notelist <i>map</i> </a>statement.
+</p>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<synthprj>
+  <name>Test Project</name>
+  <desc>A Test of SFPlayer params</desc>
+  <author>Composer Name</author>
+  <cpyrgt>Copyright stuff</cpyrgt>
+  <out type="1" lead="0" tail="0.5">sfplayer.wav</out>
+  <synth sr="44100" wt="16384" usr="1">
+    <wvtable ndx="10" parts="3" >
+      <part mul="1" amp="1.0" phs="0"/>
+      <part mul="2" amp="0.5" phs="0"/>
+      <part mul="4" amp="0.2" phs="0"/>
+    </wvtable>
+  </synth>
+  <mixer chnls="4" fxunits="1" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="0.707" pan="0"/>
+    <chnl cn="1" on="1" vol="0.707" pan="0"/>
+    <reverb unit="0" vol="0.4" rvt="2.5" pan="0">
+      <send cn="0" amt="0"/>
+      <send cn="1" amt="0"/>
+    </reverb>
+  </mixer>
+  <sf2 mod="0" name="Unison">C:\Documents and Settings\Dan Mitchell\My Documents\BasicSynth\SoundFonts\Unison.sf2</sf2>
+  <instrlib>
+    <instr id="1" type="SoundBank" name="Piano">
+      <sf bank="0" preset="0" modFrq="0" modPan="0" frqscl="0" panscl="0" sfenv="1">
+        <file>Unison</file>
+        <preset>ACOUSTIC GRAND PIANO</preset>
+      </sf>
+      <venv	st="0" atk="0.005" pk="1.0" dec="0.01" sus="0.95" rel="0.01" end="0" ty="1" />
+      <menv	st="0" atk="0.005" pk="1.0" dec="0.01" sus="0.95" rel="0.01" end="0" ty="1" />
+      <vlfo frq="3.5" wt="0" atk="0" amp="0" />
+      <mlfo frq="3.5" wt="0" atk="0" amp="0" />
+    </instr>
+    <instr id="2" type="SoundBank" name="Clarinet">
+      <sf bank="0" preset="71" modFrq="0" modPan="0" frqscl="0" panscl="0" sfenv="1">
+        <file>Unison</file>
+        <preset>CLARINET</preset>
+      </sf>
+      <venv	st="0" atk="0.005" pk="1.0" dec="0.01" sus="0.95" rel="0.01" end="0" ty="1" />
+      <menv	st="0" atk="0.005" pk="1.0" dec="0.01" sus="0.95" rel="0.01" end="0" ty="1" />
+      <vlfo frq="3.5" wt="0" atk="0" amp="0" />
+      <mlfo frq="3.5" wt="0" atk="0" amp="0" />
+    </instr>
+  </instrlib>
+  <score name="SFPlayer" dbg="0">tstsoundbank.nl</score>
+</synthprj>

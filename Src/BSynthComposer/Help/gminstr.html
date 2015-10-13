@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>General MIDI Instrument</title>
+</head>
+<body>
+<h2>General MIDI Instrument<hr/></h2>
+<p>The <i>GM </i> instrument emulates a MIDI wavetable synthesis keyboard instrument with downloadable sounds. The sound files may
+be loaded from either a SoundFont&reg; (SF2) or DLS sound bank. The present version of this instrument does not implement all possible features of
+the GM specification and sound bank player, but is sufficient to play most sound bank files based on recorded sounds. In particular, modulators that
+override implied connections are ignored and only some MIDI controller values are recognized and applied to the instrument. </p>
+<p>In order to play sounds using a GM sound bank, the sound bank must be added to the project. An instrument of type GMPlayer must be
+added and configured to reference the sound bank. Specific sounds are selected using the MIDI bank and program values, or using
+the configuration values for the instrument. Multiple sound banks can be loaded and used by creating multiple GMPlayer instruments, one
+for each sound bank.</p>
+<h3>Patch Diagram<hr/></h3>
+<p>The following diagram shows the GM Player object internal structure.</p>
+<img src="images/gmplayerdiag2.jpg" alt="GM diagram" />
+<p>This synthesis model is typical of instruments for SF2 and DLS sound bank files. It sums together values for key number,
+vibrato LFO, pitch wheel and pitch bend envelope to determine the playback frequency. It sums together values for volume,
+note-on velocity, envelope and modulation LFO to determine the volume level. The modulation wheel adds to the levels
+for vibrato and tremolo.</p>
+<h3>Configuration<hr/></h3>
+<p>The General MIDI Instrument editor is shown below.</p>
+<img src="images/gmplayered.jpg" alt="GM editor" />
+<p>Normally, the values for note on volume, pan, bank, and patch are received as MIDI events. 
+The four switches under "Internal" can be used to override the default MIDI values. Use the other controls
+to set the override values. The override for volume is set in the Notelist score. 
+The override for Pan is the value set on the mixer channel.</p>
+<p>The "Atten" setting sets an attenuation scaling for the sound bank. Some sound banks (especially older SF2 files)
+need to be scaled in order to correct for the limited dynamic range of some synthesizers. By setting an attenuation
+value less than 1.0 the overall dynamic range of the sounds is decreased and may provide a better balance between
+sounds. When needed, a value of 0.375 is typical.</p>
+<h4>Project and Notelist ID Values</h4>
+<p>Because synthesis parameters are loaded from either the sound bank or received from MIDI controls,
+the GM instrument does not have configuration values for synthesis parameters. 
+However, configuration values setable on the instrument
+can override the MIDI bank and patch values. The volume, pan and effects controllers are usually routed to the mixer. Because some
+SoundFont and DLS presets have internal pan values that are important to the sound, the instrument can bypass the mixer inputs
+and supply channel volume and pan values directly.  </p>
+<p>The <i>local</i> parameter can be used to override the default volume, pan and patch values for the instrument. 
+The following values can be added to control local override for the instrument.</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr valign="top" style="background-color:Black;color:White;"><td>Override</td><td>Bit value</td></tr>
+<tr><td>Bank</td><td>1</td></tr>
+<tr><td>Patch</td><td>2</td></tr>
+<tr><td>Pan</td><td>4</td></tr>
+<tr><td>Effects</td><td>8</td></tr>
+<tr><td>Volume</td><td>16</td></tr>
+</table>
+<p>When the <i>bank</i> and <i>patch</i> flags are clear,  the current MIDI values are used for bank and program.
+ When set, the values must be set using the bank and patch parameter values. 
+ When the <i>volume</i>, <i>pan</i> or <i>effects</i> flags are clear, the 
+associated MIDI control value is not applied to the sound at the instrument level. These MIDI values are normally routed
+to the mixer and applying them at the instrument level would double their respective effects. When these flags are set, the
+MIDI controller values are applied by the instrument and the mixer input is bypassed.</p>
+<p>Attenuation scaling is used to compress the initial attenuation values found in the SF2 or DLS file. This is necessary
+for some files to compensate for the dynamic range of the original instrument. The scaling value is in db and represents 
+the dynamic range desired. For example, setting attenuation to 60dB causes attenation values to be compressed into
+a range of 0 to 60dB rather than the default range of 0 to 96dB.</p>
+<p>The following table shows the parameter ID numbers and the
+equivalent XML tag and attribute values for the GM instrument. </p>
+
+<table border="1" cellspacing="0" cellpadding="4">
+ <tr valign="top" style="background-color:Black;color:White;">
+  <td><p align="center"><b>Parameter</b></p></td>
+  <td><p align="center"><b>Tag</b></p></td>
+  <td><p align="center"><b>Attribute</b></p></td>
+  <td><p align="center"><b>Name</b><p></td>
+  <td><p align="center"><b>Use</b></p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>16</p></td>
+  <td><p>gm</p></td>
+  <td><p>local</p></td>
+  <td><p>local</p></td>
+  <td><p>Flags to control local override for patch, volume and pan settings.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>17</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>bank</p></td>
+  <td><p>bank</p></td>
+  <td><p>Patch bank number.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>18</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>prog</p></td>
+  <td><p>prog</p></td>
+  <td><p>Patch program number.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>19</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>attn</p></td>
+  <td><p>attn</p></td>
+  <td>  <p>Attenuation scaling.</p></td>
+ </tr>
+</table>
+<h3>XML Format<hr/></h3>
+<pre>
+&lt;instr id=&quot;&quot; type=&quot;GMPlayer&quot; name=&quot;&quot; desc=&quot;&quot;&gt;
+   &lt;gm local=&quot;1&quot; bank=&quot;0&quot; prog=&quot;0&quot; atten=&quot;96&quot;&gt;
+     Soundbank Name
+   &lt;/gm&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

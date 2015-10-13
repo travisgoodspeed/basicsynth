@@ -1,0 +1,17 @@
+This program demonstrates the effect of summing harmonic frequencies. As such, it implements a simple Fourier series synthesis method.
+
+The amplitude of each partial is set with the sliders or edit fields. The amplitude ranges from 0-1. Changing a slider automatically updates the edit field. Entering a value in the edit field will update the slider on exit from the edit field. Changes to the amplitude values will update the waveform plot when one of the top row function buttons is pressed.
+
+Refresh - this button will update the plot with the current values.
+
+Preset Waveforms - The four preset waveform buttons will set the amplitudes of the partials to produce the indicated waveform.
+
+Gibbs On/Off - When "ON" this will adjust the amplitude values for the "Gibbs phenonmen" by applying the Lanczos sigma value to the amplitude of all partials > 1.
+
+To hear the waveform, press the Play (>) button or Loop () button. The play button will play two seconds of the sound. The Loop button will repeat the sound until the Stop [] button is pressed. 
+
+The pitch entry field can be used to change the pitch. Pitch is specified with an integer value 0-120 with Middle C at 60 (ala MIDI).
+
+The "loudspeaker" button will save the sound to a .WAV file. The "disk" button will save the plot to a metafile (.EMF) that can be displayed in a word processor or graphics program. The metafile can be placed on the clipboard with the "copy" button.
+
+

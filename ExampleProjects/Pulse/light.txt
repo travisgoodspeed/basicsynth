@@ -1,0 +1,30 @@
+u 0.05
+p F10 E10 D#10 D10 E10 D#10 F#10 G10
+s Light
+s Let there be Light
+u 0.04
+s the light shineth in darkness
+s the darkness comprehended it not
+s men loved darkness rather than light
+s men loved darkness
+s what communion hath light with darkness
+s no communion with darkness
+u 0.03
+s the darkness did not comprehended
+s in darkness the light shines
+u 0.02
+s speak ye in light
+s children of light
+s abideth in the light
+
+u 0.025
+p F10 Eb10 Eb10 Db10 C10 Ab10 F10 Db10
+s Christ shall give thee light
+s the true light now shineth
+s Let your light shine
+s put on the armour of light
+s the Lamb is the light
+u 0.02
+s In him was life
+s in him is no darkness at all
+s the life was the light of men

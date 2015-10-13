@@ -1,0 +1,658 @@
+<html>
+<head>
+<title>Chuffer</title>
+</head>
+<body>
+<h2>Chuffer (Noise) Instrument</h2>
+<p>
+The <i>Chuffer</i> instrument combines a noise generator and variable 
+filter to produce a variety of noise effects. These can vary from slowly changing
+wind sounds to short clicks and pops. Both the filter and amplitude can be swept
+with LFO oscillators.
+</p>
+<h3>Patch Diagram</h3>
+<img src="images/chufferdiag.jpg" alt="Chuffer diagram"/>
+<h3>Configuration</h3>
+<p>
+The noise generator combines a sampled noise source (RandH) and optional ring-modulator
+oscillator. Lowering the sample rate on the noise generator results in a more slowly
+changing random series and thus reduces the high-frequency content of the noise
+signal. Applying the modulation oscillator can impart a sense of pitch to the noise.</p>
+<p>
+The amplitude envelope is a simple AR type with a sustain portion that can be switched
+on and off. In addition, the release rate can be fixed or set to automatically follow
+the actual duration of the note. A LFO oscillator with selectable waveform and amplitude
+can be applied to the noise signal to produce a variety of effects. When set at
+a low frequency and a sine wave, it produces a sweeping sound, such as wind, helicopter,
+etc. When the LFO is set to higher rates and using square or sawtooth waveforms,
+it can produce a "chopped" output that simulates rattle-like sounds.</p>
+<p>
+The filter is a two-pole lowpass filter with a resonant peak around the cutoff frequency.
+Filter Q is defined as Fc/BW so that a higher value for Q produces a smaller frequency
+band in the resonant area around the cutoff frequency. Since Q is relative to the
+cutoff frequency, the resonance varies proportionally to the center frequency. Typically,
+Q varies between 1 and a maximum around 50. Both the center frequency and Q for
+the filter can be dynamic. Each is specified by a start value, end value, and rate
+in seconds. The start value for the filter frequency can be set to follow the pitch
+of the note. The end values for frequency and Q can be set as a multiple (or fraction)
+of the start value so that as the start value changes from note to note the end
+value will track the changes. In addition, a LFO oscillator can be added to the
+center frequency value to produce dynamic filter sweeps, simulating sounds such
+as wind or a fan.</p>
+<p>
+The <i>Chuffer</i> includes a settable rate for recalculation of the filter coefficients.
+Since this calculation is time consuming, and filter frequencies may not change
+quickly, setting this rate can significantly reduce the processing time taken to
+generate each sample. The coefficient rate indicates the number of samples between
+re-calculation. A value of 0 causes coefficients to be recalculated on each sample if needed.</p>
+
+    <table border="1" cellspacing="0" cellpadding="4">
+        <tr valign="top" style="background-color: Black; color: White;">
+            <td>
+                <p align="center">
+                    <b>Parameter</b></p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Tag</b></p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Attribute</b></p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Name</b><p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Use</b></p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    16</p>
+            </td>
+            <td>
+                <p>
+                    sig</p>
+            </td>
+            <td>
+                <p>
+                    atk</p>
+            </td>
+            <td>
+                <p>
+                    atk</p>
+            </td>
+            <td>
+                <p>
+                    Envelope attack rate</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    17</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    rel</p>
+            </td>
+            <td>
+                <p>
+                    rel</p>
+            </td>
+            <td>
+                <p>
+                    Envelope release rate</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    18</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    son</p>
+            </td>
+            <td>
+                <p>
+                    suson</p>
+            </td>
+            <td>
+                <p>
+                    Envelope sustain on (1) or off (0)</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    19</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    trkd</p>
+            </td>
+            <td>
+                <p>
+                    etrkd</p>
+            </td>
+            <td>
+                <p>
+                    Envelope release tracks note duration (1) or is fixed (0).</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    20</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    hrate</p>
+            </td>
+            <td>
+                <p>
+                    hrate</p>
+            </td>
+            <td>
+                <p>
+                    Hold period for noise samples as a fraction of the sample rate. A value of 1 produces
+                    'white' noise. Lower values reduce the high-frequency content of the signal. The
+                    maximum value is 1.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    21</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    mfrq</p>
+            </td>
+            <td>
+                <p>
+                    modfrq</p>
+            </td>
+            <td>
+                <p>
+                    Ring modulator frequency.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    22</p>
+            </td>
+            <td>
+                <p>
+                    chp</p>
+            </td>
+            <td>
+                <p>
+                    frq</p>
+            </td>
+            <td>
+                <p>
+                    chfrq</p>
+            </td>
+            <td>
+                <p>
+                    Amplitude "chopper" oscillator frequency.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    23</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    amp</p>
+            </td>
+            <td>
+                <p>
+                    champ</p>
+            </td>
+            <td>
+                <p>
+                    Amplitude "chopper" oscillator amplitude.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    24</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    wt</p>
+            </td>
+            <td>
+                <p>
+                    chwt</p>
+            </td>
+            <td>
+                <p>
+                    Amplitude "chopper" oscillator wavetable id.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    25</p>
+            </td>
+            <td>
+                <p>
+                    swp</p>
+            </td>
+            <td>
+                <p>
+                    frq</p>
+            </td>
+            <td>
+                <p>
+                    swpfrq</p>
+            </td>
+            <td>
+                <p>
+                    Filter sweep oscillator frequency.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    26</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    amp</p>
+            </td>
+            <td>
+                <p>
+                    swpamp</p>
+            </td>
+            <td>
+                <p>
+                    Filter sweep oscillator amplitude.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    27</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    wt</p>
+            </td>
+            <td>
+                <p>
+                    swpwt</p>
+            </td>
+            <td>
+                <p>
+                    Filter sweep oscillator wavetable id.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    30</p>
+            </td>
+            <td>
+                <p>
+                    flt</p>
+            </td>
+            <td>
+                <p>
+                    f1</p>
+            </td>
+            <td>
+                <p>
+                    f1</p>
+            </td>
+            <td>
+                <p>
+                    Starting value for filter center frequency.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    31</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    f2</p>
+            </td>
+            <td>
+                <p>
+                    f2</p>
+            </td>
+            <td>
+                <p>
+                    Ending value for filter center frequency.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    32</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    rt</p>
+            </td>
+            <td>
+                <p>
+                    frt</p>
+            </td>
+            <td>
+                <p>
+                    Rate for change between f1 and f2.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    33</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    mul</p>
+            </td>
+            <td>
+                <p>
+                    fmul</p>
+            </td>
+            <td>
+                <p>
+                    End value multiplier (f2 = f1 * mul).</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    34</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    trkf</p>
+            </td>
+            <td>
+                <p>
+                    ftrkf</p>
+            </td>
+            <td>
+                <p>
+                    Filter start tracks note frequency (1) or is fixed (0).</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    35</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    trkm</p>
+            </td>
+            <td>
+                <p>
+                    ftrkm</p>
+            </td>
+            <td>
+                <p>
+                    End value multiplier applied (1) or ignored (0).</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    36</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    trkd</p>
+            </td>
+            <td>
+                <p>
+                    ftrkd</p>
+            </td>
+            <td>
+                <p>
+                    Filter frequency change rate tracks note duration (1) or is fixed (0).</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    50</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    cr</p>
+            </td>
+            <td>
+                <p>
+                    cr</p>
+            </td>
+            <td>
+                <p>
+                    Coeffecient recalc rate in samples.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    40</p>
+            </td>
+            <td>
+                <p>
+                    res</p>
+            </td>
+            <td>
+                <p>
+                    q1</p>
+            </td>
+            <td>
+                <p>
+                    q1</p>
+            </td>
+            <td>
+                <p>
+                    Starting value for filter Q.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    41</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    q2</p>
+            </td>
+            <td>
+                <p>
+                    q2</p>
+            </td>
+            <td>
+                <p>
+                    Ending value for filter Q.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    42</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    rt</p>
+            </td>
+            <td>
+                <p>
+                    qrt</p>
+            </td>
+            <td>
+                <p>
+                    Rate for change between q1 and q2.</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    43</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    mul</p>
+            </td>
+            <td>
+                <p>
+                    qmul</p>
+            </td>
+            <td>
+                <p>
+                    End value multiplier (q2 = q1 * mul).</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    45</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    trkm</p>
+            </td>
+            <td>
+                <p>
+                    qtrkm</p>
+            </td>
+            <td>
+                <p>
+                    End value multiplier applied (1) or ignored (0).</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    46</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    trkd</p>
+            </td>
+            <td>
+                <p>
+                    qtrkd</p>
+            </td>
+            <td>
+                <p>
+                    Filter Q change rate tracks note duration (1) or is fixed (0).</p>
+            </td>
+        </tr>
+    </table>
+<h3>XML Format</h3>
+    <pre>
+&lt;instr id=&quot;1&quot; type=&quot;Chuffer&quot; name=&quot;&quot; desc=&quot;&quot;&gt;
+    &lt;sig atk=&quot;&quot; rel=&quot;&quot; son=&quot;&quot; trkd=&quot;&quot; hrate=&quot;&quot; mfrq=&quot;&quot; /&gt;
+    &lt;chp frq=&quot;&quot; amp=&quot;&quot; wt=&quot;&quot; /&gt;
+    &lt;swp frq=&quot;&quot; amp=&quot;&quot; wt=&quot;&quot; /&gt;
+    &lt;flt f1=&quot;&quot; f2=&quot;&quot; rt=&quot;&quot; mul=&quot;&quot; trkf=&quot;&quot; trkd=&quot;&quot; trkm=&quot;&quot; cr=&quot;&quot; /&gt;
+    &lt;res q1=&quot;&quot; q2=&quot;&quot; rt=&quot;&quot; mul=&quot;&quot; trkd=&quot;&quot; trkp=&quot;0&quot; /&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

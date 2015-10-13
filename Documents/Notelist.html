@@ -1,0 +1,1190 @@
+
+<p>A Notelist score contains one or more <i>voices</i> and <i>sequences</i>,
+each containing a combination of <i>control statements</i> and <i>note
+statements</i>. A voice is used to group one or more notes that follow
+sequentially in time. A sequence defines a set of statements than can be
+inserted into a voice by &ldquo;playing&rdquo; the sequence. A control statement either
+changes the settings associated with a voice or controls how Notelist
+interprets the score. Note statements define sounds to be played by the synthesizer.</p>
+
+<p>Collecting notes into voices allows us to define notes without having to
+calculate the starting time for each note individually. As each note is
+generated, the start time is automatically moved forward by the duration of the
+note. In addition, each voice maintains current volume level, tempo,
+articulation, transposition, and default parameter values for notes. This
+allows each note to be specified with a minimal amount of information.</p>
+
+<p>Most control statements only affect the current voice, but a few are global
+and may occur outside of a voice. Global control statements must be used
+carefully since they affect all subsequent notes in all voices. </p>
+
+<h2>Pitch</h2>
+
+<p>Each note statement begins with a value for the pitch. The pitch can be an
+integer value with middle C represented by the value of 48. Pitch can also be
+represented by a letter representing pitch class, followed by an optional
+accidental and octave. The pitch letter is one of A-G. The accidental can be
+&lsquo;#&rsquo; for sharp, &lsquo;b&rsquo; for flat, &lsquo;x&rsquo; for double sharp and &lsquo;d&rsquo; for double flat. The
+octave value 4 represents the octave of middle C. For example, &lsquo;C4&rsquo; is middle
+C, and &lsquo;F#3&rsquo; is F# below middle C. Octave numbers carry forward for successive
+pitches and only need to be entered when the octave changes. Accidentals, however,
+must be specified whenever they occur since there is no concept of &lsquo;key&rsquo; in
+Notelist.</p>
+
+<p>Rests are indicated by a pitch letter of &lsquo;R&rsquo;.</p>
+
+<h2>Rhythm</h2>
+
+<p>Rhythm can be represented as absolute time in seconds or by a rhythm value.
+A rhythm value represents a fraction of a whole-note at the current tempo and
+is indicated by a &lsquo;%&rsquo; followed by a number. For example, &lsquo;%4&rsquo; is a quarter-note
+and &lsquo;%8&rsquo; is an eighth-note. The number in a rhythm value is not required to
+be a standard sub-division of the beat. Thus, %10 represents 1/10 of a whole
+note, and %2.5 represents 1/2.5 or 4/10 of a whole-note. </p>
+
+<p>Because a rhythm value is relative to the duration of a whole note, the
+actual duration will vary depending on the current tempo. Using absolute time
+values is useful when the exact time of the note is important, but makes it
+difficult to globally alter the duration of notes. In general, it
+is better to use rhythm values so that durations can be changed globally using
+a tempo change rather than having to retype the duration for each note.</p>
+
+<h2>Dynamics</h2>
+
+<p>Dynamics (i.e., volume levels) are specified with a number in the range 0 to
+100. A value of 0 represents silence and 100 represents maximum amplitude
+available in the synthesizer. However, values can exceed 100 if needed since
+the final volume level may be attenuated by subsequent signal processing or the synthesizer's mixer.</p>
+<p>Dynamics can be controlled on a note-by-note
+basis. In addition, a <i>volume </i>statement can be used to modify the
+per-note volume levels for all subsequent notes in a voice. Volume levels are
+linear amplitude values, not decibels.</p>
+
+<h2>Synthesizer Parameters</h2>
+
+<p>In addition to pitch, rhythm and dynamics, a note statement can include any
+number of values that represent synthesizer parameters. Note parameters are
+passed to the synthesizer and are not interpreted by Notelist. The number of
+parameters and their interpretation is dependent on the synthesizer instrument.</p>
+
+<h2>Notelist Expressions</h2>
+
+<p>In most cases where a value is allowed, the value can be either a single
+number or a calculated value. A calculated value is called an <i>expression</i>.
+An expression consists of operands separated by operators. The operand in an
+expression can be a number, character string, pitch, rhythm or variable.
+Operators can be one of the following.</p>
+
+<table border=1 cellspacing=0 cellpadding=0 style='border-collapse:collapse;border:none'>
+ <tr>
+  <td colspan=2 valign=top style='background:#CCC;border:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Unary Operators</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none; padding:0in 5.4pt 0in 5.4pt'>-a</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Negate the value of a</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>~a</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if a is false. The word &lsquo;not&rsquo; can be used as well.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>eval a</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>The string a is evaluated by an external scripting engine (if available).</td>
+ </tr>
+ <tr>
+  <td colspan=2 valign=top style='background:#CCC;border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>Arithmetic Operators</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a * b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Multiply a and b</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a / b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Divide a by b.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a ^ b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Exponentiation, raise a to the power b.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a + b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Add a and b</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a - b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Subtract a from b</td>
+ </tr>
+ <tr>
+  <td colspan=2 valign=top style='background:#CCC;border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>Relational Operators</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a &lt; b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if a is less than b.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a &lt;= b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if a is less than or equal to b.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a &gt; b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if a is greater than b.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a &gt;= b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if a is greater than or equal to b.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a = b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if a is equal to b. A double equal &lsquo;==&rsquo; can be used instead of the single &lsquo;=&rsquo; if desired.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a &lt;&gt; b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if a is not equal to b.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a &amp; b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if both a and b are non-zero. The word &lsquo;and&rsquo; can be used instead of &lsquo;&amp;&rsquo;.</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a | b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>True if either a or b are non-zero. The word &lsquo;or&rsquo; can be used instead of &lsquo;|&rsquo;.</td>
+ </tr>
+ <tr>
+  <td colspan=2 valign=top style='background:#CCC;border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>String Paste Operator</td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid windowtext 1.0pt;border-top:none;
+  padding:0in 5.4pt 0in 5.4pt'>a :: b</td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;
+  border-right:solid windowtext 1.0pt;padding:0in 5.4pt 0in 5.4pt'>Concatenate the strings a and b into one string. Numbers are converted to a string before concatenation.</td>
+ </tr>
+</table>
+
+<p>Operator precedence is from top to bottom of the table. For example,
+multiplication, division and exponentiation have higher precedence than
+addition and subtraction and are evaluated first. Equal precedence operators
+are evaluated in order, left to right. Parts of the expression can be grouped
+within parentheses to override the order of evaluation. For example, 5*4+2
+would multiply first then add, but 5*(4+2) would add first then multiply. </p>
+
+<p>Internally, pitch values are converted into the equivalent integer value and
+may be used as number values in an expression. For example, C4+1 represents a
+semi-tone above middle C and is the same as C#4. C4+12 would be one octave
+higher, i.e., C5. Pitch values cannot be treated in the same manner as
+frequency. For example, C4*2 is not one octave higher than C4. It would be
+equivalent to 48*2=96, which is pitch C8.</p>
+
+<p>Rhythm values can also appear as operands in an expression, making
+specification of tied and dotted rhythms easier. For example, %4+%8 is
+equivalent to a quarter note tied to an eighth note, while %4*3+%8 is equal to
+three quarter notes and an eighth note tied together.</p>
+
+<p>Operands may also be one of the built-in variables:</p>
+
+<pre>curpit  Last pitch value<br/>curdur  Last duration value<br/>curvol  Last volume value<br/>curtime Current time in seconds<br/>count   Current loop count</pre>
+
+<h2>Examples</h2>
+
+<p>Some examples of Notelist script syntax are
+shown below. In the following examples keywords are shown in lower case
+letters. However, Notelist does not distinguish between upper and lower case
+for keywords, (i.e., <i>VOICE</i>, <i>Voice</i>, and <i>voice</i> are all
+equivalent).</p>
+
+<pre>tempo 4, 60;<br/>voice 1<br/>begin<br/>  instrument &ldquo;piano&rdquo;;<br/>  volume 100;<br/>  channel 0;<br/>  C4, %4, 100;<br/>  D4, %4, 100;<br/>  E4, %4, 100;<br/>  F4, %4, 100;<br/>  G4, %4, 100;<br/>  B3, %4, 100;<br/>  C4, %2, 100;<br/>end<br/>&nbsp;<br/>voice 2<br/>begin<br/>  instrument &ldquo;bass&rdquo;;<br/>  volume 95;<br/>  channel 1;<br/>  C3, %2, 100, 10, 20;<br/>  A2, %2, 100, 10, 30;<br/>  G2, %2, 100, 15, 20;<br/>  C3, %2, 100, 10, 20;<br/>end</pre>
+
+<p>This example contains two voices that play simultaneously. Each voice is
+identified with an integer value. The lines between the <i>begin...end </i>keywords
+specify the sequence of notes played on the voice. Each note statement consists
+of a pitch, rhythm, volume level and optional parameters. The first voice plays
+notes from C4 to G4, B3, C4 in quarter notes using a piano instrument on mixer
+channel 0. The second voice plays C3, A2, G2, C3 in half notes on a bass
+instrument on mixer channel 1 at a slightly lower volume level.</p>
+
+<p>The <i>tempo</i> statement is optional and only needed when the rhythm is
+indicated with the &lsquo;%&rsquo; form. In this case, the tempo is set to quarter notes at
+60 bpm. Notice that the tempo statement is outside the first voice indicating
+it is a global control statement. This statement, and a few others, apply to
+all voices regardless of where the statement is located and are applied from
+the point where they are located in the file. A tempo statement within a voice
+will modify all notes in subsequent voices, not only notes within the voice. </p>
+
+<p>The lines beginning with <i>instrument</i> define which instrument should be
+used to play the following notes. An instrument statement is an example of a
+Notelist control statement. Control statements affect the performance of
+subsequent but do not produce any sound output. Only note statements generate
+sound.</p>
+
+<p>Each note or control statement must be terminated with a semi-colon. Because
+a note is terminated with a semi-colon, a note can contain a variable number of
+parameters and can span multiple lines, or, multiple notes can be placed on a
+single line. Blank lines can be inserted at any point to help set-off different
+phrases, sections, etc. Likewise, a comma is used to separate items in a list.
+Spaces, tabs, and end of lines (whitespace) are generally ignored by the
+Notelist program and can be used freely to format the score in any manner
+desired. Spaces are required to separate a keyword (such as voice) from
+subsequent values, but otherwise spaces can be included or left out as desired.
+</p>
+
+<p>The <i>begin...end</i> keywords are used to enclose multiple note statements.
+Without them each note must begin with a voice keyword. For example, we could
+have written the previous example like this:</p>
+
+<pre>tempo 4, 60;<br/>&nbsp;<br/>voice 1 instrument &ldquo;piano&rdquo;;<br/>voice 1 channel 0;<br/>voice 1 volume 100;<br/>voice 2 instrument &ldquo;bass&rdquo;;<br/>voice 2 channel 1;<br/>voice 2 volume 95;<br/>&nbsp;<br/>voice 1 C4, %4, 100;<br/>voice 1 D4, %4, 100;<br/>voice 2 C3, %2, 100;<br/>&nbsp;<br/>voice 1 E4, %4, 100;<br/>voice 1 F4, %4, 100;<br/>voice 2 A2, %2, 100;<br/>&nbsp;<br/>voice 1 G4, %4, 100;<br/>voice 1 B3, %4, 100;<br/>voice 2 G2, %2, 100;<br/>&nbsp;<br/>voice 1 C4, %2, 100;<br/>voice 2 C3, %2, 100;</pre>
+
+<p>Because each voice maintains separate values for the current time and
+instrument, notes in a voice do not need to be contiguous. A Notelist score can
+freely switch between voices, or, can group all notes of each voice together
+with <i>begin...end</i>. A voice can also be entered using multiple <i>begin...end</i>
+blocks because the starting time for each block begins at the end time of the
+previous block.</p>
+
+<p>A note is defined by a pitch, rhythm and volume value, but only the pitch
+needs to be explicit if the rhythm and volume values are the same as the
+previous note. For example, the first voice above could be written as:</p>
+
+<pre>voice 1<br/>begin<br/>  C4, %4, 100;<br/>  D4; E4; F4; G4; B3;<br/>  C4, %2;<br/>end</pre>
+
+<p>Typically, pitch and rhythm are specified for each note for clarity. The
+shortened form is most useful when a note statement contains a group of notes.
+A group is indicated by enclosing values in braces with each value separated by
+a comma. This notation not only allows multiple notes to be easily contained on
+one line and avoids entering duplicate values, but is also an intuitive way to
+represent a musical phrase. For example:</p>
+
+<pre>voice 1<br/>begin<br/>  { C4, D4, E4, F4, G4, B3 }, %4, 100;<br/>  C4, %2, 100;<br/>end</pre>
+
+<p>As with the previous example, only one rhythm value and one volume value are
+specified and thus repeat for subsequent notes. We can provide a group for rhythm
+and volume values as well and allow the pitch value to repeat. In the following
+example, the pitch C4 is repeated four times followed by C4 through F4. The
+volume value is not specified on the second note statement since it will carry
+forward from the previous note.</p>
+
+<pre>voice 1<br/>begin<br/>  C4, { %4, %16, %16, %2 }, 100;<br/>  { C4, D4, E4, F4}, { %4, %16, %16, %2 };<br/>end</pre>
+
+<p>When using multiple groups on a single line, the longest group controls the
+number of notes that are played. In the following example, the first note
+statement plays C4 and D4 as quarter notes followed by E4 and F4 both as half
+notes. The second statement plays C4 four times with a crescendo.</p>
+
+<pre>voice 1<br/>begin<br/>  { C4, D4, E4, F4 }, { %4, %4, %2 }, 100;<br/>  C4, %4, { 50, 60, 75, 100 };<br/>end</pre>
+
+<p>A pitch group can also be enclosed in square brackets to represent
+simultaneous pitches, (i.e., a chord). If only one rhythm value is given, it
+will apply to all pitches in the chord. However, it is possible to specify
+different rhythm values for each pitch. In any case, the start time of the note
+following the chord will be determined by the longest duration in the chord. In
+the following example, the first note statement plays a C-Major chord for one
+quarter note, followed by a F-Major chord for one quarter note, but with only
+the C4 pitch sounding through the entire duration.</p>
+
+<pre>voice 1<br/>begin<br/>  [ C4, E4, G4 ], %4, 100;<br/>  [ C4, F4, A4 ], { %4, %8, %8 }, 100;<br/>  C5, %4, 100;<br/>end</pre>
+
+<p>A note group can be preceded by the keywords <i>sus</i> (sustain) or <i>tie</i>
+in order to modify the interpretation of the duration values. The <i>sus</i>
+keyword causes the first note in a group to be interpreted as the total
+duration for all notes in the group. Subsequent note start times are
+interpreted as a delay from the previous note. This produces the effect of a
+roll or arpeggio with earlier notes held through the total duration.</p>
+
+<pre>sus { C4, E4, G4, C5 }, { %1, %8, %8, %8 }, 80;</pre>
+
+<p>In this statement the total duration is a whole note with each successive
+pitch played an eight-note apart. A value of 0 for a duration after the first
+will cause a pitch to sound simultaneously with the previous pitch.</p>
+
+<pre>sus { C4, E4, G4, C5 }, { %1, 0, %8, %8 }, 20;</pre>
+
+<p>In this case, C4 and E4 sound together followed by G4 and C5 spaced an
+eighth note apart.</p>
+
+<p>The <i>tie</i> keyword causes the first value in the group to be interpreted
+as the starting value with subsequent values representing modifications to the
+note. As with <i>sus</i> the rhythm values specify a delay from the previous
+value.</p>
+
+<pre>tie { C4, E4, G4, C4 }, { %1, %4, %4, %4 }, 100;</pre>
+
+<p>In synthesizer terms, a tie alters the oscillator frequency, volume level,
+and other parameters without resetting the oscillator phase or re-triggering
+the envelope generator. Not all synthesis instruments have this capability, and
+changing parameters that alter the envelope may have no effect on a sounding
+note.</p>
+
+<h1>Notelist Reference</h1>
+
+<p>An alphabetized list of valid Notelist statements follows. Keywords may be
+any mixture of upper and lower case. Arguments are indicated in <i>italics </i>while
+keywords are indicated by normal text.</p>
+
+<h3>ARTIC</h3>
+
+<p>Syntax: artic <i>type value</i>;</p>
+
+<p>The ARTIC statement modifies the actual duration of notes. The start time of
+a note is controlled by the rhythm value of the previous note. ARTIC does not
+alter the relative start times, only the sounding duration. This allows the
+duration of notes to be specified independently of the time interval between
+notes. Notes can thus be spaced or overlapped as needed while still using
+rhythm values to control the timing between notes.</p>
+
+<p>Articulation can be entered using an ARTIC control statement or by adding
+the articulation value after the volume level. In either case, the articulation
+value can be one of three types. A <i>fixed</i> articulation value sets the
+duration of the note to the articulation value regardless of the rhythm value.
+An <i>add</i> articulation value adds to the note duration. A <i>percent</i>
+articulation value extends the note by a percentage of the rhythm value.</p>
+
+<pre>voice 1<br/>begin<br/>  artic add 0.1;<br/>  C4, %4, 100;<br/>  artic percent 90;<br/>  C4, %4, 100;<br/>  artic fixed %1;<br/>  {C4, C5}, %4, 100;<br/>  artic percent param;<br/>  {C4, G4, C5}, %4, 100, {80, 90, 100};<br/>end</pre>
+
+<p>The first ARTIC statement causes the subsequent note to be played for 1/10
+second longer than the given duration causing an overlap with the following
+note. The second ARTIC statement causes the note to be played for 90% of the
+given duration, producing a short gap between notes similar to <i>staccato</i>.
+The third ARTIC statement causes the notes to be played for the duration of a
+whole note even though the duration of the following note is given as a quarter
+note. The last ARTIC statement causes the note duration to be modified using
+the values after the volume. The first note is held for 80% duration, the
+second at 90% duration, and the third at 100% of the duration.</p>
+
+<h3>BEGIN...END</h3>
+
+<p>Syntax: begin <i>notelist</i> end</p>
+
+<p>BEGIN and END are used to bracket multiple statements. Although they can
+occur anywhere within a voice, typically they are used to group statements
+following a VOICE, SEQUENCE, LOOP, IF...ELSE, or WHILE...DO statement. </p>
+
+<h3>CALL</h3>
+
+<p>Syntax: call &ldquo;<i>script</i>&rdquo;;</p>
+
+<p>The CALL statement passes a string to an external script engine for
+execution. Unlike the script statement, the CALL statement is executed during
+sequence generation.</p>
+
+<h3>CHANNEL</h3>
+
+<p>Syntax: channel <i>number</i>;</p>
+
+<p>The CHANNEL statement sets the mixer output channel for the current voice.
+The single argument indicates the mixer channel number. </p>
+
+<p>A voice is usually associated with a specific instrument and mixer input
+channel. However, a voice can switch between instruments and channels at any
+time, and multiple voices can be played on the same instrument or channel. This
+is especially useful when complex polyphonic voices are used. For example, a
+complex rhythm with overlapping notes can be specified more easily with
+multiple voice lists.</p>
+
+<pre>voice 1<br/>begin<br/>  instrument &ldquo;piano&rdquo;;<br/>  channel 0;<br/>  {C4, D4, E4, F4}, {%4, %4, %8, %8}, 100;<br/>end<br/>&nbsp;<br/>voice 2<br/>begin<br/>  instrument &ldquo;piano&rdquo;;<br/>  channel 0;<br/>  {C3, G3, C3, G2}, {%16, %8, %16, %2}, 100;<br/>end</pre>
+
+<p>The keyword CHANNEL can be abbreviated as CHNL. </p>
+
+<h3>COMMENTS</h3>
+
+<p>Syntax: ! <i>comment text</i></p>
+
+<p>A comment is any text that should be ignored by the Notelist parser. A
+comment begins with either an exclamation point (!) or a single quote (') and
+extends to the end of the line.</p>
+
+<pre>! A bang comment<br/>' A quoted text comment<br/>&nbsp;<br/>voice 0 'comment after statement<br/>begin<br/>...<br/>end</pre>
+
+<h3>DOUBLE</h3>
+
+<p>Syntax: double <i>transpose</i>,<i> volume</i>;</p>
+
+<p>The DOUBLE keyword indicates that subsequent notes should be doubled at the
+pitch offset given by <i>transpose</i> and the volume level indicated by <i>volume.
+</i>The <i>volume </i>parameter is optional. Doubling is canceled by using the
+keyword OFF for the transpose value.</p>
+
+<pre>double 12, 50;<br/>{C4, D4, E4, F4, G4}, %4, 100;<br/>double OFF;<br/>{C4, D4, E4, F4, G4}, %4, 100;</pre>
+
+<p>In this example, the first note statement would result in a scale played in
+octaves with the upper note at a volume of 50 and the lower note at a volume of
+100.</p>
+
+<h3>EVAL</h3>
+
+<p>Syntax: eval &ldquo;<i>string</i>&rdquo;</p>
+
+<p>The EVAL keyword passes the string argument to an external scripting engine
+for evaluation. EVAL is treated as a unary operator. If the argument is an expression
+other than a string literal, it must be placed in parentheses.</p>
+
+<h3>FGEN</h3>
+
+<p>Syntax: fgen(<i>unit</i>, <i>amount</i>)</p>
+
+<p>The FGEN keyword invokes one of the built-in function generators. See INIT
+for an explanation.</p>
+
+<h3>IF...THEN...ELSE</h3>
+
+<p>Syntax: if <i>condition </i>then <i>notelist </i>else <i>notelist</i></p>
+
+<p>The IF...THEN...ELSE statement is used to conditionally execute statements. The <i>condition</i>
+between IF and THEN is an expression that controls which statement is executed.
+If the condition is true, the statement after THEN is executed. If the
+condition is false, the statement after ELSE is executed. The ELSE part is
+optional. The statement controlled by IF...THEN...ELSE can also be a BEGIN...END
+block, allowing for a group of statements to be controlled by a single
+condition.</p>
+
+<p>In the following example IF is used to create two endings for a repeated
+phrase.</p>
+
+<pre>voice 1<br/>begin<br/>  loop (2)<br/>  begin<br/>    {C4, E4, G4, F4, A4}, %8, 100;<br/>    if count = 0 then<br/>      {C5, G4, E4}, %8, 100;<br/>    else<br/>      {B4, G4, C5}, %8, 100;<br/>  end<br/>end</pre>
+
+<h3>INCLUDE</h3>
+
+<p>Syntax: include &ldquo;<i>filename</i>&rdquo;;</p>
+
+<p>The INCLUDE statement includes another file into the current file. The <i>filename</i>
+argument must be a complete path to the file. Relative paths can be used, but
+will be relative to the current directory.</p>
+
+<h3>INIT</h3>
+
+<p>Syntax: init <i>unit function start</i>,<i> end</i>,<i> step</i>;</p>
+
+<p>Notelist includes a set of built-in functions that calculate a series of
+values. The INIT statement is used to initialize the function generator. The <i>fgen</i>
+operator is used to produce the next value in the series.</p>
+
+<p>The <i>unit</i> argument is an integer value in the range [0,9] that
+identifies the generator in later calls to <i>fgen</i>. Since function
+generators can be reused, the <i>unit </i>range only limits the number of
+generators that can be operating simultaneously within a voice.</p>
+
+<p>The <i>start</i> argument indicates the starting value for the series. The <i>end</i>
+argument indicates the ending value for the series. The <i>steps</i> argument
+indicates how many discrete steps are calculated. The <i>type</i> argument
+indicates one of the following:</p>
+
+<p>LINE      The values will be linearly interpolated between start and end. <br/>
+EXP        The values will be exponentially interpolated between start and
+end.<br/>
+LOG       The values will be logarithmically interpolated between start and
+end.<br/>
+RAND    The value will be a random value between start and end.</p>
+
+<p>The <i>fgen</i> operator returns the current value of a function. The <i>unit
+</i>value should match a previous init statement. The <i>fgen</i> function is
+especially useful within loops to provide crescendo, decrescendo, or step-wise
+alteration of the synthesizer parameters:</p>
+
+<pre>init 0 line 50, 100, 10;<br/>loop 10<br/>  { C4, D, E, F, G}, 0.1, fgen(0,1);</pre>
+
+<p>The <i>fgen</i> function is zero based. That is, on the first call it will
+return the start value and will only return the end value after <i>n</i>+1
+steps. Once <i>fgen</i> reaches the end of the series, the value will remain at
+the end value until another init statement on the same unit is encountered, and
+<i>fgen</i> will continue to return the end value when invoked. In the example
+above, volume would range from 50 to 95. </p>
+
+<p>When <i>fgen</i> is invoked, the second argument indicates how many steps to
+move forward. The steps value in the init statement is usually an integer value
+and <i>fgen</i> is invoked as <i>fgen</i>(<i>unit</i>,1) to retrieve the next
+value. However, the steps value on the init statement can be set to a duration.
+Each call to <i>fgen</i> should then indicate how much of that duration has
+passed. This is useful to map a series of steps onto notes of varying duration.</p>
+
+<pre>init 0 line 50, 100, %1;<br/>{ C4, D, E, F }, %4, fgen(0,%4);</pre>
+
+<p>In addition to <i>fgen</i>, the <i>rand</i> function can be used to produce
+a random value without first initializing a function with init. The two
+arguments to <i>rand</i> are optional. Without arguments, <i>rand</i> returns a
+value between 0 and 1.</p>
+
+<h3>INSTRUMENT</h3>
+
+<p>Syntax: instrument <i>id</i>;</p>
+
+<p>The INSTRUMENT statement identifies the synthesizer instrument for the current
+voice. All notes subsequent to the INSTRUMENT statement will be played on the
+indicated instrument. The <i>id </i>argument is typically a string that matches
+a pre-defined synthesizer instrument, but can also be a number if appropriate. </p>
+
+<h3>LOOP</h3>
+
+<p>Syntax: loop (<i>count</i>) <i>notelist</i></p>
+
+<p>The LOOP statement is used to repeat one or more note statements. The <i>count</i>
+argument indicates the number of times the loop repeats. The <i>notelist</i> is
+either a single note statement or a compound statement in the form of a
+BEGIN...END block. The parentheses around the loop count are optional, but must
+be included if the count expression could be interpreted as a part of the first
+statement in the Notelist.</p>
+
+<pre>loop 5<br/>  { C4, E, G, C5 }, 0.25, 50;<br/>&nbsp;<br/>loop 5<br/>begin<br/>  { C4, E, G, C5 }, 0.25, 50;<br/>  { C4, E, G, C5 }, 0.25, 80;<br/>  { C4, E, G, C5 }, 0.25, 100;<br/>end</pre>
+
+<p>Loops can be nested within loops to any level:</p>
+
+<pre>loop 5<br/>begin<br/>  { C4, E, G, C5 }, 0.25, 50;<br/>  { C4, E, G, C5 }, 0.25, 80;<br/>  loop 2<br/>  begin<br/>    { C4, E, G, C5 }, 0.25, 100;<br/>    loop 2<br/>      {C4, E, G, C5}, 0.125, 50;<br/>  end<br/>end</pre>
+
+<p>Control statements apply to all notes from the point where they are
+encountered and must be used carefully within loops. For example, a volume
+statement at the end of a loop will apply to all iterations after the first. In
+the following example, the first iteration will play at a volume level of 100
+while iterations 2-5 will play at volume 50.</p>
+
+<pre>volume 100;<br/>loop 5<br/>begin<br/>  { C4, E, G, C5 }, 0.25, 50;<br/>  volume 50;<br/>end</pre>
+
+<p>However, this feature can be useful, especially with nested loops. In the
+following example, the phrase is played four times, alternating between loud
+and soft.</p>
+
+<pre>loop 2<br/>begin<br/>  volume 100;<br/>  loop 2<br/>  begin<br/>     { C4, E, G, C5 }, 0.25, 50;<br/>   volume 50;<br/>  end<br/>end</pre>
+
+<p>Loops are expanded by the Notelist parser, not the sequencer. Although this
+produces a longer event sequence, it allows values within the loop to be
+calculated during processing and thus different for each iteration. The COUNT
+keyword can be used inside the loop to modify a value based on the number of
+times the loop has played. The value is zero-based and varies from 0 to n-1,
+where n is the loop count. The following loop uses the COUNT value to play a
+chromatic scale with crescendo.</p>
+
+<pre>loop (12) C4+count, %8, 40+(count*5);</pre>
+
+<p>In the case of nested loops, each loop has its own instance of the COUNT<i> </i>value
+and the value will always refer to the controlling loop count. In the following
+example, the chromatic scale is played 5 times, each time at a higher volume
+level.</p>
+
+<pre>loop 5<br/>begin<br/>  volume 50+(count*10);<br/>  loop (12)<br/>    C4+count, %16, 80;<br/>end</pre>
+
+<p>If COUNT is referenced outside of a loop it has a value of 0.</p>
+
+<h3>MAP</h3>
+
+<p>Syntax: map <i>instrument </i> <i>params...</i>;</p>
+
+<p>The MAP statement is used to translate a note parameter value. For
+instruments with a small number of parameters, position dependent values is
+generally not a problem. However, when the instrument includes a large number
+of parameters it is often the case that we only want to give values for a small
+number of the possible values. Parameter maps allow selecting a sub-set of an instrument&rsquo;s
+parameters .</p>
+
+<p>The values on the map statement specify the actual instrument parameter id
+values for the <i>n</i><sup>th</sup> parameter on the note statement. Suppose
+that an instrument uses parameter 18 to set the envelope attack and parameter
+22 to set the envelope delay. Rather than list all 22 parameters on the note
+statement, we can create a map of the two values we need. The following example
+sets the first parameter to the attack rate and the second parameter to the
+release rate.</p>
+
+<pre>map &ldquo;iname&rdquo; 18, 22;<br/>voice 1<br/>begin<br/>  instr &ldquo;iname&rdquo;;<br/>  C4, %4, 100, 0.1, 0.4;<br/>end</pre>
+
+<p>A parameter map can contain optional scaling values for each parameter. The
+scaling value is specified by adding <i>:value</i> after the parameter id. This
+allows parameters to be specified in a normalized range and also provides
+automatic conversion of values when the instrument changes. For example,
+suppose that two instruments both have a parameter to indicate a modulation of
+the sound, but instrument <i>in1</i> has a range of 0-100 on  parameter 19
+while <i>in2</i> has a range of 0-1 on parameter 20. We can create two maps so
+that we can change between instruments without having to change the note
+statement values.</p>
+
+<pre>map &ldquo;in1&rdquo; 19;<br/>map &ldquo;in2&rdquo; 20:0.01;<br/>voice 1<br/>begin<br/>  instrument &ldquo;in1&rdquo;;<br/>  C4, %4, 100, 50;<br/>  instrument &ldquo;in2&rdquo;;<br/>  C4, %4, 100, 50;<br/>end</pre>
+
+<p>These two statements play C4 on instrument 1 with a parameter value of 50
+for parameter 19, and on instrument 2 with a parameter value of 0.5 for
+parameter 20. If we later decide to switch the order of the instruments, the
+note statements will still produce the correct parameter values.</p>
+
+<p>Parameter numbers can also be given by a name in quotes, if the instrument supports name to ID mapping.</p>
+
+<pre>map &ldquo;iname&rdquo; &ldquo;atk&rdquo;, &ldquo;dec&rdquo;;</pre>
+
+<p>Instrument parameter maps are global and remain in effect until another map
+statement is encountered for the instrument. However, maps can be changed
+within a voice to allow varying the selection of parameters on subsequent
+notes.</p>
+
+<h3>MARK</h3>
+
+<p>Syntax: mark <i>markid;</i></p>
+
+<p>The MARK and SYNC statements are used to synchronize note start times
+between voices. The argument to MARK and SYNC can be a string or number. The
+MARK statement saves the current start time; the SYNC statement retrieves the
+saved value and sets the voice start time.</p>
+
+<pre>voice 1<br/>begin<br/>  {C4, D4, E4, F4, G4}, {%12, %13, %14, %15, %16};<br/>  mark &ldquo;cue1&rdquo;;<br/>  {C4, D4, E4, F4}, %16, 100;<br/>  G4, %4, 100;<br/>end<br/>&nbsp;<br/>voice 2<br/>begin<br/>  sync &ldquo;cue1&rdquo;;<br/>  {C3, G3}, %4, 100;<br/>end</pre>
+
+<p>In this example, the initial scale has duration values that make it
+difficult to calculate the exact start point for voice 2. Using the MARK and
+SYNC pair causes voice 2 to play the bass notes at the point where voice 1
+reaches the 16th note scale. In addition, if the start time is moved, or the
+rhythm of the first voice is changed prior to the mark point, the second voice
+will still synchronize to the first voice. In effect, mark and sync serve the
+same function as bar lines in music notation.</p>
+
+<h3>MAXPARAM</h3>
+
+<p>Syntax: maxparam <i>number</i>;</p>
+
+<p>The MAXPARAM statement redefines the maximum number of parameters allowed on
+a note statement.</p>
+
+<p>Each note statement carries forward the values from the previous note statement.
+Since the number of parameters varies depending on the instrument, Notelist
+cannot know in advance how many parameters should be retained. By default,
+space for 10 values is allocated. If more or fewer parameters are needed,
+MAXPARAM can be used to extend or reduce the size of the parameter buffer.</p>
+
+<p>The value of MAXPARAM is global and applies to all instruments on all
+voices.</p>
+
+<h3>MIDDLEC</h3>
+
+<p>Syntax: middlec <i>number</i>;</p>
+
+<p>The MIDDLEC statement is used to move the octave number of middle C. The
+default value is 4 but sometimes it is useful to re-define this point. The
+following statement would cause C6 to refer to middle C.</p>
+
+<pre>middlec 6;</pre>
+
+<p>The value of MIDDLEC is processed by the parser and must be a constant
+number. Changing the octave of middle C only affects parsing and does not
+change the integer value for middle C passed to the synthesizer.</p>
+
+<h3>MIDICC</h3>
+
+<p>Syntax: midicc <i>control, value</i>;</p>
+
+<p>The MIDICC statement emits a MIDI controller change message. 
+The <i>control</i> argument specifies the MIDI controller number. 
+The <i>value</i> argument is the value for the controller.
+Both control and value must be in the ragne 0-127.</p>
+
+<h3>MIDIPW</h3>
+
+<p>Syntax: midipw <i>value</i>;</p>
+
+<p>The MIDIPW statement emits a MIDI pitch wheel change message. 
+The <i>value</i> argument is the raw pitch bend value and should be in the range +/-8192.</p>
+
+<h3>MIDIPRG</h3>
+
+<p>Syntax: midiprg <i>value</i>;</p>
+
+<p>The MIDIPRG statement emits a MIDI program change message. 
+The <i>value</i> argument is the program number in the range 0-127.</p>
+
+<h3>MIDIAT</h3>
+
+<p>Syntax: midiat <i>value</i>;</p>
+
+<p>The MIDIAT statement emits a MIDI channel pressure (after touch) message. 
+The <i>value</i> argument is the range 0-127.</p>
+
+
+<h3>MIXER</h3>
+
+<p>Syntax: mixer <i>mixfn,  mixop, [fxunit], start, [end, time, [freq, wt]]</i>;</p>
+
+<p>
+The MIXER statement provides dynamic mixer control functions that set the value of an input level, pan or effects unit.
+The <i>mixfn</i> argument can be one of the following:</p>
+<table  border="1" cellspacing="0" cellpadding="4">
+<tr><td>Argument</td><td>Use</td></tr>
+<tr><td>in</td><td>Change an input level</td></tr>
+<tr><td>pan</td><td>Change an input pan setting.</td></tr>
+<tr><td>send</td><td>Change the amount sent to an effects unit.</td></tr>
+<tr><td>fxin</td><td>Change an effects unit volume level.</td></tr>
+<tr><td>fxpan</td><td>Change an effects unit pan setting.</td></tr>
+</table>
+<p>
+A MIXER control statement that affects an input (in, pan or send) uses the current channel for the voice as the mixer channel number.
+When the function is <i>fxin</i> or <i>fxpan</i>, the first argument indicates which effects unit is altered. 
+The <i>mixop</i> argument is optional, and can be one of the following:</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr><td>Argument</td><td>Use</td></tr>
+<tr><td>set</td><td>Set the value to <i>start</i>. The other parameters are ignored. If the <i>mixop</i> argument is missing, set is assumed.</td></tr>
+<tr><td>ramp</td><td>Produce a linear change from <i>start</i> to <i>end</i> over a duration of <i>time</i>.</td></tr>
+<tr><td>osc</td><td>Continuously vary the value from <i>start</i> to <i>end</i> over a duration of <i>time</i> at the rate 
+<i>freq</i> using the wavetable <i>wt</i>. If the wavetable argument is missing, a sine wave is used.</td></tr>
+</table>
+
+<h3>NOTE</h3>
+
+<p>Syntax: [note] <i>pitch</i>,<i> rhythm</i>,<i> volume</i>,<i> params</i>;</p>
+
+<p>A NOTE statement defines a sound to be produced on the synthesizer. A
+statement that does not begin with a keyword is considered a NOTE statement.
+The NOTE keyword can also be used to indicate a note.</p>
+
+<p>See the examples above for information on NOTE statements.</p>
+
+<h3><a name="option">OPTION</a></h3>
+
+<p>Syntax: option <i>optname</i> {ON|OFF};</p>
+
+<p>The OPTION statement sets one of three global options.</p>
+<ol>
+<li>frequency</li>
+<li>voldb</li>
+<li>velocity</li>
+</ol>
+<p>Normally the first parameter of a NOTE statement is interpreted as a pitch. Setting the FREQUECNY option
+ON treats the value as the actual note frequency in Hz.</p>
+
+<p>Normally volume values are normalized linear amplitude values. Setting the VOLDB option
+ON treats the volume value as a decibel value. A value of 100 is mapped to 0dB (a linear
+amplitude value of 1.0) while a value of 0 is mapped to -100dB (i.e. 100dB attenuation). </p>
+
+<p>Normally the note volume is scaled and multiplied by the voice volume value. When the VELOCITY option
+is ON, the note volume is passed to the instrument as the MIDI note-on velocity value and the voice value
+is normalized (0-1) and passed as the volume level. When the VELOCITY option is OFF, the note-on velocity
+is set to 127.</p>
+
+<h3>PLAY</h3>
+
+<p>Syntax: play <i>sequence</i>;</p>
+
+<p>The PLAY statement plays a defined sequence. </p>
+
+<p>See SEQUENCE.</p>
+
+<h3>PARAM</h3>
+
+<p>Syntax: param <i>id</i>,<i> value</i>;</p>
+
+<p>The PARAM statement sets a single instrument parameter. Parameter values on
+a note statement are position dependent. Thus, to set parameter number <i>n </i>all
+parameters up to <i>n </i>must appear on the note statement. The PARAM
+statement allows changing a single parameter without specifying all other
+parameters. The parameter <i>id </i>is zero-based (i.e., <i>id </i>0 represents
+the first parameter).</p>
+
+<pre>param 0, 1;<br/>param 1, 2;<br/>param 2, 3;<br/>C4, 1, 100;<br/>param 2, 4;<br/>D4, 1, 100;</pre>
+
+<p>These statements are the equivalent of:</p>
+
+<pre>C4, 1, 100, 1, 2, 3;<br/>D4, 1, 100, 1, 2, 4;</pre>
+
+<p>The second PARAM statement sets the third parameter to a value of 4 and
+leaves other parameters at the previous value. </p>
+
+<h3>REPEAT</h3>
+
+<p>Syntax: repeat (<i>count</i>)<i> notelist</i></p>
+
+<p>REPEAT is an alternate keyword for LOOP. See LOOP.</p>
+
+<h3>SCRIPT</h3>
+
+<p>Syntax: script <i>&ldquo;string&rdquo;;</i></p>
+
+<p>The SCRIPT statement passes a character string to an external scripting
+engine. The string argument to the script statement can be a file of scripting
+language code that will be loaded into the scripting engine for later use, or,
+it can be a statement in the script language that is executed immediately. The
+script statement is executed during parsing of the Notelist script.</p>
+
+<h3>SET</h3>
+
+<p>Syntax: set <i>variable </i>= <i>value</i>;</p>
+
+<p>The value of a variable is assigned using the SET statement. The SET
+statement can appear within a voice as well as outside of a voice. The value on
+the right of the &lsquo;=&rsquo; can be any valid expression and can include pitches and
+rhythm values along with numbers. When a rhythm value is used, it is converted
+to actual time at the point of the assignment.</p>
+
+<pre>set oct = 12;<br/>set step = 1;<br/>set val2 = C4 + (oct * step);</pre>
+
+<p>Any declared variable in Notelist can be treated as an associative array. When
+the variable name is followed by an index in brackets, the index value is associated
+with the value. The index can be a number or a string.</p>
+<pre>
+set myval["vol"] = 100;
+set myval[0] = 200;
+</pre>
+<p>Arrays can be used to store a set of values that are iterated using
+the <i>loop</i> or <i>while</i> statements. The following example
+generates a random series of pitches and plays them 12 times,
+transposing up a semitone each time.</p>
+
+<pre>
+var index;
+var pits;
+
+voice 0
+begin
+
+	set index = 0;
+	while index &lt; 16 do
+	begin
+		set pits[index] = rand(48,60);
+		set index = index + 1;
+	end
+
+	loop 12
+	begin
+		transpose count;
+		loop 16
+			pits[count], %16, 100;
+	end
+end
+</pre>
+
+<h3>SEQUENCE</h3>
+
+<p>Syntax: sequence <i>id </i>begin <i>notelist </i>end</p>
+
+<p>A SEQUENCE statement begins definition of a note sequence. Often, it is
+useful to define a series of notes that repeat at different places in the composition.
+By defining the repeated phrase as a sequence, the notes can be inserted by
+referring to the sequence rather than repeating entry of the notes. A sequence
+is identified by a name or number and is invoked by that name or number from
+within subsequent voice statements by using the PLAY statement.</p>
+
+<p>The content of the sequence is enclosed in a BEGIN...END block and is the same
+set of statements that can appear within a voice. The sequence itself must be
+defined outside of any voice.</p>
+
+<pre>sequence &ldquo;short&rdquo;<br/>begin<br/>  { C4, D, E, F}, {%4, %16, %16, %8}, 100;<br/>end<br/>&nbsp;<br/>voice 1<br/>begin<br/>  play &ldquo;short&rdquo;;<br/>  play &ldquo;short&rdquo;;<br/>end</pre>
+
+<p>Since a sequence is played within the context of a voice, control statements
+that modify the interpretation of subsequent notes should be used carefully.
+For example, a TRANSPOSE statement within a sequence would remain in effect for
+notes within the voice that come after the sequence is played.</p>
+
+<p>The keyword SEQUENCE may be abbreviated to SEQ.</p>
+
+<h3>START</h3>
+<p>Syntax: start <i>track, [loop]</i>;</p>
+<p>The START statement starts a background track. The optional loop count indicates how many times the track should be played.
+If the <i>loop</i> value is missing, or is zero, the track will play until a STOP statement is given.</p>
+
+<h3>STOP</h3>
+<p>Syntax: stop <i>track</i>;</p>
+<p>The STOP statement stops a background track.</p>
+
+<h3>SYNC</h3>
+
+<p>Syntax: sync <i>markid</i>;</p>
+
+<p>See MARK.</p>
+
+<h3>SYSTEM</h3>
+
+<p>Syntax: system &ldquo;<i>command</i>&rdquo;;</p>
+
+<p>The SYSTEM statement invokes an external program using the system command
+shell. SYSTEM is executed during parsing of the script.</p>
+
+<h3>TEMPO</h3>
+
+<p>Syntax: tempo <i>beat, time;</i></p>
+
+<p>The TEMPO statement defines the duration for rhythm values. The <i>beat </i>argument
+represents a fraction of a whole-note and should be an integer value. The <i>time
+</i>argument indicates the beats per minute. The following example sets the
+tempo to quarter note at 120bpm.</p>
+
+<pre>tempo 4, 120;</pre>
+
+<p>TEMPO is a global control statement and affects all subsequent notes. It can
+appear outside a voice.</p>
+
+<h3>TIME</h3>
+
+<p>Syntax: time <i>seconds</i>;</p>
+
+<p>The TIME statement sets an explicit start time for the next note in the
+current voice. TIME should be used sparingly since it bypasses the automatic
+start time calculation for notes. It is most useful when the sound must be
+synchronized to an external source, such as a video. However, the parameter to
+time can be any valid expression, including rhythm values and the <i>curtime </i>built-in
+variable. This gives some automatic conversion of the time value based on the
+tempo and/or current start time.</p>
+
+<pre>time 10;<br/>time curtime+10;<br/>time curtime+%1;</pre>
+
+<p>The first example sets the start time for the next note to 10 seconds,
+absolutely. The second example moves the start time forward by 10 seconds. The
+third example moves the start time forward by the duration of a whole note at
+the current tempo.</p>
+
+<h3>TRACK</h3>
+<p>Syntax: track <i>n</i>;</p>
+<p>The TRACK statement changes the sequencer track for subsequent notes and resets the current time for the voice to zero.
+By default notes are assigned to track zero. Track zero is started automatically when the sequencer is started.
+When the track number is other than zero, all subsequent events in the voice are assigned to a separate sequencer track.
+Tracks other than zero must be explicitly started with a START statement, but can be started, stopped and looped individually.</p>
+<pre>
+
+voice 0
+begin
+  instr "piano";
+  channel 0;
+  
+  track 1;
+  {C4, G4, E4, G4}, %8, 100;
+  track 2;
+  {B3, G4, D4, G4}, %8, 100;
+  track 3;
+  [C4, E4, G4], %2, 100;
+end
+
+voice 1
+begin
+  instr "bass";
+  channel 1;
+  
+  track 1;
+  C3, %2, 100;
+  track 2;
+  G2, %2, 100;
+  track 3;
+  C2, %2, 100;
+end
+
+voice 3
+begin
+  instr "flute";
+  channel 3;
+  
+  track 0;
+  start 1, 4;
+  {C5, D5, E5, F5, G5},  {%2, %4,  %2, %4, %2}, 100;
+  start 2, 2;
+  {G5, F5, E5, D5}, %4, 100;
+  start 3, 1;
+  C5, %2, 100;
+end  
+</pre>
+
+<h3>TRANSPOSE</h3>
+
+<p>Syntax: transpose <i>offset</i>;</p>
+
+<p>The TRANSPOSE statement modifies the pitch of subsequent notes. The argument
+to transpose indicates the number of semi-tones to be added to the pitch value
+and can be negative or positive. Transposition is chromatic as there is
+currently no concept of key signature in Notelist.</p>
+
+<h3>VAR</h3>
+
+<p>Syntax: var <i>name</i>;</p>
+
+<p>The VAR statement declares one or more variable names. Variables are used to
+hold a value that can change during sequence generation. Variable names begin
+with a letter followed by any number of letters and digits. All variables must
+be declared before they can used. A single statement can define multiple
+variables by separating the variable names with commas.</p>
+
+<p>Note: Single letter variable names in the range [A-G], with or without a
+number following, represent pitches and cannot be used as variable names.
+Likewise, the single letter names W,H,Q,S,T represent rhythms.</p>
+
+<pre>var val1;<br/>var oct, step;</pre>
+
+<h3>VERSION</h3>
+
+<p>Syntax: version <i>major.minor</i>;</p>
+
+<p>The version statement sets the version number for the Notelist file. </p>
+
+<pre>version 3.0;</pre>
+
+<p>By default, the version number is set to the version of the Notelist
+program. Subsequent versions of the program may alter the default behavior of
+Notelist statements and it might be necessary to indicate that the prior
+behavior should be used instead. By setting a version number as the first
+statement in the file, the parser and generator will revert to the previous
+behavior and the file will not have to be edited to be properly interpreted.</p>
+
+<h3>VOICE</h3>
+
+<p>Syntax: voice <i>number notelist</i></p>
+
+<p>The VOICE statement indicates that the following statement applies to the
+voice given by the <i>number </i>argument. The voice number can be any integer
+value, and any number of voices can be defined.</p>
+
+<p>See the example section above for more information on Notelist voices.</p>
+
+<h3>VOLUME</h3>
+
+<p>Syntax: volume <i>level</i>;</p>
+
+<p>The VOLUME statement sets a value that is multiplied by the per-note volume
+value. Using volume is similar to setting a mixer level on the synthesizer, but
+is performed internally by Notelist. Setting the volume on a voice can help
+balance the level between voices, but can also be used to generate a change in
+volume level without having to explicitly set each note volume. This makes it
+easy to produce a crescendo of notes that have varying volume levels, and, to
+vary the range of a crescendo later without having to reenter the volume levels
+for all notes. For example,</p>
+
+<pre>voice 2<br/>begin<br/>  volume 30;<br/>  {C3, G3, C3, G2}, {%16, %8, %16, %2}, {100, 80, 90, 100};<br/>  volume 40;<br/>  {C3, G3, C3, G2}, {%16, %8, %16, %2};<br/>  volume 50;<br/>  {C3, G3, C3, G2}, {%16, %8, %16, %2};<br/>end</pre>
+
+<p>The keyword VOLUME can be abbreviated as VOL.</p>
+
+<h3>WHILE...DO</h3>
+
+<p>Syntax: while <i>condition </i>do <i>Notelist</i></p>
+
+<p>The WHILE...DO statement is used to repeatedly execute a statement, similar to
+a LOOP statement. Unlike a loop, the WHILE...DO statement contains a condition
+to control the number of times the statement is executed. Whereas the loop statement
+automatically increments the loop count, the expression that controls the while
+loop must be explicitly calculated. The following example loops five times,
+increasing the volume level by 20 on each step.</p>
+
+<pre>var val1;<br/>voice 1<br/>begin<br/>  set val1 = 20;<br/>  while val1 &lt;= 100 do<br/>  begin<br/>    C4, %8, val1;<br/>    set val1 = val1 + 20;<br/>  end<br/>end</pre>
+
+<h3>WRITE</h3>
+
+<p>Syntax: write &ldquo;<i>string</i>&rdquo;;</p>
+
+<p>The WRITE statement is used to send a text string to the console. This can
+be used for debugging or for informational purposes.</p>
+
+<h1>Notelist Grammar</h1>
+
+<p>The formal grammar for Notelist script is shown below. An asterisk (*)
+indicates zero or more occurrences of a symbol, a plus (+) one or more
+occurrences, and a question mark (?) one or zero occurrences. The vertical bar
+is used to denote alternates, and parenthesis indicate a sub-element of a
+production rule. Text in quotes represents a keyword or terminal symbol that
+must be matched exactly.</p>
+
+<pre>
+score     : statement* ;
+statement : global | sequence | voice ;
+global    : include | system | script | write 
+          | version | tempo | middlec | initfn
+          | maxparam | map | declare | set ;
+include   : &lsquo;include&rsquo; STRING &lsquo;;&rsquo; ;
+system    : (&lsquo;system&rsquo;|&lsquo;sys&rsquo;) STRING &lsquo;;&rsquo; ;
+script    : &lsquo;script&rsquo; STRING &lsquo;;&rsquo; ;
+write     : &lsquo;write&rsquo; expr &lsquo;;&rsquo; ;
+version   : &lsquo;version&rsquo; id &lsquo;;&rsquo; ;
+tempo     : &lsquo;tempo&rsquo; expr &lsquo;,&rsquo; expr &lsquo;;&rsquo; ;
+middlec   : &lsquo;middlec&rsquo; NUMBER &lsquo;;&rsquo; ;
+initfn    : &lsquo;init&rsquo; NUMBER fn expr &lsquo;,&rsquo; expr &lsquo;,&rsquo; expr &lsquo;;&rsquo; ;
+fn        : &lsquo;line&rsquo; | &lsquo;exp&rsquo; | &lsquo;log&rsquo; | &lsquo;rand&rsquo; ;
+maxparam  : &lsquo;maxparam&rsquo; expr &lsquo;;&rsquo; ;
+map       : &lsquo;map&rsquo; id mapval (&lsquo;,&rsquo; mapval)* &lsquo;;&rsquo; ;
+mapval    : expr (&lsquo;:&rsquo; expr)? ;
+declare   : (&lsquo;variable&rsquo;|&lsquo;var&rsquo;) VAR (, VAR)* &lsquo;;&rsquo; ;
+set       : &lsquo;set&rsquo; VAR &lsquo;=&rsquo; expr &lsquo;;&rsquo; ;
+sequence  : (&lsquo;sequence&rsquo;|&rsquo;seq&rsquo;) id notelist ;
+voice     : &lsquo;voice&rsquo; NUMBER notelist ;
+notelist  : &lsquo;begin&rsquo; notes* &lsquo;end&rsquo; | notes &lsquo;;&rsquo; ;
+notes     : global | ifstmt | whilestmt | loop
+          | instr | vol | chnl | call | play
+          | artic | param | time | mark | sync
+          | transpose    | double | sus | tie 
+          | note | notespec ;
+ifstmt    : &lsquo;if&rsquo; expr &lsquo;then&rsquo; notelist (&lsquo;else&rsquo; notelist)? ;
+whilestmt : &lsquo;while&rsquo; expr &lsquo;do&rsquo; notelist ;
+loop      : (&lsquo;loop&rsquo;|&lsquo;repeat&rsquo;) &lsquo;(&rsquo; expr &lsquo;)&rsquo; notelist ;
+instr     : (&lsquo;instrument&rsquo;|&lsquo;instr&rsquo;) expr &lsquo;;&rsquo; ;
+vol       : (&lsquo;volume&rsquo;|&lsquo;vol&rsquo;) expr &lsquo;;&rsquo; ;
+chnl      : (&lsquo;channel&rsquo;|&lsquo;chnl&rsquo;) expr &lsquo;;&rsquo; ;
+call      : &lsquo;call&rsquo; expr &lsquo;;&rsquo; ;
+play      : &lsquo;play&rsquo; expr &lsquo;;&rsquo; ;
+artic     : &lsquo;artic&rsquo; artval &lsquo;;&rsquo; ;
+artval    : &lsquo;fixed&rsquo; artexpr
+          | &lsquo;percent&rsquo; artexpr
+          | &lsquo;add&rsquo; artexpr
+          | &lsquo;off&rsquo; ;
+artexpr   : &lsquo;param&rsquo; | expr ;
+param     : &lsquo;param&rsquo; expr &lsquo;,&rsquo; expr &lsquo;;&rsquo; ;
+time      : &lsquo;time&rsquo; expr &lsquo;;&rsquo; ;
+mark      : &lsquo;mark&rsquo; expr &lsquo;;&rsquo; ;
+sync      : &lsquo;sync&rsquo; expr &lsquo;;&rsquo; ;
+transpose : &lsquo;transpose&rsquo; expr &lsquo;;&rsquo; ;
+double    : &lsquo;double&rsquo; dblparam &lsquo;;&rsquo; ;
+dblparam  : &lsquo;off&rsquo; | expr (',' expr)* ;
+sus       : &lsquo;sus&rsquo; notespec ;
+tie       : &lsquo;tie&rsquo; notespec ;
+note      : &lsquo;note&rsquo; notespec ;
+notespec  : valgroup (&lsquo;,&rsquo; valgroup)* &lsquo;;&rsquo; ;
+valgroup  : &lsquo;{&rsquo; exprlist &lsquo;}&rsquo;
+          | &lsquo;[&rsquo; exprlist &lsquo;]&rsquo;
+          | expr ;
+exprlist  : expr (&lsquo;,&rsquo; expr)* ;
+expr      : logical (&lsquo;:&rsquo; logical)* ;
+logical   : relation (logop relation)* ;
+relation  : term (relop term)* ;
+term      : factor (addop factor)* ;
+factor    : value (mulop value)* ;
+value     : &lsquo;(&rsquo; expr &lsquo;)&rsquo; | NUMBER | STRING
+          | PITCH | RHYTHM | VAR 
+          | &lsquo;fgen&rsquo; &lsquo;(&rsquo; expr &lsquo;,&rsquo; expr &lsquo;)&rsquo;
+          | &lsquo;rand&rsquo; | &lsquo;count&rsquo; | &lsquo;curtime&rsquo;
+          | &lsquo;curpit&rsquo; | &lsquo;curdur&rsquo; | &lsquo;curvol&rsquo;
+          | &lsquo;-&rsquo; value | &lsquo;eval&rsquo; value
+          | &lsquo;~&rsquo; value | &lsquo;not&rsquo; value ;
+logop     : &lsquo;&amp;&rsquo; | &lsquo;|&rsquo; | &lsquo;and&rsquo; | &lsquo;or&rsquo; ;
+addop     : &lsquo;+&rsquo; | &lsquo;-&rsquo; ;
+mulop     : &lsquo;*&rsquo; | &lsquo;/&rsquo; | &lsquo;^&rsquo; ;
+relop     : &lsquo;&lt;&rsquo; | &lsquo;&gt;&rsquo;  ;
+          | &lsquo;&lt;=&rsquo; | &lsquo;&gt;=&rsquo;  ;
+          | &lsquo;&lt;&gt;&rsquo; | &lsquo;=&rsquo; | &lsquo;==&rsquo; ;
+id        : STRING | NUMBER ;
+</pre>
+
+<p>The terminals NUMBER, STRING, PITCH, RHYTHM, and VAR are described with
+regular expressions.</p>
+
+<pre>
+NUMBER  = ([0-9]+(\.[0-9]*)?)|(\.[0-9]+)
+STRING  = &quot;([^&quot;]|\\&quot;)*&quot;
+PITCH   = [A-Ga-g][#bxd]?[0-9]*
+RHYTHM  = (%[0-9]+(\.[0-9]*)?)|((W|H|Q|EI|S|T|w|h|q|ei|s|t)(\.)?)
+VAR     = [A-Za-z][A-Za-z0-9]*</pre>
+
+<p>Note that the RE for VAR overlaps with the definitions for PITCH and RHYTHM.
+A single pitch letter (A-G), a pitch letter followed by a number, or a rhythm
+letter (WHQEST), will match multiple expressions. The lexer must scan for PITCH
+and RHYTHM first and only recognize a single letter as a variable name when the
+character is not a pitch letter or rhythm letter.</p>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap name="varied">
+  <include>ColorsCommon.xml</include>
+  <color name="label" val="#fff0f080" />
+  <color name="btnlabel" val="#fff0f088" />
+  <color name="grpfr" val="#ff202020" />
+  <color name="grpbk" val="#ff607060" />
+  <color name="freq"  val="#ffffff80" />
+  <color name="freqlo" val="#ff808000" />
+  <color name="freqhi" val="#fff0f080" />
+  <color name="volume" val="#ffffff80" />
+  <color name="vollo" val="#ff808000" />
+  <color name="volhi" val="#fff0f080" />
+  <color name="modlo" val="#ff808000" />
+  <color name="modhi" val="#fff0f080" />
+  <color name="mod" val="#ffffff80" />
+  <color name="rate" val="#ffffff80" />
+  <color name="ratelo" val="#ff808000" />
+  <color name="ratehi" val="#fff0f080" />
+  <color name="eglin" val="#fff0f080" />
+  <color name="egexp" val="#ff800000" />
+  <color name="eglog" val="#ff202080" />
+  <color name="shinyhi" val="#fff0f0f0" />
+  <color name="shinylo" val="#ff808000" />
+  <color name="shiny" val="#ffc0c0a0" />
+  <color name="silverhi" val="#fff0f0f0" />
+  <color name="silverlo" val="#ff808080" />
+  <color name="silver" val="#ffa0a0a0" />
+  <color name="mattehi" val="#ff808080" />
+  <color name="mattelo" val="#ff202018" />
+  <color name="wtsel" val="#ffc0c080" />
+  <color name="cmd" val="#ffc0c080" />
+  <color name="hdr" val="#fff0f0a0" />
+  <color name="bg" val="#ff404840" />
+  <color name="fg" val="#ff000000" />
+  
+</colormap>

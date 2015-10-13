@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>Step VIII - Add another voice to the score</title>
+</head>
+<body>
+<h1>
+Step VIII - Add another voice to the score</h1><hr/>
+<p>
+Double click on the Score project item to open the editor for the Steps score. Move
+to the bottom of the file and add the following lines.</p>
+<pre>
+
+voice 2
+begin
+    instrument &quot;Plunk&quot;;
+    channel 1;
+    volume 100;
+    C2, %1, 100;
+    B1, %2, 100;
+    G2, %2, 100;
+    D2, %4, 100;
+    E2, %4, 100;
+    F2, %4, 100;
+    G2, %4, 100;
+    C2, %1, 100;
+end
+
+</pre>
+<p>
+Save the file and then play the score again. This time you will hear two voices
+played together. Now add the following to the score:</p>
+<pre>
+map &quot;Plunk&quot; &quot;oscmnx&quot;;
+
+voice 2
+begin
+    instrument &quot;Plunk&quot;;
+    channel 3;
+    volume 100;
+    C2, %1, 100, 0.5;
+    B1, %2, 100, 0.7;
+    G2, %2, 100, 0.9;
+    D2, %4, 100, 1.2;
+    E2, %4, 100, 1.4;
+    F2, %4, 100, 1.6;
+    G2, %4, 100, 1.8;
+    C2, %1, 100, 2.0;
+end
+</pre>
+<p>
+The &quot;map&quot; line tells Notelist that the first value after the volume is
+an instrument parameter and should be passed to the instrument as the oscillator
+modulation index value. Notelist allows setting almost any instrument parameter
+on a note-by-note basis. In fact, you can skip editing the instruments completely
+and specify all instrument parameters in the score. However, the normal case is
+that only a few parameters will be varied in the score. Configuring the instrument
+first means that we only have to enter the parameters that are changing during playback
+into the score.</p>
+<p>
+Also change the channel number for voice 1 to channel 2. Remember that we set channel
+2 and 3 to pan left and right. Play the score again and listen to the bass line
+become brighter on each note.
+</p>
+<hr />
+<p>Next: <a href="step9.html">Generate the output file</a>...</p>
+</body>
+</html>

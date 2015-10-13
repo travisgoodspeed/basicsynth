@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Instruments">
+		<param name="Name" value="Instruments">
+		<param name="Local" value="instruments.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Libraries">
+		<param name="Name" value="Instrument Libraries">
+		<param name="Local" value="libraries.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToneInstr">
+		<param name="Name" value="Tone Instrument">
+		<param name="Local" value="toneinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ToneFMInstr">
+		<param name="Name" value="Tone FM Instrument">
+		<param name="Local" value="tonefminstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AddSynth">
+		<param name="Name" value="Additive Synthesis Instrument">
+		<param name="Local" value="addsynthinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FMSynth">
+		<param name="Name" value="FM Synthesis Instrument">
+		<param name="Local" value="fmsynthinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SubSynth">
+		<param name="Name" value="Subtractive Synthesis Instrument">
+		<param name="Local" value="subsynthinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BuzzSynth">
+		<param name="Name" value="BUZZ Synthesis Instrument">
+		<param name="Local" value="buzzsynthinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="WFSynth">
+		<param name="Name" value="Wave File Playback Instrument">
+		<param name="Local" value="wfsynthinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Chuffer">
+		<param name="Name" value="Chuffer">
+		<param name="Local" value="chufferinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MatSynth">
+		<param name="Name" value="Matrix Synthesis Instrument">
+		<param name="Local" value="matsynthinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ModSynth">
+		<param name="Name" value="Modular Synthesis Instrument">
+		<param name="Local" value="modsynthinstr.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Mixer">
+		<param name="Name" value="Mixer Configuration">
+		<param name="Local" value="mixersetup.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Keyboard">
+		<param name="Name" value="Keyboard/Player">
+		<param name="Local" value="player.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Editor">
+		<param name="Name" value="Text Editor">
+		<param name="Local" value="editor.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="projects">
+		<param name="Name" value="Project Files">
+		<param name="Local" value="projects.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="projects">
+		<param name="Name" value="Project Properties">
+		<param name="Local" value="projectproperties.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Sequencer Files">
+		<param name="Name" value="Sequencer Files">
+		<param name="Local" value="seqfile.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="steps">
+		<param name="Name" value="Basic Synth Step by Step">
+		<param name="Local" value="stepbystep.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Notelist">
+		<param name="Name" value="Notelist">
+		<param name="Local" value="notelist.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ARTIC">
+		<param name="Local" value="Notelist.html#artic">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="BEGIN...END">
+		<param name="Local" value="Notelist.html#beginend">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="CALL">
+		<param name="Local" value="Notelist.html#call">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="CHANNEL">
+		<param name="Local" value="Notelist.html#channel">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="COMMENTS">
+		<param name="Local" value="Notelist.html#comments">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="DOUBLE">
+		<param name="Local" value="Notelist.html#double">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="EVAL">
+		<param name="Local" value="Notelist.html#eval">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="FGEN">
+		<param name="Local" value="Notelist.html#fgen">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="IF...THEN...ELSE">
+		<param name="Local" value="Notelist.html#ifthenelse">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="INCLUDE">
+		<param name="Local" value="Notelist.html#include">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="INIT">
+		<param name="Local" value="Notelist.html#init">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="INSTRUMENT">
+		<param name="Local" value="Notelist.html#instrument">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="LOOP">
+		<param name="Local" value="Notelist.html#loop">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MAP">
+		<param name="Local" value="Notelist.html#map">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MARK">
+		<param name="Local" value="Notelist.html#mark">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MAXPARAM">
+		<param name="Local" value="Notelist.html#maxparam">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MIDDLEC">
+		<param name="Local" value="Notelist.html#middlec">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="MIXER">
+		<param name="Name" value="MIXER">
+		<param name="Local" value="notelist.html#mixer">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="NOTE">
+		<param name="Local" value="Notelist.html#note">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="OPTION">
+		<param name="Name" value="OPTION">
+		<param name="Local" value="notelist.html#option">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PLAY">
+		<param name="Local" value="Notelist.html#play">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="PARAM">
+		<param name="Local" value="Notelist.html#param">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="REPEAT">
+		<param name="Local" value="Notelist.html#repeat">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SCRIPT">
+		<param name="Local" value="Notelist.html#script">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SET">
+		<param name="Local" value="Notelist.html#set">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SEQUENCE">
+		<param name="Local" value="Notelist.html#sequence">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SYNC">
+		<param name="Local" value="Notelist.html#sync">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="SYSTEM">
+		<param name="Local" value="Notelist.html#system">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TEMPO">
+		<param name="Local" value="Notelist.html#tempo">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TIME">
+		<param name="Local" value="Notelist.html#time">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="TRANSPOSE">
+		<param name="Local" value="Notelist.html#transpose">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="VAR">
+		<param name="Local" value="Notelist.html#var">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="VERSION">
+		<param name="Local" value="Notelist.html#version">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="VOICE">
+		<param name="Local" value="Notelist.html#voice">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="VOLUME">
+		<param name="Local" value="Notelist.html#volume">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="WHILE...DO">
+		<param name="Local" value="Notelist.html#whiledo">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="WRITE">
+		<param name="Local" value="Notelist.html#write">
+		</OBJECT>
+</UL>
+</BODY></HTML>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<synthprj>
+  <name>Test Project</name>
+  <desc>Test various Notelist statements</desc>
+  <author>Dan Mitchell</author>
+  <cpyrgt>2009</cpyrgt>
+  <out type="1">testnl.wav</out>
+  <synth sr="44100" wt="16384" usr="1">
+    <wvtable ndx="10" parts="2" >
+      <part mul="1" amp="1.0" phs="0"/>
+      <part mul="2" amp="0.5" phs="0"/>
+      <part mul="4" amp="0.2" phs="0"/>
+    </wvtable>
+  </synth>
+  <mixer chnls="2" fxunits="0" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="0.5" pan="0"/>
+    <chnl cn="1" on="1" vol="0.5" pan="1"/>
+  </mixer>
+  <libdir></libdir>
+  <instrlib>
+    <instr id="13" type="Tone" name="Tone" desc="">
+      <osc frq="440.0" wt="10" />
+      <env st="0" atk="0.01" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+    </instr>
+  </instrlib>
+  <score name="Test" dbg="0">testnl.nl</score>
+</synthprj>

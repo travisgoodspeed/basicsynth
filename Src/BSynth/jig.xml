@@ -1,0 +1,40 @@
+<synthprj>
+  <name>Test Jig</name>
+  <author>Dan Mitchell</author>
+  <cpyrgt>(C) 2008, Daniel R. Mitchell</cpyrgt>
+  <synth sr="44100" wt="16384" usr="0" />
+  <mixer chnls="4" fxunits="1" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="0.5" pan="0"/>
+    <chnl cn="1" on="1" vol="0.5" pan="-0.5"/>
+    <chnl cn="2" on="1" vol="0.5" pan="0.5"/>
+    <chnl cn="3" on="1" vol="0.5" pan="0"/>
+    <reverb unit="0" vol="0.1" rvt="2.5" pan="0">
+      <send cn="0" amt="0.4"/>
+      <send cn="1" amt="0.4"/>
+      <send cn="2" amt="0.4"/>
+      <send cn="3" amt="0.4"/>
+    </reverb>
+  </mixer>
+  <out type="1" lead="0" tail="2.5">jig.wav</out>
+  <instrlib>
+    <instr id="1" type="FMSynth" name="Fidl" >
+      <fm alg="1" mix="1.0" dly="0" pon="0" pan="0"/>
+      <gen1 mul="1.0" st="0" atk="0.15" pk="1.0" dec="0" sus="1.0" rel="0.1" end="0" ty="1" />
+      <gen2 mul="3.0" st="2.0" atk="0.06" pk="1.6" dec="0.1" sus="1.2" rel="0.1" end="1.0" ty="1" />
+      <gen3 mul="4.0" st="2.0" atk="0.05" pk="1.5" dec="0.1" sus="1.2" rel="0.1" end="0.8" ty="1" />
+      <nz mix="0.0" fr="0" fo="0" st="0" atk="0" pk="0" dec="0" sus="0" rel="0" end="0" ty="1" />
+      <dln mix="0.5" dly="0.01" dec="0.8" />
+      <lfo frq="3.8" wt="0" atk="0.1" amp="0.1" />
+    </instr>
+    <instr id="2" type="FMSynth" name="Drum" >
+      <fm alg="2" mix="1.0" dly="0" />
+      <gen1 mul="1.0" st="0" atk="0.02" pk="1.0" dec="0.4" sus="0" rel="0.4" end="0" ty="2" />
+      <gen2 mul="2.0" st="0" atk="0.035" pk="3" dec="0.3" sus="0" rel="0.3" end="0.0" ty="2" />
+      <gen3 mul="3.0" st="0" atk="0.0" pk="2.4" dec="0.03" sus="0" rel="0.3" end="0.0" ty="2" />
+      <nz mix="0.8" dly="0.5" fr="800" fo="600" st="0" atk="0" pk="1.0" dec="0.1" sus="0" rel="0.02" end="0" ty="2" />
+      <dln mix="0.8" dly="0" dec="0.5" />
+      <lfo frq="2.1" wt="0" atk="0.0" amp="0.2" />
+    </instr>
+  </instrlib>
+  <score>jig.nl</score>
+</synthprj>

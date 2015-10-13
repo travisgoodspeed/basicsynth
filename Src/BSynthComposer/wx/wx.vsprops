@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="wx"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="$(wxroot)\include;$(wxroot)\include\msvc"
+		PreprocessorDefinitions="_UNICODE"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="$(wxroot)\lib\vc_lib"
+	/>
+	<Tool
+		Name="VCResourceCompilerTool"
+		AdditionalIncludeDirectories="$(wxroot)\include;$(wxroot)\include\msvc"
+	/>
+	<UserMacro
+		Name="wxroot"
+		Value="..\..\..\OpenSource\wxWidgets-2.9.3"
+	/>
+</VisualStudioPropertySheet>

@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+    <meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+    <title>Keyboard/Player</title>
+</head>
+<body>
+<h1>Keyboard/Player</h1>
+<p>The keyboard at the bottom of the main window allows you to play notes on any configured
+instrument. In addition, the keyboard can record the notes played and copy them to the clipboard
+in Notelist score format.</p>
+<img src="images/player.jpg" alt="Virtual Keyboard" />
+<h2>Activating the Keyboard</h2>
+<p>When the keyboard is active it must constantly send output to the computer sound card, even
+if you are not actually playing notes. This consumes processor time and memory unecessarily.
+In addition, the keyboard and sequencer share the same instruments, mixer and wave file output
+modules, and both cannot be active at the same time.
+For these reasons, the keyboard is not automatically started when you open a project. When you
+want to play sounds, press the "On" button above the keyboard. Note: The first time you start the
+keyboard there might be a slight delay while the system opens and prepares the sound card. If you
+start the sequencer, or reconfigure the mixer, the keyboard will automatically turn off.</p>
+<p>When a MIDI device is connected to the computer, the MIDI light will be available. Click on the
+lamp to enable/disable receiving events from the MIDI keyboard.</p>
+<h2>Instrument Selection</h2>
+<p>
+A list to the left of the keyboard shows all currently available instruments. In order to play the keyboard,
+you must select one of the instruments. When an instrument editor is activated, it will automatically
+switch the instrument selection to itself. 
+</p>
+<h2>Volume and Mixer Channel</h2>
+<p>You can control the volume level of the keyboard independently of the mixer. Normally, the volume
+level can be left set to 1.0 since all sounds played on the keyboard are sent through a mixer channel. The
+volume control is added in order to emulate the <i>volume</i> keyword in a Notelist score.
+<p>
+<p>
+The currently selected mixer channel is shown below the volume control. Press the + button to increment
+the mixer channel number. The number will wrap around when you reach the maximum mixer channel
+number. Selecting different mixer channels allows you to hear how the mixer affects the sound.
+</p>
+<p>
+The virtual keyboard simulates MIDI note-on velocity using the position of the mouse when a key is clicked.
+When the mouse position is at the bottom edge of the key, a maximum velocity of 127 is set for the note.
+The velocity value decreases as the mouse position is moved up from the bottom edge of the key.
+</p>
+<h2>Note Duration</h2>
+<p>Normally when you play on the keyboard, the sound will last until you release the key. However,
+some instruments can be configured with an envelope based on the current note duration. In that case,
+the keyboard must supply a duration to the instrument whenever a note is played. 
+The five buttons with notes on them allow selecting a different note duration. The effective tempo
+is 120bpm, thus a quarter note represents 1/2 second duration. The duration buttons are also used
+during recording to indicate the actual length of a note.
+</p>
+<h2>Recording</h2>
+<p><b>Note:</b> Recording is only available from the virtual keyboard. MIDI events
+are not currently recorded.</p>
+<p>
+The record controls are to the right of the note buttons. The first button (red in color) switches the
+record function on and off. When record is on, each note you play is added to a buffer. Notes
+remain in the buffer until you press the Copy button.
+</p>
+<p>The group button (braces with a note in them) toggles the format of
+the Notelist output. When the group button is up, each note is placed on a separate
+line. When the group button is down, notes are written using the Notelist phrase notation
+(notes inside braces).
+</p>
+<p>
+The sharps and flats buttons control how enharmonic equivalents are represented. </p>
+<p>The copy button (note -> page) copies the current record buffer to the clipboard and
+then clears the buffer. You can then switch to a Notelist editor and use the paste function
+to copy the notes into the score. Since the information is left on the clipboard, you can
+copy the notes as many times as you want, and also copy the notes into any other text
+editor on your computer.</p>
+<h2>Sequencing</h2>
+<p>
+The speaker and disk buttons are used to start the sequencer. Unlike the menu
+and toolbar equivalents, these buttons automatically start the sequencer and close the
+popup form when it is finished. This allows for a quick preview of the score.
+The last set start and end times from the generator form are reused. Thus, you can
+open the sequencer using the project menu, set the start and end times, then close the
+form. As you work on the score, or change instruments, the speaker and disk buttons
+can be used to quickly audition the section of the composition you are working on.
+</p>
+</body>
+</html>

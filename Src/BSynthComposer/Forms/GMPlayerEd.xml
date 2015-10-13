@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout type="GMPlayer" x="0" y="0" w="540" h="360" bg="bg" fg="fg" >
+  <label id="-2" filled="1" x="10" y="10" w="150" h="20" val="0" th="16" align="0" lbl="Sound Bank File" bold="1" fg="label" />
+  <label id="2"  filled="1" x="160" y="10" w="200" h="20" val="0" align="0" th="16" lbl="" bold="0" fg="label" bg="black" edit="1"/>
+  <label id="-3" x="20" y="60" w="100" h="20" th="14" align="1" lbl="Internal" bold="1" fg="label" />
+  <switchset id="3" ip="16" x="20" y="80" w="100" h="25" val="0" >
+    <pushswitch id="4" x="0" y="0" w="90" h="25" val="16" lbl="Volume" fg="btnlabel" />
+    <pushswitch id="5" x="0" y="30" w="90" h="25" val="4" lbl="Pan" fg="btnlabel" />
+    <pushswitch id="6" x="0" y="60" w="90" h="25" val="1" lbl="Bank" fg="btnlabel" />
+    <pushswitch id="7" x="0" y="90" w="90" h="25" val="2" lbl="Patch" fg="btnlabel" />
+  </switchset>
+  <group id="-7" x="120" y="80" w="390" h="130" >
+    <label id="-1" x="100" y="0" w="50" h="20" lbl="Atten." fg="label" />
+    <baseknob id="8" ip="19" x="100" y="25" h="50" w="50" lo="0" hi="1" hiclr="volhi" loclr="vollo"/>
+    <label id="9" x="100" y="80" h="20" w="50" filled="1" edit="1" val="0" fg="volume" bg="black"/>
+    <pair knb="8" lbl="9" />
+
+    <label id="12" x="0" y="5" w="50" h="20" lbl="Bank" fg="label" />
+    <label id="13" x="0" y="30" w="50" h="20" lbl="Prog" fg="label" />
+    <label id="14" ip="17" x="50" y="5" w="35" h="20" val="0" filled="1" edit="1" fmt="%3.0f" fg="label" bg="black" />
+    <label id="15" ip="18" x="50" y="30" w="35" h="20" val="0" filled="1" edit="1" fmt="%3.0f" fg="label" bg="black" />
+    <pushbutton id="16" x="15" y="60" w="70" h="25" lbl="Select" fg="btnlabel" />
+  </group>
+</layout>

@@ -1,0 +1,52 @@
+[OPTIONS]
+Compatibility=1.1 or later
+Compiled file=BSynthHelp.chm
+Contents file=BSynthHelp.hhc
+Default topic=overview.html
+Display compile progress=No
+Index file=BSynthHelp.hhk
+Language=0x409 English (United States)
+Title=BasicSynth Composer
+
+
+[FILES]
+overview.html
+stepbystep.html
+step1.html
+step2.html
+step3.html
+step4.html
+step5.html
+step6.html
+step7.html
+step8.html
+step9.html
+step10.html
+projects.html
+examples.html
+instruments.html
+toneinstr.html
+tonefminstr.html
+subsynthinstr.html
+addsynthinstr.html
+fmsynthinstr.html
+matsynthinstr.html
+chufferinstr.html
+modsynthinstr.html
+wfsynthinstr.html
+notelist.html
+projectproperties.html
+mixersetup.html
+player.html
+editor.html
+libraries.html
+gminstr.html
+sfinstr.html
+projectoptions.html
+buzzsynthinstr.html
+seqfile.html
+wavefiles.html
+midi.html
+
+[INFOTYPES]
+

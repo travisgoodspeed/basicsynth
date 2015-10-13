@@ -1,0 +1,169 @@
+﻿<html>
+<head>
+<title>Sequencer Files</title>
+</head>
+<body>
+<h1>Sequencer Files</h1>
+<p>A Sequencer file contains timed events for the <em>BasicSynth</em> sequencer.
+This is a &ldquo;raw&rdquo; format that specifies each event with an absolute
+start time in seconds, duration in seconds, and instrument parameters as
+numeric values. Sequencer file format is tedious to enter manually, but
+is a good format for external programs that generate events as output.</p>
+<p>Each line in a sequencer file consists of a leading record type followed
+by space delimited parameter fields.
+Numbers (other than the <em>inum</em> field) may be entered as a real or integer value and may also 
+include a leading negative sign (-). Character strings are enclosed in either single or 
+double quote marks. The maximum length of any one field is 256 characters.
+</p>
+<p>Four note event types, and three control event types, can be specified in the file.</p>
+<ul>
+<li>START - begin a note at the time and duration indicated.</li>
+<li>PARAM - modify a sounding note</li>
+<li>STOP - stop a sounding note</li>
+<li>RESTART - restart a sounding note</li>
+<li>STARTTRACK - start a loop track</li>
+<li>STOPTRACK - stop a loop track</li>
+<li>CONTROL - MIDI controller change</li>
+</ul>
+<h3>Note Events</h3>
+<p>The format of one note event line in the sequence file is as follows:</p>
+<pre>[+|-|&]inum chnl time duration { param }</pre>
+<p>
+Lines without a leading +, - or &amp; will generate a START event.
+A line beginning with + will generate a PARAM event. 
+A line beginning with - will generate a STOP event. 
+A line beginning with &amp; will generate a RESTART event. 
+PARAM, STOP and RESTART event lines must follow the event that is to be modified 
+with no intervening START events.
+However, since the start time determines the ultimate sequence of events, 
+the event will be applied based on the start time.
+The duration of the initial note must be less than the delta time
+to the PARAM, START or RESTART event. Otherwise the original note will no longer be playing and the event
+will have no effect.
+</p>
+<p>
+The first four fields are required. The <em>inum</em> field is an integer value that matches an 
+entry in the instrument definition table. The <em>chnl</em> field indicates the output channel, 
+usually a mixer input. The <em>time</em> and <em>duration</em> fields are numbers that specify the event 
+time and duration in seconds.
+</p>
+<p>
+The <em>params</em> are used to specify event information. For note events, the 
+default parameter fields are as follows:
+</p>
+<table border="1" style="width:400;border-width:1">
+<tr align="center"><td>Field</td><td>Position</td><td>Use</td></tr>
+<tr><td>Pitch</td><td>4</td><td>The pitch class (0-127) with Middle C as 48.</td></tr>
+<tr><td>Frequency</td><td>5</td><td>Actual note frequency</td></tr>
+<tr><td>Volume</td><td>6</td><td>Note volume normalized to [0,1].</td></tr>
+<tr><td>Track</td><td>7</td><td>Sequencer track number (0 by default).</td></tr>
+<tr><td>Velocity</td><td>8</td><td>Note on velocity.</td></tr>
+</table>
+<p>
+Any following <em>params</em> are optional and specific to the instrument. 
+Any number of <em>param</em> fields may be included, up to a maximum line length of 2048 characters.
+By default, each parameter is passed to the event object using the parameter’s position 
+on the line as the parameter identifier. In order to make parameters 
+more flexible, the sequence file loader provides a parameter mapping function. 
+A parameter map is a list of actual identifiers that should be passed to the event 
+object along with the parameter index. A parameter map is a line beginning with an equal 
+sign (=) followed by the instrument number and parameter ID numbers. The first
+entry in the map corresponds to the first parameter (i.e., field number 4).
+</p>
+<pre>=inum id0 id1 id2…</pre>
+<p>
+This map would use <em>id0</em> as the identifier for the first parameter field,
+<em>id1</em> for the second, etc. 
+</p>
+<p>
+Typically, a note record will use either
+pitch or frequency, but not both, and a map definition will be used to select
+one or the other. For example, to set pitch and then volume, the map would
+be:</p>
+<pre>=1 4 6</pre>
+<p>To use actual frequency followed by volume, the map would be:</p>
+<pre>=1 5 6</pre>
+<p>The builtin <em>Basicsynth</em> instruments have instrument specific
+parameters starting at id value 16. For a complete list see <a href="instruments.html">
+the instrument defintions</a> for each instrument.
+</p>
+<p>The following sequence will generate a C major scale using instrument 1 on mixer channel 0,
+with a crescendo.</p>
+<pre>
+// Set first instrument parameter to pitch, second to volume
+=1 4 6
+1 0 0.00 0.25 48 0.72
+1 0 0.25 0.25 50 0.76
+1 0 0.50 0.25 52 0.80
+1 0 0.75 0.25 53 0.84
+1 0 1.00 0.25 55 0.88
+1 0 1.25 0.25 57 0.92
+1 0 1.50 0.25 59 0.96
+1 0 1.75 0.50 60 1.00
+</pre>
+
+<h3>Control Events</h3>
+<p>Control events have a leading @ character as the type with the following format:</p>
+<pre>@type chnl time value1 value2</pre>
+<p>The type field indicates the type of control event. Currently this must
+be a valid MIDI status byte, with or without the channel number. For channel voice messages, 
+the <em>chnl</em> value is automatically added to the control type value. For example,
+to set the MIDI volume level to 100 on channel 0, use:</p>
+<pre>@176 0 1.0 7 100</pre>
+<p>
+The value "176" is a controller change message, the value "7" is the volume controller,
+and "100" is the volume level.
+</p>
+<h3>Track Events</h3>
+<p>The <em>BasicSynth</em> sequencer has the capability to perform multiple background
+loop tracks along with the main sequence. Any note placed on track 0 (the default) will
+play when the sequencer is started. To set notes on background tracks, the track number must
+be set to a value other than 0. </p>
+<p>Loops are started by a loop start record and play a fixed number of times
+or until a loop stop command is executed. A loop start command is indicated by
+a &lt; character at the start of the line. A loop stop command is indicated by
+a &gt; character at the start of the line.</p>
+<pre>
+&lt;time track count
+&gt;time track
+</pre>
+<p>The <em>time</em> parameter sets the 
+time when the loop starts. The <em>track</em> parameter indicates which track to play.
+The <em>loop</em> parameter indicates the number of times to play the track.
+If <em>loop</em> is set to 0, the track will continue to play until a stop track
+command is executed.
+</p>
+<p>The following example creates two loops and then plays them. The first loop
+is an C Maj arpeggio. The second is a G Maj arpeggio in first inversion.</p>
+<pre>
+// loop track 1 C
+=1 4 6 7
+1 1 0.000 0.125 48 0.50 1
+1 1 0.125 0.125 52 0.50 1
+1 1 0.250 0.125 55 0.50 1
+1 1 0.375 0.125 52 0.50 1
+// loop track 2 G6
+1 1 0.000 0.125 47 0.50 2
+1 1 0.125 0.125 50 0.50 2
+1 1 0.250 0.125 55 0.50 2
+1 1 0.375 0.125 50 0.50 2
+// play loop 1 4 times
+&lt;0.00 1 4
+// play loop 2 4 times
+&lt;2.0 2 4
+// play loop 1 4 times
+&lt;4.00 1 4
+// play loop 2 continuously
+&lt;6.00 2 0
+// stop loop 2
+&gt;10.00 2
+</pre>
+<h3>Comments</h3>
+<p>
+Comments may be included in the file by beginning the comment with either the C++ style 
+comment (//) or with a semi-colon (;). The comment continues to the end of the line. 
+Blank lines are also ignored.
+</p>
+
+</body>
+</html>

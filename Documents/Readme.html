@@ -1,0 +1,747 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>BasicSynth Synthesis Library</title>
+
+<style>
+<!--
+h1
+	{margin-right:0in;
+	margin-left:0in;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{margin-right:0in;
+	margin-left:0in;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{margin-right:0in;
+	margin-left:0in;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p
+	{margin-right:0in;
+	margin-left:0.25in;
+	font-family:"Times New Roman";}
+li
+	{margin-right:0in;
+	margin-left:0.4in;
+	font-family:"Times New Roman";}
+-->
+</style>
+
+</head>
+
+<body style="padding-left:100px;width:800px">
+
+<h1>BasicSynth Library</h1>
+
+<p>The <em>BasicSynth</em> source is provided to support the book <em>BasicSynth: Creating a Music Synthesizer in Software</em>.
+(see <a href="http://basicsynth.com">http://basicsynth.com</a>.) The book provides detailed explanations of the signal processing functions
+required to generate and process sounds, and shows the derivation of the programs using the C++ language.
+Although the book is not required to use and understand the source, it should be read first if you do not
+have any experience with signal processing programming.</p>
+
+<p>The <em>BasicSynth</em> source distribution contains the following parts.</p>
+<ul>
+<li>Common library - signal generation and processing library.</li>
+<li>Instruments library - various synthesis instruments.</li>
+<li>Notelist - a text-based music score language.</li>
+<li>Examples and utilities - working programs that use the libraries.</li>
+<li>BSynthComposer - a complete software synthesis program.</li>
+</ul>
+
+
+<h3>Common library</h3>
+
+<p>The <em>BasicSynth</em> Common library  provides the signal generation 
+and processing foundation for a software synthesizer. Much of the implementation 
+is contained in the header files located in the Include directory. 
+The file <em>BasicSynth.h</em> includes all of the header files, or individual files 
+can be included as needed. The methods are typically short, and placing them
+in the header allows the compiler to optimally expand the code as inline functions. 
+Longer functions, and those that are not time critical, are located in the 
+Src/Common directory and compiled into the Common library as object modules.</p>
+
+<p>To build your own synthesis program with <em>BasicSynth</em> you need at a
+minimum the Include files and the Common library (<em>Lib/Common.lib</em>). The Include
+directory and the Common library provide the sound generation, wave file and
+sequencer code. The header file <em>BasicSynth.h</em> includes all of the library.</p>
+
+<p>Note: Libraries for GCC (including MINGW) have the <em>.a</em> extension instead of <em>.lib</em></p>
+
+<h3>Instruments</h3>
+
+<p>A set of example instruments built using the library are located in Src/Instruments.
+The instruments are intended for use with BSynthComposer (see below) but can also
+be used for other software synthesis systems.</p>
+
+<p>If you want to use the <em>BasicSynth</em> instruments collection in your
+program, you must also include the header file <em>Src/Instruments/Instruments.h</em> and link 
+the <em>Lib/Instruments.lib</em> library.</p>
+
+<h3>Notelist</h3>
+
+<p>Notelist is a musician friendly, text-based music score format. It allows simple representation of notes, and
+also includes programming functions to calculate note values. Notelist allows specifying synthesis
+parameters on a note-by-note basis. This provides complete control of the sound, not simply note-on
+and note-off specification.</p>
+
+<p>To include the Notelist score processor in your program, you must include the header file
+<em>NLConvert.h</em> from the <em>Src/Notelist</em> directory and link the <em>Lib/Notelist.lib</em>
+library.</p>
+
+<h3>Examples</h3>
+
+<p>The source distribution includes numerous example programs that show usage of the library. 
+The exmple programs are executed from the command line and are portable to many
+platforms. Some examples are under the directory Src/Utilties. These are specific
+to MS-WINDOWS.</p>
+
+<h3>BasicSynth Composer</h3>
+
+<p>The BasicSynth source is intended to provide examples to someone who wants to 
+create a personalized software synthesizer, and should not be treated as a completed
+synthesis project. However, a complete synthesizer (BSynthComposer) designed by the
+author for his own use is also included. This can be compiled and run as-is, but is also
+intended as a reference for how the BasicSynth libraries can be used as the foundation
+for your own synthesizer.</p>
+
+<p>Three versions of BSynthComposer are available.</p>
+<ul>
+<li>Windows - uses WTL for the GUI framework, GDI+ for graphics, DirectSound for audio.</li>
+<li>FLTK - uses the FLTK for the GUI framework.</li>
+<li>WX - uses wxWidgets for the GUI framework.</li>
+</ul>
+<p>The MSWIN version only compiles with Visual Studio and only runs on Windows. The FLTK and WX versions
+can be compiled with the GNU or MinGW compilers and will run on Windows or Linux.</p>
+
+<p>Several compositions for BSynthComposer are located in the ExampleProjects directory.</p>
+
+<h3>Documentation</h3>
+<p>Reference documentation on the libraries is  built with Doxygen. Use the files in the <em>Doxygen</em> directory
+to build the documentation .html files. In addition, documentation in Windows help file format can be downloaded from
+the BasicSynth project on sourceforge.</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h2><em>BasicSynth</em> Directory Structure</h2>
+
+<p>The BasicSynth directory structure is shown in the following diagram.</p>
+
+<p><img border=0 src=structure.jpg></p>
+
+<table border="1" cellpadding="4" cellspacing="0" style="margin-left:0.25;">
+ <thead>
+  <tr style="background:#888;color:#fff;">
+   <td >
+   <p>Directory</p>
+   </td>
+   <td >
+   <p>Usage</p>
+   </td>
+  </tr>
+ </thead>
+ <tr>
+  <td >
+  <p>Bin</p>
+  </td>
+  <td >
+  <p>Executable images</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Lib</p>
+  </td>
+  <td >
+  <p>Object file libraries</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Binx64</p>
+  </td>
+  <td >
+  <p>64-bit Executable images</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Libx64</p>
+  </td>
+  <td >
+  <p>64-bit Object file libraries</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Include</p>
+  </td>
+  <td >
+  <p>Source include files. Much of the <em>BasicSynth</em>
+  sound generation code is contained in these files as inline class functions.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Documents</p>
+  </td>
+  <td >
+  <p>Various documents.</p>
+  </td>
+ </tr>
+  <tr>
+  <td >
+  <p>Doxygen</p>
+  </td>
+  <td >
+  <p>Configuration files to produce source code documentation with Doxygen.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>OpenSource</p>
+  </td>
+  <td >
+  <p>Open source libraries and include files. These are only used to build BSynthComposer.
+  These are not needed to build the libraries and examples. However, the Windows examples (utilities)
+  require WTL 8.0.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>OpenSource/scintilla</p>
+  </td>
+  <td >
+  <p>Header files and VS 2008 project files to build scintilla for BasicSynth. By default, the BSynthComposer looks here for the header files.
+  If scintilla is installed already, change the project file for BSynthComposer to reference the include directory.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>OpenSource/WTL80</p>
+  </td>
+  <td >
+  <p>WTL files used by BasicSynth. By default, the BSynthComposer looks here for the header files.
+  If WTL is installed already, change the project file for BSynthComposer to reference the include directory.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>OpenSource/fltk-*</p>
+  </td>
+  <td >
+  <p>FLTK files used for BSynthCompser. These are not needed to build the libraries and examples.
+  BSynthComposer can be built with either version 1.1.10 or 1.3.x. Version 1.3 is preferred.
+  Later versions may work, but have not been tested. For Linux, the Makefiles use fltk-config to get the path to the FLTK include and library files. 
+  On Windows, the BSynthComposer FLTK project looks here for the header files
+  and libraries.  If FLTK is installed elsewhere, change the properties file for BSynthComposer to reference the appropriate directory.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>OpenSource/wxWidgets-*</p>
+  </td>
+  <td >
+   <p>wxWidget files used for BSynthCompser. These are not needed to build the libraries and examples.
+  BSynthComposer can be built with either version 2.8.11 or 2.9.1. 
+  Other versions may work, but have not been tested. Version 2.9 is preferred.
+For Linux, the Makefiles use wx-config to get the path to the wxWidgets include and library files. 
+  On Windows, the BSynthComposer wx project looks here for the header files
+  and libraries.  If wxWidgets is installed elsewhere, change the properties file for BSynthComposer to reference the appropriate directory.</p>
+  </td>
+ </tr>
+<tr>
+  <td >
+  <p>Src</p>
+  </td>
+  <td >
+  <p>Source code</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/Common</p>
+  </td>
+  <td >
+  <p>Common library source. Implementation that is not contained in header files.
+  Includes implementation of sequencers, audio, and generic file I/O</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/Instruments</p>
+  </td>
+  <td >
+  <p>Source to the <em>BasicSynth</em> instruments collection
+  library.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/Notelist</p>
+  </td>
+  <td >
+  <p>Source to the notelist parser and interpreter library.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/Examples</p>
+  </td>
+  <td >
+  <p>Source to the example programs. Each sub-directory
+  contains one example program. The theory and algorithm of each program is explained
+  in the associated book chapter.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/Utilities</p>
+  </td>
+  <td >
+  <p>Source to the utility programs. Each sub-directory
+  contains one utility program. These are Windows-only GUI programs that use
+  the <em>BasicSynth</em> library and demonstrate various synthesis techniques.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynth</p>
+  </td>
+  <td >
+  <p>Command line version of the synthesizer.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/GMSynth</p>
+  </td>
+  <td >
+  <p>Plug-in synthesizer DLL using MIDI and SF2/DLS files.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynthComposer</p>
+  </td>
+  <td >
+  <p>GUI version of the synthesizer.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynthComposer/Core</p>
+  </td>
+  <td >
+  <p>Platform independent parts.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynthComposer/mswin</p>
+  </td>
+  <td >
+  <p>MS-Windows specific code.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynthComposer/Forms</p>
+  </td>
+  <td >
+  <p>XML files defining editor forms.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynthComposer/Help</p>
+  </td>
+  <td >
+  <p>Help files in HTML format and compiled help project for MS-Windows.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynthComposer/fltk</p>
+  </td>
+  <td >
+  <p>FLTK specific code.</p>
+  </td>
+ </tr>
+ <tr>
+  <td >
+  <p>Src/BSynthComposer/wx</p>
+  </td>
+  <td >
+  <p>wxWidgets specific code.</p>
+  </td>
+ </tr>
+</table>
+
+<hr size="2" width="100%" align="center" />
+
+<h2> Building <em>BasicSynth</em></h2>
+
+<p>The author's target development environment for <em>BasicSynth</em> is Windows using Visual Studio 2008.
+Consequently, the build procedure receives much more use and testing on Windows than other environments. 
+Compiling with makefiles or Code:Blocks, GNU C++, MINGW, and building
+for Linux, may require some adjustments to make them work correctly on your computer.</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h3>Building on MS-Windows with Visual Studio</h3>
+
+<p>There are several solution files that can be built depending on what you want to do. 
+Default solution files are for Visual Studio 2008 (i.e. version 9). Solution files with 2005
+in the name are for VisualStudio 2005 (version 8). Visual Studio 6 project files (.dsp) are
+also included. However, the older project files are not always kept up to date and you may
+need to modify them to produce working versions on  the latest code.
+The VirtualKBD utility and BSynthComposer will not build with version 6 as they need the gdi+ libraries. 
+If you have a different version of the compiler, you will have to produce the project and/or solution files from one
+of the supplied versions. Visual C++ Express edition will build most of BasicSynth without problems.
+However, to build BSynthComposer, and the Utilities, you need ATL. ATL is not included with VC Express, but may be available in the Platform SDK.
+</p>
+
+<p>Each Visual Studio project defines four targets:</p>
+
+<ol>
+<li>Release Win32 - 32-bit version without debug info.</li>
+<li>Debug Win32 - 32-bit version with debugging.</li>
+<li>Release x64 - 64-bit version without debug info.</li>
+<li>Debug x64 - 64-bit version with debug info.</p>
+</ol>
+
+<p>Output of the 32-bit release version is in Bin and Lib. The 64-bit version produces output in Bin64 and Lib64</p>
+
+<p>To build everything, use the solution file <em>Src/BasicSynth.sln</em></p>
+
+<p>To build just the libraries, use the solution files in <em>Src/Common,
+Src/Instruments, and Src/Notelist</em> directories.</p>
+
+<p>To build the Example programs, use the solution file in <em>Src/Examples</em>. This
+builds all the example programs and libraries.</p>
+
+<p>To build the utilities, use the solution file in <em>Src/Utilities</em>.</p>
+
+<p>To build the stand-alone command line synthesizer, build the project in <em>Src/BSynth</em>.</p>
+
+<p>To build the GUI synthesizer, build the project in Src/BSynthComposer</p>
+
+<p>The utility programs and VC version of <em>BSynthComposer</em> use WTL 8.0, available on sourceforge.net.
+The parts used by <em>BasicSynth</em> are located in the <em>OpenSource/WTL80</em> directory.
+<em>BSynthComposer</em> requires the <em>scintilla</em> header files and library DLL, 
+also available on sourceforge.net. The parts used by <em>BasicSynth</em> are located in the 
+<em>OpenSource/scintilla</em> directory. Pre-built DLLs are installed in the <em>Bin</em>
+and <em>Binx64</em> directories.</p>
+
+<p>The fltk version of <em>BSynthComposer</em> requires the FLTK header and library
+files. Source code is available from the <a href="http://www.fltk.org">FLTK website.</a>
+</p>
+
+<p>The wx version of <em>BSynthComposer</em> requires the wxWidgets header and library
+files. Source code is available from the <a href="http://www.wxwidgets.org">wxWidgets website.</a>
+Use the 2.9.x version. To build wxWidgets, use the appropriate solution file in wxWidgets\build\msw directory.
+The BasicSynth projects use a properties file (BSynthComposer\wx.props) to set the path to the wxWidgets
+directory. The default is <em>basicsynth\OpenSource\wxWidgets-2.9.3</em>.
+</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h3>Building with Code::Blocks</h3>
+
+<p>There are two Code::Blocks workspace files for BasicSynth. In the Src directory,
+the basicsynth.workspace file will build the libraries and example programs. 
+In the Src/BSynthComposer directory the BSynthComposer.workspace file will build the
+synthesizer program using either FLTK or wxWidgets. </p>
+<p>The Code::Blocks installer for Windows includes a version of MinGW32. However, you should not use
+that version as it does not include the gdi+ libraries. Download and install the latest MinGW tools
+and then change the path to the compiler in Code::Blocks to reference the MinGW\bin directory.
+If you already have MinGW, check the include directory to insure that you have the gdiplus header files.
+</p>
+
+<p>Projects contain four targets:</p>
+<ol>
+<li>Release Win32 - 32-bit Windows version without debug info.</li>
+<li>Debug Win32 - 32-bit Windows version with debugging.</li>
+<li>Release UNIX - Linux version without debug info.</li>
+<li>Debug UNIX - Linux with debug info.</p>
+</ol>
+
+<p>There is a .cbp project file for each of the libraries, example programs, FLTK and wx versions
+of BasicSynth Composer. (The Utilities and MSWIN version of BasicSynth Composer use
+ATL and must be compiled with VisualStudio, so no .cbp files are provided.) </p>
+
+<p>A global variable <em>bshome</em> defines the location of  include and library files. The first time
+you build the basicsynth workspace, Code::Blocks will prompt for the needed value.
+You can also set this in advance from the <i>Settings:Global Variables</i> menu.
+
+The bshome value is the top directory where BasicSynth is installed (the <i>basicsynth</i> directory).
+It's best to put the source in a path without spaces since the MINGW compiler and linker
+will have problems otherwise. However, if the path has spaces in it, there are ways
+around the problem. For Windows, you can create a network share name for the root folder and 
+use the UNC path to access it. (e.g. \\MYCOMPUTER\BasicSynth). </p>
+
+<p>When compiling on Linux the projects use the appropriate config file to determine the
+path for include and library files for wxWidgets and FLTK. When compiling on Windows 
+you must set a variable for the path.
+</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h3>Building with Makefiles</h3>
+
+<p>There is a master Makefile located in the Src directory. This will build the libraries
+and example programs. There is also a Makefile in each directory that can be used if
+you only want to build part of the system. </p>
+<p>The file <em>BasicSynth.cfg</em> in
+the Src directory contains the settings for the compiler and linker. 
+Edit BasicSynth.cfg to point to the appropriate places. Usually you will only need to change
+the location of BSDIR in case you put the source in a directory other than your
+home directory. By default, BasicSynth is built with XML support using the
+tinyxml code in the Common directory. If you want to build with libxml2, 
+you must install the libxml2-dev package and set the value in the BasicSynth.cfg 
+file first before building BasicSynth. If you do not need to use the project/instrument file
+loading code, there is a null implementation of the XmlWrapper class that can
+be used instead. The file is Src/Common/XmlWrapN.cpp.</p>
+
+<p>Output is to the directories Bin and Lib under the BasicSynth install
+directory. (Note the capitalization!)</p>
+
+<p>There is a Makefile in <em>BSynthComposer</em> that will build the
+FLTK and wx versions of BasicSynth Composer. There are install targets,
+installwx and installfltk, to install the binaries. You must <em>su</em> to root
+for the install make.</p>
+
+<p><em>Note:</em><em><span style='font-style:normal'></span></em> I have noticed
+a problem with the GNU make that causes make to halt when descending three
+directory levels. Running make with the command line argument
+<em>--no-print-directory</em> fixes this.</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h3>Building with MINGW</h3>
+
+<p>The makefiles will work with MINGW if you also install MSYS. 
+However, a different configuration file is used for mingw on Windows. 
+Copy BasicSynth.mingw to BasicSynth.cfg before running make.</p>
+
+<p>Compiling BSynthComposer with mingw presents
+some difficulties. To get high quality graphics, BSynthComposer for wxWidgets uses
+the GDI+ library, but this is not included with MINGW. It is possible to 
+compile without GDI+, however. Set wxUSE_GRAPHICS_CONTEXT=0 when
+building wxWidgets to avoid this problem. Alternatively, you can
+get the GDI+ header files from the Windows SDK, edit them to work
+with mingw, then create an import file (libgdiplus.a) to reference the
+GDI+ dll.
+</p>
+
+<p>When compiling the FLTK version of BSynthComposer, you
+will also need a regex library. Source to regex is included under the
+OpenSource directory. Compile the library and then copy to the MINGW 
+library directory if needed.
+</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h2>Example Programs</h2>
+
+<h3>Example01 (Chapter 5)</h3>
+
+<p>This example program shows a basic oscillator. It produces one second of a
+sin wave and writes the sound into the file Example01.wav</p>
+
+<h3>Example02 (Chapter 6)</h3>
+
+<p>These examples demonstrate envelope generators. Example02 has in-line code,
+Example02a uses the BasicSynth Library, Example02b uses a graphics line
+algorithm. </p>
+
+<h3>Example03 (Chapter 7)</h3>
+
+<p>Program to calculate complex waveforms.</p>
+<ul>
+<li>summation of first 8 partials</li>
+<li>sawtooth wave</li>
+<li>inverse sawtooth wave</li>
+<li> triangle wave</li>
+<li>square wave </li>
+<li>25% pulse wave</li>
+<li>frequency modulation</li>
+<li>phase modulation</li>
+<li>amplitude modulation</li>
+<li>ring modulation</li>
+<li>white noise </li>
+</ul>
+
+<h3>Example04 (Chapter 8)</h3>
+
+<p>Program to calculate complex waveforms using wavetable oscillators.</p>
+
+<h3>Example4a</h3>
+
+<p>Program to dump the contents of SF2 and DLS files. When used with one of the -d options,
+a text dump of the file is produced. Otherwise, a WAV file of one or more samples is produced.</p>
+<pre style="margin-left:0.3in">example4a soundfont -bbank -ppreset -m -d(1|2|3) -wprefix -l[0|1] -n[0|1]</pre>
+<table border="1" cellpadding="4" cellspacing="0" style="margin-left:0.25in">
+ <thead>
+  <tr style="background:#888;color:#fff;">
+    <td>Option</td><td>Use</td>
+  </tr>
+  </thead>
+<tr><td>-d1</td><td>print internal representation used by BasicSynth</td></tr>
+<tr><td>-d2</td><td>print raw file contents</td></tr>
+<tr><td>-d3</td><td>print both raw data and internal representation</td></tr>
+<tr><td>-w<i>path</i></td><td>prefix to output file name</td></tr>
+<tr><td>-l0</td><td>don't preload samples</td></tr>
+ <tr><td>-l1</td><td>preload all samples (default)</td></tr>
+<tr><td>-bn</td><td>only output bank #n, else all banks</td></tr>
+<tr><td>-pn</td><td>only output patch #n, else all patches</td></tr>
+</table>
+<p>Bank numbers vary with the sound font file, but typically the sound font is
+a GM bank with melodic instruments in bank 0 and percussion instruments in
+bank 128. Additional melodic banks may exist as well.</p>
+
+<h3>Example05 (Chapter 10)</h3>
+
+<p>Various filters, LP, HP, BP, Reson, using bi-quad filter; FIR and IIR
+averaging and convolution.</p>
+
+<h3>Example06 (Chapter 9)</h3>
+
+<p>Program to demonstrate mixing and panning.</p>
+
+<h3>Example07 (Chapter 11)</h3>
+
+<p>Using delay lines to implement echo.</p>
+
+<h3>Example07a (Chapter 12)</h3>
+
+<p>Using delay lines to implement reverb.</p>
+
+<h3>Examle07b (Chapter 13)</h3>
+
+<p>Using delay lines to implement Flanger/Chorus.</p>
+
+<h3>Example08 (Chapter 15)</h3>
+
+<p>BasicSynth sequencer.</p>
+
+<h3>Example09 (Chapter 16)</h3>
+
+<p>MIDI Sequencer.</p>
+
+<h3>Example10 (Chapters 19-25)</h3>
+
+<p>Various Synthesizer Instruments.</p>
+<pre style="margin-left:0.4in">example10 [file]</pre>
+
+<p>The <em>file</em> parameter is the name of an XML file containing
+instrument definitions. See the documentation on the <a href="Instruments.html">instruments</a>
+for the definition of the XML file format.</p>
+
+<p>The <em>data.xml</em> file contains definitions for the instruments to test.</p>
+
+<ul type="disc">
+ <li>Tone Generator</li>
+ <li>FM Tone Generator</li>
+ <li>Additive Synthesis</li>
+ <li>Subtractive Synthesis - variable waveform</li>
+ <li>Subtractive Synthesis - BUZZ generator</li>
+ <li>FM Synthesis (3 oscillators)</li>
+ <li>Matrix Synthesizer (8 oscillators, FM or Add)</li>
+ <li>Noise Sound Generator (Chuffer)</li>
+ <li>Wavefile Playback</li>
+</ul>
+
+<hr size="2" width="100%" align="center" />
+
+<h2>Utility Programs</h2>
+
+<p>The utility programs can be used to interactively explore various synthesis and signal processing
+techniques. These programs are built with Visual Studio on Windows and are not currently available
+in a portable version. The compiled files can be downloaded separately as a Windows .msi install file.</p>
+
+<h3>Waveform Explorer</h3>
+
+<p>This program allows setting each of 16 partials to construct a complex
+waveform using the inverse Fourier transform (sum of sine waves). The resulting
+waveform can be saved to disk as a WAV file and as a graphic (EMF). Settings
+can be copied to the clipboard.</p>
+
+<h3>FM Explorer</h3>
+
+<p>This program implements a three oscillator FM synthesizer. Each oscillator
+is combined with an ADSR envelope generator. Several presets are available as
+examples. The program can save the sound to a WAV file. The settings can also be
+copied to the clipboard.</p>
+
+<h3>Reverb Explorer</h3>
+
+<p>This program implements a Schroeder reverb. The loop times and reverb time
+can be set from the program to hear how they affect the sound. Sounds can be
+internally generated or loaded from a WAV file. The processed sound can be
+saved to disk.</p>
+
+<h3>Flanger Explorer</h3>
+
+<p>This program implements a Flanger/Chorus effect. The delay times, modulation
+depth, and amplitudes can be set to hear how they affect the sound. Sounds can
+be internally generated or loaded from a WAV file. The processed sound can be
+saved to disk.</p>
+
+<h3>MIDI Player</h3>
+
+<p>This program uses the GMSynth DLL to produce a MIDI file playback
+program using either SoundFonts or DLS files to define instruments. A virtual
+keyboard allows playing the sounds interactively. MIDI keyboard input is 
+also provided. Output can be sent directly to the sound card or to a WAV file.</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h2>BSynth</h2>
+
+<p>This program is a complete synthesizer that runs from a command line. It
+takes one argument, the name of the project file to process.</p>
+
+<p>BSynth <em>project.xml</em></p>
+
+<p>The <a href="BSynth.html">documentation on this program</a> gives the specification for the project
+file and other related files.</p>
+
+<hr size="2" width="100%" align="center" />
+
+<h2>BSynthComposer</h2>
+
+<p>This program is a complete GUI synthesizer with mixer, wavetable editor, instrument editors, 
+interactive playback using a virtual keyboard, MIDI keyboard input, and text score editor. The 
+synthesizer can generate a WAV file or send output directly to the sound card. Three versions
+currently exist, a native Windows implementation, a portable implementation using FLTK, and 
+a portable version using wxWidgets. On-line help and several example compositions are include
+to help get you started using the synthesizer.
+</p>
+
+<hr size="2" width="100%" align="center" />
+
+<p>&copy;2008-2010, Daniel R. Mitchell, All rights reserved except as noted below. </p>
+
+<p>See more synthesis stuff at <a href="http://basicsynth.com">the <em>BasicSynth</em> Website</a></p>
+
+<!-- Creative Commons License -->
+
+<p><a href="http://creativecommons.org/licenses/GPL/2.0/"><span
+style='text-decoration:none'><img border=0 width=88 height=62
+src="http://creativecommons.org/images/public/cc-GPL-a.png" alt="CC-GNU GPL"></span></a><br>
+The source code to BasicSynth is &copy; 2008-2011, Daniel R. Mitchell and is licensed under the
+<a href="http://creativecommons.org/licenses/GPL/2.0/">CC-GNU GPL</a>Creative Commons/GNU-GPL. Source code may be
+used for non-commercial purposes without further restrictions.
+
+<p>Compositions in the ExampleProjects directory are &copy; Daniel R. Mitchell and are licensed
+under the <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/us/">Creative Commons Attribution-Noncommercial-No Derivitave Works license</a>.
+
+</body>
+
+</html>

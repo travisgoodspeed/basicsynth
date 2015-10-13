@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Core" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option platforms="Windows;" />
+				<Option output="../Lib/libCoreD.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="debugi686" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-mthreads" />
+					<Add option="-D_WIN32" />
+					<Add option="-DDEBUG" />
+					<Add option="-D_LIB" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="ranlib ..\Lib\libCoreD.a" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release Win32">
+				<Option platforms="Windows;" />
+				<Option output="../Lib/libCore.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="releasei686" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-mthreads" />
+					<Add option="-D_WIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="ranlib ..\Lib\libCore.a" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Debug UNIX">
+				<Option platforms="Unix;" />
+				<Option output="../Lib/libCoreD.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="gccDebug" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-pthread" />
+					<Add option="-DDEBUG" />
+					<Add option="-DUNIX" />
+					<Add option="-DGCC" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="ranlib ../Lib/libCoreD.a" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release UNIX">
+				<Option platforms="Unix;" />
+				<Option output="../Lib/libCore.a" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="gccRelease" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-pthread" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DUNIX" />
+					<Add option="-DGCC" />
+				</Compiler>
+				<ExtraCommands>
+					<Add after="ranlib ../Lib/libCore.a" />
+				</ExtraCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-DUSE_TINYXML" />
+			<Add directory="../../../Include" />
+			<Add directory="../../Instruments" />
+			<Add directory="../../Notelist" />
+		</Compiler>
+		<Unit filename="AddSynthEd.cpp" />
+		<Unit filename="AddSynthEd.h" />
+		<Unit filename="BuzzSynthEd.cpp" />
+		<Unit filename="BuzzSynthEd.h" />
+		<Unit filename="ChufferEd.cpp" />
+		<Unit filename="ChufferEd.h" />
+		<Unit filename="ComposerCore.h" />
+		<Unit filename="ComposerGlobal.h" />
+		<Unit filename="EnvelopeWidget.cpp" />
+		<Unit filename="EnvelopeWidget.h" />
+		<Unit filename="FMSynthEd.cpp" />
+		<Unit filename="FMSynthEd.h" />
+		<Unit filename="FileItem.cpp" />
+		<Unit filename="InstrItem.cpp" />
+		<Unit filename="KeyboardForm.cpp" />
+		<Unit filename="KeyboardForm.h" />
+		<Unit filename="KeyboardWidget.cpp" />
+		<Unit filename="KeyboardWidget.h" />
+		<Unit filename="KnobWidget.cpp" />
+		<Unit filename="KnobWidget.h" />
+		<Unit filename="LibItem.cpp" />
+		<Unit filename="MIDIControlEd.cpp" />
+		<Unit filename="MIDIControlEd.h" />
+		<Unit filename="MatSynthEd.cpp" />
+		<Unit filename="MatSynthEd.h" />
+		<Unit filename="MixerEdit.cpp" />
+		<Unit filename="MixerEdit.h" />
+		<Unit filename="MixerItem.cpp" />
+		<Unit filename="ModSynthEd.cpp" />
+		<Unit filename="ModSynthEd.h" />
+		<Unit filename="NotelistItem.cpp" />
+		<Unit filename="PathList.cpp" />
+		<Unit filename="ProjectFrame.cpp" />
+		<Unit filename="ProjectItem.cpp" />
+		<Unit filename="ProjectItem.h" />
+		<Unit filename="ProjectOptions.cpp" />
+		<Unit filename="ProjectOptions.h" />
+		<Unit filename="SliderWidget.cpp" />
+		<Unit filename="SliderWidget.h" />
+		<Unit filename="SoundBankEd.cpp" />
+		<Unit filename="SoundBankEd.h" />
+		<Unit filename="SoundBankItem.cpp" />
+		<Unit filename="SubSynthEd.cpp" />
+		<Unit filename="SubSynthEd.h" />
+		<Unit filename="SwitchWidget.cpp" />
+		<Unit filename="SwitchWidget.h" />
+		<Unit filename="SynthEdit.cpp" />
+		<Unit filename="SynthEdit.h" />
+		<Unit filename="SynthItem.cpp" />
+		<Unit filename="SynthProject.cpp" />
+		<Unit filename="SynthProjectPS.cpp" />
+		<Unit filename="SynthWidget.cpp" />
+		<Unit filename="SynthWidget.h" />
+		<Unit filename="TextWidget.cpp" />
+		<Unit filename="TextWidget.h" />
+		<Unit filename="ToneSynthEd.cpp" />
+		<Unit filename="ToneSynthEd.h" />
+		<Unit filename="WFSynthEd.cpp" />
+		<Unit filename="WFSynthEd.h" />
+		<Unit filename="WaveWidget.h" />
+		<Unit filename="WavefileItem.cpp" />
+		<Unit filename="WaveoutItem.cpp" />
+		<Unit filename="WavetableEdit.cpp" />
+		<Unit filename="WavetableEdit.h" />
+		<Unit filename="WavetableItem.cpp" />
+		<Unit filename="WidgetForm.cpp" />
+		<Unit filename="WidgetForm.h" />
+		<Unit filename="WindowTypes.h" />
+		<Unit filename="../Forms/AddSynthEd.xml" />
+		<Unit filename="../Forms/BuzzSynthEd.xml" />
+		<Unit filename="../Forms/ChufferEd.xml" />
+		<Unit filename="../Forms/Colors.xml" />
+		<Unit filename="../Forms/FMSynthEd.xml" />
+		<Unit filename="../Forms/GMPlayerEd.xml" />
+		<Unit filename="../Forms/KeyboardEd.xml" />
+		<Unit filename="../Forms/MIDIControlEd.xml" />
+		<Unit filename="../Forms/MatrixSynthEd.xml" />
+		<Unit filename="../Forms/MixerEd.xml" />
+		<Unit filename="../Forms/ModSynthEd.xml" />
+		<Unit filename="../Forms/SoundBankEd.xml" />
+		<Unit filename="../Forms/SubSynthEd.xml" />
+		<Unit filename="../Forms/ToneEd.xml" />
+		<Unit filename="../Forms/ToneFMEd.xml" />
+		<Unit filename="../Forms/WFSynthEd.xml" />
+		<Unit filename="../Forms/WaveTableEd.xml" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

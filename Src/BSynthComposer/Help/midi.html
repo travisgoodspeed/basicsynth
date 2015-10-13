@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>MIDI</title>
+</head>
+<body>
+<h1><a name="_MIDI" />MIDI<hr/></h1>
+<p><em>BasicSynth Composer</em> includes support for live MIDI keyboard input and playback of MIDI files.
+However, the model for a MIDI instrument is slightly different from a <em>BasicSynth</em> instrument. A MIDI
+instrument is modeled on a keyboard with multiple notes played by a single patch. Control events (e.g., volume, pitch bend) apply to all sounding
+notes on the instrument. Multiple instruments can be used so long as each instrument is assigned to a different MIDI channel.
+<em>BasicSynth</em> follows the MUSIC <i>N</i> model where control events are applied to each note, and are independent of
+the mixer channel and instrument configuration (patch). 
+With <em>BasicSynth</em> each MIDI channel is matched to a mixer channel. MIDI events that affect volume and panning are sent
+to the mixer. MIDI events that affect note performance are sent to each sounding note for the instrument. However, a MIDI aware
+instrument can read controller values from the <em>BasicSynth</em>  instrument manager and apply the controller values directly during
+sound generation. The <a href="gminstr.html">General MIDI (GM) instrument</a> does this, but most instruments only use the pitch bend value.
+</p>
+
+<h2>MIDI Editor</h2>
+<p>To open the MIDI editor, select the <em>MIDI</em> item in the project tree and select edit from the item menu. 
+You can also right-click on the <em>MIDI</em> item and select edit from the popup menu.
+The MIDI editor provides a way to set the default bank, patch, volume and pan settings for each MIDI channel. These values can be filled in
+when you want to set the values directly rather than from a MIDI keyboard. If you change values from the keyboard, the value
+will override the default setting. The bank and patch values only apply when using a GM instrument with a keyboard or when playing a MIDI file.
+These values do not affect instrument settings for a Notelist score.</p>
+<p>The select button at the top of the editor allows selection of the sound bank to use for MIDI file playback. Before selecting a sound bank,
+you must add the sound bank to the project. Select the <em>SoundBank</em> entry in the project tree and select Add from the item menu. You
+can add as many sound banks as desired, but only one sound bank can be selected as the default for MIDI playback. Additional sound banks
+can be used by adding GM instruments to the project and playing the instruments with a Notelist score.</p>
+<p>Click on any of the value fields to change the default value. To select a patch from a list of instruments in the current sound bank,
+click on the ? next to the value.</p>
+
+<h2>MIDI Keyboard Input</h2>
+<p>MIDI keyboard input is processed by the <a href="player.html">virtual keyboard</a> when the MIDI lamp is on. MIDI events are
+converted into <em>BasicSynth</em> sequencer events and then played using the currently selected instrument.</p>
+<p>Note: the current implementation does not record MIDI events.</p>
+
+<h2>MIDI File Playback</h2>
+<p><em>BasicSynth Composer</em> can play standard midi files along with Notelist scores in any combination. To add a MIDI file for
+playback, click on the <em>MIDI</em> project tree entry and select Add from the item menu. For type 0 or type 1 MIDI files, 
+all events from the MIDI files will be combined and played on sequencer track 0. For type 2 files, each MIDI track will be assigned
+to a different sequencer track and must be started and stopped from a Notelist score. (See the Notelist <a href="notelist.html#start">START</a> and
+<a href="notelist.html#stop">STOP</a> commands for more information.)</p>
+<p>MIDI files are played using an internal GM instrument with the sound bank selected in the MIDI editor. 
+For most MIDI files, the sound bank must be a GM sound bank.
+However, it is possible to record a MIDI file for use with a custom sound bank. Be sure the sound bank matches the MIDI file.</p>
+<p>The current version of <em>BasicSynth</em> does not provide an editor for MIDI files, only playback</p>
+ </body>
+ </html>

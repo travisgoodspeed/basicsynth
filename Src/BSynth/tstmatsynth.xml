@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<synthprj>
+  <name>Test Project</name>
+  <desc>A Test of Matrix Synth params</desc>
+  <author>Composer Name</author>
+  <cpyrgt>Copyright stuff</cpyrgt>
+  <out type="1" lead="0" tail="0.5">matsynth.wav</out>
+  <synth sr="44100" wt="16384" usr="1">
+    <wvtable ndx="10" parts="3" >
+      <part mul="1" amp="1.0" phs="0"/>
+      <part mul="2" amp="0.5" phs="0"/>
+      <part mul="4" amp="0.2" phs="0"/>
+    </wvtable>
+  </synth>
+  <mixer chnls="4" fxunits="1" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="0.707" pan="0"/>
+    <chnl cn="1" on="1" vol="0.707" pan="0"/>
+    <reverb unit="0" vol="0.4" rvt="2.5" pan="0">
+      <send cn="0" amt="0"/>
+      <send cn="1" amt="0"/>
+    </reverb>
+  </mixer>
+  <instrlib>
+    <instr id="1" type="MatrixSynth" name="Test">
+      <mat frq="440.0" vol="1" />
+      <gen gn="0" out="1110000000000000" mod="01000000" frq="440" wt="0" mul="1" mnx="0" vol="1" eg="0" fx1="0" fx2="0" fx3="0" fx4="0" lfo="1" pan="0"/>
+      <gen gn="1" out="1000000000000000" mod="00000000" frq="440" wt="0" mul="1" mnx="2" vol="0" eg="1" fx1="0" fx2="0" fx3="0" fx4="0" />
+      <gen gn="2" out="0100000000000000" mod="00000000" frq="440" wt="10" mul="2.001" mnx="0" vol="0.5" eg="0" fx1="0" fx2="0" fx3="0" fx4="0" />
+      <gen gn="3" out="0100000000000000" mod="00000000" frq="440" wt="10" mul="2.999" mnx="0" vol="0.5" eg="0" fx1="0" fx2="0" fx3="0" fx4="0" />
+      <env en="0" segs="3" st="0" sus="1">
+        <seg sn="0" rt="0.01" lvl="1.0" ty="1" />
+        <seg sn="1" rt="0.10" lvl="0.8" ty="1" />
+        <seg sn="2" rt="0.40" lvl="0.0" ty="1" />
+      </env>
+      <env en="1" segs="3" st="0" sus="1">
+        <seg sn="0" rt="0.01" lvl="1.0" ty="1" />
+        <seg sn="1" rt="0.10" lvl="0.8" ty="1" />
+        <seg sn="2" rt="0.40" lvl="0.0" ty="1" />
+      </env>
+      <lfo frq="3.5" wt="0" atk="0" amp="0.1" />
+    </instr>
+  </instrlib>
+  <score name="MatSynth" dbg="0">tstmatsynth.nl</score>
+</synthprj>

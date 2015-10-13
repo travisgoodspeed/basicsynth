@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout type="WFSynth">
+<!-- old WF synth, not used -->
+  <label id="1"  x="5" y="5" w="90" h="25" th="16" lbl="Options" shadow="1" bold="1" italic="1" fg="#f0f0a0" />
+  <group id="2"  x="5" y="35" w="90" h="95" bord="0" fr="#202020" >
+    <pushswitch id="3"  x="0" y="0" w="90" h="25" val="0" th="14" lbl="Play All" bold="1" fg="#f0f0a0"/>
+    <pushswitch id="4"  x="0" y="30" w="90" h="25" val="1" th="14" lbl="Loop" bold="1" fg="#f0f0a0"/>
+    <label id="5"  x="0" y="60" w="90" h="15" th="10" lbl="Wavefile ID" bold="0" italic="1" fg="#f0f0a0" />
+    <edit id="6"  x="0" y="75" w="90" h="20" prec="0" fg="#f0f0a0" />
+  </group>
+  <label id="9"  x="110" y="5" w="220" h="25" th="16" lbl="Envelope" shadow="1" bold="1" italic="1" fg="#f0f0a0" />
+  <group id="10"  x="110" y="35" w="220" h="155" bord="1" fr="#202020" bg="#606060">
+    <label id="11"  x="5" y="5" w="100" h="15" lbl="Attack" th="12" italic="1" fg="#f0f080"/>
+    <label id="12"  x="115" y="5" w="100" h="15" lbl="Decay" th="12" italic="1" fg="#f0f080"/>
+    <baseknob id="16"  x="5" y="25" w="100" h="100" lo="0" hi="10" val="0" hiclr="#80F080" loclr="#008000"/>
+    <baseknob id="17"  x="115" y="25" w="100" h="100" lo="0" hi="10" val="0" hiclr="#80F080" loclr="#008000" />
+    <label id="21"  x="5" y="130" w="100" h="15" lbl="0.0" th="12" filled="1" fg="#00ff00" bg="#000000"/>
+    <label id="22"   x="115" y="130" w="100" h="15" lbl="1.0" th="12" filled="1" fg="#00ff00" bg="#000000"/>
+  </group>
+  <label id="103"  x="340" y="5" h="25" w="305" th="16" lbl="Wavefiles" shadow="1" bold="1" italic="1" fg="#f0f0a0" />
+  <group id="104"  x="340" y="35" h="130" w="305" bord="1" fr="#202020" bg="#606060">
+    <pushswitch id="32"  x="5" y="5" w="20" h="20" lbl="1" th="10" fg="#f0f080" />
+    <edit id="33"  x="25" y="5" w="25" h="20" />
+    <edit id="34"  x="50" y="5" w="100" h="20" />
+    <pushswitch id="35"  x="5" y="30" w="20" h="20" lbl="2" th="10" fg="#f0f080" />
+    <edit id="36"  x="25" y="30" w="25" h="20" />
+    <edit id="37"  x="50" y="30" w="100" h="20" />
+    <pushswitch id="38"  x="5" y="55" w="20" h="20" lbl="3" th="10" fg="#f0f080" />
+    <edit id="39"  x="25" y="55" w="25" h="20" />
+    <edit id="40"  x="50" y="55" w="100" h="20" />
+    <pushswitch id="41"  x="5" y="80" w="20" h="20" lbl="4" th="10" fg="#f0f080"/>
+    <edit id="42"  x="25" y="80" w="25" h="20" />
+    <edit id="43"  x="50" y="80" w="100" h="20" />
+    <pushswitch id="44"  x="5" y="105" w="20" h="20" lbl="5" th="10" fg="#f0f080"/>
+    <edit id="45"  x="25" y="105" w="25" h="20" />
+    <edit id="46"  x="50" y="105" w="100" h="20" />
+
+    <pushswitch id="47"  x="155" y="5" w="20" h="20" lbl="6" th="10" fg="#f0f080" />
+    <edit id="48"  x="175" y="5" w="25" h="20" />
+    <edit id="49"  x="200" y="5" w="100" h="20" />
+    <pushswitch id="50"  x="155" y="30" w="20" h="20" lbl="7" th="10" fg="#f0f080" />
+    <edit id="51"  x="175" y="30" w="25" h="20" />
+    <edit id="52"  x="200" y="30" w="100" h="20" />
+    <pushswitch id="53"  x="155" y="55" w="20" h="20" lbl="8" th="10" fg="#f0f080" />
+    <edit id="54"  x="175" y="55" w="25" h="20" />
+    <edit id="55"  x="200" y="55" w="100" h="20" />
+    <pushswitch id="56"  x="155" y="80" w="20" h="20" lbl="9" th="10" fg="#f0f080"/>
+    <edit id="57"  x="175" y="80" w="25" h="20" />
+    <edit id="58"  x="200" y="80" w="100" h="20" />
+    <pushswitch id="59"  x="155" y="105" w="20" h="20" lbl="10" th="10" fg="#f0f080"/>
+    <edit id="60"  x="175" y="105" w="25" h="20" />
+    <edit id="61"  x="200" y="105" w="100" h="20" />
+  </group>
+  <pushbutton id="100"  x="5" y="140" w="90" h="25" lbl="Apply" fg="#000000" />
+  <pushbutton id="101"  x="5" y="170" w="90" h="25" lbl="Restore" fg="#000000" />
+  <pushbutton id="102"  x="345" y="170" w="100" h="25" val="10" lbl="Update WF" fg="#000000" />
+</layout>

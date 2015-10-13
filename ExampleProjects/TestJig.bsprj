@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<synthprj>
+    <name>Test Jig</name>
+    <descr>A short &quot;jig&quot; to test the synthesizer.</descr>
+    <author>Dan Mitchell</author>
+    <cpyrgt>Copyright 2008, Daniel R. Mitchell</cpyrgt>
+    <out type="1" fmt="0" lead="0.000000" tail="2.500000">jig.wav</out>
+    <synth sr="44100" wt="16384" usr="0" />
+    <mixer chnls="4" fxunits="1" lft="0.900000" rgt="0.900000" pan="2">
+        <chnl cn="0" on="1" vol="0.500000" pan="0.000000" />
+        <chnl cn="1" on="1" vol="0.500000" pan="-0.500000" />
+        <chnl cn="2" on="1" vol="0.500000" pan="0.500000" />
+        <chnl cn="3" on="1" vol="0.500000" pan="0.000000" />
+        <reverb name="reverb" unit="0" vol="0.200000" pan="0.000000" rvt="2.000000" lt1="0.043700" lt2="0.041100" lt3="0.037100" lt4="0.029700">
+            <send chnl="0" amt="0.125000" />
+            <send chnl="1" amt="0.120000" />
+            <send chnl="2" amt="0.120000" />
+            <send chnl="3" amt="0.120000" />
+        </reverb>
+    </mixer>
+    <wvdir></wvdir>
+    <instrlib>
+        <instr id="1" type="FMSynth" name="Fidl" desc="">
+            <fm mix="1.000000" dly="0.000000" alg="1" pon="0" pan="0.000000" />
+            <gen1 st="0.000000" atk="0.150000" pk="1.000000" dec="0.000000" sus="1.000000" rel="0.100000" end="0.000000" ty="1" mul="1.000000" wt="0" />
+            <gen2 st="2.000000" atk="0.060000" pk="1.600000" dec="0.100000" sus="1.200000" rel="0.100000" end="1.000000" ty="1" mul="3.000000" wt="0" />
+            <gen3 st="2.000000" atk="0.050000" pk="1.500000" dec="0.100000" sus="1.200000" rel="0.100000" end="0.800000" ty="1" mul="4.000000" wt="0" />
+            <nz st="0.000000" atk="0.000000" pk="0.000000" dec="0.000000" sus="0.000000" rel="0.000000" end="0.000000" ty="1" mix="0.000000" dly="0.000000" fr="0.000000" fo="0.000000" />
+            <dln mix="0.500000" dly="0.010000" dec="0.800000" />
+            <lfo frq="3.800000" wt="0" atk="0.100000" amp="0.100000" />
+            <pb on="0" r1="0.000000" r2="0.000000" a1="0.000000" a2="0.000000" a3="0.000000" pbamp="0.000000" pbwt="9" />
+        </instr>
+        <instr id="2" type="FMSynth" name="Drum" desc="">
+            <fm mix="1.000000" dly="0.000000" alg="2" pon="0" pan="0.000000" />
+            <gen1 st="0.000000" atk="0.020000" pk="1.000000" dec="0.400000" sus="0.000000" rel="0.400000" end="0.000000" ty="2" mul="1.000000" wt="0" />
+            <gen2 st="0.000000" atk="0.035000" pk="3.000000" dec="0.300000" sus="0.000000" rel="0.300000" end="0.000000" ty="2" mul="2.000000" wt="0" />
+            <gen3 st="0.000000" atk="0.000000" pk="2.400000" dec="0.030000" sus="0.000000" rel="0.300000" end="0.000000" ty="2" mul="3.000000" wt="0" />
+            <nz st="0.000000" atk="0.000000" pk="1.000000" dec="0.100000" sus="0.000000" rel="0.020000" end="0.000000" ty="2" mix="0.800000" dly="0.500000" fr="800.000000" fo="600.000000" />
+            <dln mix="0.800000" dly="0.000000" dec="0.500000" />
+            <lfo frq="2.100000" wt="0" atk="0.000000" amp="0.200000" />
+            <pb on="0" r1="0.000000" r2="0.000000" a1="0.000000" a2="0.000000" a3="0.000000" pbamp="0.000000" pbwt="9" />
+        </instr>
+    </instrlib>
+    <score inc="1">jig.nl</score>
+</synthprj>

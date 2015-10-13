@@ -1,0 +1,260 @@
+<html>
+<head>
+<title>Text Editor</title>
+</head>
+<body>
+<h1><a name="_Text_Editor" />Text Editor<hr/></h1>
+<p>Several types of text files can be included in a <i>BasicSynth</i> project. These include
+Notelist scores, sequencer files, script files, and notes about the composition. Text files are
+not contained in the project file, but are stored in separate files in the project directory. 
+You can edit these files directly with any text editor, or with the builtin editor.
+The editor commands follow common Windows edit conventions. 
+Arrow keys, along with the home and end keys, move the cursor and extend the text selection when the shift key is held down. 
+The following table shows the editor commands. Many of the keys are shown as uppercase by convention. However,
+unless the command specifically indicates the shift key, you do not need to press the shift key.  Text can be
+selected with either the keyboard or the mouse.</p>
+<table cellpadding="0" cellspacing="0" border="1" summary="Keyboard commands">
+      <tr>
+        <td>Toggle insert/replace mode.</td><td>Ins</td>
+      <tr>
+      <tr>
+        <td>Delete selected text.</td><td>Del</td>
+      </tr>
+      <tr>
+        <td>Undo edit.</td><td>Ctrl+Z</td>
+      </tr>
+      <tr>
+        <td>Redo edit.</td><td>Ctrl+Y</td>
+      </tr>
+      <tr>
+        <td>Copy selected text to the clipboard.</td><td>Ctrl+C</td>
+      </tr>
+      <tr>
+        <td>Cut selected text to the clipboard.</td><td>Ctrl+X</td>
+      </tr>
+      <tr>
+        <td>Paste text, replacing any selected text.</td><td>Ctrl+V</td>
+      </tr>
+      <tr>
+        <td>Line copy.</td><td>Ctrl+Shift+T</td>
+      </tr>
+      <tr>
+        <td>Line delete.</td><td>Ctrl+Shift+L</td>
+      </tr>
+       <tr>
+        <td>Line cut.</td><td>Ctrl+L</td>
+      </tr>
+      <tr>
+        <td>Line transpose with previous.</td><td>Ctrl+T</td>
+      </tr>
+      <tr>
+        <td>Selection duplicate.</td><td>Ctrl+D</td>
+      </tr>
+      <tr>
+        <td>Indent block.</td><td>Tab</td>
+      </tr>
+      <tr>
+        <td>Dedent block.</td><td>Shift+Tab</td>
+      </tr>
+      <tr>
+        <td>Delete to start of word.</td><td>Ctrl+BackSpace</td>
+      </tr>
+      <tr>
+        <td>Delete to end of word.</td><td>Ctrl+Delete</td>
+      </tr>
+      <tr>
+        <td>Delete to start of line.</td><td>Ctrl+Shift+BackSpace</td>
+      </tr>
+      <tr>
+        <td>Delete to end of line.</td><td>Ctrl+Shift+Delete</td>
+      </tr>
+     <tr>
+        <td>Go to start of document.</td><td>Ctrl+Home</td>
+      </tr>
+      <tr>
+        <td>Extend selection to start of document.</td><td>Ctrl+Shift+Home</td>
+      </tr>
+      <tr>
+        <td>Go to start of display line.</td><td>Alt+Home</td>
+      </tr>
+      <tr>
+        <td>Extend selection to start of display line.</td><td>Alt+Shift+Home</td>
+      </tr>
+      <tr>
+        <td>Go to end of document.</td><td>Ctrl+End</td>
+      </tr>
+      <tr>
+        <td>Extend selection to end of document.</td><td>Ctrl+Shift+End</td>
+      </tr>
+      <tr>
+        <td>Go to end of display line.</td><td>Alt+End</td>
+      </tr>
+      <tr>
+        <td>Extend selection to end of display line.</td><td>Alt+Shift+End</td>
+      </tr>
+      <tr>
+        <td>Create or delete a bookmark.</td><td>Ctrl+F2</td>
+      </tr>
+      <tr>
+        <td>Go to next bookmark.</td><td>F2</td>
+      </tr>
+      <tr>
+        <td>Select to next bookmark.</td><td>Alt+F2</td>
+      </tr>
+      <tr>
+        <td>Find selection.</td><td>Ctrl+F3</td>
+      </tr>
+      <tr>
+        <td>Find selection backwards.</td><td>Ctrl+Shift+F3</td>
+      </tr>
+      <tr>
+        <td>Scroll up.</td><td>Ctrl+Up</td>
+      </tr>
+      <tr>
+        <td>Scroll down.</td><td>Ctrl+Down</td>
+      </tr>
+      <tr>
+        <td>Previous paragraph. Shift extends selection.</td><td>Ctrl+[</td>
+      </tr>
+      <tr>
+        <td>Next paragraph. Shift extends selection.</td><td>Ctrl+]</td>
+      </tr>
+      <tr>
+        <td>Previous word. Shift extends selection.</td><td>Ctrl+Left</td>
+      </tr>
+      <tr>
+        <td>Next word. Shift extends selection.</td><td>Ctrl+Right</td>
+      </tr>
+      <tr>
+        <td>Previous word part. Shift extends selection</td><td>Ctrl+/</td>
+      </tr>
+      <tr>
+        <td>Next word part. Shift extends selection.</td><td>Ctrl+\</td>
+      </tr>
+      <tr>
+        <td>Rectangular block selection.</td><td>Alt+Shift+Movement</td>
+      </tr>
+       <tr>
+        <td>Magnify text size.</td><td>Ctrl+Keypad+</td>
+      </tr>
+      <tr>
+        <td>Reduce text size.</td><td>Ctrl+Keypad-</td>
+      </tr>
+      <tr>
+        <td>Restore text size to normal.</td><td>Ctrl+Keypad/</td>
+      </tr>
+   </table>
+<p><em>Note:</em> These commands are for the native Windows version of <em>BasicSynth Composer</em> using
+the <a href="http://www.scintilla.org">Scintilla editor.</a> Some versions of <em>BasicSynth Composer</em>
+use a different text editor and not all keyboard commands are available.</p>
+<h2>Find and Replace<hr/></h2>
+<p>The text editor includes a find and replace function with optional regular expression pattern matching. To find or replace text,
+select the <b>Edit-&gt;Find</b> menu or press <b>Ctrl-F</b>. The find and replace form is displayed.</p>
+<img src="images/findreplace.jpg" alt="Find and Replace" />
+<p>Enter the text you want to find in the <b>Find</b> field and any replacement text in the <b>Replace</b> field. These two
+fields maintain lists of find and replace strings. The four checkboxes affect how text is matched.</p>
+<ul>
+<li>Match case: when checked, upper and lower case must match exactly.</li>
+<li>Whole word only: when checked, the find text will only match a full word.</li>
+<li>Start of word: when checked, the find text must match the start of a word.</li>
+<li>Regular Expression: when checked, match text patterns.</li>
+</ul>
+<p>Regular expressions allow matching a text pattern. The text editor supports the following regular expressions.</p>
+    <table border="0" summary="Regular expression synopsis">
+      <tbody>
+        <tr valign="top">
+          <td><code>.</code></td>
+
+          <td>Matches any character</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>\(</code></td>
+
+          <td>This marks the start of a region for tagging a match.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>\)</code></td>
+
+          <td>This marks the end of a tagged region.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>\n</code></td>
+
+          <td>Where <code>n</code> is 1 through 9 refers to the first through ninth tagged region
+          when replacing. For example, if the search string was <code>Fred\([1-9]\)XXX</code> and
+          the replace string was <code>Sam\1YYY</code>, when applied to <code>Fred2XXX</code> this
+          would generate <code>Sam2YYY</code>.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>\&lt;</code></td>
+
+          <td>This matches the start of a word.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>\&gt;</code></td>
+
+          <td>This matches the end of a word.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>\x</code></td>
+
+          <td>A \ before a character removes the special meaning of a character. For
+          example, \[ would be interpreted as [ and not as the start of a character set.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>[...]</code></td>
+
+          <td>A list of characters in brackets matches one of the characters in the set. 
+ A range of characters can be indicated as S-E. Examples:</br>
+[Aa] matches upper or lower case A<br/>
+[a-z] matches any lowercase alphabetic character<br/>
+[^A-Z] matches any alphabetic character except uppercase<br/>
+[a-zA-Z] matches any upper or lower case alphabetic character.<br/>
+[0-9] matches any digit</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>[^...]</code></td>
+
+          <td>The complement of the characters in the set. For example, [^A-Za-z] means any
+          character except an alphabetic character.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>^</code></td>
+
+          <td>If placed at the bgeginning of the pattern, matches the start of a line.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>$</code></td>
+
+          <td>If placed at the end of the pattern, matches the end of a line.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>*</code></td>
+
+          <td>This matches 0 or more times. For example, <code>Sa*m</code> matches <code>Sm</code>,
+          <code>Sam</code>, <code>Saam</code>, <code>Saaam</code> and so on.</td>
+        </tr>
+
+        <tr valign="top">
+          <td><code>+</code></td>
+
+          <td>This matches 1 or more times. For example, <code>Sa+m</code> matches
+          <code>Sam</code>, <code>Saam</code>, <code>Saaam</code> and so on.</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+ </body>
+ </html>

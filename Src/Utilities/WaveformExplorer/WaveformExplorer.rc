@@ -1,0 +1,283 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "atlres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""atlres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\WaveformExplorer.ico"
+IDI_PLAY                ICON                    "res\\play.ico"
+IDI_STOP                ICON                    "res\\stop.ico"
+IDI_SAW                 ICON                    "res\\saw.ico"
+IDI_SQUARE              ICON                    "res\\square.ico"
+IDI_SIN                 ICON                    "res\\sin.ico"
+IDI_DISK                ICON                    "res\\disk.ico"
+IDI_WVFILE              ICON                    "res\\wvfile.ico"
+IDI_RAMP                ICON                    "res\\ramp.ico"
+IDI_LOOP                ICON                    "res\\loop.ico"
+IDI_HELP                ICON                    "res\\help.ico"
+IDI_COPY                ICON                    "res\\copy.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG  0, 0, 247, 131
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About"
+FONT 10, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "Close",IDOK,95,115,50,14
+    CTEXT           "Waveform Investigator",IDC_STATIC,45,10,130,20,SS_CENTERIMAGE | SS_SUNKEN
+    CONTROL         201,IDC_STATIC,"Static",SS_BITMAP,180,10,59,19
+    CTEXT           "© 2008, Daniel R. Mitchell\n\nThis work is licensed under a Creative Commons\nAttribution-Share Alike 3.0 United States License\n(http://creativecommons.org/licenses/by-sa/3.0/us/)\n\nSee more synthesis stuff at\nhttp://basicsynth.com",IDC_COPYRGT,5,35,230,70
+    CONTROL         211,IDC_STATIC,"Static",SS_BITMAP,10,5,27,24
+END
+
+IDD_MAINDLG DIALOGEX 0, 0, 489, 256
+STYLE DS_SETFONT | WS_CAPTION | WS_SYSMENU
+CAPTION "Waveform Investigator"
+FONT 10, "Tahoma", 0, 0, 0x1
+BEGIN
+    PUSHBUTTON      "Refresh",IDC_REFRESH,5,5,35,14
+    PUSHBUTTON      "SIN",IDC_SIN,45,5,20,14,BS_ICON
+    PUSHBUTTON      "SAW",IDC_SAWTOOTH,65,5,20,14,BS_ICON
+    PUSHBUTTON      "RMP",IDC_RAMP,85,5,20,14,BS_ICON
+    PUSHBUTTON      "SQR",IDC_SQUARE,105,5,20,14,BS_ICON
+    CONTROL         "Gibbs OFF",IDC_GIBBS,"Button",BS_AUTOCHECKBOX | BS_PUSHLIKE | WS_TABSTOP,130,5,40,14
+    PUSHBUTTON      "Play",IDC_PLAY,175,5,20,14,BS_ICON
+    PUSHBUTTON      "Loop",IDC_LOOP,195,5,20,14,BS_ICON
+    PUSHBUTTON      "Stop",IDC_STOP,215,5,20,14,BS_ICON
+    LTEXT           "Pitch:",IDC_STATIC,240,8,19,8
+    PUSHBUTTON      "WAV",IDC_SAVEWAV,350,5,20,14,BS_ICON
+    PUSHBUTTON      "PIC",IDC_SAVEPIC,370,5,20,14,BS_ICON
+    PUSHBUTTON      "&About...",ID_APP_ABOUT,415,5,35,14
+    PUSHBUTTON      "Exit",IDOK,450,5,35,14
+    CTEXT           "1",IDC_STATIC,5,25,30,8,SS_CENTERIMAGE
+    CTEXT           "2",IDC_STATIC,35,25,30,8,SS_CENTERIMAGE
+    CTEXT           "3",IDC_STATIC,65,25,30,8,SS_CENTERIMAGE
+    CTEXT           "4",IDC_STATIC,95,25,30,8,SS_CENTERIMAGE
+    CTEXT           "5",IDC_STATIC,125,25,30,8,SS_CENTERIMAGE
+    CTEXT           "6",IDC_STATIC,155,25,30,8,SS_CENTERIMAGE
+    CTEXT           "7",IDC_STATIC,185,25,30,8,SS_CENTERIMAGE
+    CTEXT           "8",IDC_STATIC,215,25,30,8,SS_CENTERIMAGE
+    CTEXT           "9",IDC_STATIC,245,25,30,8,SS_CENTERIMAGE
+    CTEXT           "10",IDC_STATIC,275,25,30,8,SS_CENTERIMAGE
+    CTEXT           "11",IDC_STATIC,305,25,30,8,SS_CENTERIMAGE
+    CTEXT           "12",IDC_STATIC,335,25,30,8,SS_CENTERIMAGE
+    CTEXT           "13",IDC_STATIC,365,25,30,8,SS_CENTERIMAGE
+    CTEXT           "14",IDC_STATIC,395,25,30,8,SS_CENTERIMAGE
+    CTEXT           "15",IDC_STATIC,425,25,30,8,SS_CENTERIMAGE
+    CTEXT           "16",IDC_STATIC,455,25,30,8,SS_CENTERIMAGE
+    CONTROL         "Slider1",IDC_PART1,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,5,35,30,50
+    CONTROL         "Slider1",IDC_PART2,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,35,35,30,50
+    CONTROL         "Slider1",IDC_PART3,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,64,35,31,50
+    CONTROL         "Slider1",IDC_PART4,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,95,35,30,50
+    CONTROL         "Slider1",IDC_PART5,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,125,35,30,50
+    CONTROL         "Slider1",IDC_PART6,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,155,35,30,50
+    CONTROL         "Slider1",IDC_PART7,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,185,35,30,50
+    CONTROL         "Slider1",IDC_PART8,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,215,35,30,50
+    CONTROL         "Slider1",IDC_PART9,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,245,35,30,50
+    CONTROL         "Slider1",IDC_PART10,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,275,35,30,50
+    CONTROL         "Slider1",IDC_PART11,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,305,35,30,50
+    CONTROL         "Slider1",IDC_PART12,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,335,35,30,50
+    CONTROL         "Slider1",IDC_PART13,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,365,35,30,50
+    CONTROL         "Slider1",IDC_PART14,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,395,35,30,50
+    CONTROL         "Slider1",IDC_PART15,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,425,35,30,50
+    CONTROL         "Slider1",IDC_PART16,"msctls_trackbar32",TBS_AUTOTICKS | TBS_VERT | TBS_BOTH | WS_BORDER | WS_TABSTOP,455,35,30,50
+    EDITTEXT        IDC_LVL1,5,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL2,35,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL3,65,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL4,95,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL5,125,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL6,155,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL7,185,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL8,215,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL9,245,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL10,275,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL11,305,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL12,335,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL13,365,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL14,395,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL15,425,85,30,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_LVL16,455,85,30,12,ES_AUTOHSCROLL
+    GROUPBOX        "",IDC_WVFRAME,5,100,480,150,WS_GROUP,WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_PITCH,260,6,20,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "?",IDC_HELP2,390,5,20,14,BS_ICON
+    EDITTEXT        IDC_PERIODS,310,6,15,12,ES_AUTOHSCROLL | ES_NUMBER
+    LTEXT           "Periods",IDC_STATIC,285,8,25,8
+    PUSHBUTTON      "CLIP",IDC_COPYCLIP,330,5,20,14,BS_ICON
+END
+
+IDD_SAVEPIC DIALOG  0, 0, 259, 61
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Save Waveform Graphic"
+FONT 10, "Tahoma"
+BEGIN
+    LTEXT           "File:",IDC_STATIC,5,7,25,8
+    EDITTEXT        IDC_FILENAME,35,5,200,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BROWSE,235,5,20,14
+    RTEXT           "Width:",IDC_STATIC,5,27,25,8
+    EDITTEXT        IDC_WIDTH,35,25,40,14,ES_AUTOHSCROLL
+    RTEXT           "Height:",IDC_STATIC,80,27,25,8
+    EDITTEXT        IDC_HEIGHT,115,25,40,14,ES_AUTOHSCROLL
+    CONTROL         "Inches",IDC_INCH,"Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,165,25,40,10
+    CONTROL         "MM",IDC_MM,"Button",BS_AUTORADIOBUTTON,210,25,40,10
+    DEFPUSHBUTTON   "OK",IDOK,160,45,40,14,WS_GROUP
+    PUSHBUTTON      "Cancel",IDCANCEL,210,45,40,14
+END
+
+IDD_HELP DIALOG  0, 0, 352, 222
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Waveform Investigator - Help"
+FONT 10, "Tahoma"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,295,205,50,14
+    EDITTEXT        IDC_TEXT,5,5,340,195,ES_MULTILINE | WS_VSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 95
+    END
+
+    IDD_MAINDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 483
+        TOPMARGIN, 7
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "See http://basicsynth.com for more information"
+            VALUE "CompanyName", "Daniel R. Mitchell"
+            VALUE "FileDescription", "BasicSynth Waveform Explorer Utility"
+            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "InternalName", "WaveInvestigator"
+            VALUE "LegalCopyright", "Copyright 2008 Daniel R. Mitchell"
+            VALUE "OriginalFilename", "WaveInvestigator.exe"
+            VALUE "ProductName", "BasicSynth"
+            VALUE "ProductVersion", "1, 0, 0, 1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_CCLIC               BITMAP                  "res\\cclic.bmp"
+IDB_WAVEFORM            BITMAP                  "res\\waveform.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXT
+//
+
+IDR_HELPTEXT            TEXT                    "help.txt"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDR_MAINFRAME           "Waveform Explorer"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+

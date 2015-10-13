@@ -1,0 +1,1116 @@
+<html>
+<head>
+<title>Matrix Synthesis Instrument</title>
+</head>
+<body>
+    <h2>
+        <a name="_Matrix_Synthesis_Instrument"></a>Matrix Synthesis Instrument</h2>
+    <p>
+        The <i>MatrixSynth</i> instrument combines eight oscillators and eight envelope
+        generators in a variable configuration, along with LFO, pitch bend, dynamic panning
+        and processing effects.
+    </p>
+    <h3>Patch Diagram</h3>
+    <img src="images/matsynthdiag.jpg" alt="MatSynth diagram" />
+<h3>Configuration</h3>
+<p>The MatrixSynth instrument editor is shown below.</p>
+<img src="images/matsynth.jpg" alt="mat editor" />
+<p>Because of the complexity of this instrument, it is helpful to draw  a patch
+diagram before attempting to configure the instrument. The eight tone generators
+can be configured for FM synthesis, additive synthesis, or a combination. The
+MatrixSynth instrument can also produce  an "ensemble" sound, with
+separate sections of the patch used to produce different sounds, doublings, etc. </p>
+<p>The editor configures one tone generator (oscillator and envelope generator) at a time.
+The oscillator is selected using the buttons at the top of the form. The envelope
+for the oscillator is selected using the buttons between the oscillator and envelope
+areas. An envelope can be shared by multiple oscillators. A single LFO and  pitch-bend 
+configuration is shared by all tone generators, but the amount of each can be individually
+applied and scaled to each tone generator.
+</p>
+<p>The switches at the left side enable routing the oscillator signal. 
+<ul>
+<li>On - enables the oscillator</li>
+<li>Out - adds the oscillator output to the audio signal</li>
+<li>Vib. - applies the LFO parameters to the oscillator frequency, scaled by the LFO amount.</li>
+<li>P.B. - applies the pitch-bend parameters to the oscillator frequency.</li>
+<li>Pan - applies the pan parameter to the output directly, bypassing the mixer setting.</li>
+<li>Fx1-Fx4 - applies the audio output to the Mixer effects channel, scaled by the Fx parameter values.</li>
+</ul>
+<p>Typically, the effects send and pan values are set for an instrument at the mixer. The MatrixSynth
+can optionally bypass the mixer settings on a per-oscillator basis. This allows direct control of effects
+and pan by setting the appropriate instrument parameters during performance.</p>
+<p>The next set of switches controls FM input to the oscillator. If a switch is set on, the output
+of the respective oscillator is applied to the current oscillator's frequency. For example, a simple
+two oscillator FM instrument is created by enabling GEN 1 and GEN 2, setting GEN 1 as an audio output 
+and selecting GEN2 in the Mod-in settings for GEN 1. </p>
+<p>The switches labeled with waveforms select the oscillator waveform.</p>
+<p>The Freq X and Fine controls set the oscillator multiplier. The note frequency is multiplied
+by the sum of the Freq X and Fine controls. The Volume value sets the level for audio output and is
+only effective if the OUT lamp is switched on. The Modulation value sets the level for modulation
+output and is only effective if the oscillator is selected as an input to another oscillator.</p>
+<p>The LFO value scales the output of the LFO for this oscillator. The FxN values determine 
+how much of the oscillator is applied to the respective mixer effects input. The Pan value determines
+the panning for this oscillator.</p>
+
+<h4>Project and Notelist ID Values</h4>
+<p>
+Since each of the eight oscillators can be designated a signal output, a modulator, or both, separate
+parameters determine the amplitude for signal output and modulation output. Oscillator
+signals are routed using a set of flags on each oscillator. The flags are defined
+as follows. (bit 0 indicates LSB)
+</p>
+<p>
+Bit 0 - If set, the oscillator is on and output of the oscillator will be processed.
+If clear, the oscillator is skipped during sample generation.<br/>
+Bit 1 - If set, the oscillator output is multiplied by the envelope, scaled by the volume level, and added
+to the audio signal output.<br/>
+Bit 2 - If set, the LFO is applied to the oscillator frequency (vibrato).<br/>
+Bit 3 - If set, the Pitch Bend function is applied to the oscillator.<br/>
+Bit 4 - If set, the output of the oscillator is sent to effects unit 1<br/>
+Bit 5 - If set, the output of the oscillator is sent to effects unit 2<br/>
+Bit 6 - If set, the output of the oscillator is sent to effects unit 3<br/>
+Bit 7 - If set, the output of the oscillator is sent to effects unit 4<br/>
+Bit 11 - If set, LFO is applied to the audio amplitude (tremolo).<br/>
+Bit 12 - If set, internal panning is applied to the audio output.<br/>
+Bit 16-23 - These bits select modulator inputs. When set, a bit indicates that the
+output of the associated oscillator (0-7) should be applied to the frequency modulation
+input of the oscillator.<br/>
+Bit 24-31 - Currently unused; reserved for additional generators, up to 16 total.
+</p>
+    <p>
+        This setup allows the <i>MatrixSynth</i> instrument to act as an eight operator
+        FM instrument, an eight tone additive synthesis instrument, or any combination of
+        the two.</p>
+    <p>
+        The eight envelope generators each have a variable number of segments. Any envelope
+        generator can be applied to any oscillator allowing multiple oscillators to be controlled
+        with a single envelope generator.
+    </p>
+    <p>
+        Each oscillator that is added as a signal output can be independently panned left
+        or right. When internal panning is turned on, the output bypasses normal mixer panning
+        and allows the spatial position of the sound to be dynamically controlled.</p>
+    <p>
+Four effects outputs are available for the instrument. Any amount of each output
+oscillator can be sent to one of these four outputs allowing for dynamic control
+over effects such as reverb and chorus. Each effects output corresponds to an
+effects unit on the Mixer.</p>
+<p>
+The XML format and parameter table for the <i>MatrixSynth</i> instrument are shown
+below. Each signal generator and envelope generator in the matrix is given a separate
+node in the tree. The <i>gen</i><i> </i>node contains attributes for the oscillators
+and associated values. The <i>env</i><i> </i>node contains attributes and child
+nodes for one envelope generator. Both <i>gen </i>and <i>env </i>may be duplicated
+up to eight times. The envelope segment nodes are duplicated four times with the
+segment number varying from 0 to 3 representing attack, decay 1, decay 2, release.
+The level indicates the value at the end of the segment.
+</p>
+<p>
+The <i>out</i> attribute contains the generator output matrix flags. This is encoded
+as a text string of 1s and 0s from LSB to MSB going left-to-right. See the description
+of the bits 0-15 given above.
+</p>
+<p>
+The <i>mod</i> attribute contains the modulator input matrix flags (bits 16-31 of
+the flags). This is encoded as a text string of 1s and 0s from LSB to MSB going
+left-to-right. Modulator 0 is the first bit, modulator 1 the second, bit, etc. For
+example, a value of 0x13 would be &quot;11001000&quot; and would indicate generators
+0, 1 and 4 are applied to the oscillator as modulation inputs.</p>
+<p>
+Because of the large number of parameters we use a system of IDs similar to that
+shown for the AddSynth instrument to represent parameters. The upper byte of the
+parameter ID contains the generator number while the lower byte contains the value
+index. For an envelope, 3 bits of the value index are used to indicate the envelope
+parameter and 5 bits to indicate the segment number. Since we have 8 oscillators
+and envelope generators, 3 bits of the upper byte are used to indicate the generator
+number. The next 2 bits are used to indicate the type, oscillator or envelope. A
+value of 1 for the type indicates an oscillator, while a value of 2 indicates an
+envelope. A value of 0 for the upper byte indicates a value that applies to either
+multiple generators or one of the reserved event IDs.</p>
+<pre>
+[ON(5)][val(8)] <i>or </i>[EN(5)][SN(5)][val(3)]
+
+ON = (oscillator * 256) + 2048
+EN = (envelope * 256) + 4096
+SN = segment * 8
+</pre>
+<p>
+In the following table, ID names of the form g<i>n</i> represent the letter 'g'
+followed by an integer in the range 0-7 and refer to a generator number. ID names
+of the form e<i>n</i> and e<i>n</i>s<i>n</i> refer to envelopes and envelope segment
+numbers respectively. For example, to set the frequency for generator 3, use g3.frq
+and use e0s2.rt to set the rate for segment 2 of envelope 0. The letter 'g' can
+be extened to 'gen' or even 'generator' if desired since the code only looks at
+the first letter and then skips all letters up to the next digit. The same is true
+for envelope and segments. For example, envelope0segment2.rate is parsed the same
+as e0s2.rt. In addition, the 'dot' before the parameter name is optional, i.e.,
+e0s2rt is allowed as well.</p>
+    <table border="1" cellspacing="0" cellpadding="4">
+        <tr valign="top" style="background-color: Black; color: White;">
+            <td>
+                <p align="center">
+                    <b>Parameter</b></p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Tag</b></p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Attribute</b></p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Name</b><p>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Use</b></p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    5</p>
+            </td>
+            <td>
+                <p>
+                    mat</p>
+            </td>
+            <td>
+                <p>
+                    frq</p>
+            </td>
+            <td>
+                <p>
+                    frq</p>
+            </td>
+            <td>
+                <p>
+                    Base frequency</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    6</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    vol</p>
+            </td>
+            <td>
+                <p>
+                    vol</p>
+            </td>
+            <td>
+                <p>
+                    Overall volume</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    16</p>
+            </td>
+            <td>
+                <p>
+                    lfo</p>
+            </td>
+            <td>
+                <p>
+                    frq</p>
+            </td>
+            <td>
+                <p>
+                    lfofrq</p>
+            </td>
+            <td>
+                <p>
+                    LFO Frequency</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    17</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    wt</p>
+            </td>
+            <td>
+                <p>
+                    lfowt</p>
+            </td>
+            <td>
+                <p>
+                    LFO wavetable</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    18</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    rt</p>
+            </td>
+            <td>
+                <p>
+                    lfoatk</p>
+            </td>
+            <td>
+                <p>
+                    LFO attack rate</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    19</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    amp</p>
+            </td>
+            <td>
+                <p>
+                    lfoamp</p>
+            </td>
+            <td>
+                <p>
+                    LFO amplitude</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    20</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    r1</p>
+            </td>
+            <td>
+                <p>
+                    pbr1</p>
+            </td>
+            <td>
+                <p>
+                    Rate between a1 and a2</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    21</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    r2</p>
+            </td>
+            <td>
+                <p>
+                    pbr2</p>
+            </td>
+            <td>
+                <p>
+                    Rate between a2 and a3</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    22</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    a1</p>
+            </td>
+            <td>
+                <p>
+                    pba1</p>
+            </td>
+            <td>
+                <p>
+                    Pitch bend start amount</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    23</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    a2</p>
+            </td>
+            <td>
+                <p>
+                    pba2</p>
+            </td>
+            <td>
+                <p>
+                    Pitch bend middle amount</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    24</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    a3</p>
+            </td>
+            <td>
+                <p>
+                    pba3</p>
+            </td>
+            <td>
+                <p>
+                    Pitch bend end amount</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    25</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    pbamp</p>
+            </td>
+            <td>
+                <p>
+                    pbamp</p>
+            </td>
+            <td>
+                <p>
+                    Pitch bend WT amount</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    26</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    wt</p>
+            </td>
+            <td>
+                <p>
+                    pbwt</p>
+            </td>
+            <td>
+                <p>
+                    Pitch bend wavetable</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    27</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    *</p>
+            </td>
+            <td>
+                <p>
+                    pbfrq</p>
+            </td>
+            <td>
+                <p>
+                    Pitch bend WT rate (only settable during performance)</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    gen</p>
+            </td>
+            <td>
+                <p>
+                    gn</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i></p>
+            </td>
+            <td>
+                <p>
+                    Oscillator number</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+0</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    out</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.on</p>
+            </td>
+            <td>
+                <p>
+                    Output flags</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+1</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    mod</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.mod</p>
+            </td>
+            <td>
+                <p>
+                    Mod in flags</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+2</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    wt</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.wt</p>
+            </td>
+            <td>
+                <p>
+                    Wave table</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+3</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    mul</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.mul</p>
+            </td>
+            <td>
+                <p>
+                    Frequency multiplier</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+4</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    mnx</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.mnx</p>
+            </td>
+            <td>
+                <p>
+                    Modulation index</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+5</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    vol</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.vol</p>
+            </td>
+            <td>
+                <p>
+                    Audio signal volume</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+6</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    eg</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.eg</p>
+            </td>
+            <td>
+                <p>
+                    Envelope generator index</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+7</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    fx1</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.fx1</p>
+            </td>
+            <td>
+                <p>
+                    Effects 1 out level</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+8</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    fx2</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.fx2</p>
+            </td>
+            <td>
+                <p>
+                    Effects 2 out level</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+9</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    fx3</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.fx3</p>
+            </td>
+            <td>
+                <p>
+                    Effects 3 out level</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+10</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    fx4</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.fx4</p>
+            </td>
+            <td>
+                <p>
+                    Effects 4 out level</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+11</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    lfo</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.lfo</p>
+            </td>
+            <td>
+                <p>
+                    LFO in level</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+12</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.vib</p>
+            </td>
+            <td>
+                <p>
+                    LFO vibrato on/off</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+13</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.trm</p>
+            </td>
+            <td>
+                <p>
+                    LFO tremolo on/off</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+14</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    pan</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.pan</p>
+            </td>
+            <td>
+                <p>
+                    Pan setting</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+15</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.pon</p>
+            </td>
+            <td>
+                <p>
+                    Panning on/off</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+16</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.on</p>
+            </td>
+            <td>
+                <p>
+                    Oscillator on/off</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    ON+17</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    g<i>n</i>.sig</p>
+            </td>
+            <td>
+                <p>
+                    Audio signal out on/off</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    env</p>
+            </td>
+            <td>
+                <p>
+                    en</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i></p>
+            </td>
+            <td>
+                <p>
+                    Envelope number</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    EN+6</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    segs</p>
+            </td>
+            <td>
+                <p>
+                    *</p>
+            </td>
+            <td>
+                <p>
+                    Number of segments</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    EN+0</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    st</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i>.st<br />
+                    e<i>n</i>.start</p>
+            </td>
+            <td>
+                <p>
+                    Envelope start level</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    EN+1</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    sus</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i>.sus<br />
+                    e<i>n</i>.sustain</p>
+            </td>
+            <td>
+                <p>
+                    Sustain on/off</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    seg</p>
+            </td>
+            <td>
+                <p>
+                    sn</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i>s<i>n</i></p>
+            </td>
+            <td>
+                <p>
+                    Envelope segment number</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    EN+SN+2</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    rt</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i>s<i>n</i>.rt<br />
+                    e<i>n</i>s<i>n</i>.rate</p>
+            </td>
+            <td>
+                <p>
+                    Envelope segment rate</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    EN+SN+3</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    lvl</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i>s<i>n</i>.lvl<br />
+                    e<i>n</i>s<i>n</i>.level</p>
+            </td>
+            <td>
+                <p>
+                    Envelope segment level</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    EN+SN+4</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    ty</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i>s<i>n</i>.ty<br />
+                    e<i>n</i>s<i>n</i>.type</p>
+            </td>
+            <td>
+                <p>
+                    Envelope segment type</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    EN+SN+5</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    fix</p>
+            </td>
+            <td>
+                <p>
+                    e<i>n</i>s<i>n</i>.fix<br />
+                    e<i>n</i>s<i>n</i>.fixed</p>
+            </td>
+            <td>
+                <p>
+                    Fixed duration flag</p>
+            </td>
+        </tr>
+    </table>
+    <h3>XML Format</h3>
+    <pre>
+&lt;instr type=&quot;MatrixSynth&quot;&gt;
+  &lt;mat frq=&quot;&quot; vol=&quot;&quot; /&gt;
+  &lt;gen gn=&quot;&quot; out=&quot;&quot; mod=&quot;&quot; wt=&quot;&quot; mul=&quot;&quot; mnx=&quot;&quot;
+    vol=&quot;&quot; eg=&quot;&quot; lfo=&quot;&quot; pan=&quot;&quot; pb=&quot;&quot;
+    fx1=&quot;&quot; fx2=&quot;&quot; fx3=&quot;&quot; fx4=&quot;&quot; /&gt;
+  &lt;env en=&quot;&quot; segs=&quot;&quot; st=&quot;&quot; sus=&quot;&quot;&gt;
+    &lt;seg sn=&quot;&quot; rt=&quot;&quot; lvl=&quot;&quot; ty=&quot;&quot; fix=&quot;&quot; /&gt;
+  &lt;/env&gt;
+  &lt;lfo frq=&quot;&quot; wt=&quot;&quot; rt=&quot;&quot; amp=&quot;&quot; /&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

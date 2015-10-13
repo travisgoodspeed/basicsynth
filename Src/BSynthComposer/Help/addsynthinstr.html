@@ -1,0 +1,207 @@
+<html>
+<head>
+<title>Additive Synthesis Instrument</title>
+</head>
+<body>
+<h2>Additive Synthesis Instrument</h2>
+<p>
+The <i>AddSynth</i> instrument adds the output of up to 16 tone generators.
+Each generator combines a wavetable oscillator and variable-segment envelope generator.
+A single LFO generator is shared by all oscillators.
+</p>
+<p>To create an <i>AddSynth</i> instrument, right-click on <b>Instruments</b> in the
+project tree and select <b>New</b>. Enter a neame for the instrument and select 
+the <b>AddSynth</b> type in the list box at the bottom of the instrument properties form.
+</p>
+<h3>Patch Diagram</h3>
+<img src="images/addsynthdiag.jpg" alt="AddSynth diagram"/>
+<hr/><h3>Configuration</h3>
+<p>The additive synthesis instrument editor is shown below.</p>
+<img src="images/addsynthedit.jpg" alt="AddSynth editor" />
+<p>
+Although the instrument can support maximum of 126 partials and sixteen envelope segments, 
+the editor for the <i>AddSynth</i> instrument allows a maximum of sixteen partials and
+a maximum of seven segments for an envelope. Only one oscillator and envelope generator
+pair is displayed at a time. The buttons across the top of the editor allow selection of the partial.
+To increase or decrease the number of available partials, click the  "# Parts" button and
+enter the number of partials. To change the number of segments in the envelope, select
+one of the buttons under the "Segments" label.
+</p>
+<p>
+The waveform, frequency, and overall volume for each oscillator
+may be set individually. When waveforms are set to sine waves, this instrument
+implements a Fourier series and can be used to re-synthesize sounds from an
+analyzed sound. It is also possible to use complex waveforms and &quot;morph&quot;
+between the waveforms over time, implementing a wavetable synthesis system.
+</p>
+<p>
+The envelope generators are variable multi-segment types
+allowing up to seven segments with or without sustain. Each segment is
+defined by a rate, ending level and curve type.
+</p>
+<h4>Project and Notelist ID Values</h4>
+<p>
+Because the number of tone generators varies, parameter ID numbers must
+be calculated based on the partial and envelope segment. The parameter ID
+numbers are formed as a set of bit fields:
+</p>
+<pre>
+[PN(7)][SN(4)][VAL(4)]
+
+PN = (partial + 1) * 256
+SN = segment * 16
+</pre>
+<p>
+This allows for 126 partials, 16 envelope segments per
+partial, and 16 parameter values for each partial or envelope. A value of 0 for
+PN indicates a parameter index used to specify parameters that affect the
+entire instrument (e.g.<i>,</i> fundamental pitch, master volume, LFO). 
+</p>
+<p>
+The following table shows the parameter numbers and the
+equivalent XML tag and attribute values for the <i>AddSynth </i> instrument.  
+ID names of the form p<i>n</i> represent the letter 'p' followed by 
+an integer and refer to a zero-based part number. ID names of the form p<i>n</i>s<i>n</i> refer to envelope segment numbers. 
+For example, to set the frequency for part 3, use p3.frq and use p0s2.rt to set the rate for segment 2 of the envelope for part 0.
+The letter 'p' can be extened to 'part' or even 'partial' if desired since the code only
+looks at the first letter and then skips all letters up to the next digit.
+</p>
+
+<table border="1" cellspacing="0" cellpadding="4">
+ <tr valign="top" style="background-color: Black; color: White;">
+  <td><p align="center"><b>Parameter</b></td>
+  <td><p align="center"><b>Tag</b></td>
+  <td><p align="center"><b>Attribute</b></td>
+  <td><p align="center"><b>Name</b></td>
+  <td><p align="center"><b>Use</b></td>
+ </tr>
+ <tr valign="top">
+  <td><p>16</p></td>
+  <td><p>lfo</p></td>
+  <td><p>frq</p></td>
+  <td><p>lfofrq</p></td>
+  <td><p>LFO Frequency</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>17</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>lfowt</p></td>
+  <td><p>LFO wave table</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>18</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>lfoatk</p></td>
+  <td><p>LFO envelope attack time</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>19</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>amp</p></td>
+  <td><p>lfpamp</p></td>
+  <td><p>LFO amplitutde (depth)</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>&nbsp;</p></td>
+  <td><p>part</p></td>
+  <td><p>pn</p></td>
+  <td><p>p<i>n</i></p></td>
+  <td><p>Partial number</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+0</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>mul</p></td>
+  <td><p>p<i>n</i>.mul</p></td>
+  <td><p>Frequency multiplier. The frequency of this partial is the base frequency of the
+  instrument multiplied by this value.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+1</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>frq</p></td>
+  <td><p>p<i>n</i>.frq</p></td>
+  <td><p>Oscillator frequency. This is optional since the frequency will be recalculated based on
+  the multiplier. If the multiplier is 0, this frequency will be used instead.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+2</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>p<i>n</i>.wt</p></td>
+  <td><p>Wave table index</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+9</p></td>
+  <td><p>env</p></td>
+  <td><p>segs</p></td>
+  <td><p>*</p></td>
+  <td><p>Number of envelope segments.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+3</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>st</p></td>
+  <td><p>p<i>n</i>.st</p></td>
+  <td><p>Starting envelope value</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+4</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>p<i>n</i>.sus</p></td>
+  <td><p>Sustain-on flag, 1 or 0.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>&nbsp;</p></td>
+  <td><p>seg</p></td>
+  <td><p>sn</p></td>
+  <td><p>p<i>n</i>s<i>n</i></p></td>
+  <td><p>Segment number</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+SN+5</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt</p></td>
+  <td><p>p<i>n</i>s<i>n</i>.rt</p></td>
+  <td><p>Segment rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+SN+6</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>lvl</p></td>
+  <td><p>p<i>n</i>s<i>n</i>.lvl</p></td>
+  <td><p>Segment end level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+SN+7</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>p<i>n</i>s<i>n</i>.ty</p></td>
+  <td><p>Segment curve type:<br/>0=Linear<br/>1=Exponential<br/>2=Logarithmic</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>PN+SN+8</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>p<i>n</i>s<i>n</i>.fix</p></td>
+  <td><p>Segment rate type:<br/>0=Relative to duration<br/>1=Fixed time<br/>2=Remainder</p></td>
+ </tr>
+ </tr>
+</table>
+<p>* The number of envelope segments must be set from the project file or the editor.</p>
+<h3>XML Format</h3>
+<pre>
+&lt;instr id=&quot;&quot; type=&quot;AddSynth&quot; name=&quot;&quot; parts=&quot;&quot; &gt;
+  &lt;part pn=&quot;&quot; mul=&quot;&quot; frq=&quot;&quot; wt=&quot;&quot; /&gt;
+   &lt;env segs=&quot;&quot; st=&quot;&quot; sus=&quot;&quot;&gt;
+     &lt;seg sn=&quot;&quot; rt=&quot;&quot; lvl=&quot;&quot; ty=&quot;&quot; /&gt;
+   &lt;/env&gt;
+  &lt;/part&gt;</p>
+  &lt;lfo frq=&quot;&quot; wt=&quot;&quot; atk=&quot;&quot; amp=&quot;&quot; /&gt;
+&lt;/instr&gt;</p>
+</pre>
+</body>
+</html>

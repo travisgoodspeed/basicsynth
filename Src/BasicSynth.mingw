@@ -1,0 +1,39 @@
+# Common prefix for installation directories.
+prefix = /Program Files/BasicSynth
+exec_prefix = $(prefix)
+bindir = $(exec_prefix)
+datarootdir = $(prefix)
+datadir = $(datarootdir)
+docdir=$(datadir)/html
+
+SHELL=sh.exe
+RM=rm.exe
+
+# BSDIR is the root directory for BasicSynth - change as appropriate
+#BSDIR=$(HOMEPATH)\basicsynth
+BSDIR=\Projects\basicsynth
+BSBIN=$(BSDIR)\Bin
+BSINC=$(BSDIR)\Include
+BSLIB=$(BSDIR)\Lib
+BSINSTR=$(BSDIR)\Src\Instruments
+BSNL=$(BSDIR)\Src\Notelist
+
+# The cannonical library names on UNIX are lib*.a
+# If you prefer, set the prefix:
+#LIBPREFIX=libsynth
+# For compatibility with MSWIN, leave LIBPREFIX set to nothing
+CMNLIB=$(BSLIB)\$(LIBPREFIX)Common.a
+INSTLIB=$(BSLIB)\$(LIBPREFIX)Instruments.a
+NLLIB=$(BSLIB)\$(LIBPREFIX)Notelist.a
+
+XMLTYPE=TINYXML
+CPPFLAGS=-D_WIN32 -DGCC -DUSE_$(XMLTYPE) -I$(BSINC) -I$(BSINSTR) -O3 -mthreads
+# add -DUSE_OSCILI for interpolating oscillators on some instruments
+#CPPFLAGS+= -DUSE_OSCILI
+CPP=g++
+RANLIB=ranlib
+
+%.o: %.c
+	@echo Compiling $<
+	@$(CC) -c $(CPPFLAGS) $<
+	

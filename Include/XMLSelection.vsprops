@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="XMLSelection"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories=""
+		PreprocessorDefinitions="_CRT_SECURE_NO_DEPRECATE;_CRT_SECURE_NO_WARNINGS;USE_TINYXML"
+		RuntimeLibrary="2"
+		WarningLevel="3"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories=""
+	/>
+	<UserMacro
+		Name="BasicSynthInc"
+		Value="..\..\Include"
+	/>
+	<UserMacro
+		Name="BasicSynthLib"
+		Value="..\..\Lib"
+	/>
+	<UserMacro
+		Name="BasicSynthLibx64"
+		Value="..\..\Libx64"
+	/>
+	<UserMacro
+		Name="BasicSynthInc2"
+		Value="..\..\..\Include"
+	/>
+	<UserMacro
+		Name="BasicSynthLib2"
+		Value="..\..\..\Lib"
+	/>
+	<UserMacro
+		Name="BasicSynthLib2x64"
+		Value="..\..\..\Libx64"
+	/>
+</VisualStudioPropertySheet>

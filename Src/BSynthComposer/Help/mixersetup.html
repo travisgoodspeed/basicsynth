@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<title>Mixer Configuration</title>
+</head>
+<body>
+<h1>Mixer Setup and Use</h1>
+<i>BasicSynth Composer</i> provides multiple facilities for controlling the volume level of sounds. First, each instrument
+controls it's peak volume level with one or more envelope generators. Second, Notelist provides both per-note and per-voice
+volume levels. Finally, all output sounds pass through a mixer channel and are attenuated by the input channel level control.
+The Mixer can be configured with as many inputs and effects channels as you need. 
+How you configure the Mixer depends on how you want to control volume, panning, and processing effects.</p>
+<p>The <i>volume</i> command in Notelist can be used to balance the volume levels between different voices.
+Since each Mixer input channel can combine multiple sounds, you can send all voices through one channel if you don't
+need any panning or other Mixer effects. More commonly, the mixer is configured with one mixer input channel for
+each voice. The Notelist <i>volume</i> command can then be used to create crescendo and decrescendo while the Mixer
+balances voices and provide panning, reverb, etc. However, each Mixer input adds processing time
+during sound generation and you should only configure as many inputs as you truly need. In general,
+you need one Mixer input channel for each separate pan setting. All instruments that have the same pan position
+can be combined into a single channel. Likewise, if you need multiple reverb effects, you can assign voices that
+share the same effect into one input channel.</p>
+
+<h3>Mixer Diagram</h3>
+<p><img src="images/mixerdiag.jpg" alt="mixer diagram" /></p>
+<p>The diagram shows one input channel and one effects channel along with the output.</p>
+<p>Each input channel acts as a small mixer in its own right. This allows multiple score voices to be
+played into one channel if desired, but also insures that overlapping notes in the same channel are
+properly combined. Each channel can be turned off independently of other inputs. This makes it
+easy to preview only some voices and suppress others without having to change the mixer level
+settings to do so. 
+The input channel level controls the amount of the input signal sent to the output. The pan value
+controls how much of the signal is applied to the left and right outputs. The send level
+determines how much of the input signal is sent through an effects unit. There is a separate send level
+for each effects unit.</p>
+<p>Each effects unit combines the outputs from the send controls into a single value, applies a level and panning control to
+the output of the processor and adds the signal to the left and right outputs. Three effects types are currently
+available: reverb, flanger, and echo. Multiple units of each type can be defined, each with different settings, with the input send
+level used to determine how much of the input is sent to each effects unit. </p>
+
+<h3>Configuration</h3>
+<p>The mixer is configured with the mixer setup dialog. Right-click on the Mixer project item and select properties to access
+the mixer setup dialog. </p>
+<img src="images/mixersetup.jpg" alt="mixer setup" />
+<p>Enter the desired number of input channels in the Inputs entry field. Select the panning type. Each
+panning type provides a slightly different panning effect. The pan setting ranges from [-1,+1]. and produces
+the left and right multipliers shown in the table below. Linear panning results in the "hole in the middle" effect 
+where the sound appears to move away from the listener as it moves toward the center. Trig panning (taking the sin of the pan setting)
+produces a more constant pan effect. Square root panning also produces a smooth panning, but with a different rate of fall-off
+as the sound moves from side to side. </p>
+
+<table border="1" cellspacing="0" cellpadding="4">
+<tr>
+<td>&nbsp;</td>
+<td colspan="2">Linear</td>
+<td colspan="2">Sin</td>
+<td colspan="2">Square Root</td>
+</tr>
+<tr>
+<td>Pan Setting</td>
+<td>Left Multiplier</td><td>Right Multiplier</td>
+<td>Left Multiplier</td><td>Right Multiplier</td>
+<td>Left Multiplier</td><td>Right Multiplier</td>
+</tr>
+<tr>
+<td>1.00</td>
+<td>1.000</td><td>0.000</td>
+<td>0.707</td><td>0.000</td>
+<td>0.707</td><td>0.000</td>
+</tr>
+<tr>
+<td>0.50</td>
+<td>0.750</td><td>0.250</td>
+<td>0.653</td><td>0.271</td>
+<td>0.612</td><td>0.354</td>
+</tr>
+<tr>
+<td>0.25</td>
+<td>0.625</td><td>0.375</td>
+<td>0.588</td><td>0.383</td>
+<td>0.559</td><td>0.433</td>
+</tr>
+<tr>
+<td>0.00</td>
+<td>0.500</td><td>0.500</td>
+<td>0.500</td><td>0.500</td>
+<td>0.500</td><td>0.500</td>
+</tr>
+</table>
+<p>To add an effects unit, enter a name in the Fx Name input field and select the type in the Fx Type list. Press the + button to add
+the unit. The up and down arrows can be used to change the order. The X button will remove an effects unit.</p>
+<p>Each effects unit is added as a child item under the Mixer item in the project view. Double click on an effects unit to change its properties.</p>
+<table border="1" cellspacing="0" cellpadding="4">
+<tr valign="top">
+<td><img src="images/reverbprops.jpg" alt="reverb"/></td>
+<td>The reverb unit consists of four feedback delay lines and two allpass filters. The reverb time and the loop times of the delay
+lines can be changed using the properties dialog for the reverb unit.</td>
+</tr>
+<tr valign="top">
+<td><img src="images/flangerprops.jpg" alg="flanger"/></td>
+<td>The flanger unit consists of a variable rate delay line combined with a low-frequency oscillator to move the delay tap back and forth.
+The mix parameter sets the amount of dry and wet signals applied at the output. The feedback parametet controls the amount of the
+delayed signal that is recycled through the delay line. The depth and center values control the length of the delay line. Both
+values are given in seconds. The delay time varies from center - depth/2 to center + depth/2.</td>
+</tr>
+<tr valign="top">
+<td><img src="images/echoproperties.jpg" alt="echo" /></td>
+<td>The echo unit consists of a feedback delay line alone. The delay value sets the delay line length in seconds. The decay value
+sets the amount of time it takes for the signal to decay to -60dB. </td>
+</tr>
+</table>
+<p>Note: all three effects units incorporate a feedback delay line. If the input level is too high, or the decay time is too long, 
+continued input to the unit can create a positive feedback loop. Distorted sound will recirculate in the delay line indefinitely. 
+If this happens, click the [Clear] button on the Mixer editor to clear all values from the effects units.
+</body>
+</html>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="bsynthcomp" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug UNIX">
+				<Option output="../../Bin/bsynthcompd" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccDebug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-g" />
+					<Add option="`wx-config --cxxflags --unicode=no --debug=yes`" />
+					<Add option="-DUNIX" />
+					<Add option="-DDEBUG" />
+					<Add option="-DUSE_TINYXML" />
+					<Add option="-DGCC" />
+					<Add directory="/home/gonzo/basicsynth/Include/" />
+					<Add directory="/home/gonzo/basicsynth/Src/BSynthComposer/Core/" />
+					<Add directory="/home/gonzo/basicsynth/Src/Instruments/" />
+					<Add directory="/home/gonzo/basicsynth/Src/Notelist/" />
+				</Compiler>
+				<Linker>
+					<Add option="-lasound" />
+					<Add option="`wx-config --libs --unicode=no --debug=yes`" />
+					<Add library="$(#BSHOME)/Src/BSynthComposer/Lib/CoreD.a" />
+					<Add library="$(#BSHOME)/Lib/InstrumentsD.a" />
+					<Add library="$(#BSHOME)/Lib/NotelistD.a" />
+					<Add library="$(#BSHOME)/Lib/CommonD.a" />
+				</Linker>
+			</Target>
+			<Target title="Release UNIX">
+				<Option output="../../Bin/bsynthcomp" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccRelease/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="`wx-config --cxxflags --unicode=no --debug=no`" />
+					<Add option="-DUNIX" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DUSE_TINYXML" />
+					<Add option="-DGCC" />
+					<Add directory="/home/gonzo/basicsynth/Include/" />
+					<Add directory="/home/gonzo/basicsynth/Src/BSynthComposer/Core/" />
+					<Add directory="/home/gonzo/basicsynth/Src/Instruments/" />
+					<Add directory="/home/gonzo/basicsynth/Src/Notelist/" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="`wx-config --libs --unicode=no --debug=no`" />
+					<Add library="../Lib/Core.lib" />
+					<Add library="../../Lib/Instruments.a" />
+					<Add library="../../Lib/Notelist.a" />
+					<Add library="../../Lib/Common.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="wx/AboutDlg.h" />
+		<Unit filename="wx/FindReplDlg.cpp" />
+		<Unit filename="wx/FindReplDlg.h" />
+		<Unit filename="wx/FormEditor.cpp" />
+		<Unit filename="wx/FormEditor.h" />
+		<Unit filename="wx/GenerateDlg.cpp" />
+		<Unit filename="wx/GenerateDlg.h" />
+		<Unit filename="wx/ItemPropertiesDlg.cpp" />
+		<Unit filename="wx/ItemPropertiesDlg.h" />
+		<Unit filename="wx/KeyboardDlg.cpp" />
+		<Unit filename="wx/KeyboardDlg.h" />
+		<Unit filename="wx/MainFrame.cpp" />
+		<Unit filename="wx/MainFrame.h" />
+		<Unit filename="wx/MixerSetupDlg.cpp" />
+		<Unit filename="wx/MixerSetupDlg.h" />
+		<Unit filename="wx/ModSynthDlg.cpp" />
+		<Unit filename="wx/ModSynthDlg.h" />
+		<Unit filename="wx/OptionsDlg.cpp" />
+		<Unit filename="wx/OptionsDlg.h" />
+		<Unit filename="wx/ProjectItemDlg.h" />
+		<Unit filename="wx/ProjectOptionsWX.cpp" />
+		<Unit filename="wx/ProjectPropertiesDlg.cpp" />
+		<Unit filename="wx/ProjectPropertiesDlg.h" />
+		<Unit filename="wx/QueryValueDlg.cpp" />
+		<Unit filename="wx/QueryValueDlg.h" />
+		<Unit filename="wx/ScoreErrorsDlg.cpp" />
+		<Unit filename="wx/ScoreErrorsDlg.h" />
+		<Unit filename="wx/SoundBankSelect.cpp" />
+		<Unit filename="wx/SoundBankSelect.h" />
+		<Unit filename="wx/SynthWidgetWx.cpp" />
+		<Unit filename="wx/TextEditor.cpp" />
+		<Unit filename="wx/TextEditor.h" />
+		<Unit filename="wx/WavetableSelectDlg.cpp" />
+		<Unit filename="wx/WavetableSelectDlg.h" />
+		<Unit filename="wx/globinc.h" />
+		<Unit filename="wx/main.cpp" />
+		<Unit filename="wx/resource.cpp" />
+		<Unit filename="wx/resource.h" />
+		<Unit filename="wx/resource.xml">
+			<Option compiler="gcc" use="1" buildCommand="wxrc -c resource.cpp" />
+		</Unit>
+		<Extensions>
+			<code_completion>
+				<search_path add="/home/gonzo/basicsynth/Include/" />
+			</code_completion>
+			<debugger>
+				<search_path add="/usr/include/wx-2.8" />
+			</debugger>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

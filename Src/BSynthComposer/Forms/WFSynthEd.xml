@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout type="WFSynth" x="0" y="0" w="340" h="220" bg="bg" fg="fg" >
+  <label id="1" x="5" y="5" w="90" h="25" th="16" lbl="Options" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="2" x="5" y="35" w="90" h="95" bord="0" fr="grpfr" >
+    <lamp id="3" ip="18" x="0" y="0" w="90" h="25" val="0" th="14" lbl="Play All" bold="1" fg="label" lo="glmplo" hi="glmphi"/>
+    <lamp id="4" ip="17" x="0" y="30" w="90" h="25" val="1" th="14" lbl="Loop" bold="1" fg="label" lo="ratelo" hi="#ffffffaa"/>
+    <label id="5" x="0" y="60" w="90" h="15" th="10" lbl="Wavefile ID" bold="0" italic="1" fg="label" />
+    <label id="6" ip="16" x="0" y="75" w="90" h="20" filled="1" edit="1" prec="0" fmt="%.0f" fg="freq" bg="0"/>
+  </group>
+  <label id="9" x="110" y="5" w="220" h="25" th="16" lbl="Envelope" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="10" x="110" y="35" w="220" h="155" bord="1" fg="grpfr" bg="grpbk">
+    <label id="11" x="5" y="5" w="100" h="15" lbl="Attack" th="12" italic="1" fg="label"/>
+    <label id="12" x="115" y="5" w="100" h="15" lbl="Decay" th="12" italic="1" fg="label"/>
+    <baseknob id="16" ip="19" x="5" y="25" w="100" h="100" lo="0" hi="10" val="0" hiclr="ratehi" loclr="ratelo"/>
+    <baseknob id="17" ip="20" x="115" y="25" w="100" h="100" lo="0" hi="10" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="21" x="5" y="130" w="100" h="15" lbl="0.0" th="12" filled="1" edit="1" fg="rate" bg="cmd"/>
+    <label id="22" x="115" y="130" w="100" h="15" lbl="1.0" th="12" filled="1" edit="1" fg="rate" bg="cmd"/>
+    <pair knb="16" lbl="21" />
+    <pair knb="17" lbl="22" />
+  </group>
+  <pushbutton id="100" x="5" y="140" w="90" h="25" lbl="Set" fg="cmd" />
+  <pushbutton id="101" x="5" y="170" w="90" h="25" lbl="Restore" fg="cmd" />
+</layout>

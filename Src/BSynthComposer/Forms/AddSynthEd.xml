@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout type="AddSynth" x="0" y="0" w="990" h="515" bg="bg" fg="fg">
+  <label id="1" x="5" y="8" w="60" h="25" lbl="Part" th="16" bold="1" italic="1" fg="hdr" shadow="2"/>
+  <switchgroup id="2" x="65" y ="5" w="810" h="35" bord="0" fr="grpfr">
+    <pushswitch id="3" x="5" y ="5" w="48" h="25" val="0" lbl="1" fg="btnlabel"/>
+    <pushswitch id="4" x="55" y ="5" w="48" h="25" val="1" lbl="2" fg="btnlabel"/>
+    <pushswitch id="5" x="105" y ="5" w="48" h="25" val="2" lbl="3" fg="btnlabel"/>
+    <pushswitch id="6" x="155" y ="5" w="48" h="25" val="3" lbl="4" fg="btnlabel"/>
+    <pushswitch id="7" x="205" y ="5" w="48" h="25" val="4" lbl="5" fg="btnlabel"/>
+    <pushswitch id="8" x="255" y ="5" w="48" h="25" val="5" lbl="6" fg="btnlabel"/>
+    <pushswitch id="9" x="305" y ="5" w="48" h="25" val="6" lbl="7" fg="btnlabel"/>
+    <pushswitch id="10" x="355" y ="5" w="48" h="25" val="7" lbl="8" fg="btnlabel"/>
+    <pushswitch id="11" x="405" y ="5" w="48" h="25" val="8" lbl="9" fg="btnlabel"/>
+    <pushswitch id="12" x="455" y ="5" w="48" h="25" val="9" lbl="10" fg="btnlabel"/>
+    <pushswitch id="13" x="505" y ="5" w="48" h="25" val="10" lbl="11" fg="btnlabel"/>
+    <pushswitch id="14" x="555" y ="5" w="48" h="25" val="11" lbl="12" fg="btnlabel"/>
+    <pushswitch id="15" x="605" y ="5" w="48" h="25" val="12" lbl="13" fg="btnlabel"/>
+    <pushswitch id="16" x="655" y ="5" w="48" h="25" val="13" lbl="14" fg="btnlabel"/>
+    <pushswitch id="17" x="705" y ="5" w="48" h="25" val="14" lbl="15" fg="btnlabel"/>
+    <pushswitch id="18" x="755" y ="5" w="48" h="25" val="15" lbl="16" fg="btnlabel"/>
+  </switchgroup>
+  <pushbutton id="300" x="880" y="10" w="90" h="25" lbl="# Parts" val="1" fg="cmd" />
+  <label id="20" x="5" y="40" w="325" h="25" th="16" lbl="Oscillator" bold="1" italic="1" fg="hdr" shadow="2"/>
+  <group id="21" x="5" y="70" w="325" h="245" bord="1" fr="grpfr" bg="grpbk">
+    <frqgroup id="33" ip="256" x="5" y="5" w="205" h="150" bord="0" bg="grpbk" kc="23" lc="24" kf="35" lf="36">
+      <label id="22" x="0" y="0" w="100" h="15" lbl="Freq. X" th="12" italic="1" fg="label"/>
+      <baseknob id="23" x="0" y="20" w="100" h="100" lo="0" hi="10" prec="0" val="1" hiclr="freqhi" loclr="freqlo"/>
+      <label id="24" x="0" y="125" w="100" h="15" lbl="0.0" edit="1" filled="1" th="12" fg="freq" bg="black"/>
+      <label id="34" x="110" y="0" w="100" h="15" lbl="Fine" th="12" italic="1" fg="label"/>
+      <baseknob id="35" x="110" y="20" w="100" h="100" lo="0" hi="1"  prec="3" val="0.0" hiclr="freqhi" loclr="freqlo"/>
+      <label id="36" x="110" y="125" w="100" h="15" lbl="0.0" edit="1" filled="1" th="12" fg="freq" bg="black"/>
+    </frqgroup>
+    <label id="37" x="230" y="5" w="90" h="15" lbl="Wavetable" th="12" italic="1" fg="label"/>
+    <switchgroup id="25" ip="258" def="31" x="230" y="25" w="90" h="120" bord="0" fr="grpfr" bg="grpbk">
+      <pushswitch id="26" x="0" y="0" w="90" h="25" val="0" th="12" lbl="Sin" bold="1" fg="btnlabel"/>
+      <pushswitch id="27" x="0" y="30" w="90" h="25" val="1" th="12" lbl="Sawtooth" bold="1" fg="btnlabel"/>
+      <pushswitch id="28" x="0" y="60" w="90" h="25" val="2" th="12" lbl="Square" bold="1" fg="btnlabel"/>
+      <pushswitch id="29" x="0" y="90" w="90" h="25" val="3" th="12" lbl="Triangle" bold="1" fg="btnlabel"/>
+      <pushswitch id="30" x="0" y="120" w="90" h="25" val="4" th="12" lbl="Pulse" bold="1" fg="btnlabel"/>
+      <pushswitch id="31" x="0" y="150" w="90" h="25" val="5" th="12" lbl="User" bold="1" fg="btnlabel"/>
+    </switchgroup>
+    <pushbutton id="32" x="230" y="210" w="90" h="25" val="4" th="12" lbl="Select" bold="1" fg="wtsel"/>
+    <graph id="401" x="5" y="155" h="60" w="210" bar="1" bw="0.5" num="16" range="10" bg="grpbk" grclr="#ff000080"/>
+    <group id="0" x="5" y="225" h="15" w="210" bord="0">
+      <label id="0" x="0" y="0" h="15" w="20" th="10" lbl="1" align="0" filled="0" fg="label"/>
+      <label id="0" x="39" y="0" h="15" w="20" th="10" lbl="4" align="0" filled="0" fg="label"/>
+      <label id="0" x="91" y="0" h="15" w="20" th="10" lbl="8" align="0" filled="0" fg="label"/>
+      <label id="0" x="143" y="0" h="15" w="20" th="10" lbl="12" align="0" filled="0" fg="label"/>
+      <label id="0" x="195" y="0" h="15" w="20" th="10" lbl="16" align="0" filled="0" fg="label"/>
+    </group>
+  </group>
+  <label id="0" x="340" y="40" w="640" h="25" th="16" lbl="Envelope" bold="1" italic="1" fg="hdr" shadow="2"/>
+  <group name="env. vals" id="200" x="340" y="70" w="640" h="400" bord="1" fr="grpfr" bg="grpbk">
+    <label id="201" x="5" y="5" w="65" h="20" th="12" lbl="Start" italic="1" fg="label" />
+    <baseknob id="202" ip="259" x="5" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="203" x="5" y="95" w="65" h="15" th="12" lbl="0" filled="1" bold="1" fg="volume" bg="black" />
+    <lamp id="204" ip="260" x="5" y="115" w="65" h="20" th="10" lbl="Sus. On" fg="label" hi="ylmphi" lo="ylmplo"/>
+    <pair knb="202" lbl="203" />
+
+    <label id="205" x="5" y="140" w="65" h="20" th="12" lbl="Rt. Range" italic="1" fg="label" />
+    <switchgroup id="206" x="5" y="160" w="65" h="44" val="1" bord="0">
+      <pushswitch id="210" x="0" y="0" w="32" h="20" th="10" val="0.5" lbl="0.5s" fg="rate" />
+      <pushswitch id="207" x="33" y="0" w="32" h="20" th="10" val="1" lbl="1s" fg="rate" />
+      <pushswitch id="208" x="0" y="22" w="32" h="20" th="10" val="5" lbl="5s" fg="rate" />
+      <pushswitch id="209" x="33" y="22" w="32" h="20" th="10" val="10" lbl="10s" fg="rate" />
+    </switchgroup>
+
+    <label id="220" x="85" y="5" w="65" h="20" th="12" lbl="Seg #1" italic="1" fg="label" />
+    <baseknob id="221" ip="262" x="85" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="222" x="85" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="volume" bg="black" />
+    <pair knb="221" lbl="222" />
+    <baseknob id="223" ip="261" x="85" y="115" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="224" x="85" y="185" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="223" lbl="224" />
+    <switchgroup id="225" ip="263" x="85" y="205" w="65" h="15" bord="0">
+      <pushswitch id="226" x="0" y="0" w="22" h="20" th="10" val="1" lbl="Li" fg="eglin" />
+      <pushswitch id="227" x="22" y="0" w="22" h="20" th="10" val="2" lbl="Ex" fg="egexp" />
+      <pushswitch id="228" x="44" y="0" w="22" h="20" th="10" val="3" lbl="Ln" fg="eglog" />
+    </switchgroup>
+    <lamp id="229" ip="264" x="85" y="225" w="65" h="15" th="10" lbl="Fixed" fg="label"  hi="ylmphi" lo="ylmplo"/>
+
+    <label id="230" x="155" y="5" w="65" h="20" th="12" lbl="Seg #2" italic="1" fg="label" />
+    <baseknob id="231" ip="278" x="155" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="232" x="155" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="volume" bg="black" />
+    <pair knb="231" lbl="232" />
+    <baseknob id="233" ip="277" x="155" y="115" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="234" x="155" y="185" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="233" lbl="234" />
+    <switchgroup id="235" ip="279" x="155" y="205" w="65" h="15" bord="0">
+      <pushswitch id="236" x="0" y="0" w="22" h="20" th="10" val="1" lbl="Li" fg="eglin" />
+      <pushswitch id="237" x="22" y="0" w="22" h="20" th="10" val="2" lbl="Ex" fg="egexp" />
+      <pushswitch id="238" x="44" y="0" w="22" h="20" th="10" val="3" lbl="Ln" fg="eglog" />
+    </switchgroup>
+    <lamp id="239" ip="280" x="155" y="225" w="65" h="15" th="10" lbl="Fixed" fg="label"  hi="ylmphi" lo="ylmplo"/>
+
+    <label id="240" x="225" y="5" w="65" h="20" th="12" lbl="Seg #3" italic="1" fg="label" />
+    <baseknob id="241" ip="294" x="225" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="242" x="225" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="volume" bg="black" />
+    <pair knb="241" lbl="242" />
+    <baseknob id="243" ip="293" x="225" y="115" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="244" x="225" y="185" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="243" lbl="244" />
+    <switchgroup id="245" ip="295" x="225" y="205" w="65" h="15" bord="0">
+      <pushswitch id="246" x="0" y="0" w="22" h="20" th="10" val="1" lbl="Li" fg="eglin" />
+      <pushswitch id="247" x="22" y="0" w="22" h="20" th="10" val="2" lbl="Ex" fg="egexp" />
+      <pushswitch id="248" x="44" y="0" w="22" h="20" th="10" val="3" lbl="Ln" fg="eglog" />
+    </switchgroup>
+    <lamp id="249" ip="296" x="225" y="225" w="65" h="15" th="10" lbl="Fixed" fg="label"  hi="ylmphi" lo="ylmplo"/>
+
+    <label id="250" x="295" y="5" w="65" h="20" th="12" lbl="Seg #4" italic="1" fg="label" />
+    <baseknob id="251" ip="310" x="295" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="252" x="295" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="volume" bg="black" />
+    <pair knb="251" lbl="252" />
+    <baseknob id="253" ip="309" x="295" y="115" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="254" x="295" y="185" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="253" lbl="254" />
+    <switchgroup id="255" ip="311" x="295" y="205" w="65" h="15" bord="0">
+      <pushswitch id="256" x="0" y="0" w="22" h="20" th="10" val="1" lbl="Li" fg="eglin" />
+      <pushswitch id="257" x="22" y="0" w="22" h="20" th="10" val="2" lbl="Ex" fg="egexp" />
+      <pushswitch id="258" x="44" y="0" w="22" h="20" th="10" val="3" lbl="Ln" fg="eglog" />
+    </switchgroup>
+    <lamp id="259" ip="312" x="295" y="225" w="65" h="15" th="10" lbl="Fixed" fg="label"  hi="ylmphi" lo="ylmplo"/>
+
+    <label id="260" x="365" y="5" w="65" h="20" th="12" lbl="Seg #5" italic="1" fg="label" />
+    <baseknob id="261" ip="326" x="365" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="262" x="365" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="volume" bg="black" />
+    <pair knb="261" lbl="262" />
+    <baseknob id="263" ip="325" x="365" y="115" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="264" x="365" y="185" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="263" lbl="264" />
+    <switchgroup id="265" ip="327" x="365" y="205" w="65" h="15" bord="0">
+      <pushswitch id="266" x="0" y="0" w="22" h="20" th="10" val="1" lbl="Li" fg="eglin" />
+      <pushswitch id="267" x="22" y="0" w="22" h="20" th="10" val="2" lbl="Ex" fg="egexp" />
+      <pushswitch id="268" x="44" y="0" w="22" h="20" th="10" val="3" lbl="Ln" fg="eglog" />
+    </switchgroup>
+    <lamp id="269" ip="328" x="365" y="225" w="65" h="15" th="10" lbl="Fixed" fg="label"  hi="ylmphi" lo="ylmplo"/>
+
+    <label id="270" x="435" y="5" w="65" h="20" th="12" lbl="Seg #6" italic="1" fg="label" />
+    <baseknob id="271" ip="342" x="435" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="272" x="435" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="volume" bg="black" />
+    <pair knb="271" lbl="272" />
+    <baseknob id="273" ip="341" x="435" y="115" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="274" x="435" y="185" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="273" lbl="274" />
+    <switchgroup id="275" ip="343" x="435" y="205" w="65" h="20" val="1" bord="0">
+      <pushswitch id="276" x="0" y="0" w="22" h="20" th="10" val="1" lbl="Li" fg="eglin" />
+      <pushswitch id="277" x="22" y="0" w="22" h="20" th="10" val="2" lbl="Ex" fg="egexp" />
+      <pushswitch id="278" x="44" y="0" w="22" h="20" th="10" val="3" lbl="Ln" fg="eglog" />
+    </switchgroup>
+    <lamp id="279" ip="344" x="435" y="225" w="65" h="15" th="10" lbl="Fixed" fg="label"  hi="ylmphi" lo="ylmplo"/>
+
+    <label id="280" x="505" y="5" w="65" h="20" th="12" lbl="Seg #7" italic="1" fg="label" />
+    <baseknob id="281" ip="358" x="505" y="25" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="volhi" loclr="vollo" />
+    <label id="282" x="505" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="volume" bg="black" />
+    <pair knb="281" lbl="282" />
+    <baseknob id="283" ip="357" x="505" y="115" w="65" h="65" lo="0" hi="1.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="284" x="505" y="185" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="283" lbl="284" />
+    <switchgroup id="285" ip="359" x="505" y="205" w="65" h="20" val="1" bord="0">
+      <pushswitch id="286" x="0" y="0" w="22" h="20" th="10" val="1" lbl="Li" fg="eglin" />
+      <pushswitch id="287" x="22" y="0" w="22" h="20" th="10" val="2" lbl="Ex" fg="egexp" />
+      <pushswitch id="288" x="44" y="0" w="22" h="20" th="10" val="3" lbl="Ln" fg="eglog" />
+    </switchgroup>
+    <lamp id="289" ip="360" x="505" y="225" w="65" h="15" th="10" lbl="Fixed" fg="label"  hi="ylmphi" lo="ylmplo"/>
+
+    <label id="290" x="570" y="5" w="65" h="20" th="12" lbl="Segments" italic="1" fg="label" />
+    <switchgroup id="291" ip="265" x="570" y="30" h="205" val="2" bord="0" >
+      <pushswitch id="292" x="5" y="0" w="60" h="25" th="12" val="1" lbl="1" fg="btnlabel" />
+      <pushswitch id="293" x="5" y="30" w="60" h="25" th="12" val="2" lbl="2" fg="btnlabel" />
+      <pushswitch id="294" x="5" y="60" w="60" h="25" th="12" val="3" lbl="3" fg="btnlabel" />
+      <pushswitch id="295" x="5" y="90" w="60" h="25" th="12" val="4" lbl="4" fg="btnlabel" />
+      <pushswitch id="296" x="5" y="120" w="60" h="25" th="12" val="5" lbl="5" fg="btnlabel" />
+      <pushswitch id="297" x="5" y="150" w="60" h="25" th="12" val="6" lbl="6" fg="btnlabel" />
+      <pushswitch id="298" x="5" y="180" w="60" h="25" th="12" val="7" lbl="7" fg="btnlabel" />
+    </switchgroup>
+    <envgraph id="350" x="5" y="250" h="145" w="630" bord="1" bg="bg" fg="label"/>
+  </group>
+  <label id="0" x="5" y="325" w="325" h="25" th="16" lbl="LFO" bold="1" italic="1" fg="hdr" shadow="2"/>
+  <group name="env. vals" id="303" x="5" y="350" w="325" h="120" bord="1" fr="grpfr" bg="grpbk">
+    <label id="304" x="5" y="5" w="65" h="20" th="12" lbl="Freq." align="1" italic="1" fg="label" />
+    <baseknob id="305" ip="16" x="5" y="30" w="65" h="65" lo="0" hi="10.0" val="0" hiclr="freqhi" loclr="freqlo" />
+    <label id="306" x="5" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" bg="black" fg="freq" />
+    <pair knb="305" lbl="306"/>
+
+    <label id="307" x="75" y="5" w="65" h="20" th="12" lbl="Attack" align="1" italic="1" fg="label" />
+    <baseknob id="308" ip="18" x="75" y="30" w="65" h="65" lo="0" hi="10.0" val="0" hiclr="ratehi" loclr="ratelo" />
+    <label id="309" x="75" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="rate" bg="black" />
+    <pair knb="308" lbl="309" />
+
+    <label id="310" x="140" y="5" w="65" h="20" th="12" lbl="Depth" align="1" italic="1" fg="label" />
+    <baseknob id="311" ip="19" x="140" y="30" w="65" h="65" lo="0" hi="5.0" val="0" hiclr="modhi" loclr="modlo" />
+    <label id="312" x="140" y="95" w="65" h="15" th="12" lbl="0" filled="1" edit="1" bold="1" fg="mod" bg="black" />
+    <pair knb="311" lbl="312" />
+
+    <label id="314" x="230" y="5" w="90" h="20" th="12" lbl="Wavetable" align="1" italic="1" fg="label" />
+    <switchgroup id="315" ip="17" def="317" x="230" y="25" w="90" h="50" bord="0" fr="grpfr" bg="grpbk">
+      <pushswitch id="316" x="0" y="0" w="90" h="25" val="0" th="12" lbl="Sin" bold="1" fg="btnlabel"/>
+      <pushswitch id="317" x="0" y="30" w="90" h="25" val="1" th="12" lbl="User" bold="1" fg="btnlabel"/>
+    </switchgroup>
+    <pushbutton id="313" x="230" y="90" h="25" w="90" lbl="Select" val="0" fg="wtsel" />
+  </group>
+
+  <pushbutton id="1000" x="5" y="480" w="90" h="25" lbl="Set" val="1" fg="cmd" />
+  <pushbutton id="1001" x="100" y="480" w="90" h="25" lbl="Restore" val="1" fg="cmd" />
+</layout>

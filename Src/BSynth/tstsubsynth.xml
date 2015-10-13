@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<synthprj>
+  <name>Test Project</name>
+  <desc>A Test of SubSynth params</desc>
+  <author>Daniel Mitchell</author>
+  <cpyrgt>Copyright 2008</cpyrgt>
+  <out type="1" lead="0" tail="0.5">subsynth.wav</out>
+  <synth sr="44100" wt="16384" usr="1">
+    <wvtable ndx="10" parts="3" >
+      <part mul="1" amp="1.0" phs="0"/>
+      <part mul="2" amp="0.5" phs="0"/>
+      <part mul="4" amp="0.2" phs="0"/>
+    </wvtable>
+  </synth>
+  <mixer chnls="4" fxunits="1" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="1.0" pan="0"/>
+    <chnl cn="1" on="1" vol="1.0" pan="0"/>
+    <reverb unit="0" vol="0.4" rvt="2.5" pan="0">
+      <send cn="0" amt="0"/>
+      <send cn="1" amt="0"/>
+    </reverb>
+  </mixer>
+  <instrlib>
+    <instr id="1" type="SubSynth" name="Test">
+      <osc frq="440" wt="2" vol="1" mix="1" fg="1" ft="0" fr="0.5"/>
+      <egs st="0" atk="0.1" pk="1" dec="0.1" sus="0.8" rel="0.2" end="0" ty="1"/>
+      <egf st="100" atk="0.1" pk="2000" dec="0.1" sus="400" rel="0.2" end="0" ty="1"/>
+      <lfo frq="3.5" wt="0" atk="0" amp="0" />
+    </instr>
+  </instrlib>
+  <score name="SubSynth" dbg="0">tstsubsynth.nl</score>
+</synthprj>

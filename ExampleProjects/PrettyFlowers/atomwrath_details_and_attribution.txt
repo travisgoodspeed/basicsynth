@@ -1,0 +1,248 @@
+
+=================== FREESOUND ATTRIBUTION FORM =======================
+
+This form below lists all the samples in this pack with their descriptions and tags.
+You can use this form to attribute samples to users when you use them.
+
+=========================== CUT HERE =================================
+
+File:
+	Name: "KD-BD.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11385
+	Date of upload: 2005-11-27 17:18:35
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : bass/kick drum recorded with a cardioid condenser microphone
+
+Tags:
+	bass-drum kick-drum natural 
+======================================================================
+
+File:
+	Name: "KD-Sn.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11386
+	Date of upload: 2005-11-27 17:18:21
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : snare drum recorded with a cardioid condenser microphone
+
+Tags:
+	natural snare 
+======================================================================
+
+File:
+	Name: "KD-Snrim.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11387
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : soft rim shot on snare recorded with a cardioid condenser microphone
+
+Tags:
+	natural rim-shot snare 
+======================================================================
+
+File:
+	Name: "KD-cym0a.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11388
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : 18" (46cm) crash cymbal hit lightly recorded with a cardioid condenser microphone
+
+Tags:
+	crash cymbal large natural 
+======================================================================
+
+File:
+	Name: "KD-cym0b.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11389
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : 18" (46cm) crash cymbal recorded with a cardioid condenser microphone
+
+Tags:
+	crash cymbal large natural 
+======================================================================
+
+File:
+	Name: "KD-cym1a.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11390
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : 16" (41cm) crash cymbal hit lightly recorded with a cardioid condenser microphone
+
+Tags:
+	crash cymbal natural small 
+======================================================================
+
+File:
+	Name: "KD-cym1b.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11391
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : 16" (41cm) crash cymbal recorded with a cardioid condenser microphone
+
+Tags:
+	crash cymbal natural small 
+======================================================================
+
+File:
+	Name: "KD-hhcl.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11392
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : Closed 14" (36cm) hi hat recorded with a cardioid condenser microphone
+
+Tags:
+	closed hi-hat natural 
+======================================================================
+
+File:
+	Name: "KD-hhop.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11393
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : Open 14" (36cm) hi hat recorded with a cardioid condenser microphone
+
+Tags:
+	hi-hat natural open 
+======================================================================
+
+File:
+	Name: "KD-hhped.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11394
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : 14" (36cm) hi hat using the pedal recorded with a cardioid condenser microphone
+
+Tags:
+	hi-hat natural pedal 
+======================================================================
+
+File:
+	Name: "KD-ridea.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11395
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : 20" (51cm) ride cymbal recorded with a cardioid condenser microphone
+
+Tags:
+	cymbal natural ride 
+======================================================================
+
+File:
+	Name: "KD-rideb.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11396
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : 20" (51cm) ride cymbal hit toward center recorded with a cardioid condenser microphone
+
+Tags:
+	cymbal natural ride 
+======================================================================
+
+File:
+	Name: "KD-tom1.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11397
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : High tom drum recorded with a cardioid condenser microphone
+
+Tags:
+	high natural tom-drum 
+======================================================================
+
+File:
+	Name: "KD-tom2.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11398
+	Date of upload: 2005-11-27 17:18:22
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : Medium tom drum recorded with a cardioid condenser microphone
+
+Tags:
+	medium natural tom-drum 
+======================================================================
+
+File:
+	Name: "KD-tom3.wav"
+	Url: http://www.freesound.org/samplesViewSingle.php?id=11399
+	Date of upload: 2005-11-27 17:18:35
+	
+Designer / Creator / Uploader:
+	Name: "atomwrath"
+	Url: http://www.freesound.org/usersViewSingle.php?id=30817
+	
+Description:
+	By "atomwrath" : Low/floor tom drum recorded with a cardioid condenser microphone
+
+Tags:
+	low natural tom-drum 
+======================================================================
+

@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<title>Project Properties</title>
+</head>
+<body>
+<h1>Project Properties</h1>
+<p>The Project Properties form is used to set the general properties for the project
+along with synthesizer settings.</p>
+<img src="images/projectproperties.jpg" alt="Project Properties" />
+<p>
+The <b>Name</b> field sets the project name. The name is only displayed in the project tree for reference and does not have to match
+the project file name. The <b>Composer</b>, <b>Copyright</b> and <b>Description</b> are stored in the project file. 
+These fields are useful for keeping program notes, date of composition, and similar information about the composition.
+You can enter information here, or leave the values blank if you wish. However, since muscial works are protected by copyright so long
+as a notice is provided, it is a good idea to always put a copyright notice in the project file.
+</p>
+<p>
+The <b>Project File</b> field shows the complete path to the project file. Although you can change this information, it is
+better to use the Save Project As menu entry. The project directory should be changed with care. Several files, including score files,
+are assumed to be located in the same directory as the project file. Changing the project file directory may result in files failing to open.
+</p>
+<p>
+The <b>Output File</b> field contains the file name for the wave file produced by the generate function. If this file is not located in the
+project directory, you can enter a full path to the file. Otherwise, only the file name is required since by default the file will be written
+into the project directory.
+</p>
+<p>The <b>Sample Rate</b> and <b>Format</b> fields control the format of the output file. If you plan on creating a CD from
+the wave file, use a sample rate of 44100 and 16-bit PCM format. Higher sampling rates, and the 32-bit float format should be used
+if you plan on processing the output file with an audio file editor. Lower sampling rates are sometimes necessary if you want to 
+play the sound directly to the computer sound card. Slower processors may not be able to generate the sound in real time at higher
+sampling rates.</p>
+<p>
+The <b>Leader</b> and <b>Tail</b> fields indicate how many seconds of slience should be added at the beginning or end of
+a wave file. The tail value is also necessary if you are using reverb or echo effects. The output generator will continue to read
+the mixer during the tail time, allowing the reverb to fade away naturally.
+</p>
+<p>
+The <b>WT Size</b> field controls the wavetable length. Longer wavetables require more memory, but provide higher quality waveforms.
+On older software synthesizers wavetables were kept small (&lt; 1k) in order
+to preserve memory. Personal computers today generally have more than enough memory to allow for larger wavetables.
+Wavetables 16k in length are a good compromise between memory use and audio quality.
+For the <i>BasicSynth</i> instrument set, wavetables should not exceed 16K in length. Some of the instruments use a fast
+fixed-point oscillator for LFO and that oscillator cannot use longer wavetables. If you are only using the ModSynth instrument, you can
+increase the wavetable size to any value you feel is appropriate. In any case, wavetable length should be a power of 2.
+</p>
+<p>The <b>User WT</b> shows the number of user-defined wavetables. This value can only be set in the properties form
+a new project, and is only used to pre-allocate wavetables. You can always add new wavetables by right-click on the Synthesizer
+item in the project tree.</p>
+<p>The <b>File Folders</b> list contains a list of directories, other than the project file directory, that contain score and instrument
+libraries used by the project. This list is usefull if you create collections of scores and instruments that you want to use in multiple
+compositions. If a file is not found in the project directory, the program will search this list of directories to find the file. To add
+a new directory, click on the <b>+</b> button and select the directory. To remove a directory, select an item in the list and press the 
+<b>X</b> button. The up and down arrow buttons are used to change the order in which directories are searched.</p>
+<p>The <b>Wave Files</b> field is used to enter the location for wave files used by the WFSynth instrument. The project
+options values contain a default directory for wave files. This field can override the default setting for this project and
+only needs to be filled in if you are using files in a different location than that specified in the default project options.</p>
+<h2>Project Options</h2>
+<p>The project options form sets defaults that apply to all <i>BasicSynth</i> projects.</p>
+<img src="images/projectoptions.jpg" alt="Project Options" />
+<p>The <b>Composer</b> and <b>Copyright</b> fields contain values that will be copied to a new project</p>
+<p>The <b>Project Tree Options</b> control whether or not additional file types are listed in the project tree.
+To enable a file format, click the appropriate button on the form.  These options are applied when a project
+is opened. To apply changes, you must reopen the project.</p>
+<p><i>BasicSynth</i> supports two different score files, Notelist and Sequence. Notelist files provide an intuitive
+score format and are the default score file type. Sequence files contain a simplified score format consisting
+only of numbers for each sequencer event object. The format is similar to that of the Music <i>N</i> software
+systems. It is intended for import from other software synthesis systems, or as output from composition programs.
+A description of this format is contained in the <i>BasicSynth</i> book for those who have need of it.</p>
+<p>The <b>Script Files</b> option creates a node in the project tree for JavaScript and other script files. Currently,
+the script engines are not supported in <i>BasicSynth</i>. Future versions will include this feature. However, this
+type is also useful for program files that are associated with the project.</p>
+<p>The <b>Text Files</b> option adds a node in the project tree for generic text files. These files can be used
+to associate various information with a project. For example, if you want to create a file of program notes, sketches,
+or other such information and be able to edit the files from within <i>BasicSynth</i>, you can enable this option
+so that you have direct access to the files.</p>
+<p>The <b>Libraries</b> option adds a node in the project tree for instrument libraries. If you are not using
+any libraries, you can disable this function to remove unnecessary information in the project tree view.</p>
+<p>The <b>Project Files</b> field contains the path to the default directory for projects. <i>BasicSynth</i>
+will set this directory as the current directory when it starts. However, you can still create projects in any directory you choose. In addition,
+The Windows shell keeps track of the last used directory and will typically open file dialogs in the last location
+you used from <i>BasicSynth</i>, regardless of the current directory.</p>
+<p>The <b>Wave-In</b> directory specifies the path to wave files for the WFSynth instrument. You can override this
+value for a project using the project properties</p>
+<p>The <b>Forms</b> directory specifies the path to the instrument editor form layout and color files. All instruments
+use a configurable definition of the instrument editor to allow customization of the instrument editor. It is possible to
+create custom forms for the editors and then change the forms directory option to point to the custom forms.</p>
+<p>The <b>Colors</b> field contains the name of the file that controls the color scheme used in instrument, mixer, and keyboard
+forms. Several colors files are included by default. If you want to use a different color scheme, change the name in this field
+to one of the Colors*.xml files found in the forms directory. You can also create your own color schemes by copying
+one of the colors files and entering new values. Each color is defined by a hexadecimal value. The value can be
+four or eight digits. In the eight digit form, the upper two digits contain the alpha value, followed by two digits each
+for red, green and blue. The four digit form uses one digit for alpha, red, green and blue. 
+The names of the colors should be self-explanatory. </p>
+<p>(A future version of this document will describe the colors and forms files in detail. 
+For now, if you want to customize something, you will have to experiment, or study the source code, to figure them out.
+If you edit the forms, you can freely change the positions and colors, but make sure to adjust the size of
+groups to reflect the size of contained widgets. Hint: the 'lo' and 'hi' colors control the limits of gradient fill patterns.
+Do not change the ID or IP attributes, and be careful if you change the type
+of the widget to only use a compatible type. I.E., pushswitch, imageswitch and lamp types are interchangable. 
+Dial, knob, baseknob and slider are interchangeable as well. Some fields can be removed safely, mostly labels,
+but many value inputs and graph objects are coded into the program and must be in the form and of the 
+proper type or "bad things" will happen.) </p>
+<p>The <b>Libraries</b> field contains the default path for instrument libraries. (This is not really necessary since
+the project file can contain the appropriate entries in the Files Path.)</p>
+<p>The <b>Play Latency</b> controls buffering for live playback of a score. The value represents the time
+for one playback buffer. Five buffers are used, thus the maximum latency is five times the specified value.
+Shorter values cause playback to be closer to score processing time, but may "hiccup" if there
+is insufficient time to generate the next sample buffer. Longer buffer times provide more processing lead time,
+but cause a delay between the score time and the actual time samples are heard. (Watch the "time" display
+during playback to see the effect of the latency value. With the default setting of 0.5 seconds, the displayed time 
+can be up to two seconds ahead of what you hear. Change the latency value to 0.05 seconds and the displayed
+time is almost the same as what you hear.) Note: the latency value only applies to score playback. The keyboard
+uses a fixed rate of 20ms and four buffers to keep latency to a minimum for interactive playing of the
+keyboard.</p>
+</body>
+</html>

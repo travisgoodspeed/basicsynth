@@ -1,0 +1,3408 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html>
+
+<head>
+<title>BasicSynth Library</title>
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<meta name="author" content="Daniel Mitchell">
+<meta name="keywords" content="synthesizers, electronic music, music notation">
+</head>
+
+<style>
+<!--
+ /* Style Definitions */
+h1, h2, h3
+	{margin-right:0in;
+	margin-left:0in;
+	font-family:"Arial";}
+p.noindent, li.noindent, div.noindent
+	{margin-top:.25in;
+	margin-right:0in;
+	margin-bottom:0in;
+	margin-left:0in;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	font-family:"Times New Roman";}
+p.indent, li.indent, div.indent
+	{margin:0in;
+	margin-bottom:.0001pt;
+	text-align:justify;
+	text-indent:.2in;
+	font-family:"Times New Roman";}
+p.code, li.code, div.code
+	{margin:0in;
+	margin-bottom:.0001pt;
+	font-family:"Courier New";}
+p.codevariable, li.codevariable, div.codevariable
+	{font-style:italic;}
+p.classheading, li.classheading, div.classheading
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	font-family:Arial;
+	font-weight:bold;
+	font-style:italic;}
+p.method, li.method, div.method
+	{margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:.2in;
+	font-family:"Courier New";
+	font-style:italic;}
+p.methodheading, li.methodheading, div.methodheading
+	{margin-right:0in;
+	margin-bottom:6.0pt;
+	margin-left:.2in;
+	font-family:"Courier New";
+	font-weight:bold;
+	font-style:italic;}
+span.codevariablechar
+	{font-style:italic;}
+span.classheadingchar
+	{font-family:Arial;
+	font-weight:bold;
+	font-style:italic;}
+span.methodchar
+	{font-family:"Courier New";
+	font-style:italic;}
+span.codechar
+	{font-family:"Courier New";}
+-->
+</style>
+
+</head>
+
+<body style="padding: 15px 40px 15px 30px;" lang="en-us">
+
+<h1>BasicSynth Sound Generation Library</h1>
+
+<p><em>NOTE: This file is deprecated and will not be kept up to date. Use the Doxygen generated help files instead.</em></p>
+
+<p class=noindent>The <span class=codevariablechar>BasicSynth</span> Common
+library classes provide the signal generation and processing foundation for the
+synthesizer. Much of the implementation is contained in the header files
+located in the <span class=codevariablechar>Include</span> directory. The file <i>BasicSynth.h</i>
+includes all of the header files, or individual files can be included as
+needed. The methods are typically short, and placing them in the header allows
+the compiler to optimally expand the code as <span class=codevariablechar>inline</span>
+functions. Longer functions, and those that are not time critical, are located
+in the <span class=codevariablechar>Src/Common</span> directory and compiled
+into the Common library as object modules.</p>
+
+<p class=noindent>The library classes are divided into the following groups.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_General">General</a></p>
+
+<p class=indent><a href="#_File_I/O">File I/O</a></p>
+
+<p class=indent><a href="#_Oscillators">Oscillators</a></p>
+
+<p class=indent><a href="#_Noise_Generators">Noise Generators</a></p>
+
+<p class=indent><a href="#_Envelope_Generators">Envelope Generators</a></p>
+
+<p class=indent><a href="#_Filters">Filters</a></p>
+
+<p class=indent><a href="#_Delay_Lines">Delay Lines</a></p>
+
+<p class=indent><a href="#_Mixing_and_Effects">Mixing and Effects</a></p>
+
+<p class=indent><a href="#_Sequencing_">Sequencing</a></p>
+
+<p class=noindent><i>Note:</i> This document is for quick reference and is generally kept up to date
+as additions and corrections are made to the source code. 
+However, changes to the source code will not always be reflected in this document immediately.
+For complete documentation of the latest source, run the Doxygen script (Doxygen/Doxyfile.txt).</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_General">General</a></h2>
+
+</div>
+
+<p class=noindent>General classes and functions include global parameter
+settings, wave table management, and base classes.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_SynthConfig">SynthConfig</a></p>
+
+<p class=indent><a href="#_WaveTableSet">WaveTableSet</a></p>
+
+<p class=indent><a href="#_GenUnit">GenUnit</a></p>
+
+<p class=indent><a href="#_Synthesizer_Initialization">Synthesizer Initialization</a></p>
+
+<p class=indent><a href="#_bsString">bsString</a></p>
+
+<p class=indent><a href="#_SynthList">SynthList</a></p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=noindent>In addition to global classes, several types are defined for
+convenience and are used throughout the library. Some of these types can be
+redefined to trade-off performance against precision. For example, the <span
+class=codevariablechar>AmpValue</span> and <span class=codevariablechar>FrqValue</span>
+types can be redefined as double precision, or, can be implemented as
+fixed-point objects. Theoretically, the <span class=codevariablechar>SampleValue</span>
+type can be redefined to obtain 8-bit, 24-bit, or 32-bit sample output, but
+this has not been tested.</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>typedef short SampleValue; // sample output type</p>
+
+<p class=code>typedef char&nbsp; bsInt8;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+signed 8 bit data type</p>
+
+<p class=code>typedef short bsInt16;&nbsp;&nbsp;&nbsp;&nbsp; // signed 16 bit
+data type </p>
+
+<p class=code>typedef int&nbsp;&nbsp; bsInt32 ;&nbsp;&nbsp;&nbsp; // signed 32
+bit data type </p>
+
+<p class=code>typedef unsigned char&nbsp; bsUint8;&nbsp;&nbsp;&nbsp; //
+unsigned 8 bit data type</p>
+
+<p class=code>typedef unsigned short bsUint16;&nbsp;&nbsp; // unsigned 16 bit
+data type </p>
+
+<p class=code>typedef unsigned int&nbsp;&nbsp; bsUint32 ;&nbsp; // unsigned 32
+bit data type </p>
+
+<p class=code>typedef void* Opaque;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // Opaque
+pointer to anything</p>
+
+<p class=code>typedef double PhsAccum;&nbsp; &nbsp;// calculation of oscillator
+phase</p>
+
+<p class=code>typedef float AmpValue;&nbsp;&nbsp;&nbsp; // amplitude value</p>
+
+<p class=code>typedef float FrqValue;&nbsp;&nbsp;&nbsp; // frequency or time
+value</p>
+
+<h3><a name="_SynthConfig"></a>SynthConfig</h3>
+
+<p class=noindent>The <span class=codevariablechar>SynthConfig</span> class
+holds global information for the synthesizer. This includes sample rate, wave
+table size, phase increment calculation constants, and the tuning table for
+conversion of pitch to frequency. Exactly one instance of this class exists and
+is named <span class=codevariablechar>synthParams</span>. Library classes
+utilize this object rather than store sample rate and other parameters
+internally. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SynthDefs.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(bsInt32 sr = 44100, bsInt32 tl = 16384)</p>
+
+<p class=method>FrqValue GetFrequency(int pitch)</p>
+
+<p class=noindent>The Init method stores the sample rate and wave table length,
+then calculates the appropriate values for frequency to radians and frequency
+to table index conversion. The calculated values are public members of the <span
+class=codevariablechar>SynthConfig</span> class and can be accessed directly
+from anywhere within the library.</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>FrqValue sampleRate;&nbsp;&nbsp; // Global sample rate as frequency</p>
+
+<p class=code>bsInt32 isampleRate;&nbsp;&nbsp; // Sample rate as integer</p>
+
+<p class=code>AmpValue sampleScale;&nbsp; // multiplier to convert values to
+samples</p>
+
+<p class=code>PhsAccum frqRad;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // multipler
+for frequency to radians</p>
+
+<p class=code>PhsAccum frqTI;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //
+multipler for frequency to table index</p>
+
+<p class=code>PhsAccum radTI;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; // multipler
+for radians to table index</p>
+
+<p class=code>PhsAccum ftableLength; // wave table length</p>
+
+<p class=code>bsInt32&nbsp; itableLength; // wave table length as integer</p>
+
+<p class=code>FrqValue tuning[128];&nbsp; // table to convert pitch into
+frequency</p>
+
+<p class=noindent>The <span class=codevariablechar>GetFrequency</span> method
+converts a pitch in the range [0,128] into the equivalent frequency for the
+equal-tempered scale. Middle C is at index 60. Code may also access the
+tuning value array directly if desired. The tuning table is calculated
+automatically in the constructor but can be overwritten in order to implement a
+different tuning system.</p>
+
+<h3><a name="_WaveTableSet"></a>WaveTableSet</h3>
+
+<p class=noindent>The <span class=codevariablechar>WaveTableSet</span> class
+holds a set of wave tables shared by all oscillators. There is one pre-defined
+global instance of the wave table class named <span class=codevariablechar>wtSet</span>.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>WaveTable.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(bsInt32 wtUsr = 0)</p>
+
+<p class=method>int SetWaveTable(bsInt32 n,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+bsInt32 nparts,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+bsInt32 *mul,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+double *amp, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+double *phs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int gibbs)</p>
+
+<p class=method>void DestroyTables()</p>
+
+<p class=noindent>The <span class=codevariablechar>Init</span> method
+initializes the default set of wave tables and pre-allocates space for
+additional user wavetables. The <span class=codevariablechar>wtUsr</span>
+argument indicates how many user defined tables are needed. Nine wavetables are
+defined automatically and can be referenced by the manifest constants declared
+in the <span class=codevariablechar>WaveTable.h</span> file.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=code>WT_SIN&nbsp;&nbsp;&nbsp; Sine wave</p>
+
+<p class=code>WT_SAW&nbsp;&nbsp;&nbsp; Sawtooth wave</p>
+
+<p class=code>WT_SQR&nbsp;&nbsp;&nbsp; Square wave</p>
+
+<p class=code>WT_TRI&nbsp;&nbsp;&nbsp; Triangle wave</p>
+
+<p class=code>WT_PLS&nbsp;&nbsp;&nbsp; Narrow pulse wave</p>
+
+<p class=code>WT_SAWL&nbsp;&nbsp; Sawtooth wave for LFO</p>
+
+<p class=code>WT_SQRL&nbsp;&nbsp; Square wave for LFO</p>
+
+<p class=code>WT_TRIL&nbsp;&nbsp; Triangle wave for LFO</p>
+
+<p class=code>WT_SAWP&nbsp;&nbsp; Positive only sawtooth wave</p>
+
+<p class=code>WT_TRIP&nbsp;&nbsp; Positive only triangle wave</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent>The first five wavetables (WT_SIN -- WT_PLS) are calculated as a
+sum of sines and can be used safely for audio oscillators up to about 2kHz base
+frequency. Above that frequency alias foldover will occur. The tables with &lsquo;L&rsquo;
+designation are calculated directly and thus not bandwidth limited. These are
+intended for use with LFO oscillators where a straight-line waveform is needed.
+The tables with &lsquo;P&rsquo; designation are positive-only values and can be used for
+various amplitude and indexing functions where a negative value would be inappropriate
+(<i>e.g</i>. as a lookup value for another table). All wavetables have a peak
+amplitude of [-1,1] except for the positive-only tables, which have a peak
+amplitude of [0,1].</p>
+
+<p class=indent>To access these wavetables, the public array member <span
+class=codevariablechar>wtSet.wavSet</span>[] is used with the selected wave
+table constant as an index into the array. User defined wavetables can be
+accessed using the WT_USER() macro to calculate the appropriate index. Code
+should check to insure the table has been initialized before generating
+samples. For performance, many of the built in oscillators only check at
+initialization and not during sample generation.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetWaveTable</span> method
+is used to allocate additional wavetables. Tables are filled using a sum of
+sine waves calculation (i.e. inverse Fourier transform) with optional Gibbs
+phenomena correction. The <i>n </i>parameter identifies which of the user
+wavetables is to be filled. The <span class=codevariablechar>nParts</span><i> </i>parameter
+indicates the number of partials to sum. The <span class=codevariablechar>mul,
+amp</span><i>, </i>and <span class=codevariablechar>phs</span><i> </i>parameters
+point to arrays that define the multiple, amplitude and initial phase for each
+partial. The <i>amp </i>parameter is required, but <span
+class=codevariablechar>mul</span><i> </i>and <span class=codevariablechar>phs</span><i>
+</i>may be NULL. In that case, the multiple is assumed to be an integer of the
+fundamental and the initial phase is assumed to be zero. The <span
+class=codevariablechar>gibbs</span><i> </i>parameter, when true, causes the
+application of the Lanczos sigma value to correct for the Gibbs phenomena.</p>
+
+<p class=noindent>The <span class=codevariablechar>DestroyTables</span> method
+frees all memory associated with the wave table set. This should be followed immediately
+by a call to Init. <span class=codevariablechar>Init</span> will call this
+method automatically, thus it is not usually necessary to invoke <span
+class=codevariablechar>DestroyTables</span> directly. Obviously, this should be
+used carefully. Any oscillators that are holding references to the wavetables
+must be reset afterwords.</p>
+
+<h3><a name="_GenUnit"></a>GenUnit</h3>
+
+<p class=noindent><span class=codevariablechar>GenUnit</span> is the base class
+for all other classes that generate or process samples. Derived classes must
+implement the <span class=codevariablechar>Init</span>, <span
+class=codevariablechar>Reset</span>, and <span class=codevariablechar>Sample</span>
+methods as these are defined as pure virtual functions.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SynthDefs.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(int count, float *values)</p>
+
+<p class=method>void Reset(float initPhs)</p>
+
+<p class=method>AmpValue Sample(AmpValue in)</p>
+
+<p class=method>void Samples(SampleBlock *block)</p>
+
+<p class=method>int IsFinished()</p>
+
+<p class=noindent>The <span class=codevariablechar>Init</span> method sets
+initial values for the object. The count argument indicates the number of
+values in the values array. This method provides an opaque mechanism for
+initializing unit generators. The caller can load values from a file or other
+source and pass them to the generator unit without interpretation. Most
+generator units will supply additional initialization and access methods where
+each value is passed as an explicit argument. The latter form of initialization
+is preferred as it allows for effective type and range checking.</p>
+
+<p class=noindent>The <span class=codevariablechar>Reset</span> method is
+called to force the generator unit to update any internal values that are dependent
+on properties or initial values and enter a known state. For example, an
+oscillator would calculate the phase increment based on the last set frequency
+value, while an envelope generator would calculate the slope of the initial
+segment. </p>
+
+<p class=indent>The <span class=codevariablechar>initPhs</span> argument
+indicates the reset condition. The range varies based on the type of object.
+For an oscillator, phase has a range of [0,2π], while for an envelope
+generator, the phase might indicate a time in seconds. A value of 0 indicates
+the object should reset to a condition prior to any samples being generated. A
+value greater than 0 indicates a condition after some samples have been
+generated. A value of -1 indicates the object should apply any changed
+parameter values, but should not otherwise change the current phase. Not all
+generator units utilize the <span class=codevariablechar>initPhs</span>
+argument.</p>
+
+<p class=noindent>The <span class=codevariablechar>Sample</span> method is
+invoked to generate one sample. The value of the current sample is passed as an
+argument. Objects that modify the current sample (such as filters) can use the
+argument. Objects that generate new samples (such as oscillators and envelope
+generators) will typically ignore the argument.</p>
+
+<p class=noindent>The <span class=codevariablechar>Samples</span> method is
+invoked to generate a block of samples. The number of samples to generate is
+contained in the <span class=codevariablechar>SampleBlock</span> structure
+passed as an argument. The value of the current sample block is passed in the <span
+class=codevariablechar>in</span> buffer and the output sample block is returned
+in the <span class=codevariablechar>out</span> buffer.</p>
+
+<p class=noindent><span class=codevariablechar>IsFinished</span> is called to
+determine when a generator has produced all the valid sample values it can
+produce. Oscillators are always considered finished and always return true.
+Envelope generators return true when the end of the envelope cycle is reached.
+Other generator units return true or false based on their individual
+requirements, but for the most part, should always return true.</p>
+
+<h3><a name="_Synthesizer_Initialization"></a>Synthesizer
+Initialization</h3>
+
+<p class=noindent>Both <span class=codevariablechar>synthParams</span> and <span
+class=codevariablechar>wtSet</span> must be initialized before calling any
+other method in the library. This is easily accomplished by calling the <span
+class=codevariablechar>InitSynthesizer</span> function during program startup,
+but the methods on the <span class=codevariablechar>synthParams</span> and <span
+class=codevariablechar>wtSet</span> objects can be called directly if desired.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SyntDefs.h</p>
+
+<p class=methodheading>Function:</p>
+
+<p class=method>int InitSynthesizer(bsInt32 sampleRate = 44100, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bsInt32 wtLen = 16384, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;bsInt32 wtUsr = 0)</p>
+
+<p class=indent><span class=codevariablechar>InitSynthesizer</span> invokes <span
+class=codevariablechar>Init</span> on the <span class=codevariablechar>synthParams</span>
+object, passing the sample rate (<span class=codevariablechar>sampleRate</span>)
+and wavetable length (<span class=codevariablechar>wtLen</span>) as arguments.
+It then invokes the <span class=codevariablechar>wtSet</span> object <span
+class=codevariablechar>Init</span>, passing the number of user wavetables as an
+argument (<span class=codevariablechar>wtUsr</span>).</p>
+
+<h3><a name="_bsString"></a>bsString </h3>
+
+<p class=noindent>The <span class=codevariablechar>bsString</span> class
+provides a holder for dynamic character strings. This class is used by various
+classes in the library. Although not a complete string class implementation, it
+provides the dynamic allocation, concatenation and comparison operators needed
+by other classes. The methods listed below show an argument of <span
+class=codevariablechar>const char *</span> only. Each such method or operator
+is also available with an argument of type <span class=codevariablechar>bsString&amp;</span>.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SynthString.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>bsString(const char *)</p>
+
+<p class=method>size_t Length()</p>
+
+<p class=method>char *Allocate(size_t)</p>
+
+<p class=method>operator const char *()</p>
+
+<p class=method>char operator [](size_t)</p>
+
+<p class=method>operator =(const char *)</p>
+
+<p class=method>bsString&amp; Assign(const char *)</p>
+
+<p class=method>operator +=(const char *)</p>
+
+<p class=method>bsString&amp; Append(const char *)</p>
+
+<p class=method>operator ==(const char *)</p>
+
+<p class=method>operator !=(const char*)</p>
+
+<p class=method>int Compare(const char *)</p>
+
+<p class=method>int CompareNC(const char *)</p>
+
+<p class=method>bsString&amp; Upper()</p>
+
+<p class=method>bsString&amp; Lower()</p>
+
+<p class=noindent>The constructor may be invoked without an argument to produce
+an empty string, or with a character string argument to initialize the <span
+class=codevariablechar>bsString</span>.</p>
+
+<p class=noindent>The <span class=codevariablechar>Length</span> method returns
+the length of the string.</p>
+
+<p class=noindent>The <span class=codevariablechar>Allocate</span> method
+allocates and returns a buffer of the requested size. Typically this method is
+not used, as the assignment operator and methods will automatically resize the
+buffer as needed.</p>
+
+<p class=noindent>The <span class=codevariablechar>const char *</span> cast
+operator returns a read-only reference to the internal character array.</p>
+
+<p class=noindent>The <span class=codevariablechar>=</span> operator and <span
+class=codevariablechar>Assign</span> method allocate space and copy the
+argument to the string.</p>
+
+<p class=noindent>The <span class=codevariablechar>+= </span>operator and <span
+class=codevariablechar>Append</span> method append the string argument to the
+internal string.</p>
+
+<p class=noindent>The <span class=codevariablechar>==</span> operator, <span
+class=codevariablechar>!=</span> operator and <span class=codevariablechar>Compare</span>
+methods compare the string with the argument. The return value is 0 if the
+strings match, less than zero if the argument is greater than the string and
+greater than zero if the argument is less than the string. The <span
+class=codevariablechar>CompareNC</span> method makes a case-insensitive
+comparison. Unlike the standard library function <span class=codevariablechar>strcmp</span>,
+these methods treat a null pointer as an empty string.</p>
+
+<p class=noindent>The <span class=codevariablechar>Upper</span> and <span
+class=codevariablechar>Lower</span> methods convert the string to all upper or
+lower case, respectively.</p>
+
+<h3><a name="_SynthList"></a>SynthList</h3>
+
+<p class=noindent>The <span class=codevariablechar>SynthList</span> class is a template
+class used to create doubly-linked lists. This is an efficient, but minimal
+list class, sufficient for the synthesizer. The two member variables forming
+the links, <span class=codevariablechar>next</span> and <span
+class=codevariablechar>prev</span>, are public members and may be accessed
+directly to iterate through the list forward or backward. However, insertion
+and removal from the list should use the defined methods.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SynthList.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>T *Insert(T *pnew) </p>
+
+<p class=method>T *InsertBefore(T *pnew) </p>
+
+<p class=method>T *Remove()</p>
+
+<p class=noindent>The <span class=codechar>Insert</span> method adds the
+argument (pnew) as the immediate successor node to the object.</p>
+
+<p class=noindent>The <span class=codechar>InsertBefore</span> method adds the
+argument (pnew) as the immediate predecessor node to the object.</p>
+
+<p class=noindent>The <span class=codechar>Remove</span> method removes the
+object from the list.</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_File_I/O"></a>File I/O</h2>
+
+</div>
+
+<p class=noindent>The <span class=codevariablechar>BasicSynth</span> library
+includes a set of custom file input and output classes esigned specifically for
+the needs of the synthesizer. For performance, these classes bypass the
+standard library and invoke the operating system file API directly. Two
+versions of the low-level classes are available, one for Linux and one for Microsoft
+Windows.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_FileWriteUnBuf">FileWriteUnBuf</a></p>
+
+<p class=indent><a href="#_FileReadBuf">FileReadBuf</a></p>
+
+<p class=indent><a href="#_SynthFileExists">SynthFileExists</a></p>
+
+<p class=indent><a href="#_WaveOutBuf">WaveOutBuf</a></p>
+
+<p class=indent><a href="#_WaveFile">WaveFile</a></p>
+
+<p class=indent><a href="#_WaveFileIn">WaveFileIn</a></p>
+
+<p class=indent><a href="#_XML_Wrapper">XML Wrapper</a></p>
+
+<p class=indent>&nbsp;</p>
+
+<h3><a name="_FileWriteUnBuf"></a>FileWriteUnBuf</h3>
+
+<p class=noindent>The <span class=codevariablechar>FileWriteUnBuf</span> class
+provides un-buffered file output. It is expected that the caller is managing a
+large buffer and will provide large blocks to the output methods.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SynthFile.h<br>
+SynthFileW.cpp (MS-Windows)<br>
+SynthFileU.cpp (Linux)</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>int FileOpen(const char *fname);</p>
+
+<p class=method>int FileClose();</p>
+
+<p class=method>int FileWrite(void *buf, size_t siz);</p>
+
+<p class=method>int FileRewind(int pos = 0);</p>
+
+<p class=noindent>The <span class=codevariablechar>FileOpen</span> method opens
+the file, creating or truncating the file if needed. The <span
+class=codevariablechar>fname</span> argument is the path to the file. The
+return value is 0 if the open succeeded and a negative value if the open
+failed.</p>
+
+<p class=noindent>The <span class=codevariablechar>FileClose</span> method
+closes the file. The return value is always 0.</p>
+
+<p class=noindent>The <span class=codevariablechar>FileWrite</span> method
+writes one buffer of samples to the opened file. The return value is the number
+of bytes written, or -1 on failure.</p>
+
+<p class=noindent>The <span class=codevariablechar>FileRewind</span> method
+moves the position of the file to the absolute position indicated by the
+argument <i>pos. </i>Relative positioning is not supported. The return value is
+the new position of the file or -1 if the operation failed.</p>
+
+<h3><a name="_FileReadBuf"></a>FileReadBuf</h3>
+
+<p class=noindent>The <span class=codevariablechar>FileReadBuf</span> class
+provides buffered file input. The size of the buffer can be set by the caller. If
+no value is set, the default size of 16KB is used. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SynthFile.h<br>
+SynthFileW.cpp (MS-Windows)<br>
+SynthFileU.cpp (Linux)</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void SetBufSize(size_t sz);</p>
+
+<p class=method>int FileOpen(const char *fname);</p>
+
+<p class=method>int FileRead(void *rdbuf, int rdsiz);</p>
+
+<p class=method>int ReadCh();</p>
+
+<p class=method>int FileSkip(int n);</p>
+
+<p class=method>int FileRewind(int pos = 0);</p>
+
+<p class=method>int FileClose();</p>
+
+<p class=noindent>The <span class=codevariablechar>SetBufSize</span> method
+sets the input buffer size in bytes. If used, this method must be called before
+the file is opened and can only be invoked once during the lifetime of the
+object. No return value is provided. If allocation fails, a subsequent open
+will attempt to create a default size buffer and return an error if no memory
+is available.</p>
+
+<p class=noindent>The <span class=codevariablechar>FileOpen</span> method opens
+the file indicated by the <span class=codevariablechar>fname</span> argument.
+The return value is 0 if the file was opened and a buffer allocated, -1 if the
+file open failed.</p>
+
+<p class=noindent>The <span class=codevariablechar>FileRead</span> method
+copies bytes from the file into the <i>rdbuf </i>memory location up to <i>rdsize
+</i>in length. The return value is the number of bytes read, or -1 on an end of
+file.</p>
+
+<p class=noindent>The <span class=codevariablechar>ReadCh</span> method returns
+the next byte from the file, or -1 at end of file.</p>
+
+<p class=noindent>The <span class=codevariablechar>FileSkip</span> method moves
+the read position forward or backward in the file by the requested number of
+bytes. The <span class=codevariablechar>FileRewind</span> method moves the read
+position to the absolute position in the file. The return value is the new file
+position or -1 if the operation failed.</p>
+
+<p class=noindent>The <span class=codevariablechar>FileClose</span> method
+closes the file. The return value is always 0. Note that this operation does
+not discard the input buffer. The object must be destroyed to release the
+memory. This allows a new file open on the same object with the existing buffer
+reused.</p>
+
+<h3><a name="_SynthFileExists"></a>SynthFileExists</h3>
+
+<p class=methodheading>Function:</p>
+
+<p class=method>int SynthFileExists(const char *fname)</p>
+
+<p class=noindent>This function tests for the existence of a file. The return
+value is true of the file exists and is a regular file, false otherwise.</p>
+
+<h3><a name="_WaveOutBuf"></a>WaveOutBuf</h3>
+
+<p class=noindent>The <span class=codevariablechar>WaveOutBuf</span> class
+provides buffered sample output. In itself, it does not produce I/O, but only
+buffers samples, converting them to the output sample size in the process.
+Typically this class is used as a base class for output to either a file or
+DAC, but can be used directly if the buffer is set to a size large enough to
+contain the entire sample output. This class supports one or two channel
+output.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>WaveFile.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>SampleValue *GetBuf()</p>
+
+<p class=method>int AllocBuf(long length, bsInt16 ch)</p>
+
+<p class=method>void SetBuf(long length, bsInt16 ch, SampleValue *bp)</p>
+
+<p class=method>void DeallocBuf()</p>
+
+<p class=method>void OutS(SampleValue value)</p>
+
+<p class=method>void Output(AmpValue value)</p>
+
+<p class=method>void Output1(AmpValue value)</p>
+
+<p class=method>void Output2(AmpValue vleft, AmpValue vright)</p>
+
+<p class=method>int FlushOutput()</p>
+
+<p class=method>long GetOOR()</p>
+
+<p class=noindent>The <span class=codevariablechar>GetBuf</span> method returns
+a pointer to the output buffer. Although not explicitly declared as such, it
+should be treated as <span class=codevariablechar>const</span> and not
+deleted or modified unless the caller has allocated and passed the buffer to
+the object using <span class=codevariablechar>SetBuf</span>. </p>
+
+<p class=noindent>The <span class=codevariablechar>AllocBuf</span> method
+causes the object to allocate a buffer of the indicated length. Any existing
+buffer is discarded, not copied to the new buffer. The <i>length</i> argument
+indicates the number of samples (not bytes) and the <i>ch</i> argument
+indicates the number of channels. Note: the sample length is actual samples,
+not frames. Thus, the duration in samples that can be stored in the buffer is
+the length divided by the number of channels.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetBuf</span> method passes
+an externally allocated buffer to the object. The <span class=codevariablechar>length</span>
+and <span class=codevariablechar>ch</span> arguments are the number of samples
+and channels. The <span class=codevariablechar>bp</span> argument points to the
+buffer. As with <span class=codevariablechar>AllocBuf</span>, the length is
+total samples, not frames.</p>
+
+<p class=noindent>The <span class=codevariablechar>DeallocBuf</span> method
+discards the buffer and sets the sample count back to zero. If the buffer was
+internally allocated, the memory is released. If the caller set the buffer
+using <span class=codevariablechar>SetBuf</span>, the caller is responsible for
+freeing the memory.</p>
+
+<p class=noindent>The <span class=codevariablechar>OutS</span> method writes
+one sample directly into the buffer. The caller must scale the value
+appropriately and check for any overflow. For two channel output, <span
+class=codevariablechar>OutS</span> must be called once for each channel.</p>
+
+<p class=noindent>The <span class=codevariablechar>Output</span> method writes
+one value to the buffer, scaling the value to the output sample size. The value
+is assumed to be normalized to the range [-1,+1] and will be scaled by the
+value stored in the <span class=codevariablechar>synthParams.sampleScale</span>
+member. Before the value is scaled, it is tested to verify it is within range
+and clipped if it is out of range. For two channel output, Output must be
+called once for each channel.</p>
+
+<p class=noindent>The <span class=codevariablechar>Output1</span> method writes
+a sample to the output buffer, duplicating the value if the buffer is defined
+for two channels.</p>
+
+<p class=noindent>The <span class=codevariablechar>Output2</span> method writes
+a sample frame, combining the two values if the buffer is defined for one
+channel.</p>
+
+<p class=noindent>The <span class=codevariablechar>FlushOutput</span> method is
+called when the buffer is filled. The base class does nothing other than reset
+the next position back to the beginning of the buffer. A derived class should
+override this method and copy the output appropriately before calling the base
+class method to reset the buffer position. However, there are situations where
+it is not necessary to copy the output. If the caller has allocated the buffer
+as output to a sound device, the <span class=codevariablechar>FlushOutput</span>
+method can be used as a signal that the buffer is now full and about to wrap
+around to the beginning. The caller can signal the output device, if
+appropriate, at that time. Likewise, if the buffer was allocated to the total
+length of the sound to be produced, this method can be used as a signal that
+the end of the sound has been reached.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetOOR</span> method returns
+the number of samples that have been detected as out of range. The OOR count is
+only reset to zero in the constructor. If the caller needs to know how many
+samples are out of range on a per-block basis, it must keep track of the last
+OOR value.</p>
+
+<h3><a name="_WaveFile"></a>WaveFile</h3>
+
+<p class=noindent>The <span class=codevariablechar>WaveFile</span> class
+provides output to a standard WAV file in PCM format. Note that the <span
+class=codevariablechar>SampleValue</span> type must be defined to 16 bits for
+this class to work properly. This class derives from the <span
+class=codevariablechar>WaveOutBuf</span> class and overrides the <span
+class=codevariablechar>FlushBuffer</span> method, storing the output into the
+file each time the buffer is filled. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>WaveFile.h<br>
+WaveFile.cpp</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void SetBufSize(int secs)</p>
+
+<p class=method>int OpenWaveFile(const char *fname, int chnls = 1)</p>
+
+<p class=method>int CloseWaveFile()</p>
+
+<p class=noindent>The <span class=codevariablechar>SetBufSize</span> method can
+be used to set the size of the output buffer in seconds. If not invoked, the
+buffer will be set to five seconds length. This must be invoked before the file
+is opened.</p>
+
+<p class=noindent>The <span class=codevariablechar>OpenWaveFile</span> method
+opens an initializes a WAV file. The fname argument indicates the path to the
+file. The <span class=codevariablechar>chnls</span> argument indicates the
+number of channels. Currently <span class=codevariablechar>chnls</span> should
+be one or two. Other formats are not supported.</p>
+
+<p class=noindent>The <span class=codevariablechar>CloseWaveFile</span> method
+flushes any remaining output, updates the file header to the final file size,
+and then closes the wave file.</p>
+
+<h3><a name="_WaveFileIn"></a>WaveFileIn</h3>
+
+<p class=noindent>The <span class=codevariablechar>WaveFileIn</span> class
+loads a standard PCM WAV file into memory. This class can only read files with
+16-bit sample sizes. Multiple channels are allowed, but will be combined into a
+mono buffer.</p>
+
+<p class=indent>Because loading wave files can be a time consuming operation,
+this class is designed to be loaded into a cache and retrieved by either name
+or ID. The file name and ID passed to the class when the file is opened and
+read is kept along with the file contents.</p>
+
+<p class=methodheading>FILE:</p>
+
+<p class=method>WaveFile.h<br>
+WaveFile.cpp</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>const char *GetFilename()</p>
+
+<p class=method>bsInt16 GetFileID()</p>
+
+<p class=method>AmpValue *GetSampleBuffer()</p>
+
+<p class=method>long GetInputLength()</p>
+
+<p class=method>void Clear()</p>
+
+<p class=method>int LoadWaveFile(const char *fname, bsInt16 id)</p>
+
+<p class=noindent>The <span class=codevariablechar>GetFilename</span> method
+returns the file name (or path) of the last opened file.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetFileID</span> method
+returns the ID value passed in during a file open operation.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetSampleBuffer</span>
+method returns a pointer to the sample buffer. This buffer is a single channel,
+<i>i.e. </i>one sample per frame.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetInputLength</span> method
+returns the length of the input buffer in samples.</p>
+
+<p class=noindent>The <span class=codevariablechar>LoadWaveFile</span> method
+loads a WAV file into memory. The <span class=codevariablechar>fname</span>
+argument specifies the path to the file. The <span class=codevariablechar>id</span>
+argument specifies an internal ID number to associate with the file. When the
+file is loaded it is converted from the PCM sample format into the internal
+sample format for the synthesizer. Multiple channel files are combined into one
+channel and amplitude is normalized to a range of [-1,+1] </p>
+
+<h3><a name="_XML_Wrapper"></a>XML Wrapper</h3>
+
+<p class=noindent>XML files are used to store configuration information, such
+as the default setting for instruments. The Common library provides the support
+for the higher-level parts of the synthesizer. The <span
+class=codevariablechar>XmlSynthDoc</span> class, along with <span
+class=codevariablechar>XmlSynthElem</span>, implement a wrapper for XML format
+files. These classes do not implement an XML parser, but merely hide the
+system-dependent implementation from the rest of the library. Three wrapper
+classes are available, although only one may be used at a time. The first uses
+the Microsoft MSXML component. The second uses the libxml2 library. The third
+implementation is a null object that always returns error. The null
+implementation can be used if the specific synthesis system does not use XML
+files, or does not have the appropriate libraries available.</p>
+
+<p class=indent>Furthermore, it is possible to add XML wrapper implementations
+that support reading configuration information from sources other that XML. So
+long as the source data can be mapped into an XML structure, a wrapper class
+can present that information to the other parts of the synthesizer as XML. This
+allows storing configuration information in a variety of formats transparent to
+the synthesizer library classes.</p>
+
+<p class=indent>The XML wrapper classes are not full implementations of the
+DOM. Only the document and element nodes are supported.</p>
+
+<h3>XmlSynthDoc</h3>
+
+<p class=noindent>The XmlSynthDoc class implements a wrapper for an XML
+document.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>XmlWrap.h<br>
+XmlWrapW.cpp<br>
+XmlWrapU.cpp</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>XmlSynthElem *Open(char *fname);</p>
+
+<p class=method>int Close();</p>
+
+<p class=method>XmlSynthElem *NewDoc(char *roottag);</p>
+
+<p class=method>int Save(char *fname);</p>
+
+<p class=method>XmlSynthElem *CreateElement(XmlSynthElem *parent, const char
+*tag);</p>
+
+<p class=noindent>The <span class=codevariablechar>Open</span> method opens and
+loads an XML file, returning the root node. </p>
+
+<p class=noindent>The <span class=codevariablechar>Close</span> method should
+be invoked when the file loaded by <span class=codevariablechar>Open</span> is
+no longer needed.</p>
+
+<p class=noindent>The <span class=codevariablechar>NewDoc</span> method creates
+an empty XML document in memory, returning the root node. </p>
+
+<p class=noindent>The <span class=codevariablechar>Save</span> method can be
+used to save the document to a file.</p>
+
+<h3>XmlSynthElem</h3>
+
+<p class=noindent>The XmlSynthElem class implements a wrapper for an XML
+Element node. This class is created internally by either the document or other
+element nodes. When the caller is finished processing the node, it should be
+released by calling the destructor. This does not destroy the underlying XML
+node, only the wrapper object.</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>XmlSynthElem *FirstChild();</p>
+
+<p class=method>XmlSynthElem *NextSibling();</p>
+
+<p class=method>XmlSynthElem *AddChild(const char *childTag);</p>
+
+<p class=method>const char *TagName();</p>
+
+<p class=method>int TagMatch(const char *tag);</p>
+
+<p class=method>int GetAttribute(char *attrName, long&amp; val);</p>
+
+<p class=method>int GetAttribute(char *attrName, double&amp; val);</p>
+
+<p class=method>int GetAttribute(char *attrName, char **val);</p>
+
+<p class=method>int SetAttribute(char *attrName, long val);</p>
+
+<p class=method>int SetAttribute(char *attrName, double val);</p>
+
+<p class=method>int SetAttribute(char *attrName, const char *val);</p>
+
+<p class=method>int GetContent(char **data);</p>
+
+<p class=method>int SetContent(const char *data);</p>
+
+<p class=noindent>The FirstChild method returns the first child of the element
+node. The NextSibling method returns the next sibling of the current node.
+These two methods are used in combination to walk the node tree.</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>XmlSynthElem *next = root-&gt;FirstChild();</p>
+
+<p class=code>XmlSynthElem *elem;</p>
+
+<p class=code>while ((elem = next) != NULL)<br>
+{</p>
+
+<p class=code>&nbsp;&nbsp; // do something with elem…</p>
+
+<p class=code>&nbsp;&nbsp; next = elem-&gt;NextSibling();</p>
+
+<p class=code>&nbsp;&nbsp; delete elem;</p>
+
+<p class=code>}</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=noindent>The <span class=codevariablechar>AddChild</span> method adds
+a new node as a child of the current node. </p>
+
+<p class=noindent>The <span class=codevariablechar>TagName</span> method
+returns a pointer to the node&rsquo;s tag. This is typically used to compare the tag
+name to a known name. The <span class=codevariablechar>TagMatch</span> method
+can be used also. It returns true if the argument matches the name of the node.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetAttribute</span> method
+returns the value of the attribute specified by <span class=codevariablechar>attrName</span>.
+This method is overloaded for different types. When used for character strings,
+the method allocates a buffer for the value and the caller must release this
+memory by calling delete when the string is no longer needed.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetAttribute</span> method
+sets the value of the attribute specified by <span class=codevariablechar>attrName</span>.
+If the attribute does not exist it will be added to the node.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetContent</span> method
+returns the content of the node (<i>i.e.</i> the text contained between the
+node&quot;s begin and end tags.) Memory for the content is allocated by the method
+and must be released by the caller.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetContent</span> method
+replaces the content of the node with the character string pointed to by data.</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_Oscillators"></a>Oscillators</h2>
+
+</div>
+
+<p class=noindent>Oscillator classes provide the means to generate samples
+using a periodic waveform. Oscillators are divided into two general types,
+direct calculation and wavetable lookup. Direct calculation types have the
+greatest precision but are often limited in their application.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_GenWave">GenWave</a></p>
+
+<p class=indent><a href="#_GenWaveSaw">GenWaveSaw</a></p>
+
+<p class=indent><a href="#_GenWaveTri">GenWaveTri</a></p>
+
+<p class=indent><a href="#_GenWaveSqr">GenWaveSqr</a></p>
+
+<p class=indent><a href="#_GenWaveWT">GenWaveWT</a></p>
+
+<p class=indent><a href="#_GenWave32">GenWave32</a></p>
+
+<p class=indent><a href="#_GenWaveSum">GenWaveSum</a></p>
+
+<p class=indent><a href="#_GenWaveFM">GenWaveFM</a></p>
+
+<p class=indent><a href="#_GenWaveAM">GenWaveAM</a></p>
+
+<p class=indent><a href="#_GenWaveRM">GenWaveRM</a></p>
+
+<h3><a name="_GenWave"></a>GenWave</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWave</span> class
+produces a sine wave by directly calling the <span class=codevariablechar>sin</span>
+function. <span class=codevariablechar>GenWave</span> inherits from <span
+class=codevariablechar>GenUnit</span> and implements the <span
+class=codevariablechar>Init</span>, <span class=codevariablechar>Reset</span>
+and <span class=codevariablechar>Sample</span> methods. The <span
+class=codevariablechar>Reset</span> method implementation calculates the phase
+increment from the current frequency and modulation values. Additional methods
+required by the oscillators are added. These methods define the basic waveform
+generator methods inherited by all waveform generators in the <span
+class=codevariablechar>BasicSynth</span> library.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWave.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void SetFrequency(FrqValue f)</p>
+
+<p class=method>FrqValue GetFrequency()</p>
+
+<p class=method>void Modulate(FrqValue d)</p>
+
+<p class=method>void PhaseModulate(PhsAccum phs)</p>
+
+<p class=method>AmpValue Gen()</p>
+
+<p class=noindent>The <span class=codevariablechar>SetFrequency</span> method
+stores the frequency. The caller must invoke <span class=codevariablechar>Reset</span>
+to apply the new frequency. </p>
+
+<p class=noindent><span class=codevariablechar>GetFrequency</span> returns the current
+frequency value.</p>
+
+<p class=noindent>The <span class=codevariablechar>Modulate</span> method
+changes the phase increment by adding the argument to the base frequency and
+calculating the new phase increment. The argument is specified in Hz. <span
+class=codevariablechar>Modulate</span> can be used for vibrato or FM synthesis.
+<span class=codevariablechar>Modulate</span> produces an immediate change in
+the phase increment and it is not necessary to call <span
+class=codevariablechar>Reset</span> in order to apply the change.</p>
+
+<p class=noindent>The <span class=codevariablechar>PhaseMod</span> method
+modulates the frequency by adding directly to the phase increment. The <span
+class=codevariablechar>phs</span> argument is in radians. <span
+class=codevariablechar>PhaseMod</span> produces an immediate change in the
+phase increment and it is not necessary to call <span class=codevariablechar>Reset</span>
+in order to apply the change.</p>
+
+<p class=noindent>The <span class=codevariablechar>Gen</span> method is called
+to return the next sample. The <i>Sample</i> method is implemented by calling <span
+class=codevariablechar>Gen</span> and may be used also.</p>
+
+<h3><a name="_GenWaveSaw"></a>GenWaveSaw</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveSaw</span> class
+produces a sawtooth (ramp) wave by incrementally calculating the amplitude from
+the phase. Thus, this class is fast, but not bandwidth limited and will likely
+produce alias frequencies if used for audio output. This class inherits from <span
+class=codevariablechar>GenWave</span> and overrides the <span
+class=codevariablechar>Modulate, PhaseModulate, Reset</span> and <span
+class=codevariablechar>Gen</span> methods. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWave.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_GenWave">GenWave</a>)</p>
+
+<h3><a name="_GenWaveTri"></a>GenWaveTri</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveTri</span> class
+produces a triangle wave by incrementally calculating the amplitude from the phase
+increment. This class is fast, but not bandwidth limited and will likely
+produce alias frequencies if used for audio output. This class inherits from <span
+class=codevariablechar>GenWave</span> and overrides the <span
+class=codevariablechar>Modulate, PhaseModulate,</span> and <span
+class=codevariablechar>Gen</span> methods. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWave.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_GenWave">GenWave</a> above.)</p>
+
+<h3><a name="_GenWaveSqr"></a>GenWaveSqr</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveSqr</span> and <span
+class=codevariablechar>GenWaveSqr32</span> classes produce a square wave by
+calculating the amplitude from the phase increment. These classes are fast, but
+not bandwidth limited and will likely produce alias frequencies if used for
+audio output. The <span class=codevariablechar>GenWaveSqr32</span> uses integer
+calculation and will produce frequency errors at higher frequencies. Both
+classes provide for a variable duty cycle and settable min and max amplitude
+values. By setting the min and max to 0 and 1 respectively, these can be used
+as simple gate controls. These classes inherit from <span
+class=codevariablechar>GenWave</span> and override the <span
+class=codevariablechar>Reset,</span> and <span class=codevariablechar>Gen</span>
+methods.</p>
+
+<p class=indent>The <span class=codevariablechar>Modulate</span> and <span
+class=codevariablechar>PhaseModulate</span> methods can be used effectively
+with <span class=codevariablechar>GenWaveSqr</span>, but do not work for <span
+class=codevariablechar>GenWaveSqr32</span> as the integer calculation of the phase
+discards frequency steps less than one sample.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWave.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void SetDutyCycle(float duty)</p>
+
+<p class=method>void SetMinMax(AmpValue vmin, AmpValue vmax)</p>
+
+<p class=method>void InitSqr(FrqValue f, float duty)</p>
+
+<p class=method>(Also see GenWave above.)</p>
+
+<p class=noindent>The <span class=codevariablechar>SetDutyCycle</span> method
+sets the percentage of the period the waveform is on or off. A duty cycle of
+50% produces a true square wave with the amplitude at maximum for half the
+cycle and minimum for half the cycle. Smaller values produce shorter on times
+while larger values (up to 100) produce longer on times. The value of <span
+class=codevariablechar>duty</span> should be greater than 0 and less than 100.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetMinMax</span> method sets
+the minimum and maximum amplitude values for the oscillator. By default the
+output swings between -1 and +1. Setting the minimum and maximum allows the
+oscillator to switch between any two values. This can be used for various
+modulation effects, such as varying a pan position between two locations,
+switching between two frequencies, etc.</p>
+
+<p class=noindent>The <span class=codevariablechar>InitSqr</span> method
+provides a single method to set both frequency and duty cycle in one call.
+Calling this method is equivalent to calling <span class=codevariablechar>SetFrequency</span>
+and <span class=codevariablechar>SetDutyCycle</span> followed by <span
+class=codevariablechar>Reset</span>.</p>
+
+<h3><a name="_GenWaveWT"></a>GenWaveWT</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveWT</span> class, and
+classes derived from it, provide wavetable lookup oscillators. These are the
+primary oscillators used by the synthesizer. They provide fast calculation of
+the waveform with only minimal distortion when used with large wavetable sizes.
+These classes rely on the <span class=codevariablechar>wtSet</span> object for
+the wavetables. <span class=codevariablechar>GenWaveWT</span> inherits from <span
+class=codevariablechar>GenWave</span> and overrides the <span
+class=codevariablechar>Modulate</span>, <span class=codevariablechar>PhaseModulate</span>,
+<span class=codevariablechar>Reset</span> and <span class=codevariablechar>Gen</span>
+methods. Additional methods specific to wavetables are added.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveWT.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void SetWavetable(int wt)</p>
+
+<p class=method>int GetWavetable()</p>
+
+<p class=method>void InitWT(FrqValue f, int wt)</p>
+
+<p class=method>void PhaseModWT(PhsAccum phs)</p>
+
+<p class=method>(Also see GenWave above)</p>
+
+<p class=noindent>The <span class=methodchar>SetWavetable</span> method sets
+the current wavetable. The value passed in wt must be a valid index into the
+wavetable array maintained by <span class=methodchar>wtSet</span>. The defined
+constants for wavetables may be used, or, user defined wavetables may be used.
+The new wavetable is active from the point where this method is called and care
+must be taken when switching wavetables while the oscillator is running.
+Switching wavetables can produce a discontinuity in the waveform and result in
+an audible click in the output.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetWavetable</span> method
+returns the current wavetable index.</p>
+
+<p class=noindent>The <span class=codevariablechar>InitWT</span> method
+combines the calls to <span class=codevariablechar>SetFrequency</span>, <span
+class=codevariablechar>SetWavetable</span> and <span class=codevariablechar>Reset</span>
+into one method.</p>
+
+<p class=noindent>The <span class=codevariablechar>PhaseModWT</span> method
+modulates the oscillator frequency by adding <span class=codevariablechar>phs</span>
+directly to the wavetable index. This method allows the fastest possible method
+of frequency change for an oscillator A table index increment value equivalent
+to a given frequency is calculated as:</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>phs = frequency * synthParams.frqTI;</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=indent>Typically, the caller will pre-calculate the minimum and
+maximum frequency variation and set the values as the amplitude range of some
+other generator, such as the envelope of another oscillator. It is then only
+necessary to apply the output of the other generator to the <span
+class=codevariablechar>PhaseModWT</span> input of the signal oscillator to
+produce dynamic frequency changes. The caller must insure the value is within
+the allowable range (+/- 1/2 table length) in order for this method to be
+effective. <span class=codevariablechar>PhaseModWT</span> produces an immediate
+change in the oscillator phase increment and it is not necessary to call <span
+class=codevariablechar>Reset</span> in order to apply the change.</p>
+
+<h3><a name="_GenWaveI"></a>GenWaveI</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveI</span> class
+implements a wavetable oscillator with linear interpolation between samples.
+Interpolation increases the precision of the output waveform at the expense of
+slightly more calculation time.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveWT.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>See GenWaveWT and GenWave</p>
+
+<h3><a name="_GenWave32"></a>GenWave32</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWave32</span> class
+implements a wavetable oscillator using a 32-bit fixed point phase calculation.
+This is essentially the same oscillator as <span class=codevariablechar>GenWaveWT</span>,
+but achieves faster execution by reducing the precision of the phase index.
+This can produce more quantization error (and thus noise) in the signal.
+However, in many situations the noise level is low enough that there is no
+audible difference between the two oscillators.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveWT.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>See GenWaveWT and GenWave</p>
+
+<h3><a name="_GenWaveSum"></a>GenWaveSum</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveSum</span> class
+implements a wavetable oscillator that produces complex waveforms as a sum of
+waveforms. A sum of sine waves can be calculated and stored as a single
+waveform then used with <span class=codevariablechar>GenWaveWT</span>. However,
+such a waveform cannot be easily varied in timbre, and may also produce alias
+frequencies when the fundamental frequency is high enough. Because this class
+calculates the waveform dynamically, it is slower than a pre-calculated
+wavetable, but insures the resulting waveform is bandwidth limited.</p>
+
+<p class=indent><span class=codevariablechar>GenWaveSum</span> is typically
+used with a sin wave table to calculate a Fourier series. However, it is
+possible to use other wavetables containing pre-calculated complex waveforms
+and thus produce doublings of a sound without having to run multiple
+oscillators.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveX.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>See GenWaveWT and GenWave</p>
+
+<p class=method>void AllocParts(int n)</p>
+
+<p class=method>void SetPart(int n, float mul, float amp, float phs = 0)</p>
+
+<p class=method>void InitParts(int n, float *m, float *a, int g = 0)</p>
+
+<p class=method>void SetGibbs(int n)</p>
+
+<p class=noindent>The <span class=codevariablechar>AllocParts</span> method
+allocates space for <i>n </i>partials. The <span class=codevariablechar>SetPart</span>
+method sets the frequency multiple (<span class=codevariablechar>mul</span>),
+amplitude (<span class=codevariablechar>amp</span>) and relative phase (<span
+class=codevariablechar>phs</span>) for the partial number <i>n</i>.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetGibbs</span> method
+indicates whether or not to adjust the amplitude of partials to correct for the
+Gibbs phenomenon. If <i>n </i>is true, the Lanczos sigma value is applied to
+each partial when the output waveform is calculated. When summing sine waves,
+the gibbs value is typically set true, but when summing complex waveforms,
+gibbs would be set to false.</p>
+
+<p class=noindent>The <span class=codevariablechar>InitParts</span> method
+combines the operation of <span class=codevariablechar>AllocParts,</span> <span
+class=codevariablechar>SetPart</span> and <span class=codevariablechar>SetGibbs</span>
+methods by passing the values for multiple and amplitude as arrays. The <i>n </i>argument
+specifies the number of partials. The <i>g </i>argument sets the Gibbs
+calculation on or off.</p>
+
+<h3><a name="_GenWaveFM"></a>GenWaveFM</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveFM</span> class
+implements a one carrier, one modulator, FM synthesis generator. The <span
+class=codevariablechar>c:m</span> ratio. modulation index and waveform are
+fixed when the oscillator is reset. The same waveform must be used for both
+carrier and modulator and is typically set to a sine wave. However, any
+wavetable in the <span class=codevariablechar>wtSet</span> object may be used
+in order to produce more complex sidebands. </p>
+
+<p class=indent><span class=codevariablechar>GenWaveFM</span> provides a fast
+FM synthesis method, but does not allow for variable FM sounds typical of many
+FM instruments. For more sophisticated FM synthesis, two <span
+class=codevariablechar>GenWaveWT</span> oscillators should be used. However, in
+some instances, this class will provide sufficient functionality and is faster
+than two independent oscillators.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveX.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_GenWave">GenWave</a> and <a href="#_GenWaveWT">GenWaveWT</a>.)</p>
+
+<p class=method>void SetModIndex(AmpValue iom)</p>
+
+<p class=method>AmpValue GetModIndex()</p>
+
+<p class=method>void SetModMultiple(FrqValue m)</p>
+
+<p class=method>FrqValue GetModMultiple()</p>
+
+<p class=method>void InitFM(FrqValue frequency, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FrqValue
+mult, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AmpValue mi,
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int wtIndex)</p>
+
+<p class=noindent>The <span class=codevariablechar>SetModIndex</span> method
+sets the modulation index. The modulation index sets the amplitude of the
+modulator based on the frequency of the modulator: <i>A = I x F</i>.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetModIndex</span> returns
+the current value for the modulation index.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetModMultiple</span> method
+sets the modulator frequency as a multiple of the carrier frequency. When the
+carrier frequency is varied, the modulator frequency is automatically
+recalculated. </p>
+
+<p class=noindent>The <span class=codevariablechar>GetModMultple</span> returns
+the current modulator multiplier.</p>
+
+<p class=noindent>The <span class=codevariablechar>InitFM</span> method
+combines calls to <span class=codevariablechar>SetFrequency</span>, <span
+class=codevariablechar>SetModMultiple</span>, <span class=codevariablechar>SetModIndex</span>,
+<span class=codevariablechar>SetWavetable</span> and <span
+class=codevariablechar>Reset</span> into one method.</p>
+
+<h3><a name="_GenWaveAM"></a>GenWaveAM</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveAM</span> class
+implements an amplitude modulation generator using one carrier and one
+modulator.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveX.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="_GenWaveWT">GenWaveWT</a> and <a href="_GenWave">GenWave</a>)</p>
+
+<p class=method>void InitAM(FrqValue frequency,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FrqValue mfrq, <br>
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AmpValue mamp,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; int wtIndex)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitAM</span> method sets
+the carrier and modulator frequencies and the modulator amplitude along with
+the wavetable.</p>
+
+<h3><a name="_GenWaveRM"></a>GenWaveRM</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenWaveRM</span> class
+implements a ring modulation generator using one carrier and one modulator. It
+inherits from the <span class=codevariablechar>GenWaveAM</span> class and
+overrides the <span class=codevariablechar>Gen</span> method in order to
+produce ring modulation (four-quadrant multiply) instead of amplitude
+modulation (two-quadrant multiply).</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveX.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_GenWaveAM">GenWaveAM</a>,<a href="#_GenWaveWT">GenWaveWT</a> and <a href="#_GenWave">GenWave</a>)</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+<h2><a name="_Noise_Generators"></a>Noise Generators</h2>
+</div>
+
+<h3><a name="_GenNoise"></a>GenNoise</h3>
+
+<h3><a name="_GenNoisePink1"></a>GenNoisePink1</h3>
+
+<h3><a name="_GenNoisePink2"></a>GenNoisePink2</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenNoise</span> class
+produces white noise using a pseudo-random number sequence. It inherits from <span
+class=codevariablechar>GenUnit</span> and overrides the <span
+class=codevariablechar>Init</span>, <span class=codevariablechar>Reset</span>, <span
+class=codevariablechar>Sample</span> methods. <span class=codevariablechar>GenNoisePink1</span>
+and <span class=codevariablechar>GenNoisePink2</span> add a one-pole and one-zero
+filter, respectively, to <span class=codevariablechar>GenWaveNoise</span> to
+produce &lsquo;pinkish&rsquo; noise.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveX.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Gen()</p>
+
+<p class=noindent>The <span class=codevariablechar>Gen</span> method returns
+one sample generated using a random number generator.</p>
+
+<h3><a name="_GenNoiseH"></a>GenNoiseH</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenNoiseH</span> class
+produces &ldquo;held&rdquo; white noise. The frequency argument to the init function
+indicates the frequency at which random values are generated. Lower values for
+the frequency effectively remove high frequencies from the output. It inherits
+from <span class=codevariablechar>GenNoise</span> and overrides the <span
+class=codevariablechar>Init</span>, <span class=codevariablechar>Gen</span>
+methods. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveX.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(int n, float *f)</p>
+
+<p class=method>void Gen()</p>
+
+<p class=noindent>The <i>Init</i> method uses the first value in the parameters
+array as the frequency at which to produce random values.</p>
+
+<p class=noindent>The <span class=codevariablechar>Gen</span> method returns one
+sample generated using a random number generator.</p>
+
+<h3><a name="_GenNoiseI"></a>GenNoiseI</h3>
+
+<p class=noindent>The <span class=codevariablechar>GenNoiseI</span> class is
+similar to <i>GenNoiseH</i> but interpolates between successive random values.
+The frequency argument to the init function indicates the frequency at which
+random values are generated. Lower values for the frequency effectively remove
+high frequencies from the output. It inherits from <span
+class=codevariablechar>GenNoise</span> and overrides the <span
+class=codevariablechar>Init</span>, <span class=codevariablechar>Gen</span>
+methods. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>GenWaveX.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(int n, float *f)</p>
+
+<p class=method>void Gen()</p>
+
+<p class=noindent>The <i>Init</i> method uses the first value in the parameters
+array as the frequency at which to produce random values.</p>
+
+<p class=noindent>The <span class=codevariablechar>Gen</span> method returns
+one sample generated using a random number generator.</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_Envelope_Generators"></a>Envelope Generators</h2>
+
+</div>
+
+<p class=noindent>The <span class=codevariablechar>BasicSynth</span> library
+provides multiple envelope generators that fall into two general categories.
+The first category contains simple, fixed duration generators that are fast but
+limited in variability. The second category contains multiple segment
+generators with indeterminate sustain times.</p>
+
+<p class=indent>Envelope generators inherit from <span class=codevariablechar>GenUnit</span>
+and implement the <span class=codevariablechar>Init, Reset, Sample</span> and <span
+class=codevariablechar>IsFinished</span> methods. The <span
+class=codevariablechar>Sample</span> method invokes the <span
+class=codevariablechar>Gen</span> method to return the next envelope value. The
+<span class=codevariablechar>IsFinished</span> method returns true when the
+envelope is complete, false otherwise.</p>
+
+<p class=indent><i>&nbsp;</i></p>
+
+<p class=indent><a href="#_EnvGen">EnvGen</a></p>
+
+<p class=indent><a href="#_EnvGenExp">EnvGenExp</a></p>
+
+<p class=indent><a href="#_EnvGenLog">EnvGenLog</a></p>
+
+<p class=indent><a href="#_EnvSeg">EnvSeg</a></p>
+
+<p class=indent><a href="#_EnvDef">EnvDef</a></p>
+
+<p class=indent><a href="#_EnvGenUnit">EnvGenUnit</a></p>
+
+<p class=indent><a href="#_EnvGenSeg">EnvGenSeg</a></p>
+
+<p class=indent><a href="#_EnvGenAR">EnvGenAR</a></p>
+
+<p class=indent><a href="#_EnvGenADSR">EnvGenADSR</a></p>
+
+<p class=indent><a href="#_EnvGenA3SR">EnvGenA3SR</a></p>
+
+<p class=indent><a href="#_EnvGenSegSus">EnvGenSegSus</a></p>
+
+<p class=indent><a href="#_EnvGenTable">EnvGenTable</a></p>
+
+<h3><a name="_EnvGen"></a>EnvGen</h3>
+
+<p class=noindent>The <span class=codevariablechar>EnvGen</span> class implements
+a fixed duration envelope generator with one attack segment and one release
+segment. <span class=codevariablechar>EnvGen</span> has a linear attack and
+decay, and is the base class for other simple fixed duration generators. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGen.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitEG(AmpValue peak, FrqValue dur,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FrqValue atk,
+FrqValue dec)</p>
+
+<p class=noindent>The InitEG method initializes the envelop generator. The <span
+class=codevariablechar>peak</span> argument sets the peak amplitude and/or
+sustain level. The <span class=codevariablechar>dur</span> argument sets the
+total duration. The <span class=codevariablechar>atk</span> argument sets the
+attack time while the <span class=codevariablechar>dec</span> argument sets the
+decay (release) time. The total duration must be greater than or equal to the
+sum of the attack and decay. If this is not the case, the attack and decay
+times are reduced in length proportionately.</p>
+
+<h3><a name="_EnvGenExp"></a>EnvGenExp</h3>
+
+<p class=noindent>The <span class=codevariablechar>EnvGenExp</span> class
+implements a fixed duration envelope generator with one attack segment and one
+release segment. <span class=codevariablechar>EnvGenExp</span> has an
+exponential attack and decay, but is otherwise the same as <span
+class=codevariablechar>EnvGen</span>.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGen.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_EnvGen">EnvGen</a>)</p>
+
+<p class=method>void SetBias(AmpValue b)</p>
+
+<p class=noindent>The<span class=codevariablechar> SetBias</span> method sets
+the curve bias. The curve is defined by the equation:</p>
+
+<p class=indent><sub><img border=0 width=61 height=51 src=bias1.jpg></sub>&nbsp;and
+<sub><img border=0 width=61 height=51 src=bias2.jpg></sub></p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent>where <span class=codevariablechar>t</span> is the attack or
+decay time as appropriate. The bias must be greater than zero. Smaller values
+produce steeper curves. The default bias value is 0.2.</p>
+
+<h3><a name="_EnvGenLog"></a>EnvGenLog</h3>
+
+<p class=noindent>The <span class=codevariablechar>EnvGenLog</span> class
+implements a fixed duration envelope generator with one attack segment and one
+release segment. <span class=codevariablechar>EnvGenLog</span> has a
+logarithmic attack and decay, but is otherwise the same as <span
+class=codevariablechar>EnvGenExp</span>.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGen.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_EnvGen">EnvGen</a> and <a href="#_EnvGenExp">EnvGenExp</a>)</p>
+
+<h3><a name="_EnvSeg"></a>EnvSeg</h3>
+
+<p class=noindent>The <span class=codevariablechar>EnvSeg</span> and derived
+classes produce one segment for a multi-segment envelope generator. A segment
+is defined by a starting value, rate and ending level value. The rate is
+specified in seconds. Each class generates a series of values with each value
+in the series returned on successive calls to the <span class=codevariablechar>Gen</span>
+method. <span class=codevariablechar>EnvSeg</span> is the base class for the
+other classes and implements a sustain segment by always returning its start
+value. <span class=codevariablechar>EnvSegLin</span> produces a linear series, <span
+class=codevariablechar>EnvSegExp</span> an exponential series, and <span
+class=codevariablechar>EnvSegLog</span> a logarithmic series.</p>
+
+<p class=indent>These classes are intended for use by complex envelope
+generators but can also be instantiated individually in order to calculate a series
+of values along a line or curve between a minimum and maximum.</p>
+
+<p class=indent>The <span class=codevariablechar>GenUnit</span> base class <span
+class=codevariablechar>Sample</span> method merely returns the value of <span
+class=codevariablechar>Gen.</span> The <span class=codevariablechar>Reset</span>
+method sets the current value to the starting value for the segment and
+calculates the increment value for the curve. The <span class=codevariablechar>initPhs</span>
+argument is ignored. The <span class=codevariablechar>IsFinished</span> method
+returns true when the end of the series has been reached, false otherwise.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>EGSegType GetType()</p>
+
+<p class=method>void SetStart(AmpValue s)</p>
+
+<p class=method>void SetLevel(AmpValue s)</p>
+
+<p class=method>void SetRate(FrqValue r)</p>
+
+<p class=method>void InitSeg(FrqValue r, AmpValue s, AmpValue e)</p>
+
+<p class=method>void InitSegTick(long r, AmpValue s, AmpValue e)</p>
+
+<p class=method>AmpValue GetStart()</p>
+
+<p class=method>AmpValue GetLevel()</p>
+
+<p class=method>FrqValue GetRate()</p>
+
+<p class=method>void GetSettings(FrqValue&amp; r, AmpValue&amp; s,
+AmpValue&amp; e)</p>
+
+<p class=method>void Copy(EnvSeg *tp)</p>
+
+<p class=method>AmpValue Gen()</p>
+
+<p class=method>void SetBias(float b)</p>
+
+<p class=noindent><span class=codevariablechar>GetType</span> returns a value
+identifying the segment type. The return value is one of the values for the
+enumerated type <span class=codevariablechar>EGSegType</span>.</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>enum EGSegType {</p>
+
+<p class=code>&nbsp;&nbsp; nulSeg = 0,</p>
+
+<p class=code>&nbsp;&nbsp; linSeg = 1,</p>
+
+<p class=code>&nbsp;&nbsp; expSeg = 2,</p>
+
+<p class=code>&nbsp;&nbsp; logSeg = 3,</p>
+
+<p class=code>&nbsp;&nbsp; susSeg = 4</p>
+
+<p class=code>};</p>
+
+<p class=noindent>The <span class=codevariablechar>SetRate</span>, <span
+class=codevariablechar>SetStart</span> and <span class=codevariablechar>SetLevel</span>
+methods sets the rate, starting and ending values, respectively. Changes made
+through these methods are not applied until the <span class=codevariablechar>Reset</span>
+method is called.</p>
+
+<p class=noindent>The <span class=codevariablechar>InitSeg</span> method sets
+all three values and then calls <span class=codevariablechar>Reset</span>. The <span
+class=codevariablechar>InitSegTick</span> sets the rate in samples instead of
+seconds.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetRate</span>, <span
+class=codevariablechar>GetStart</span> and <span class=codevariablechar>GetLevel</span>
+methods return the current settings. </p>
+
+<p class=noindent>The <span class=codevariablechar>GetSettings</span> method
+returns the three values in the associated arguments.</p>
+
+<p class=noindent>The <span class=codevariablechar>Copy</span> method initializes
+the segment by copying the settings from another envelope segment object. The <span
+class=codevariablechar>Reset</span> method must be called afterwards to
+calculate the internal values needed to generate the segment.</p>
+
+<p class=noindent>The <span class=codevariablechar>Gen</span> method returns
+the next value in the series. Once the end of the series is reached, <span
+class=codevariablechar>Gen</span> will continue to return the last value on
+subsequent calls.</p>
+
+<p class=noindent><span class=codevariablechar>SetBias</span> sets the bias for
+the <span class=codevariablechar>EnvSegExp</span> and <span
+class=codevariablechar>EnvSegLog</span> classes. See the explanation under the <a
+href="#_EnvGenExp">EnvGenExp</a> class
+for how the bias is used.</p>
+
+<h3><a name="_EnvDef"></a>EnvDef</h3>
+
+<p class=noindent>The <span class=codevariablechar>EnvDef</span> structure
+stores the rate and level values for a multi-segment envelope generator. The
+structure holds the number of segments, initial value, and a flag indicating
+whether or not the envelope should enter a sustain period before the final
+release.</p>
+
+<p class=indent><span class=codevariablechar>EnvDef</span> is typically
+initialized by calling a method on one of the envelope generator classes below.
+However, the values can also be set directly and then passed to the envelope
+generator to initialize it to a known set of values. An typical use for an ADSR
+envelope would be the following.</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>EnvDef envVals;</p>
+
+<p class=code>envVals.Alloc(3, 0, 1);</p>
+
+<p class=code>// Set attack rate and peak level</p>
+
+<p class=code>envVals.Set(0, 0.1, 1.0, expSeg);</p>
+
+<p class=code>// Set decay rate and sustain level</p>
+
+<p class=code>envVals.Set(1, 0.2, 0.8, logSeg);</p>
+
+<p class=code>// Set release rate and final level</p>
+
+<p class=code>envVals.Set(2, 0.5, 0.0, expSeg);</p>
+
+<p class=code>EnvGen env;</p>
+
+<p class=code>env.SetEnvDef(&amp;envVals);</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Alloc(int n, AmpValue s, int so)</p>
+
+<p class=method>int NumSegs()</p>
+
+<p class=method>AmpValue GetStart()</p>
+
+<p class=method>void Set(int n, FrqValue rt, AmpValue lv, EGSegType ty)</p>
+
+<p class=method>void Get(int n, FrqValue&amp; rt, AmpValue&amp; lv,
+EGSegType&amp; ty)</p>
+
+<p class=method>void Copy(EnvDef *dp)</p>
+
+<p class=method>void Clear()</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=noindent>The <span class=codevariablechar>Alloc</span> method
+allocates space for <span class=codevariablechar>n</span> rate and level
+values, and stores the starting value (<span class=codevariablechar>s</span>)
+and sustain-on flag (<span class=codevariablechar>so</span>).</p>
+
+<p class=noindent><span class=codevariablechar>NumSegs</span> is an accessor function
+that returns the number of segments allocated in the structure. Because the
+structure members are public, code can also access the <span
+class=codevariablechar>nsegs</span> member directly if desired. The value for <span
+class=codevariablechar>nsegs</span> should only be set by calling the <span
+class=codevariablechar>Alloc</span> method to insure the array of values is
+properly allocated.</p>
+
+<p class=noindent><span class=codevariablechar>GetStart</span> is an accessor
+function that returns the start value for the envelope. Because the structure
+members are public, code can also access the <span class=codevariablechar>start
+</span>&nbsp;member directly if desired. The value of <span
+class=codevariablechar>start</span> is set in the <span class=codevariablechar>Alloc</span>
+method.</p>
+
+<p class=noindent>The <span class=codevariablechar>Set</span> method sets the
+nth rate and level pairs that define an envelope segment. The rate (<span
+class=codevariablechar>rt</span>) is specified in seconds. The level value (<span
+class=codevariablechar>lv</span>) specifies the end value for the segment. The
+type (<span class=codevariablechar>ty</span>) is one of the enumerated types
+for an envelope segment. (See <span class=codevariablechar><a href="#_EnvSeg">EnvSeg</a></span> for the allowed values.)</p>
+
+<p class=noindent>The <span class=codevariablechar>Get</span> method is the
+counterpart to the <span class=codevariablechar>Set</span> method. It retrieves
+the values for one segment from the <span class=codevariablechar>EnvDef</span>
+structure.</p>
+
+<p class=noindent><span class=codevariablechar>Copy</span> makes a deep copy of
+the <span class=codevariablechar>EnvDef</span> structure, allocating space in
+the new structure to hold the rate and level values. The structure should not
+be copied by direct assignment as it holds a dynamically allocated array of
+values.</p>
+
+<p class=noindent><span class=codevariablechar>Clear</span> frees any allocated
+memory and sets the number of segments back to 0. Memory is freed automatically
+in the destructor, or when <span class=codevariablechar>Alloc</span> is called,
+thus <span class=codevariablechar>Clear</span> does not need to be called in
+most cases. <span class=codevariablechar>Clear</span> can be used to release
+memory without deleting the <span class=codevariablechar>EnvDef</span> object.</p>
+
+<h3><a name="_EnvGenUnit"></a>EnvGenUnit</h3>
+
+<p class=noindent><span class=codevariablechar>EnvGenUnit</span> defines the
+common methods for all multi-segment envelope generators. Multi-segment
+envelope generators inherit from this class and provide an implementation for
+each method. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Release()</p>
+
+<p class=method>void GetEnvDef(EnvDef *e)</p>
+
+<p class=method>void SetEnvDef(EnvDef *e) </p>
+
+<p class=method>void Copy(EnvGenUnit *e) </p>
+
+<p class=noindent>The <span class=codevariablechar>Release</span> method forces
+the envelope generator to jump to the final segment. This method is typically
+used by an instrument during a note off event. The instrument will continue to
+play until the <span class=codevariablechar>IsFinished</span> method returns
+true, allowing the final decay segment to occur.</p>
+
+<p class=noindent><span class=codevariablechar>GetEnvDef</span> fills in a
+structure with the rate and level values for all segments in the envelope. See
+the description of EnvDef for an explanation of the structure.</p>
+
+<p class=noindent><span class=codevariablechar>SetEnvDef</span> initializes the
+envelope generator with the rate and level values for all segments in the
+envelope as defined by the <span class=codevariablechar>EnvDef</span>
+structure. See the description of <span class=codevariablechar>EnvDef</span>
+for an explanation of the structure.</p>
+
+<p class=noindent>The <span class=codevariablechar>Copy</span> method makes a
+copy of the envelope generator settings.</p>
+
+<h3><a name="_EnvGenSeg"></a>EnvGenSeg</h3>
+
+<p class=noindent><span class=codevariablechar>EnvGenSeg</span> implements a
+multi-segment envelope with fixed sustain length. It inherits from <span
+class=codevariablechar>EnvGenUnit</span> and adds methods to specify each
+segment separately. By default, the <span class=codevariablechar>EnvGenSeg</span>
+class moves from one segment to the next, including the final decay segment
+without waiting for the <span class=codevariablechar>Release</span> method to
+be called. However, if the <span class=codevariablechar>Release</span> method
+is called before the final segment is reached, the generator will skip to the
+last segment at that point.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_EnvGenUnit">EnvGenUnit</a>)</p>
+
+<p class=method>void SetStart(AmpValue st)</p>
+
+<p class=method>void SetSegs(int count)</p>
+
+<p class=method>void SetSegN(int segn, FrqValue rt, AmpValue lvl, EGSegType
+typ)</p>
+
+<p class=noindent><span class=codevariablechar>SetStart</span> sets the
+starting value for the envelope.</p>
+
+<p class=noindent><span class=codevariablechar>SetSegs</span> sets the number
+of segments. This method must be called before defining the values for each
+segment.</p>
+
+<p class=noindent><span class=codevariablechar>SetSegN</span> sets the rate (<span
+class=codevariablechar>rt</span>), level (<span class=codevariablechar>lvl</span>)
+and type (<span class=codevariablechar>typ</span>) values for segment number <span
+class=codevariablechar>segn</span>.</p>
+
+<h3><a name="_EnvGenAR"></a>EnvGenAR</h3>
+
+<p class=noindent><span class=codevariablechar>EnvGenAR</span> implements a two
+segment envelope with indeterminate sustain. It inherits from <span
+class=codevariablechar>EnvGenUnit</span> and adds one specialized
+initialization method to the base class methods.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_EnvGenUnit">EnvGenUnit</a>
+and <a href="#_EnvGenSeg">EnvGenSeg</a>)</p>
+
+<p class=method>void InitAR(FrqValue ar, AmpValue sl, FrqValue rr,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;int son,
+EGSegType t)</p>
+
+<p class=noindent><span class=codevariablechar>InitAR</span> initializes the envelope
+generator with the specified values. The attack rate is specified in <span
+class=codevariablechar>ar</span>, the decay rate in <span
+class=codevariablechar>rr</span>, and the sustain level in <span
+class=codevariablechar>sl</span>. The <span class=codevariablechar>son</span>
+argument indicates whether the envelope should hold at the sustain level when the
+attack is finished, or, immediately enter the decay segment. The start and end
+values are always set to zero for this envelope generator type.</p>
+
+<h3><a name="_EnvGenADSR"></a>EnvGenADSR</h3>
+
+<p class=noindent><span class=codevariablechar>EnvGenADSR</span> implements a
+three segment envelope with indeterminate sustain. It inherits from <span
+class=codevariablechar>EnvGenUnit</span> and adds one specialized
+initialization method to the base class methods.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_EnvGenUnit">EnvGenUnit</a>
+and <a href="#_EnvGenSeg">EnvGenSeg</a>)</p>
+
+<p class=method>void InitADSR(AmpValue st, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue ar, AmpValue al,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;FrqValue dr, AmpValue sl, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue rr, AmpValue rl,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;EGSegType t)</p>
+
+<p class=method>void SetAtkRt(FrqValue val</p>
+
+<p class=method>void SetAtkLvl(AmpValue val)</p>
+
+<p class=method>void SetDecRt(FrqValue val)</p>
+
+<p class=method>void SetSusLvl(AmpValue val)</p>
+
+<p class=method>void SetRelRt(FrqValue val)</p>
+
+<p class=method>void SetRelLvl(AmpValue val)</p>
+
+<p class=method>void SetType(EGSegType ty)</p>
+
+<p class=method>FrqValue GetAtkRt()</p>
+
+<p class=method>AmpValue GetAtkLvl()</p>
+
+<p class=method>FrqValue GetDecRt()</p>
+
+<p class=method>AmpValue GetSusLvl()</p>
+
+<p class=method>FrqValue GetRelRt()</p>
+
+<p class=method>AmpValue GetRelLvl()</p>
+
+<p class=method>EGSegType GetType()</p>
+
+<p class=noindent><span class=codevariablechar>InitADSR</span> initializes the envelope
+generator with the specified values. The other methods set one rate or level
+for each segment of the envelope.</p>
+
+<h3><a name="_EnvGenA3SR"></a>EnvGenA3SR</h3>
+
+<p class=noindent><span class=codevariablechar>EnvGenA3SR</span> implements a
+four segment envelope with indeterminate sustain. This class differs from ADSR
+by supplying two attack segments. </p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_EnvGenUnit">EnvGenUnit</a>
+and <a href="#_EnvGenSeg">EnvGenSeg</a>)</p>
+
+<h3><a name="_EnvGenSegSus"></a>EnvGenSegSus</h3>
+
+<p class=noindent><span class=codevariablechar>EnvGenSegSus</span> implements a
+multi-segment envelope with a variable number of attack and decay segments and indeterminate
+sustain length. <span class=codevariablechar>EnvGenSegSus</span> aggregates two
+copies of <span class=codevariablechar>EnvGenSeg</span>. The first object
+contains the attack segments while the second contains the decay segments. When
+the end of all attack segments has been reached, <span class=codevariablechar>EnvGenSegSus</span>
+waits for the <span class=codevariablechar>Release</span> method call to begin
+processing the decay segments.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_EnvGenUnit">EnvGenUnit</a>)</p>
+
+<p class=method>void SetSegs(int atks, int decs)</p>
+
+<p class=method>void SetAtkN(int segn, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FrqValue rt,
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; AmpValue
+lvl, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; EGSegType
+typ)</p>
+
+<p class=method>void SetDecN(int segn,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;FrqValue rt,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;AmpValue lvl,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;EGSegType typ)</p>
+
+<p class=noindent><span class=codevariablechar>SetSegs</span> sets the number
+of attack (<span class=codevariablechar>atks</span>) and decay (<span
+class=codevariablechar>decs</span>) segments. This method must be called before
+defining the values for each segment.</p>
+
+<p class=noindent><span class=codevariablechar>SetAtkN</span> sets the rate (<span
+class=codevariablechar>rt</span>), level (<span class=codevariablechar>lvl</span>)
+and type (<span class=codevariablechar>typ</span>) values for attack segment
+number <span class=codevariablechar>segn</span>.</p>
+
+<p class=noindent><span class=codevariablechar>SetDecN</span> sets the rate (<span
+class=codevariablechar>rt</span>), level (<span class=codevariablechar>lvl</span>)
+and type (<span class=codevariablechar>typ</span>) values for decay segment
+number <span class=codevariablechar>segn</span>.</p>
+
+<h3><a name="_EnvGenTable"></a>EnvGenTable</h3>
+
+<p class=noindent><span class=codevariablechar>EnvGenSegTable</span> implements
+a multi-segment envelope similar to <span class=codevariablechar>EnvGenSeg</span>,
+but pre-calculates the values and stores them in a table. The <span
+class=codevariablechar>Gen</span> method only needs to increment an index into
+the table and return the next value on each call. <span class=codevariablechar>EnvGenSegTable</span>
+is best used when the envelope is relatively short, used multiple times and
+does not need an indeterminate sustain period.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>EnvGenSeg.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitSegs(int segs,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;AmpValue start, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue *rt,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;AmpValue *amp,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;EGSegType *typ)</p>
+
+<p class=noindent><span class=codevariablechar>InitSegs</span> initializes the envelope
+table. The <span class=codevariablechar>segs</span> argument specifies the
+number of segments. The <span class=codevariablechar>start</span> value
+specifies the starting level. The <span class=codevariablechar>rt, amp </span>and<span
+class=codevariablechar> typ</span> arrays define the rate, level and curve type
+for each of the segments. The <span class=codevariablechar>rt</span> and <span
+class=codevariablechar>amp</span> arrays must be of <span
+class=codevariablechar>segs</span> length. The <span class=codevariablechar>typ</span>
+array can be NULL, in which case all segments use linear interpolation.</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_Filters"></a>Filters</h2>
+
+</div>
+
+<p class=noindent>The BasicSynth library includes a variety of commonly used
+filters. One set of filters are derived from a common bi-quad filter base
+class. Other filters implement averaging and convolution.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_AllPassFilter">AllPassFilter</a></p>
+
+<p class=indent><a href="#_BiQuadFilter">BiQuadFilter</a></p>
+
+<p class=indent><a href="#_FilterLP">FilterLP</a></p>
+
+<p class=indent><a href="#_FilterHP">FilterHP</a></p>
+
+<p class=indent><a href="#_FIlterBP">FIlterBP</a></p>
+
+<p class=indent><a href="#_Reson">Reson</a></p>
+
+<p class=indent><a href="#_DynFilterLP">DynFilterLP</a></p>
+
+<p class=indent><a href="#_FilterFIR">FilterFIR</a></p>
+
+<p class=indent><a href="#_FilterIIR">FilterIIR</a></p>
+
+<p class=indent><a href="#_FilterFIRn">FilterFIRn</a></p>
+
+<p class=indent><a href="#_FilterAvgN">FilterAvgN</a></p>
+
+<h3><a name="_AllPassFilter"></a>AllPassFilter</h3>
+
+<p class=noindent>The<span class=codevariablechar> AllPassFilter</span> class
+implements an allpass filter. It inherits from <span class=codevariablechar>GenUnit</span>
+and implements the <span class=codevariablechar>Init</span>, <span
+class=codevariablechar>Reset</span> and <span class=codevariablechar>Sample</span>
+methods. <span class=codevariablechar>AllPassFilter</span> implements the <span
+class=codevariablechar>Sample</span> method by applying the filter to the
+current input value and returning the filtered value.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>AllPass.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitAP(float d)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitAP</span> initializes
+the feedback and feedforward coefficient (<i>g</i>) using the argument <i>d</i>:
+</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>g = (1 - d) / (1 + d)</p>
+
+<h3><a name="_BiQuadFilter"></a>BiQuadFilter</h3>
+
+<p class=noindent><span class=codevariablechar>BiQuadFilter</span> defines a base
+class for second order filters using the bi-quad form. It declares the
+necessary member variables to hold the filter coefficients and delayed sample
+values. Since it contains no code to calculate the coefficients, a useful
+filter must be derived from this class. It should not be instantiated directly
+(except perhaps as an aggregate member of another filter).</p>
+
+<p class=indent>For higher order filters, it is possible to chain multiple <span
+class=codevariablechar>BiQuad</span> filters in series, or, derive from this
+class and implement the filter calculation directly.</p>
+
+<p class=indent><span class=codevariablechar>BiQuadFilter</span> implements the
+<span class=codevariablechar>Sample</span> method by applying the filter to the
+current input value and returning the filtered value. The <span
+class=codevariablechar>Reset</span> method clears the delay buffers back to
+zero.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>BiQuad.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(FrqValue cu, AmpValue g)</p>
+
+<p class=method>void Copy(BiQuadFilter *filt)</p>
+
+<p class=noindent>The overloaded <span class=codevariablechar>Init</span>
+function receives a cutoff frequency (<span class=codevariablechar>cu</span>)
+and a gain value (<span class=codevariablechar>g</span>) and stores them for
+use in calculation of the coefficients and samples. Note that <span
+class=codevariablechar>BiQuadFilter</span> does not directly utilize the cutoff
+frequency. Derived classes overload this method and provide the implementation
+to calculate filter coefficients.</p>
+
+<p class=noindent>The <span class=methodchar>Copy</span> method copies the
+settings of the filter to another instance. This method duplicates the filter
+settings without recalculating the coefficients and is typically used by an
+instrument to initialize from a template.</p>
+
+<h3><a name="_FilterLP"></a>FilterLP</h3>
+
+<p class=noindent><span class=codevariablechar>FilterLP</span> derives from <span
+class=codevariablechar>BiQuadFilter</span> and overloads the <span
+class=codevariablechar>Init</span> method to provide the appropriate code to
+implement the calculation of coefficients for a second order low-pass filter.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>BiQuad.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_BiQuadFilter">BiQuadFilter</a>)</p>
+
+<h3><a name="_FilterHP"></a>FilterHP</h3>
+
+<p class=noindent><span class=codevariablechar>FilterHP</span> derives from <span
+class=codevariablechar>BiQuadFilter</span> and overloads the <span
+class=codevariablechar>Init</span> method to provide the appropriate code to
+implement the calculation of coefficients for a second order high-pass filter.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>BiQuad.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_BiQuadFilter">BiQuadFilter</a>)</p>
+
+<h3><a name="_FIlterBP"></a>FIlterBP</h3>
+
+<p class=noindent><span class=codevariablechar>FilterLP</span> derives from <span
+class=codevariablechar>BiQuadFilter</span> and overloads the <span
+class=codevariablechar>Init</span> method to provide the appropriate code to
+implement the calculation of coefficients for a second order band-pass filter.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>BiQuad.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_BiQuadFilter">BiQuadFilter</a>)</p>
+
+<p class=method>void Init(FrqValue cu, AmpValue g, float B)</p>
+
+<p class=noindent>The overloaded <span class=codevariablechar>Init </span>method
+includes a third argument (<span class=codevariablechar>B</span>) to set the
+filter bandwidth.</p>
+
+<h3><a name="_Reson"></a>Reson</h3>
+
+<p class=noindent><span class=codevariablechar>Reson</span> derives from <span
+class=codevariablechar>BiQuadFilter</span> and overloads the <span
+class=codevariablechar>Init</span> method to provide the appropriate code to
+implement the calculation of coefficients for a constant gain resonator.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>BiQuad.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_BiQuadFilter">BiQuadFilter</a>)</p>
+
+<p class=method>void InitRes(FrqValue cu, AmpValue g, float r)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitRes</span> includes a
+third argument (<span class=codevariablechar>r</span>) to set the filter
+resonance.</p>
+
+<h3><a name="_DynFilterLP"></a>DynFilterLP</h3>
+
+<p class=noindent>The <span class=codevariablechar>DynFilterLP</span> class
+implements a specialized version of the low-pass bi-quad filter. Subtractive
+synthesis methods typically apply an envelope generator to the cut-off
+frequency of a filter with the result that the coefficients must be
+re-calculated on every sample. <i>DynFilterLP </i>minimizes the calculation
+time by aggregating the envelope generator and using a table lookup for the <i>cos
+</i>and <i>sin </i>values. The minimum and maximum values for the envelope
+generator are set to values that equate to the starting and ending
+trigonometric values in the lookup table thus avoiding the calculation of these
+values on every sample. This filter is not as precise in terms of cut-off
+frequency due to round off by table lookup. However, because the filter center
+frequency is constantly changing, the frequency error is not noticeable and the
+audible effect is the same as the true low-pass filter.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>BiQuad.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_BiQuadFilter">BiQuadFilter</a>)</p>
+
+<p class=method>void InitFilter(AmpValue st, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue ar, AmpValue al,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue dr, AmpValue sl,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue rr, AmpValue rl,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+EGSegType t = linSeg)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitFilter</span> method
+sets the values for the internal envelope generator. The arguments are the same
+as for an ADSR envelope generator, except that the levels should be set to
+frequency value rather than amplitude value ranges. The methods to get and set
+each value individually are also implemented. (See <a href="#_EnvGenADSR">EnvGenADSR</a>).</p>
+
+<h3><a name="_FilterFIR"></a>FilterFIR</h3>
+
+<p class=noindent>The <span class=codevariablechar>FilterFIR</span> class
+implements a one-zero filter of the form:</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>y[n] = in * x[n] + out * x[n-1]</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Filter.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitFilter(AmpValue in, AmpValue out)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitFilter</span> method
+sets the coefficients for input (<span class=codevariablechar>in</span>) and
+delayed samples (<span class=codevariablechar>out</span>).</p>
+
+<h3><a name="_FilterIIR"></a>FilterIIR</h3>
+
+<p class=noindent>The <span class=codevariablechar>FilterIIR</span> class
+implements a one-pole filter of the form:</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>y[n] = in * x[n] + out * y[n-1]</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Filter.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitFilter(AmpValue in, AmpValue out)</p>
+
+<p class=method>void CalcCoef(FrqValue fc, int hp = 0)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitFilter</span> method
+sets the coefficients for input (<span class=codevariablechar>in</span>) and
+delayed samples (<span class=codevariablechar>out</span>).</p>
+
+<p class=noindent>The <span class=codevariablechar>CalcCoef</span> method
+calculates the coefficients for the cutoff frequency specified by <i>fc</i>.
+If the <i>hp</i> argument is true, the coefficients are calculated for high-pass,
+otherwise for low-pass.</p>
+
+<h3><a name="_FilterFIRn"></a>FilterFIRn</h3>
+
+<p class=noindent>The <span class=codevariablechar>FilterFIRn</span> class
+implements an impulse response filter of the form:</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>y[n] = h[0] * x[0] + h[1] * x[n-1] ... + h[m] * x[n-m]</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Filter.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(int n, float *h)</p>
+
+<p class=method>void AllocImpResp(int n)</p>
+
+<p class=method>void SetCoef(float *v)</p>
+
+<p class=method>void CalcCoef(FrqValue fc, int hp = 0)</p>
+
+<p class=noindent>The <span class=codevariablechar>Init</span> method sets the
+impulse response coefficients. The <i>n </i>argument specifies the number of
+elements in the impulse response array <i>h.</i></p>
+
+<p class=noindent>The <span class=codevariablechar>AllocImpResp</span> method allocates
+space for the impulse response coefficients. The <i>n </i>argument specifies the number of
+elements in the impulse response array.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetCoef</span> method sets the
+impulse response coefficients to the values contained in the argument <i>v</i>. The
+size of the <i>v</i> array must match the size set previously with 
+<span class=codevariablechar>Init</span> or <span class=codevariablechar>AllocImpResp.</span></p>
+
+<p class=noindent>The <span class=codevariablechar>CalcCoef</span> method calculates
+the impulse response coefficients for the cutoff frequency specified in <i>fc</i>. The
+size of the <i>v</i> array must match the size set previously with 
+<span class=codevariablechar>Init</span> or <span class=codevariablechar>AllocImpResp.</span>
+The length of the impulse response should be set to an odd number.
+If the <i>hp</i> argument is true, the coefficients are calculated for high-pass,
+otherwise for low-pass.</p>
+
+<h3><a name="_FilterAvgN"></a>FilterAvgN</h3>
+
+<p class=noindent>The<span class=codevariablechar> FilterAvgN</span> class
+implements a running average filter of the form:</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>y[n] = (x[n] + x[n-1] ... + x[n-M]) / M</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Filter.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitFilter(int n)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitFilter</span> method
+sets number of samples to average (<i>n</i>).</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_Delay_Lines"></a>Delay Lines</h2>
+
+</div>
+
+<p class=noindent>The <span class=codevariablechar>BasicSynth</span> library
+includes classes that implement arbitrary length delay lines. These classes can
+be used for comb filters, echo, reverb, chorus, and other effects that require
+multi-sample delays.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_DelayLine">DelayLine</a></p>
+
+<p class=indent><a href="#_DelayLineR">DelayLineR</a></p>
+
+<p class=indent><a href="#_DelayLineV">DelayLineV</a></p>
+
+<p class=indent><a href="#_DelayLineT">DelayLineT</a></p>
+
+<p class=indent><a href="#_AllPassDelay">AllPassDelay</a></p>
+
+<h3><a name="_DelayLine"></a>DelayLine</h3>
+
+<p class=noindent><span class=codevariablechar>DelayLine</span> implements a
+basic delay line. It defines methods to get and set the current value in the
+delay line, allocate and manage memory for the delay line, and is the base
+class for the other delay line classes.</p>
+
+<p class=indent>The class implements the <span class=codevariablechar>Sample</span>
+method by storing the current value in the delay line buffer and returning the
+oldest value multiplied by the decay value.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>DelayLine.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitDL(FrqValue dlyTm, AmpValue decay)</p>
+
+<p class=method>AmpValue GetOut()</p>
+
+<p class=method>void SetIn(AmpValue inval)</p>
+
+<p class=method>AmpValue TapT(PhsAccum d)</p>
+
+<p class=method>AmpValue Tap(PhsAccum s)</p>
+
+<p class=method>void Copy(DelayLine *dp)</p>
+
+<p class=method>void Clear()</p>
+
+<p class=noindent>The <span class=codevariablechar>InitDL</span> method
+allocates memory for the delay line buffer, and clears the buffer. The <span
+class=codevariablechar>dlyTm</span> value indicates the length of the delay
+line in seconds. The <span class=codevariablechar>decay</span> value sets the
+multiplier for the decay line output.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetOut</span> method returns
+the last sample in the delay line buffer, <i>i.e</i>. at the maximum delay
+position. This method does not move the current position.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetIn</span> method sets the
+value at the current input position to <span class=codevariablechar>inval</span>
+and moves the current position forward by one entry. The delay line may be
+filled with initial values by repeatedly calling this method.</p>
+
+<p class=noindent>The <span class=codevariablechar>TapT</span> method reads the
+value from the delay line at time indicated by <span class=codevariablechar>d</span>.
+The time value is an offset from the current position in seconds.</p>
+
+<p class=noindent>The <span class=codevariablechar>Tap</span> method reads the
+value from the delay line at the sample position indicated by <span
+class=codevariablechar>s</span>. The sample value is an offset from the current
+position in samples.</p>
+
+<p class=noindent>The <span class=codevariablechar>Copy</span> method copies
+the settings to another object. This is typically used by instruments to
+initialize the instrument from a template.</p>
+
+<p class=noindent>The <span class=codevariablechar>Clear</span> method sets all
+entries in the delay line to zero. This is performed automatically during
+initialization, but can be called at any time to remove existing samples from
+the delay line.</p>
+
+<h3><a name="_DelayLineR"></a>DelayLineR</h3>
+
+<p class=noindent><span class=codevariablechar>DelayLineR</span> extends the
+basic delay line to implement a re-circulating delay. The class overrides the <span
+class=codevariablechar>Sample</span> method and adds a specialized initialization
+method.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>DelayLine.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_DelayLine">DelayLine</a>)</p>
+
+<p class=method>void InitDLR(FrqValue dlyTm, FrqValue decTm, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+AmpValue fin, AmpValue pk)</p>
+
+<p class=method>void GetSettings(FrqValue&amp; dlyTm, FrqValue&amp; decTm,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+AmpValue&amp; fin, AmpValue&amp; pk)</p>
+
+<p class=noindent><span class=codevariablechar>InitDLR</span> initializes the
+delay line using <span class=codevariablechar>dlyTm</span> for the delay time.
+The <span class=codevariablechar>decTm</span> argument indicates the time for a
+value to decay to the final value from the peak values. The decay value is
+calculated as: </p>
+
+<p class=indent><sub><img border=0 width=124 height=29 src=decay.jpg></sub></p>
+
+<p class=indent>The value for <span class=codevariablechar>pk</span> and <span
+class=codevariablechar>final</span> should be normalized to the range [0,1].
+Decay values greater than one will introduce positive feedback and will likely
+cause output values to go out of range.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetSettings</span> method
+can be used to return the current settings for the delay line.</p>
+
+<h3><a name="_DelayLineV"></a>DelayLineV</h3>
+
+<p class=noindent>The <span class=codevariablechar>DelayLineV</span> class
+extends the basic delay line to implement a variable delay.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>DelayLine.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_DelayLine">DelayLine</a>)</p>
+
+<p class=method>void SetDelayT(PhsAccum d)</p>
+
+<p class=method>void SetDelay(PhsAccum d)</p>
+
+<p class=noindent><span class=codevariablechar>SetDelayT</span> sets the delay
+in seconds. The value for the delay must be less than or equal to the total
+delay line length specified when the delay line was initialized.</p>
+
+<p class=noindent><span class=codevariablechar>SetDelay</span> sets the delay
+in samples. The value for the delay must be less than or equal to the total
+delay line length specified when the delay line was initialized.</p>
+
+<h3><a name="_DelayLineT"></a>DelayLineT</h3>
+
+<p class=noindent><span class=codevariablechar>DelayLineT</span> extends the
+basic delay line to implement a multi-tap delay line. This class adds methods
+to set and move the tap positions on each write to the delay line.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>DelayLine.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_DelayLine">DelayLine</a>)</p>
+
+<p class=method>void InitDLT(FrqValue dlyTm, int taps, AmpValue decay)</p>
+
+<p class=method>void SetTap(int n, AmpValue dlyTm, AmpValue decay)</p>
+
+<p class=method>AmpValue Tap(int n)</p>
+
+<p class=noindent><span class=codevariablechar>InitDLT</span> initializes the
+delay line to length <span class=codevariablechar>delayTime</span> and
+allocates pointers for the number of taps specified by the <span
+class=codevariablechar>taps</span> argument.</p>
+
+<p class=noindent><span class=codevariablechar>SetTap</span> sets the position and
+amplitude decay values for the nth tap. The <span class=codevariablechar>dlyTm</span>
+value is specified in seconds.</p>
+
+<p class=noindent>The <span class=codevariablechar>Tap</span> method returns
+the current value for the nth tap.</p>
+
+<h3><a name="_AllPassDelay"></a>AllPassDelay</h3>
+
+<p class=noindent>The<span class=codevariablechar> AllPassDelay</span> class
+inherits from <span class=codevariablechar>DelayLineR</span> and overrides the <span
+class=codevariablechar>Sample</span> method to produce an allpass filter
+response. The <span class=codevariablechar>AllPassDelay2</span> class
+aggregates with two delay lines to implement the allpass filter in Direct Form
+I with two buffers. <span class=codevariablechar>AllPassDelay2</span> inherits
+from <span class=codevariablechar>GenUnit</span> but supplies the same methods
+as <span class=codevariablechar>DelayLineR</span>.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>DelayLine.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_DelayLine">DelayLine</a> and <a href="#_DelayLineR">DelayLineR</a>)</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_Mixing_and_Effects"></a>Mixing and Effects</h2>
+
+</div>
+
+<p class=noindent>The library contains a general purpose mixer and two effects
+unit classes for reverb and flanger/chorus.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_Mixer">Mixer</a></p>
+
+<p class=indent><a href="#_Reverb2">Reverb2</a></p>
+
+<p class=indent><a href="#_Flanger/Chorus">Flanger/Chorus</a></p>
+
+<h3><a name="_Mixer"></a>Mixer</h3>
+
+<p class=noindent>The <span class=codevariablechar>Mixer</span> class
+implements a variable channel mixer with internal panning support. Amplitude
+values are always specified in the range [0,-1]. This class does not inherit
+from the <span class=codevariablechar>GenUnit</span> base class.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Mixer.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void SetChannels(int nchnl)</p>
+
+<p class=method>int GetChannels() </p>
+
+<p class=method>void MasterVolume(AmpValue lv, AmpValue rv)</p>
+
+<p class=method>void ChannelOn(int ch, int on)</p>
+
+<p class=method>void ChannelVolume(int ch, AmpValue v)</p>
+
+<p class=method>void ChannelPan(int ch, int pm, AmpValue p)</p>
+
+<p class=method>void ChannelIn(int ch, AmpValue val)</p>
+
+<p class=method>void ChannelIn2(int ch, AmpValue lft, AmpValue rgt)</p>
+
+<p class=method>void SetFxChannels(int nunit)</p>
+<p class=method>int GetFxChannels()</p>
+<p class=method>void FxInit(int f, GenUnit *fx, AmpValue lvl)</p>
+<p class=method>void FxLevel(int f, int ch, AmpValue lvl)</p>
+<p class=method>void FxPan(int f, int pm, AmpValue lvl)</p>
+<p class=method>void FxIn(int f, AmpValue val)</p>
+
+<p class=method>void Out(AmpValue *lval, AmpValue *rval)</p>
+
+<p class=method>void Reset()</p>
+
+<p class=noindent>The <span class=codevariablechar>SetChannels</span> method
+sets the number of input channels on the mixer to the value of <span
+class=codevariablechar>nchnl</span>. This method allocates buffers for the
+inputs and must be called first, before any other operations on the mixer are
+performed. </p>
+
+<p class=noindent>The <span class=codevariablechar>GetChannels</span> method
+returns the number of currently defined input channels.</p>
+
+<p class=noindent>The <span class=codevariablechar>MasterVolume</span> method
+sets the output volume levels for the left (<span class=codevariablechar>lv</span>)
+and right (<span class=codevariablechar>rv</span>) outputs.</p>
+
+<p class=noindent>The <span class=codevariablechar>ChannelOn</span> method
+enables or disables channel <span class=codevariablechar>ch</span>. If <span
+class=codevariablechar>on</span> is true, the channel amplitude value is added
+to the output, otherwise the channel value is ignored.</p>
+
+<p class=noindent>The <span class=codevariablechar>ChannelVolume</span> method
+sets the volume level for channel <span class=codevariablechar>ch</span> to the
+value <span class=codevariablechar>v</span>.</p>
+
+<p class=noindent>The <span class=codevariablechar>ChannelPan</span> method
+sets the panning method and value for input channel <span
+class=codevariablechar>ch</span>. The <span class=codevariablechar>pm</span>
+argument indicates the method of panning and can be 0 for no panning, 1 for
+linear panning, 2 for logarithmic panning and 3 for attenuator panning. The
+value for <i>p</i> sets the panning amount. For linear and attenuator panning,
+a value of -1 is full left, while +1 is full right. For logarithmic panning the
+value is in degrees from -45 to +45.</p>
+
+<p class=noindent>The <span class=codevariablechar>ChannelIn</span> method
+applies the input value (<span class=codevariablechar>val</span>) to channel <span
+class=codevariablechar>ch</span>. Panning, if enabled, is applied to the value
+before the value is copied to the left and right output channels. Multiple
+calls to <span class=codevariablechar>ChannelIn</span> will accumulate values
+until the <span class=codevariablechar>Out</span> method is called.</p>
+
+<p class=noindent>The <span class=codevariablechar>ChannelIn2</span> method
+adds to the current value for left (<span class=codevariablechar>lft</span>) to
+and right (rgt) for channel <span class=codevariablechar>ch</span>. Panning is
+bypassed and the values are copied directly to the left and right outputs.
+Multiple calls to <span class=codevariablechar>ChannelIn2</span> will
+accumulate values until the <span class=codevariablechar>Out</span> method is
+called.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetFxChannels</span> method
+sets the number of effects channels on the mixer to the value of <span
+class=codevariablechar>nunit</span>. This method allocates buffers for the
+inputs and must be called first, before any other operations on the mixer are
+performed. </p>
+
+<p class=noindent>The <span class=codevariablechar>GetFxChannels</span> method
+returns the number of currently defined effects channels.</p>
+
+<p class=noindent>The <span class=codevariablechar>FxInit</span> method sets the 
+unit generator object (<i>fx</i>) and output level (<i>lvl</i>) for effects unit <i>f</i>.</p>
+
+<p class=noindent>The <span class=codevariablechar>FxLevel</span> method sets the 
+send level (<i>lvl</i>) for input channel (<i>ch</i>) on effects unit (<i>f</i>).</p>
+
+<p class=noindent>The <span class=codevariablechar>FxPan</span> method sets the 
+pan amount (<i>lvl</i>) and method (<i>pm</i>) on effects unit (<i>f</i>).</p>
+
+<p class=noindent>The <span class=codevariablechar>FxIn</span> method sends a
+value (<i>val</i>) directly to effects unit (<i>f</i>), bypassing the input channels.</p>
+
+<p class=noindent>The <span class=codevariablechar>Out </span>method sums the
+current level of all active input channels, adjusts the output by the master
+volume levels, and returns the values for left and right amplitude in the
+arguments <span class=codevariablechar>lval</span> and <span
+class=codevariablechar>rval</span>. <span class=codevariablechar>Out</span>
+also clears all inputs back to zero.</p>
+
+<p class=noindent>The <span class=codevariablechar>Reset</span> method clears
+all input values to zero.</p>
+
+<h3><a name="_Reverb2"></a>Reverb2</h3>
+
+<p class=noindent>The <span class=codevariablechar>Reverb2</span> class
+implements a Schroeder reverb with three comb filters and two allpass delay filters.
+To apply the reverb, pass the current sample to the <span class=codevariablechar>Sample</span>
+method, or attach the reverb object to the mixer
+using the <span class=codevariablechar>Mixer::FxInit</span> method.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Reverb.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitReverb(AmpValue a, FrqValue rt)</p>
+
+<p class=noindent>The <span class=codevariablechar>InitReverb</span> method
+initializes the reverb unit with amplitude level a and reverberation time rt.
+The comb filter delay times are preset and cannot be varied. To vary the delay
+times it is necessary to derive a class from <span class=codevariablechar>Reverb2</span>
+and override the <span class=codevariablechar>InitReverb</span> method.</p>
+
+<h3><a name="_Flanger/Chorus"></a>Flanger/Chorus</h3>
+
+<p class=noindent>The <span class=codevariablechar>Flanger</span> class
+implements a variable Flanger-Chorus unit using a variable delay line and
+allpass filter combination. An internal oscillator varies the delay line length
+to produce the effect. To apply the Flanger, pass the current sample to the <span class=codevariablechar>Sample</span> method,
+or attach the reverb object to the mixer using the <span class=codevariablechar>Mixer::FxInit</span> method.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Flanger.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void InitFlanger(AmpValue inlvl, AmpValue mix, AmpValue fb,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue center, FrqValue depth,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;FrqValue sweep)</p>
+
+<p class=method>void GetSettings(AmpValue&amp; inlvl, AmpValue&amp; mix,
+AmpValue&amp; fb,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FrqValue&amp; center, FrqValue&amp; depth,<br>
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FrqValue&amp;
+sweep)</p>
+
+<p class=method>void Copy(Flanger *fp)</p>
+
+<p class=method>void Clear()</p>
+
+<p class=method>void Reset()</p>
+
+<p class=noindent>The <span class=codevariablechar>InitFlanger</span> method
+sets the parameters to the flanger. The <span class=codevariablechar>inlvl</span>
+argument sets the input value attenuation. The <span class=codevariablechar>mix</span>
+argument sets attenuation of the delayed signal. The <span
+class=codevariablechar>fb</span> argument sets the amount of feedback. When
+feedback is set equal to the input level, the flanger has an all-pass response.
+Values less than the input will produce a low-pass response, while values greater
+than the input level will produce a high-pass response. The <span
+class=codevariablechar>center, depth</span>, and <span class=codevariablechar>sweep</span>
+arguments set the parameters of the variable delay line. The delay line length
+is set to <span class=codevariablechar>center</span> +/- <span
+class=codevariablechar>depth</span> seconds delay. The <span
+class=codevariablechar>sweep</span> value is the frequency of the sweep
+oscillator, <i>i.e. </i>the amount of time the flanger takes to move from
+minimum to maximum delay.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetSettings</span> method
+returns the current settings for the flanger.</p>
+
+<p class=noindent>The <span class=codevariablechar>Copy</span> method copies
+the flanger settings to another instance of this class.</p>
+
+<p class=noindent>The <span class=codevariablechar>Clear</span> method sets the
+delay line to all zeros while the <span class=codevariablechar>Reset</span>
+method sets the internal delay line and sweep oscillator to initial conditions.</p>
+
+<div style='border:none;border-top:solid windowtext 1.0pt;margin-top:12.0pt;padding:1.0pt 0in 0in 0in'>
+
+<h2><a name="_Sequencing_"></a>Sequencing</h2>
+
+</div>
+
+<p class=noindent>The <span class=codevariablechar>BasicSynth</span> library
+contains two full sequencer implementations. The first sequencer uses absolute
+time events defined by the <span class=codevariablechar>SeqEvent</span> object.
+The second implementation supports MIDI events using the SMF delta time format.
+Both sequencers work in conjunction with an instrument manager. The sequencer
+relies on the instrument manger to allocate and de-allocate instrument
+instances.</p>
+
+<p class=indent>The MIDI sequencer is not a full implementation but intended
+mainly as an example. It is not described in this document. An example of using
+the MIDI sequencer is in the Example09 program.</p>
+
+<p class=indent>&nbsp;</p>
+
+<p class=indent><a href="#_Sequencer">Sequencer</a></p>
+
+<p class=indent><a href="#_SeqEvent">SeqEvent</a></p>
+
+<p class=indent><a href="#_NoteEvent">NoteEvent</a></p>
+
+<p class=indent><a href="#_VarParamEvent">VarParamEvent</a></p>
+
+<p class=indent><a href="#_Instrument">Instrument</a></p>
+
+<p class=indent><a href="#_InstrManager">InstrManager</a></p>
+
+<h3><a name="_Sequencer"></a>Sequencer</h3>
+
+<p class=noindent>The Sequencer class implements playback of an absolute time
+sequence. Each event in the sequence is represented by a start time, duration,
+mixer channel, instrument number and event identifier.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Sequencer.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void AddEvent(SeqEvent *evt)</p>
+
+<p class=method>bsInt32 Sequence(InstrManager&amp; instMgr, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+bsInt32 startTime = 0,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bsInt32 endTime = 0)</p>
+
+<p class=method>void Halt()</p>
+
+<p class=method>void Reset()</p>
+
+<p class=method>void SetCB(void (*f)(bsInt32), bsInt32 wrap)</p>
+
+<p class=noindent>The <span class=codevariablechar>AddEvent</span> method adds
+one event to the sequencer event list. The caller must set the start time
+before calling this method. All other fields of the event must be set before
+the sequence is started. The sequencer class maintains a sorted list of events
+for playback. As each event is added, the sequencer inserts the event into the
+list based on the start time. Thus events may be added in any order.</p>
+
+<p class=noindent>The <span class=codevariablechar>Sequence</span> method
+begins playback of the sequence. The <span class=codevariablechar>instMgr</span>
+argument provides an instance of the instrument manger that the sequencer
+should use to allocate and deallocate instruments. The optional <span
+class=codevariablechar>startTime</span> and <span class=codevariablechar>endTime</span>
+arguments indicate the starting and ending times for playback. If these values
+are zero, the entire sequence is played. The Sequence method returns the actual
+number of samples generated. On return, the sequencer event list is still
+available and the <span class=codevariablechar>Sequence</span> method may be
+called repeatedly to play the same sequence. It is not necessary to add the
+events to the sequencer again.</p>
+
+<p class=noindent>The <span class=codevariablechar>Halt</span> method
+asynchronously stops the sequence from running. It can be called by the instrument
+manager, or another thread if the sequencer was started in a separate thread.
+The sequencer will halt after generation of the next sample without waiting for
+currently sounding notes to finish.</p>
+
+<p class=noindent>The <span class=codevariablechar>Reset</span> method discards
+the sequencer playback list. This method should be called before the first <span
+class=codevariablechar>AddEvent</span> call to insure the new sequence is not
+mixed with a prior sequence.</p>
+
+<p class=noindent>The <span class=codevariablechar>SetCB</span> method is used
+to store a callback function. If set, this function will be called on every <span
+class=codevariablechar>wrap</span> samples with the current count of times the
+sample count has reached the wrap value. For example, if the callback function
+is set with a wrap value equal to the sample rate, the function will be called
+every time another second of output is produced with an argument of the count
+of seconds. Typically the callback function is used to give feedback to the
+user as to the current position in the sequence. The following code would
+produce output on the display showing the current sound generation time.</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>void myCB(bsint32 secs) {</p>
+
+<p class=code>&nbsp;&nbsp; printf(&quot;%02d:%02d\r&quot;, secs / 60, secs % 60);</p>
+
+<p class=code>}</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>Sequencer seq;</p>
+
+<p class=code>InstrManager mgr;</p>
+
+<p class=code>seq.SetCB(myCB, 44100);</p>
+
+<p class=code>seq.Sequence(mgr);</p>
+
+<p class=code>printf(&quot;\r\n&quot;);</p>
+
+<p class=noindent>It is also possible for the callback function to halt the
+sequencer by calling the <span class=codevariablechar>Halt</span> method. This
+allows for interaction between the user and the sequencer and also provides a
+hook for debugging the sequencer and instrument manger.</p>
+
+<h3><a name="_SeqEvent"></a>SeqEvent</h3>
+
+<p class=noindent>The <span class=codevariablechar>SeqEvent</span> structure
+contains the required sequencer parameters for one sequencer event. Instruments
+will typically derive a structure from <span class=codevariablechar>SeqEvent</span>
+and add the required playback parameters. The event structure is passed to the
+instrument during playback.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SeqEvent.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Destroy()</p>
+
+<p class=method>int AllocParam(bsInt16 n)</p>
+
+<p class=method>bsInt16 MaxParam()</p>
+
+<p class=method>void SetParam(bsInt16 n, bsInt16 id, float v)</p>
+
+<p class=method>void SetParam(bsInt16 n, bsInt16 id, char *s)</p>
+
+<p class=noindent>The <span class=codevariablechar>SetParam</span> methods set
+values into the event. The first argument (<i>n</i>)<i> </i>is the parameter
+index. The second argument (<i>id</i>) is a unique parameter ID. For the
+default parameters, the index and ID are the same value. The third argument (<i>v</i>
+or <i>s</i>) contains the value to set for the indicated parameter. The base
+class implements code to store the parameters required by the sequencer. These
+are defined as manifest constants in the header file:</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>#define P_INUM&nbsp; 0 // instrument number</p>
+
+<p class=code>#define P_CHNL&nbsp; 1 // mixer channel</p>
+
+<p class=code>#define P_START 2 // start time</p>
+
+<p class=code>#define P_DUR&nbsp;&nbsp; 3 // duration</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=indent>In addition to these parameters, the <span
+class=codevariablechar>evtid</span> and <span class=codevariablechar>type</span>
+members of the class must be set. These are public members and are usually set by
+the sequence file loader. Derived classes should not modify these values.</p>
+
+<p class=noindent>The <span class=codevariablechar>MaxParam</span> method
+returns the maximum parameter index the event will allow. For the <span
+class=codevariablechar>SeqEvent</span> base class, this is equal to 4.</p>
+
+<p class=noindent>The <span class=codevariablechar>AllocParam</span> method is
+defined for derived classes that need to allocate a variable number of
+parameters. The base class does nothing when this method is invoked.</p>
+
+<h3><a name="_NoteEvent"></a>NoteEvent</h3>
+
+<p class=noindent>The <span class=codevariablechar>NoteEvent</span> structure
+extends the <span class=codevariablechar>SeqEvent</span> structure and adds
+members for pitch, frequency and volume. This class overrides the <span
+class=codevariablechar>SetParam</span> method to store the values for the
+additional members. All other parameter values are passed to the base class.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SeqEvent.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_SeqEvent">SeqEvent</a>)</p>
+
+<p class=noindent>The additional parameters are identified by the following constants.</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>#define P_PITCH&nbsp; 4</p>
+
+<p class=code>#define P_FREQ&nbsp;&nbsp; 5</p>
+
+<p class=code>#define P_VOLUME 6</p>
+
+<p class=code>&nbsp;</p>
+
+<h3><a name="_VarParamEvent"></a>VarParamEvent</h3>
+
+<p class=noindent>The <span class=codevariablechar>VarParmEvent</span>
+structure extends the <span class=codevariablechar>NoteEvent</span> structure
+and adds the capability for a variable number of parameters. This class
+overrides the <span class=codevariablechar>SetParam</span>&nbsp; and <span
+class=codevariablechar>AllocParam</span> methods to store the values for the
+additional members. All other parameter values are passed to the base class.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>SeqEvent.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>(See <a href="#_SeqEvent">SeqEvent</a> and <a href="#_NoteEvent">NoteEvent</a>)</p>
+
+<h3><a name="_Instrument"></a>Instrument</h3>
+
+<p class=noindent>The <span class=codevariablechar>Instrument</span> class is
+an abstract base class that defines the required methods for a sound generation
+object. This is the interface used by both the instrument manager and <span
+class=codevariablechar>Sequencer</span> classes during sequencer playback.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Instrument.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Start(SeqEvent *evt)</p>
+
+<p class=method>void Param(SeqEvent *evt)</p>
+
+<p class=method>void Stop()</p>
+
+<p class=method>void Tick()</p>
+
+<p class=method>int IsFinished()</p>
+
+<p class=method>void Destroy()</p>
+
+<p class=method>int Load(XmlSynthElem *parent)</p>
+
+<p class=method>int Save(XmlSynthElem *parent)</p>
+
+<p class=method>static Instrument *(*InstrFactory)(InstrManager *, Opaque tmplt)</p>
+
+<p class=method>static SeqEvent&nbsp;&nbsp; *(*EventFactory)(Opaque tmplt);</p>
+
+<p class=noindent>The <span class=codevariablechar>Start</span> method is
+called when the current playback time matches the event start time. The event
+that contains causes the instrument to start is passed to the object as an
+argument. The instrument can use the event structure to access the per-note
+parameters for instrument initialization.</p>
+
+<p class=noindent>The <span class=codevariablechar>Param</span> method is
+similar to start, but is called while the instrument is currently playing in
+order to modify the instrument parameters.</p>
+
+<p class=noindent>The <span class=codevariablechar>Stop</span> method is called
+when the duration for the event that started the instrument has ended. The
+instrument may stop generation immediately, or begin the release phase of its
+envelope if appropriate. The instrument will remain active until the <span
+class=codevariablechar>IsFinished</span> method returns true, allowing the
+instrument to control its own demise.</p>
+
+<p class=noindent>The <span class=codevariablechar>Tick</span> method is called
+by the sequencer to generate the current sample. The instrument should
+calculate the current sample and the call the instrument manger to add the
+sample to the output buffer.</p>
+
+<p class=noindent>The <span class=codevariablechar>IsFinished</span> method is
+invoked by the sequencer on each sample after the <span class=codevariablechar>Stop</span>
+method has been called until the method returns true. When <span
+class=codevariablechar>IsFinished</span> returns true, the instrument is
+removed from the active instrument list and de-allocated.</p>
+
+<p class=noindent>The Destroy method is called to release the instrument
+object. The instrument will typically call delete on itself, but may also cache
+instrument instances and reuse them if it is more efficient to do so.</p>
+
+<p class=noindent>The <span class=codevariablechar>Load</span> and <span
+class=codevariablechar>Save</span> methods are used to load and store
+instrument configuration in an XML file. (See <a href="#_XML_Wrapper">XML Wrapper</a>).</p>
+
+<p class=noindent>The <span class=codevariablechar>InstrFactory</span> function
+is a non-class function or static class method that instantiates an object of
+the instrument type. The <span class=codevariablechar>tmplt</span> argument is
+an instrument specific template that the object may use to initialize with. The
+<span class=codevariablechar>im</span> argument is a pointer to the active
+instrument manager. The instrument must store this value as it is the only
+means for the instrument to emit samples to the output buffer. </p>
+
+<p class=noindent>The <span class=codevariablechar>EventFactory</span> function
+is a non-class function or static class method that instantiates an event
+object specific to the instrument.</p>
+
+<h3><a name="_InstrManager"></a>InstrManager</h3>
+
+<p class=noindent>The <span class=codevariablechar>InstrManager</span> class
+maintains a list of known instrument types and acts as the liaison between the
+sequencer, active instruments, mixer and output buffer. (Note: the architecture
+of the <span class=codevariablechar>BasicSynth</span> system explaining the
+relationship between the instrument manager, sequencer, instruments, mixer and
+output buffer is explained in the <span class=codevariablechar>BasicSynth</span>
+book, Chapters 14-27.)</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Insrument.h</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(Mixer *m, WaveOutBuf *w)</p>
+
+<p class=method>InstrMapEntry *AddType(const char *type,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;InstrFactory in,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;EventFactory ev)</p>
+
+<p class=method>InstrMapEntry *FindType(const char *type)</p>
+
+<p class=method>InstrMapEntry* AddInstrument(bsInt16 inum,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+InstrMapEntry *type,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;Opaque tmplt = 0)</p>
+
+<p class=method>InstrMapEntry* AddInstrument(bsInt16 inum,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;InstrFactory in,<br>
+&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EventFactory
+ev,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;Opaque tmplt = 0)</p>
+
+<p class=method>InstrMapEntry *FindInstr(bsInt16 inum)</p>
+
+<p class=method>InstrMapEntry *FindInstr(char *iname)</p>
+
+<p class=method>Instrument *Allocate(bsInt16 inum)</p>
+
+<p class=method>void Deallocate(Instrument *ip)</p>
+
+<p class=method>SeqEvent *ManufEvent(bsInt16 inum)</p>
+
+<p class=method>void Start()</p>
+
+<p class=method>void Stop()</p>
+
+<p class=method>void Tick()</p>
+
+<p class=method>void Output(int ch, AmpValue val)</p>
+
+<p class=method>void Output2(int ch, AmpValue lft, AmpValue rgt)</p>
+
+<p class=noindent>The <span class=codevariablechar>Init</span> method is called
+to initialize the instrument manager. The mixer (<i>m</i>) and wave output
+buffer (<i>w</i>) arguments are stored by the instrument manager for use during
+sample generation. <span class=codevariablechar>Init</span> must be called
+before the sequencer begins playback.</p>
+
+<p class=noindent>The <span class=codevariablechar>AddType</span> method adds an
+instrument type to the instrument manager. The <span class=codevariablechar>in</span>
+and <span class=codevariablechar>ev</span> arguments point to the instrument
+and event factory functions. The instrument type list is used by the <span
+class=codevariablechar>LoadInstrLib</span> and <span class=codevariablechar>LoadInstr</span>
+functions to match entries in an XML instrument definition file with actual
+objects. It is not necessary to add types to the instrument manager if the
+synthesizer program manages its own list of types.</p>
+
+<p class=noindent>The <span class=codevariablechar>FindType</span> method
+searches the list of known types for a match and returns the instrument map
+entry if found, or NULL if not.</p>
+
+<p class=noindent>The <span class=codevariablechar>AddInstr</span> methods add
+an instrument to the instrument manger. The instrument entry may be a reference
+to a known type, or may pass the instrument and event factory functions
+directly when the instrument is added. Instrument numbers are used to identify
+instruments in a sequence event so that instrument names do not need to be
+contained within the sequencer events. Thus, the instrument number (<span
+class=codevariablechar>inum</span>) must be unique for each instrument.
+However, if the <span class=codevariablechar>inum</span> value is already in
+use, the instrument manager will allocate a unique number for the instrument
+instead. The returned instrument map entry can be checked to discover the
+actual instrument number. The <span class=codevariablechar>tmplt</span>
+argument is an opaque pointer to information the instrument needs during
+instantiation. Typically this is a pointer to an object of the instrument class
+that can be copied into the new instrument object.</p>
+
+<p class=noindent>The <span class=codevariablechar>FindInstr</span> method is
+used to locate the instrument map entry by either name or number.</p>
+
+<p class=noindent>The <span class=codevariablechar>Allocate</span> method creates
+a new instance of an instrument object for the sequencer. The object is created
+by locating the instrument map entry for the instrument number and then calling
+the instrument factory.</p>
+
+<p class=noindent>The <span class=codevariablechar>Deallocate</span> method
+releases an instance of an instrument object. This method is called by the
+sequencer when the instrument is no longer active.</p>
+
+<p class=noindent>The <span class=codevariablechar>ManufEvent</span> method
+creates a new event instance for the indicated instrument (<span
+class=codevariablechar>inum</span>). This method is typically used by programs
+that generate events for the sequencer.</p>
+
+<p class=noindent>The <span class=codevariablechar>Start</span> and <span
+class=codevariablechar>Stop</span> methods are called by the sequencer when the
+sequence starts or stops. The <span class=codevariablechar>Tick</span> method
+is called on each sample. When <span class=codevariablechar>Tick</span> is
+called, the instrument manager copies the current value from the mixer to the
+output buffer.</p>
+
+<p class=noindent>The <span class=codevariablechar>Output</span> and <span
+class=codevariablechar>Output2</span> methods are used by instruments to send a
+value to the output buffer through the instrument manager.</p>
+
+<h3>SequenceFile</h3>
+
+<p class=noindent>The <span class=codevariablechar>SequenceFile</span> class
+loads a sequencer file and adds events to the sequencer. &nbsp;Each line in the
+file has the form:</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=code>=inum [parameter map]</p>
+
+<p class=code>[+|-|&amp;]inum start duration [parameters]</p>
+
+<p class=code>&nbsp;</p>
+
+<p class=indent>The <span class=codevariablechar>inum</span> field is used to
+locate the instrument definition via the instrument manager so that an event
+structure can be allocated. Parameters are then passed to the event for storage.
+Events do not need to be sorted by start time since the Sequencer class
+automatically sorts events by time as they are added. </p>
+
+<p class=indent>A lines beginning with an equal sign (=) indicate a parameter
+map. The map is a list of actual instrument parameter ID numbers that match the
+position-dependent parameters on the sequence event lines. If no parameters are
+specified, or each parameter ID is equal to the parameter index, the map is not
+needed.</p>
+
+<p class=indent>Events can be read from a file, but can also be passed directly
+to the ParseMem function as a character string. This allows on-the-fly
+generation of a sequence for algorithmic composition, interactive music
+programs, parsing directly from an editor buffer, etc.</p>
+
+<p class=methodheading>File:</p>
+
+<p class=method>Include/SequenceFile.h<br>
+Src/SequenceFile.cpp</p>
+
+<p class=methodheading>Methods:</p>
+
+<p class=method>void Init(InstrManager *im, Sequencer *s)</p>
+
+<p class=method>int ParseMem(char *linbuf)</p>
+
+<p class=method>int LoadFile(const char *fileName)</p>
+
+<p class=method>int GetError(bsString&amp; buf)</p>
+
+<p class=noindent>The Init method stores instrument manager and sequencer
+objects with the file loader. The instrument manager is used to locate
+instruments. All loaded events are stored in the sequencer.</p>
+
+<p class=noindent>The <span class=codevariablechar>ParseMem</span> method
+parses one sequencer file line from a memory buffer. ParseMem returns 0 if
+there were no errors, -1 otherwise.</p>
+
+<p class=noindent>The <span class=codevariablechar>LoadFile</span> method loads
+a file of sequencer events. LoadFile returns 0 if there were no errors or -1
+otherwise. Parsing stops with the first error.</p>
+
+<p class=noindent>The <span class=codevariablechar>GetError</span> method
+returns a formatted string for the last error encountered while parsing or
+loading the file.</p>
+
+<!-- Creative Commons License -->
+
+<p><a href="http://creativecommons.org/licenses/GPL/2.0/"><span
+style='text-decoration:none'><img border=0 width=88 height=62
+src="http://creativecommons.org/images/public/cc-GPL-a.png" alt="CC-GNU GPL"></span></a><br>
+The <em>BasicSynth</em> library, instrument library, example and utility
+programs are licensed under the <a
+href="http://creativecommons.org/licenses/GPL/2.0/">CC-GNU GPL</a>. </p>
+
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<html>
+<head>
+<title>Wave File Playback Instrument</title>
+</head>
+<body>
+<h2>Wave File Playback Instrument</h2>
+<p>
+The <i>WFSynth </i>instrument plays a wave file. The wave file can be played once
+or looped, and a simple AR envelope may be applied to the file for fade-in and fade-out.
+</p>
+<h3>Patch Diagram</h3>
+<img src="images/wfplaydiag.jpg" alt="WF Synth diagram"/>
+<h3>Configuration</h3>
+<p>The editor for wave playback is shown below.</p>
+<img src="images/wvplayed.jpg" alt="WF Synth editor"/>
+<p>The "Play all" switch causes the sound to be played through to the end, indendent of the note duration.
+The "Loop" switch causes the sound to loop through the note duration. The "Wavefile ID" value selects
+one of the wavefiles associated with the project. The "Attack" and "Decay" knobs set an envelope for
+the wave file. This allows the sound to fade-in or fade-out if needed.</p>
+<h4>Project and Notelist ID Values</h4>
+<p>
+In order to efficiently manage multiple files, the instrument uses
+a cache of wave files. These wave files are specified in the <a href="projects.html">project file</a>
+using the <i>wvfile</i> tag. Each file is assigned an ID number when it is loaded that
+must be matched with the ID value for the WFSynth instrument.</p>
+<p>
+The WFSynth instrument has three modes of operation. When the loop parameter is set
+to 1, the instrument will loop over the file while playing. When the play all parameter
+is set to 1, the instrument will always play to the end of the wave file independent of
+the note duration. These two options are exclusive; you can loop the sound or play all but
+cannot specify both options. If neither option is turned on, the instrument will play
+the wave file only for the duration of the note. If the file is longer than the duration\
+of a note, the file is cut off when the note is stopped.
+</p>
+The following table shows the parameter numbers and the equivalent XML tag and attribute
+values for the <i>WFSynth</i> instrument.
+</p>
+    <table border="1" cellspacing="0" cellpadding="4">
+        <tr valign="top" style="background-color: Black; color: White;">
+            <td align="center">
+                    <b>Parameter</b>
+            </td>
+            <td>
+                    <b>Tag</b>
+            </td>
+            <td>
+                    <b>Attribute</b>
+            </td>
+            <td>
+                    <b>Name</b>
+            </td>
+            <td>
+                <p align="center">
+                    <b>Use</b></p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    16</p>
+            </td>
+            <td>
+                <p>
+                    wvf</p>
+            </td>
+            <td>
+                <p>
+                    id</p>
+            </td>
+            <td>
+                <p>
+                    wvfid</p>
+            </td>
+            <td>
+                <p>
+                    ID of WAVE file</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    17</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    lp</p>
+            </td>
+            <td>
+                <p>
+                    wvflp</p>
+            </td>
+            <td>
+                <p>
+                    Loop flag,<br />
+                    0 = play once<br />
+                    1 = loop</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    18</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    pa</p>
+            </td>
+            <td>
+                <p>
+                    wvfpa</p>
+            </td>
+            <td>
+                <p>
+                    Play all flag,<br />
+                    0 = stop on Release
+                    <br />
+                    1 = play to the end always</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    19</p>
+            </td>
+            <td>
+                <p>
+                    env</p>
+            </td>
+            <td>
+                <p>
+                    ar</p>
+            </td>
+            <td>
+                <p>
+                    envar</p>
+            </td>
+            <td>
+                <p>
+                    Attack rate</p>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td>
+                <p>
+                    20</p>
+            </td>
+            <td>
+                <p>
+                    &nbsp;</p>
+            </td>
+            <td>
+                <p>
+                    rr</p>
+            </td>
+            <td>
+                <p>
+                    envrr</p>
+            </td>
+            <td>
+                <p>
+                    Release rate</p>
+            </td>
+        </tr>
+    </table>
+<h3>XML Format</h3>
+<pre>
+&lt;instr&gt;
+  &lt;wvf id=&quot;&quot; lp=&quot;&quot; pa=&quot;&quot; /&gt;
+  &lt;env ar=&quot;&quot; rr=&quot;&quot; /&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout type="Chuffer" x="0" y="0" w="750" h="440" bg="bg" fg="fg">
+  <label id="-1"  x="5" y="5" w="180" h="25" th="16" lbl="Noise" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="1"  x="5" y="35" w="180" h="135" bord="1" fr="grpfr" bg="grpbk">
+    <label id="2"  x="5" y="5" w="80" h="15" lbl="H Rate" th="12" italic="1" fg="label"/>
+    <baseknob id="3" ip="20"  x="5" y="25" w="80" h="80" lo="0" hi="1"  val="1" hiclr="freqhi" loclr="freqlo"/>
+    <label id="4"  x="5" y="110" w="80" h="15" lbl="0.0" th="12" filled="1" edit="1" fg="freq" bg="black"/>
+    <pair knb="3" lbl="4" />
+
+    <label id="5"  x="90" y="5" w="80" h="15" lbl="Fo (kHz)" th="12" italic="1" fg="label"/>
+    <baseknob id="6" ip="21"  x="90" y="25" w="80" h="80" lo="0" hi="10" val="0" prec="3" scl="1000" hiclr="freqhi" loclr="freqlo"/>
+    <label id="7"  x="90" y="110" w="80" h="15" lbl="0.0" th="12" filled="1" edit="1" fg="freq" bg="black"/>
+    <pair knb="6" lbl="7" />
+  </group>
+
+  <label id="-1"  x="190" y="5" w="180" h="25" th="16" lbl="Envelope" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="10"  x="190" y="35" w="180" h="135" bord="1" fr="grpfr" bg="grpbk">
+    <label id="11"  x="5" y="5" w="80" h="15" lbl="Attack" th="12" italic="1" fg="label"/>
+    <baseknob id="12" ip="16"  x="5" y="25" w="80" h="80" lo="0" hi="10" val="0.1" hiclr="ratehi" loclr="ratelo"/>
+    <label id="13"  x="5" y="110" w="80" h="15" lbl="0.0" th="12" filled="1" edit="1" fg="rate" bg="black"/>
+    <pair knb="12" lbl="13" />
+
+    <label id="14"  x="90" y="5" w="80" h="15" lbl="Release" th="12" italic="1" fg="label"/>
+    <baseknob id="15" ip="17"  x="90" y="25" w="80" h="80" lo="0" hi="10"  val="0.1" hiclr="ratehi" loclr="ratelo"/>
+    <label id="16"  x="90" y="110" w="80" h="15" lbl="0.0" th="12" filled="1" edit="1" fg="rate" bg="black"/>
+    <pair knb="15" lbl="16" />
+  </group>
+  <pushswitch id="17" ip="18"  x="195" y="175" w="80" h="25" val="0" lbl="Sustain" fg="btnlabel" />
+  <pushswitch id="18" ip="19"  x="280" y="175" w="80" h="25" val="0" lbl="Duration" fg="btnlabel" />
+
+  <label id="-1"  x="375" y="5" w="180" h="25" th="16" lbl="Chopper" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="20"  x="375" y="35" w="180" h="135" bord="1" fr="grpfr" bg="grpbk">
+    <label id="21"  x="5" y="5" w="80" h="15" lbl="Frequency" th="12" italic="1" fg="label"/>
+    <baseknob id="22" ip="22"  x="5" y="25" w="80" h="80" lo="0" hi="100" val="0" prec="2" hiclr="freqhi" loclr="freqlo"/>
+    <label id="23"  x="5" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" fmt="%6.2f" edit="1" fg="freq" bg="black"/>
+    <pair knb="22" lbl="23" />
+
+    <label id="24"  x="90" y="5" w="80" h="15" lbl="Amplitude" th="12" italic="1" fg="label"/>
+    <baseknob id="25" ip="23"  x="90" y="25" w="80" h="80" lo="0" hi="1" val="0" hiclr="volhi" loclr="vollo"/>
+    <label id="26"  x="90" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fg="volume" bg="black"/>
+    <pair knb="25" lbl="26" />
+  </group>
+  <pushbutton id="27" ip="24"  x="380" y="175" w="80" h="25" val="0" lbl="Waveform" fg="wtsel" />
+
+  <group id="30"  x="560" y="35" w="90" h="135" bord="1" fr="grpfr" bg="grpbk">
+    <label id="31"  x="5" y="5" w="80" h="15" lbl="Coef. Rate" th="12" italic="1" fg="label"/>
+    <baseknob id="32" ip="50"  x="5" y="25" w="80" h="80" lo="0" hi="100" val="0" hiclr="ratehi" loclr="ratelo"/>
+    <label id="33"  x="5" y="110" w="80" h="15" lbl="0.0" th="12" filled="1" edit="1" fg="rate" bg="black"/>
+    <pair knb="32" lbl="33" />
+  </group>
+
+  <label id="-1"  x="5" y="240" w="265" h="25" th="16" lbl="Filter Frequency" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="40"  x="5" y="270" w="265" h="135" bord="1" fr="grpfr" bg="grpbk">
+    <label id="41"  x="5" y="5" w="80" h="15" lbl="Start (kHz)" th="12" italic="1" fg="label"/>
+    <baseknob id="42" ip="30"  x="5" y="25" w="80" h="80" lo="0" hi="10" val="0" prec="3" scl="1000" hiclr="freqhi" loclr="freqlo"/>
+    <label id="43"  x="5" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fmt="%6.3f" fg="freq" bg="black"/>
+    <pair knb="42" lbl="43" />
+
+    <label id="44"  x="90" y="5" w="80" h="15" lbl="End (kHz)" th="12" italic="1" fg="label"/>
+    <baseknob id="45" ip="31"  x="90" y="25" w="80" h="80" lo="0" hi="10" val="0" prec="3" scl="1000" hiclr="freqhi" loclr="freqlo"/>
+    <label id="46"  x="90" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fmt="%6.3f" fg="freq" bg="black"/>
+    <pair knb="45" lbl="46" />
+
+    <label id="47"  x="175" y="5" w="80" h="15" lbl="Rate" th="12" italic="1" fg="label"/>
+    <baseknob id="48" ip="32"  x="175" y="25" w="80" h="80" lo="0" hi="10" val="50" hiclr="ratehi" loclr="ratelo" />
+    <label id="49"   x="175" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fg="rate" bg="black"/>
+    <pair knb="48" lbl="49" />
+  </group>
+  <pushswitch id="50" ip="36"  x="10" y="410" w="80" h="25" val="0" lbl="Flt. Frq." fg="btnlabel" />
+  <pushswitch id="51" ip="35"  x="95" y="410" w="80" h="25" val="0" lbl="Flt. Mul." fg="btnlabel" />
+  <pushswitch id="52" ip="34"  x="180" y="410" w="80" h="25" val="0" lbl="Flt. Dur." fg="btnlabel" />
+
+  <label id="-1"  x="275" y="240" w="265" h="25" th="16" lbl="Filter Q" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="60"  x="275" y="270" w="265" h="135" bord="1" fr="grpfr" bg="grpbk">
+    <label id="61"  x="5" y="5" w="80" h="15" lbl="Start" th="12" italic="1" fg="label"/>
+    <baseknob id="62" ip="40"  x="5" y="25" w="80" h="80" lo="1" hi="25" val="0" hiclr="volhi" loclr="vollo"/>
+    <label id="63"  x="5" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fg="volume" bg="black"/>
+
+    <label id="64"  x="90" y="5" w="80" h="15" lbl="End" th="12" italic="1" fg="label"/>
+    <baseknob id="65" ip="41"  x="90" y="25" w="80" h="80" lo="1" hi="25" val="0" hiclr="volhi" loclr="vollo"/>
+    <label id="66"  x="90" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fg="volume" bg="black"/>
+
+    <label id="67"  x="175" y="5" w="80" h="15" lbl="Rate" th="12" italic="1" fg="label"/>
+    <baseknob id="68" ip="42"  x="175" y="25" w="80" h="80" lo="0" hi="10" val="50" hiclr="ratehi" loclr="ratelo" />
+    <label id="69"   x="175" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fg="rate" bg="black"/>
+    <pair knb="62" lbl="63" />
+    <pair knb="65" lbl="66" />
+    <pair knb="68" lbl="69" />
+  </group>
+  <pushswitch id="70" ip="45"  x="280" y="410" w="80" h="25" val="0" lbl="Res. Mul." fg="btnlabel" />
+  <pushswitch id="71" ip="44"  x="365" y="410" w="80" h="25" val="0" lbl="Res. Dur." fg="btnlabel" />
+
+  <label id="-1"  x="545" y="240" w="185" h="25" th="16" lbl="Filter Sweep" shadow="1" bold="1" italic="1" fg="hdr" />
+  <group id="80"  x="545" y="270" w="185" h="135" bord="1" fr="grpfr" bg="grpbk">
+    <label id="81"  x="5" y="5" w="80" h="15" lbl="Frequency" th="12" italic="1" fg="label"/>
+    <baseknob id="82" ip="25"  x="5" y="25" w="80" h="80" lo="0" hi="10" val="0" prec="3" scl="1" hiclr="freqhi" loclr="freqlo"/>
+    <label id="83"  x="5" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fg="freq" bg="black"/>
+
+    <label id="84"  x="90" y="5" w="80" h="15" lbl="Amplitude" th="12" italic="1" fg="label"/>
+    <baseknob id="85" ip="26"  x="90" y="25" w="80" h="80" lo="0" hi="1" val="0" scl="1000" hiclr="volhi" loclr="vollo"/>
+    <label id="86"  x="90" y="110" w="80" h="15" lbl="0.000" th="12" filled="1" edit="1" fg="volume" bg="black"/>
+    <pair knb="82" lbl="83" />
+    <pair knb="85" lbl="86" />
+  </group>
+  <pushbutton id="87" ip="27"  x="550" y="410" w="80" h="25" val="0" lbl="Waveform" fg="wtsel" />
+  <pushbutton id="1000"  x="660" y="40" w="80" h="25" th="12" lbl="Set" fg="cmd" />
+  <pushbutton id="1001"  x="660" y="70" w="80" h="25" th="12" lbl="Restore" fg="cmd" />
+</layout>

@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+<instrlib>
+ <lib name="Basic" desc="Basic instrument library" />
+ <instr id="4" type="AddSynth" name="Flut" parts="3" >
+  <part pn="0"  mul="1">
+   <osc frq="440.0" wt="0" />
+   <env segs="2" st="0" son="0">
+    <seg sn="0" rt="0.05" lvl="1.0" ty="2" />
+    <seg sn="1" rt="0.25" lvl="0.0" ty="2" />
+   </env>
+  </part>
+  <part pn="1"  mul="3">
+   <osc frq="880.0" wt="0" />
+   <env segs="2" st="0" son="0">
+    <seg sn="0" rt="0.05" lvl="0.4" ty="2" />
+    <seg sn="1" rt="0.20" lvl="0.0" ty="2" />
+   </env>
+  </part>
+  <part pn="2"  mul="6">
+   <osc frq="880.0" wt="0" />
+   <env segs="2" st="0" son="0">
+    <seg sn="0" rt="0.05" lvl="0.1" ty="2" />
+    <seg sn="1" rt="0.10" lvl="0.0" ty="2" />
+   </env>
+  </part>
+ </instr>
+ <instr id="8" type="FMSynth" name="Plain piano" >
+  <gen1 mix="0.7" dly="1.0" alg="2" st="0" atk="0.01" pk="1.0" dec="3.0" sus="0" rel="0.1" end="0" ty="2" />
+  <gen2 mul="3.0" st="3" atk="0.01" pk="1" dec="2" sus="0.6" rel="0.15" end="0.2" ty="2" />
+  <gen3 mul="5.0" st="2" atk="0.01" pk="1.5" dec="1" sus="0.2" rel="0.1" end="0.1" ty="2" />
+  <nz mix="0.0" fr="0" fo="0" st="0" atk="0.05" pk="1.0" dec="0.1" sus="0" rel="0.1" end="0" ty="1" />
+  <dln mix="0.0" dly="0.01" dec="0.1" />
+  <lfo frq="3.5" wt="1" dly="0" rt="0.0" amp="0.0" />
+ </instr>
+ <instr id="9" type="MatrixSynth" name="Bloop">
+  <mat frq="440.0" vol="1" />
+   <gen gn="0" out="11100000" mod="00000000" frq="440" wt="2" mul="1" mnx="1" vol="1" eg="0" fx1="0" fx2="0" fx3="0" fx4="0" />
+   <env en="0" segs="4" st="0" sus="1">
+    <seg sn="0" rt="0.01" lvl="1.0" ty="1" />
+    <seg sn="1" rt="0.10" lvl="0.8" ty="1" />
+    <seg sn="2" rt="0.30" lvl="0.5" ty="1" />
+    <seg sn="3" rt="0.10" lvl="0.0" ty="1" />
+  </env>
+  <lfo frq="3.5" wt="0" dly="0" rt="0.0" amp="1.2" />
+ </instr>
+</instrlib>

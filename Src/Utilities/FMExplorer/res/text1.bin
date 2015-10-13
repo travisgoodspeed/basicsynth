@@ -1,0 +1,17 @@
+This program implements a simple 3 oscillator FM synthesis instrument.
+
+The four Algorithm buttons select the connection between oscillators. In the single modulator stack only Modulator I affects the carrier. In the double stack configuration, Modulator II is applied to Modulator I and then Modulator I is applied to the carrier. In the "Y" configuration, the modulators are summed and the sum applied to the carrier. Algorithm 4 is a combination of the stack and "Y" algorithms.
+
+Carrier frequency is specified as a pitch number (0-120) with middle C at index 60. Modulator frequency is specified as a multiple of the carrier in the range 0-10 and may be harmonic (integer values) or inharmonic (real values).
+
+The envelope generators are ADSR types with attack, decay, and sustain times specified in seconds.
+
+The amplitude of the carrier envelope sets the volume level. The amplitude of a modulator sets the modulation depth and is specified as an index of modulation. The index of modulation has a range of 0-50.
+
+Values can be entered using the sliders or by typing directly into the edit fields. Moving out of an edit field automatically updates the slider position.
+
+The buttons at the bottom of the display provide some example settings.
+
+Sound can be played from this program. The "Play" button (>) plays the sound once. The "Loop" button plays the sound repeatedly until the "Stop" button is pressed.
+
+The sound can be saved as a single channel (monophonic) .WAV file by pressing the "speaker" button. The settings can be copied to the clipboard using the "paste" button.

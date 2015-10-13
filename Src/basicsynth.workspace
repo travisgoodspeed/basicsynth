@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="BasicSynth workspace">
+		<Project filename="Common/Common.cbp" active="1" />
+		<Project filename="Instruments/Instruments.cbp" />
+		<Project filename="Notelist/Notelist.cbp" />
+		<Project filename="Examples/Example01/Example01.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example02/Example02.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example02a/Example02a.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example02b/Example02b.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example03/Example03.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example04/Example04.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example4a/Example4a.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example05/Example05.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example06/Example06.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example07/Example07.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example07a/Example07a.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example07b/Example07b.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example07c/Example07c.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example08/Example08.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example09/Example09.cbp">
+			<Depends filename="Common/Common.cbp" />
+		</Project>
+		<Project filename="Examples/Example9a/Example9a.cbp">
+			<Depends filename="Common/Common.cbp" />
+			<Depends filename="Instruments/Instruments.cbp" />
+		</Project>
+		<Project filename="Examples/Example10/Example10.cbp">
+			<Depends filename="Common/Common.cbp" />
+			<Depends filename="Instruments/Instruments.cbp" />
+		</Project>
+		<Project filename="BSynth/BSynth.cbp">
+			<Depends filename="Common/Common.cbp" />
+			<Depends filename="Instruments/Instruments.cbp" />
+			<Depends filename="Notelist/Notelist.cbp" />
+		</Project>
+		<Project filename="GMSynth/GMSynth.cbp">
+			<Depends filename="Common/Common.cbp" />
+			<Depends filename="Instruments/Instruments.cbp" />
+		</Project>
+	</Workspace>
+</CodeBlocks_workspace_file>

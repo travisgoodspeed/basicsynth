@@ -1,0 +1,375 @@
+<html>
+<head>
+<title>BUZZ Synthesis Instrument</title>
+</head>
+<body>
+<h2><a name="_Buzz_Synthesis_Instrument"></a>Subtractive Synthesis Instrument using BUZZ Oscillator<hr></h2>
+<p>The <em>BuzzSynth</em> instrument is a subtractive synthesis instrument using a "BUZZ" generator, i.e., a closed form
+of the Fourier series.The instrument includes two tone generators, each consisting of a buzz oscillator,
+volume envlope, resonant low pass filter, and modulation envelope. The envelope generators are
+five segments each. A LFO oscillator and pitch bend unit are applied to both sound generators.
+</p>
+<h3>Patch Diagram</h3>
+<img src="images/BuzzSynthDiag.jpg" />
+<p>The BUZZ oscillator is defined by the series shown below. This series has a closed form, shown in the the third forumla.</p>
+<img src="images/buzzformula.jpg" />
+<p>In this series, <i>N</i> is the maximum partial with the amplitude of each partial set by <i>a<sup>k</sup></i>.
+When <i>a</i> is less than 1, the amplitude decreases exponentially for higher partials. 
+When <i>a</i> is greater than 1, the amplitude increases as the partial increases. 
+The parameter <i>Theta</i> represents the fundamental frequency and the ratio of <i>Theta</i> to <i>Beta</i> sets the frequency difference between adjacent partials. 
+For example, when <i>Theta = Beta</i>, all harmonics are included, but, when <i>Beta = 2 Theta</i>, only odd harmonics are included. 
+A wide variety of waveforms can be created by varying the three values of <i>N, a,</i> and <i>Beta</i>.</p>
+<p>The modulation envelope can be applied to the oscillator harmonic amplitude, and/or filter cutoff frequency. Each modulation destination has an enable flag and a
+scaling value. The output of the envelope is multiplied by the scaling value and then added to the respective input of the oscillator or filter. 
+Bit 0 (0x01) of the <i>mod</i> flags turns on modulation of the filter. Bit 1 (0x02) turns on modulation of the harmonic amplitude (<i>a</i>). Bit 4 (0x10) enables
+the filter. If this bit is not set, the oscillator signal is not passed through the filter. Bit 5 (0x20) causes the filter frequency to be calculated relative to the oscillator frequency. 
+In other words, the filter cutoff is the oscillator frequency plus the modulation frequence, and causes the filter cutoff to track the note pitch. When bit 5 is clear, the filter frequency is absolute. 
+Bit 8 (0x100) of the <i>mod</i> flags is used to enable the generator. When clear, the generator is turned off. Each of these flags can be set directly as synthesis parameters, but in the
+instrument file, the flags are combined into a single attribute (mod).</p>
+<hr /><h3>Configuration</h3>
+<p>The <em>BuzzSynth</em> editor is shown below. </p>
+<img src="images/buzzsynthedit.jpg" alt="buzz synth editor"/>
+<h4>Oscil. I and II</h4>
+<p>Each of the two oscillators is configured independently. The lamp switch at the top enables the oscillator.</p>
+<h4>Project and Notelist ID Values</h4>
+
+<p>The following table shows the parameter numbers and the
+equivalent XML tag and attribute values for the <i>BuzzSynth </i> instrument. The value of GN is the generator number (1 or 2) multiplied by 256. The <i>genx</i> name is either gen1 or gen2.</p>
+
+<table border="1" cellspacing="0" cellpadding="2">
+ <tr valign="top" style="background-color: Black; color: White;">
+   <td><p align="center"><b>Parameter</b></p></td>
+   <td><p align="center"><b>Tag</b></p></td>
+   <td><p align="center"><b>Attribute</b></p></td>
+   <td><p align="center"><b>Name</b><p></td>
+   <td><p align="center"><b>Use</b></p></td>
+  </tr>
+ <tr valign="top">
+  <td><p>GN</p></td>
+  <td><p>gen</p></td>
+  <td><p>gn</p></td>
+  <td><p>genx</p></td>
+  <td><p>Selects the generator (GN),  (gen1 or gen2).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+30</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>mod</p></td>
+  <td><p>genx.mod</p></td>
+  <td><p>Set modulator options for this generator. (See above) </p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+31</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>genx.fcon</p></td>
+  <td><p>Enable the filter.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+32</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>genx.fcrel</p></td>
+  <td><p>Filter frequency is relative to note frequency.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+33</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>genx.fcmod</p></td>
+  <td><p>Apply modulation envelope to filter frequency.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+34</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>genx.hmod</p></td>
+  <td><p>Apply modulation envelope to harmonic amplitude.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+35</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>genx.on</p></td>
+  <td><p>Enable this generator.</p></td>
+ </tr>
+
+<tr valign="top">
+  <td><p>GN+0</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>vol</p></td>
+  <td><p>genx.volume</p></td>
+  <td><p>Volume.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>5</p></td>
+  <td><p>osc</p></td>
+  <td><p>frq</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>Base frequency (set by note start parameters). </p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+1</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fr</p></td>
+  <td><p>genx.fr</p></td>
+  <td><p>Frequency multiplier.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+2</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>amp</p></td>
+  <td><p>genx.amp</p></td>
+  <td><p>Harmonics amplitude (<i>a</i>).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+3</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>hscl</p></td>
+  <td><p>genx.hscl</p></td>
+  <td><p>Harmonics amplitude modulation scale.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+5</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fc</p></td>
+  <td><p>genx.fc</p></td>
+  <td><p>Filter frequency base (semitones relative to oscillator frequency).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+6</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fscl</p></td>
+  <td><p>genx.fscl</p></td>
+  <td><p>Filter envelope scale.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+7</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>q</p></td>
+  <td><p>genx.q</p></td>
+  <td><p>Filter resonance (Q).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+8</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>harm</p></td>
+  <td><p>genx.harm</p></td>
+  <td><p>Maximum harmonic number (N).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+9</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>hr</p></td>
+  <td><p>genx.hr</p></td>
+  <td><p>Harmonics ratio (Beta/Theta).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+10</p></td>
+  <td><p>egv</p></td>
+  <td><p>rt0</p></td>
+  <td><p>genx.egvr0</p></td>
+  <td><p>Volume envelope rate 0.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+11</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>lv0</p></td>
+  <td><p>genx.egvl0</p></td>
+  <td><p>Volume envelope level 0.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+12</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt1</p></td>
+  <td><p>genx.egvr1</p></td>
+  <td><p>Volume envelope rate 1.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+13</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>lv1</p></td>
+  <td><p>genx.egvl1</p></td>
+  <td><p>Volume envelope level 1.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+14</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt2</p></td>
+  <td><p>genx.egvr2</p></td>
+  <td><p>Volume envelope rate 2.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+15</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>lv2</p></td>
+  <td><p>genx.egvl2</p></td>
+  <td><p>Volume envelope level 2 (sustain).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+16</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt3</p></td>
+  <td><p>genx.egvr3</p></td>
+  <td><p>Volume envelope rate 3 (release).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+17</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>genx.egvty</p></td>
+  <td><p>Volume curve type (0=linear,1=exponential).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+18</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>son</p></td>
+  <td><p>genx.egvon</p></td>
+  <td><p>Volume sustain on. (0=no sustain).</p></td>
+ </tr>
+
+ <tr valign="top">
+  <td><p>GN+20</p></td>
+  <td><p>egm</p></td>
+  <td><p>rt0</p></td>
+  <td><p>genx.rt0</p></td>
+  <td><p>Modulation envelope rate 0.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+21</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>lv0</p></td>
+  <td><p>genx.egml0</p></td>
+  <td><p>Modulation envelope level 0.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+22</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt1</p></td>
+  <td><p>genx.egmr1</p></td>
+  <td><p>Modulation envelope rate 1.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+23</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>lv1</p></td>
+  <td><p>genx.egml1</p></td>
+  <td><p>Modulation envelope level 1.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+24</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt2</p></td>
+  <td><p>genx.egmr2</p></td>
+  <td><p>Modulation envelope rate 2.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+25</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>lv2</p></td>
+  <td><p>genx.egml2</p></td>
+  <td><p>Modulation envelope level 2 (sustain).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+26</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt3</p></td>
+  <td><p>genx.egmr3</p></td>
+  <td><p>Modulation envelope rate 3 (release).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+27</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>genx.egmty</p></td>
+  <td><p>Modulation curve type (0=linear,1=exponential).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>GN+28</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>son</p></td>
+  <td><p>genx.egmon</p></td>
+  <td><p>Modulation sustain on. (0=no sustain).</p></td>
+ </tr>
+
+<tr valign="top">
+  <td><p>16</p></td>
+  <td><p>lfo</p></td>
+  <td><p>frq</p></td>
+  <td><p>lfofrq</p></td>
+  <td><p>LFO Frequency</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>17</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>lfowt</p></td>
+  <td><p>LFO wavetable index</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>18</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rt</p></td>
+  <td><p>lfoatk</p></td>
+  <td><p>LFO delay (attack rate)</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>19</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>amp</p></td>
+  <td><p>lfoamp</p></td>
+  <td><p>LFO amplitude (depth).</p></td>
+ </tr>
+ 
+ <tr valign="top">
+  <td><p>20</p></td>
+  <td><p>pb</p></td>
+  <td><p>pbamp</p></td>
+  <td><p>pbamp</p></td>
+  <td><p>Pitch bend WT amount</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>21</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>pbwt</p></td>
+  <td><p>Pitch bend wavetable</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>22</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbdur</p></td>
+  <td><p>pbdur</p></td>
+  <td><p>Pitch bend WT rate (absolute or percent of duration).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>23</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbdly</p></td>
+  <td><p>pbdly</p></td>
+  <td><p>Pitch bend delay (seconds).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>24</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbmode</p></td>
+  <td><p>pbmode</p></td>
+  <td><p>Pitch bend mode (0=relative duration, 1=absolute duration)</p></td>
+ </tr>
+</table>
+<p>The XML format for the instrument is shown below.</p>
+
+<pre>
+&lt;instr id=&quot;&quot; type=&quot;BuzzSynth&quot; name=&quot; &quot;&gt;
+  &lt;gen gn=&quot;&quot; mod=&quot;&quot; vol=&quot;&quot; &gt;
+    &lt;osc frq=&quot;&quot; foffs=&quot;&quot; fr=&quot;&quot; harm=&quot;&quot; amp=&quot;&quot; aoffs=&quot;&quot; /&gt;
+    &lt;flt fc=&quot;&quot; foffs=&quot;&quot; q=&quot;&quot; /&gt;
+   &lt;egs rt0=&quot;&quot; lv0=&quot;&quot; rt1=&quot;&quot; lv1=&quot;&quot; rt2=&quot;&quot; lv2=&quot;&quot; rt3=&quot;&quot; ty=&quot;&quot; son=&quot;&quot; /&gt;
+   &lt;egm rt0=&quot;&quot; lv0=&quot;&quot; rt1=&quot;&quot; lv1=&quot;&quot; rt2=&quot;&quot; lv2=&quot;&quot; rt3=&quot;&quot; ty=&quot;&quot; son=&quot;&quot; /&gt;
+ &lt;/gen&gt; 
+ &lt;lfo frq=&quot;&quot; wt=&quot;&quot; rt=&quot;&quot; amp=&quot;&quot; /&gt; 
+ &lt;pb frq=&quot;&quot; wt=&quot;&quot; rt=&quot;&quot; amp=&quot;&quot; /&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

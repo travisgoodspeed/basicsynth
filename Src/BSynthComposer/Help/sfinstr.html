@@ -1,0 +1,238 @@
+<html>
+<head>
+<title>Sound Bank Instrument</title>
+</head>
+<body>
+<h2>Sound Bank Instrument<hr/></h2>
+<p>The <em>SoundBank</em> instrument provides playback of samples from sound banks (SF2 or DLS files). Unlike the <em>GMPlayer</em>
+instrument, this instrument uses only the sample data and ignores the articulation information (i.e., envelope and modulators). The envelope of the sound
+is controlled by parameters of the <em>SoundBank</em>  instrument.</p>
+<h3>Patch Diagram<hr/></h3>
+<p>The following diagram shows the SoundBank object internal structure.</p>
+<img src="images/soundbankdiag.jpg" alt="Sound bank diagram" />
+
+<h3>Configuration</h3>
+<p>The following table shows the parameter ID numbers and the
+equivalent XML tag and attribute values for the <em>SoundBank</em> instrument. </p>
+
+<table border="1" cellspacing="0" cellpadding="4">
+ <tr valign="top" style="background-color:Black;color:White;">
+  <td><p align="center"><b>Parameter</b></p></td>
+  <td><p align="center"><b>Tag</b></p></td>
+  <td><p align="center"><b>Attribute</b></p></td>
+  <td><p align="center"><b>Name</b><p></td>
+  <td><p align="center"><b>Use</b></p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>16</p></td>
+  <td><p>sf</p></td>
+  <td><p>bank</p></td>
+  <td><p>bank</p></td>
+  <td><p>Bank number matching a bank number in the sound bank file.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>17</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>prog</p></td>
+  <td><p>prog</p></td>
+  <td><p>Program number (preset). This selects the instrument from the sound bank.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>18</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>mono</p></td>
+  <td><p>monoSet</p></td>
+  <td><p>Force mono playback even if the sound bank sample is multi-channel.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>44</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fmcm</p></td>
+  <td><p>fmcm</p></td>
+  <td><p>Modulator frequency multiplier (i.e., C:M ratio).</p></td>
+</tr>
+<tr valign="top">
+  <td><p>45</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fmim</p></td>
+  <td><p>fmim</p></td>
+  <td><p>Modulator index of modulation..</p></td>
+</tr>
+<tr valign="top">
+  <td><p>20</p></td>
+  <td><p>venv</p></td>
+  <td><p>st</p></td>
+  <td><p>volStart</p></td>
+  <td><p>Volume envelope start level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>21</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>volAttack</p></td>
+  <td><p>Volume envelope attack time.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>22</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>volAttack</p></td>
+  <td><p>Volume envelope peak level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>23</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>volDecay</p></td>
+  <td><p>Volume envelope decay time.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>24</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>volSustain</p></td>
+  <td><p>Volume envelope sustain level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>25</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rel</p></td>
+  <td><p>volRelease</p></td>
+  <td><p>Volume envelope release time.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>26</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>end</p></td>
+  <td><p>volEnd</p></td>
+  <td><p>Volume envelope end level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>27</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>volType</p></td>
+  <td><p>Volume envelope curve type.</p></td>
+</tr>
+
+<tr valign="top">
+  <td><p>30</p></td>
+  <td><p>menv</p></td>
+  <td><p>st</p></td>
+  <td><p>modStart</p></td>
+  <td><p>Modulator envelope start level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>31</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>modAttack</p></td>
+  <td><p>Modulator envelope attack time.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>32</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>modAttack</p></td>
+  <td><p>Modulator envelope peak level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>33</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>modDecay</p></td>
+  <td><p>Modulator envelope decay time.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>34</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>modSustain</p></td>
+  <td><p>Modulator envelope sustain level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>35</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rel</p></td>
+  <td><p>modRelease</p></td>
+  <td><p>Modulator envelope release time.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>36</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>end</p></td>
+  <td><p>modEnd</p></td>
+  <td><p>Modulator envelope end level.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>37</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>modType</p></td>
+  <td><p>Modulator envelope curve type.</p></td>
+</tr>
+
+<tr valign="top">
+  <td><p>40</p></td>
+  <td><p>vlfo</p></td>
+  <td><p>atk</p></td>
+  <td><p>vibLfoAttack</p></td>
+  <td><p>Modulator envelope curve type.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>41</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>frq</p></td>
+  <td><p>vibLfoFrq</p></td>
+  <td><p>Vibrato frequency.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>42</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>amp</p></td>
+  <td><p>vibLfoLevel</p></td>
+  <td><p>Vibrato amplitude.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>43</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>vibLfoWT</p></td>
+  <td><p>Vibrato wavetable.</p></td>
+</tr>
+
+<tr valign="top">
+  <td><p>46</p></td>
+  <td><p>pb</p></td>
+  <td><p>pbamp</p></td>
+  <td><p>pbamp</p></td>
+  <td><p>Pitch bend amplitude.</p></td>
+</tr>
+<tr valign="top">
+  <td><p>48</p></td>
+  <td><p>pb</p></td>
+  <td><p>pbwt</p></td>
+  <td><p>pbwt</p></td>
+  <td><p>Pitch bend wavetable.</p></td>
+</tr>
+</tr>
+</table>
+
+<h3>XML Format<hr/></h3>
+<pre>
+&lt;instr id=&quot;&quot; type=&quot;SoundBank&quot; name=&quot;&quot; desc=&quot;&quot;&gt;
+   &lt;gm local=&quot;1&quot; vol=&quot;1.000000&quot; pan=&quot;0.000000&quot; bank=&quot;0&quot; prog=&quot;0&quot; flags=&quot;16375&quot;&gt;
+     Soundbank Name
+   &lt;/gm&gt;
+  &lt;sf bank=&quot;0&quot; prog=&quot;0&quot; mono=&quot;0&quot; fmcm=&quot;2.099000&quot; fmim=&quot;0.260000&quot;&gt;
+     &lt;file&gt;alias&lt;/file&gt;
+     &lt;instr&gt;display name&lt;/instr&gt;
+  &lt;/sf&gt;
+  &lt;venv st=&quot;0.000000&quot; atk=&quot;0.330000&quot; pk=&quot;1.000000&quot; dec=&quot;0.000000&quot; sus=&quot;1.000000&quot; rel=&quot;0.400000&quot; end=&quot;0.100000&quot; ty=&quot;2&quot; /&gt;
+  &lt;menv st=&quot;0.000000&quot; atk=&quot;0.389000&quot; pk=&quot;1.000000&quot; dec=&quot;1.549000&quot; sus=&quot;0.480000&quot; rel=&quot;0.619000&quot; end=&quot;0.000000&quot; ty=&quot;2&quot; /&gt;
+  &lt;vlfo frq=&quot;4.630000&quot; wt=&quot;0&quot; atk=&quot;1.039000&quot; amp=&quot;0.070000&quot; /&gt;
+  &lt;pb pbamp=&quot;0.000000&quot; pbwt=&quot;9&quot; /&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

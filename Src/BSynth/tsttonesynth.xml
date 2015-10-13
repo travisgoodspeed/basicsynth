@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<synthprj>
+  <name>Test Project</name>
+  <desc>A Test of Tone Synth params</desc>
+  <author>Composer Name</author>
+  <cpyrgt>Copyright stuff</cpyrgt>
+  <out type="1" lead="0" tail="0.5">tonesynth.wav</out>
+  <synth sr="44100" wt="16384" usr="1">
+    <wvtable ndx="10" parts="3" >
+      <part mul="1" amp="1.0" phs="0"/>
+      <part mul="2" amp="0.5" phs="0"/>
+      <part mul="4" amp="0.2" phs="0"/>
+    </wvtable>
+  </synth>
+  <mixer chnls="4" fxunits="1" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="0.707" pan="0"/>
+    <chnl cn="1" on="1" vol="0.707" pan="0"/>
+    <reverb unit="0" vol="0.4" rvt="2.5" pan="0">
+      <send cn="0" amt="0"/>
+      <send cn="1" amt="0"/>
+    </reverb>
+  </mixer>
+  <instrlib>
+    <instr id="1" type="Tone" name="Test">
+      <osc frq="440" wt="1" vol="1" />
+      <env st="0" atk="0.1" pk="1" dec="0.1" sus="0.8" rel="0.2" end="0" ty="1"/>
+      <lfo frq="3.5" wt="0" atk="0" amp="0" />
+    </instr>
+    <instr id="2" type="ToneFM" name="TestFM">
+      <osc frq="440" wt="0" vol="1" mul="2" mnx="2" />
+      <env st="0" atk="0.1" pk="1" dec="0.1" sus="0.8" rel="0.2" end="0" ty="1"/>
+      <lfo frq="3.5" wt="0" atk="0" amp="0" />
+    </instr>
+  </instrlib>
+  <score name="ToneSynth" dbg="0">tsttonesynth.nl</score>
+</synthprj>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Step V - Create a Score</title>
+</head>
+<body>
+<h1>Step V - Create a Score</h1><hr/>
+<p>
+Right-click the <b>Notelist</b> project item and select <b>New</b> from the pop-up menu. The Notelist
+file properties form is displayed. Enter "Steps" for the name and "steps.nl" for the
+file and press <b>OK</b>. The Notelist editor is opened. The Notelist editor is a
+text editor with syntax high-lighting. Keywords are shown in blue, while delimters
+are red. The editor uses the standard editing keys for Windows and also includes
+Find and Replace capability.</p>
+<p>
+Type (or copy) the following into the editor. Be careful to include all punctuation exactly as shown.
+</p>
+<pre>
+tempo 4, 120;
+
+voice 1
+begin
+    instrument "Plink";
+    channel 0;
+    volume 100;
+    C4, %2, 100;
+    D4, %4, 100;
+    E4, %8, 100;
+    F4, %8, 100;
+
+    G4, %2, 100;
+    A4, %4, 100;
+    B4, %8, 100;
+    C5, %8, 100;
+
+    A4, %4, 100;
+    G4, %4, 100;
+    F4, %4, 100;
+    E4, %8, 100;
+    D4, %8, 100;
+
+    C4, %1, 100;
+end
+</pre>
+<p>
+A Notelist score consists of one or more voices, each containing one or more notes.
+A Notelist voice is similar to a staff in traditional music notation. Notelist automatically
+calculates the start time for each note by adding the duration of the previous note
+to the current time. It is not necessary to specify the exact start
+and stop time for each note. (There are ways to do this if needed.) Each voice
+must be given a number, but the numbers do not have to follow in order or be limited
+to any particular range. You can create as many voices as needed and number them
+anyway you want so long as the number is a positive integer value. The voice also
+defines the instrument, mixer channel, volume level and other information about
+the notes.
+</p>
+<p>
+Each note consists of a pitch, rhythm, volume level and optional instrument parameters.
+Pitches have a pitch letter, optional accidental (# or b) and octave number. Octave
+4 is the octave of middle C. Rhythm values can be entered as absolute time in seconds,
+or, as in the example above, with a rhythm value. A rhythm value is indicated by
+a % sign followed by a number representing a fraction of a whole note. Thus, a value
+of "%4" is equivalent to a quarter note. Volume levels (dynamics) are specified
+with a value from 0 to 100 with 0 meaning silence and 100 the maximum level. The
+actual volume level, however, will be modified by the mixer channel and may be softer
+or louder than the value in the score. Instrument parameters follow the volume level
+on the note line. This voice does not include any instrument parameters.</p>
+<p>
+Notice how each note is ended with a semi-colon and the values for the note are
+separated by commas. These punctuation marks help Notelist identify the parts of
+the note. A semi-colon is used to separate notes while a comma is used to separate
+values. This allows multiple notes to be placed on one line, or one note to span
+multiple lines. In other words, Notelist treats the end of line as if it was a space.
+You can add or remove spaces freely to suit your tastes.</p>
+<p>
+It is also possible to place multiple notes on one line using braces around the
+notes. See the <a href="notelist.html">Notelist documentation</a> for information
+on this and other features of Notelist.</p>
+<hr />
+<p>Next.: <a href="step6.html">Preview the composition...</a></p>
+</body>
+</html>

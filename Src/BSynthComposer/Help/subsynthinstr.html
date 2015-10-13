@@ -1,0 +1,344 @@
+<html>
+<head>
+<title>Subtractive Synthesis Instrument</title>
+</head>
+<body>
+<h2>Subtractive Synthesis Instrument</h2>
+<p>
+The <i>SubSynth</i> instrument combines one oscillator, noise source,
+and a selectable filter. The filter may be low-pass, high-pass, band-pass, reson, or two pole 
+filter. The center frequency of the filter is controlled with an ADSR envelope generator.
+The mixture of oscillator and noise fed to the filter is controlled by the mix parameter.
+An ADSR envelope shapes the overall amplitude of the filtered signal.</p>
+<h3>Patch Diagram</h3>
+<img alt="SubSynth diagram" src="images/subsynthdiag.jpg" />
+<h3>Configuration</h3>
+<img src="images/subsynthedit.jpg" alt="sub synth editor" />
+<h4>Oscillator</h4>
+<p>The buttons on the left side select the oscillator waveform. Four of the builtin waveforms are available 
+with buttons. You can select any configured waveform by pressing the <b>Select</b> button and then select
+the waveform from the popup dialog.</p>
+<h4>Filter</h4>
+<p>The filter buttons select the filter type.
+<ul>
+<li>Res. LP - 2-pole lowpass filter with resonance.</li>
+<li>Reson - Reson filter.</li>
+<li>Lowpass (bi-quad)</li>
+<li>Highpass (bi-quad)</li>
+<li>Bandpass (bi-quad)</li>
+</ul>
+</p>
+<h4>Envelope</h4>
+<p>The volume envelope is set using the knobs on the top row. The <b>Attack</b> knob sets the attack time in seconds.
+The <b>Peak</b> knob sets the envelop level at the end of the attack. Typically this is set to 1.0. However, it is
+allowable to set the "peak" to a value less than "sustain" in order to create a two-segment attack. 
+The <b>Decay</b> knob sets the amount of time the envelope takes to move from the peak level to the sustain level.
+The <b>Sustain</b> knob sets the level held over the note duration.
+The <b>Release</b> knob sets the final release time in seconds. Release is initiated when the note is stopped
+and is the time the envelope takes to decay from the current note level to silence.
+</p>
+<h4>Signal</h4>
+<p>The <b>Noise Mix</b> knob sets the blend of oscillator and noise. A value of 1 is full oscillator, a value
+of 0 full noise, with values in between creating a blend of oscillator and noise.</p>
+<h4>Filter Envelope</h4>
+<p>The filter envelope is set using the knobs on the second row. The <b>Start</b>, <b>Peak</b>,
+<b>Sustain</b>, and <b>End</b> knobs set the filter cutoff frequency levels. The value shown
+on the form is in 1kHz increments, e.g., .500 is equal to 500Hz.
+The <b>Attack</b>, <b>Decay</b>, and <b>Release</b> knobs set the repsective rates in seconds.
+</p>
+<h4>Filter Control</h4>
+<p>The <b>Gain</b> knob changes the filter output level. The <b>Res.</b> knob sets the resonance
+for the Res. LP, Reson or Bandpass filters. For the <i>Reson</i> filter, the vaue is in the range 0.001 to 0.999.
+For the <i>Res. LP</i> and <i>Bandpass</i>, the value is the filter 'Q' with the range of 0.5 to 20.</p>
+<h4>LFO</h4>
+<p>
+The LFO (Low Frequency Oscillator) produces vibrato. The <b>Frequency</b> knob sets the vibrato rate in Hz.
+The <b>Attack</b> knob sets the time in second for the vibrato to become active. The <b>Depth</b> knob sets
+the amount of vibrato in semitones. A value of 1 indicates a half-step in pitch. Fractional values can be used
+to set vibrato to cents of pitch, e.g., 0.1 is equivalent to 10 cents. The buttons to the left of the <b>Depth</b>
+knob select the LFO waveform. Use the <b>Select</b> button to choose a waveform other than a sine wave.
+</p>
+<h4>Pitch Bend</h4>
+<p>
+Pitch bend applies a waveform to the pitch of the sound over the duration of the note. 
+Wavetables are "normalized" to a range of -1 to +1 and multiplied by the pitch bend amount.
+The <b>Amount</b> knob sets the scaling for the waveform in semitones.
+The <b>Curve</b> button selects the wavetable
+The <b>Delay</b> knob sets the amount of time before the pitch bend begins to affect the pitch.
+The <b>Duration</b> knob sets the time taken to scan the wavetable.
+Depending on the setting for duration, the wavetable can be scanned at a constant rate,
+or scannned at a rate scaled by the note length. When the <b>Abs.</b> button is depressed, the
+delay and duration values are absolute values in seconds. When the <b>Scl.</b> button is depressed,
+the delay and duration values represent a multiplier for the actual note duration. For example, if
+the note length is 1/2 second, delay is 0.1 and duration is 0.5, pitch bend will start 1/20th second
+after the note starts and then finish 1/4 second later.
+</p>
+<h4>Project and Notelist ID Values</h4>
+<p>
+The following table shows the parameter numbers and the equivalent XML tag and attribute
+values for the <i>SubSynth</i> instrument.
+</p>
+<table border="1" cellspacing="0" cellpadding="4">
+    <tr valign="top" style="background-color: Black; color: White;">
+        <td align="center"><b>Parameter</b></td>
+        <td align="center"><b>Tag</b></td>
+        <td align="center"><b>Attribute</b></td>
+        <td><b>Name</b></td>
+        <td><b>Use</b></td>
+    </tr>
+    <tr valign="top">
+        <td>5</td>
+        <td>osc</td>
+        <td>frq</td>
+        <td>oscfrq</td>
+        <td>Sets the initial frequency for the oscillator.</td>
+    </tr>
+    <tr valign="top">
+        <td><p>6</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>vol</p></td>
+        <td><p>oscvol</p></td>
+        <td><p>Sets the overall volume level.</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>16</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>mix</p></td>
+        <td><p>oscmix</p></td>
+        <td><p>Sets the mixture of oscillator output and noise output. 1 is full oscillator; 0 is full noise.</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>17</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>wt</p></td>
+        <td><p>oscwt</p></td>
+        <td><p>Wave table index.</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>18</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>ft</p></td>
+        <td><p>oscft</p></td>
+        <td><p>Filter type:<br/>
+    0 = LP (bi-quad)<br/>
+    1 = HP (bi-quad)<br/>
+    2 = BP (bi-quad)<br/>
+    3 = RESON<br/>
+    4 = two pole (lowpass with resonance).</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>19</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>fg</p></td>
+        <td><p>oscfg</p></td>
+        <td><p>Filter gain</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>20</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>fr</p></td>
+        <td><p>oscft</p></td>
+        <td><p>Filter resonance/bandwidth</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>21</p></td>
+        <td><p>egs</p></td>
+        <td><p>st</p></td>
+        <td><p>egsst</p></td>
+        <td><p>Volume envelope start level.</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>22</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>atk</p></td>
+        <td><p>egsatk</p></td>
+        <td><p>Volume envelope attack rate</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>23</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>pk</p></td>
+        <td><p>egspk</p></td>
+        <td><p>Volume envelope peak level</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>24</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>dec</p></td>
+        <td><p>egsdec</p></td>
+        <td><p>Volume envelope decay rate</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>25</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>sus</p></td>
+        <td><p>egssus</p></td>
+        <td><p>Volume envelope sustain lvl.</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>26</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>rel</p></td>
+        <td><p>egsrel</p></td>
+        <td><p>Volume envelope release rate</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>27</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>end</p></td>
+        <td><p>egsend</p></td>
+        <td><p>Volume envelope final level</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>28</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>ty</p></td>
+        <td><p>egsty</p></td>
+        <td><p>Volume envelope curve type</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>30</p></td>
+        <td><p>egf</p></td>
+        <td><p>st</p></td>
+        <td><p>egfst</p></td>
+        <td><p>Filter envelope start value.</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>31</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>atk</p></td>
+        <td><p>egfatk</p></td>
+        <td><p>Filter envelope attack rate</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>32</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>pk</p></td>
+        <td><p>egfpk</p></td>
+        <td><p>Filter envelope peak level</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>33</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>dec</p></td>
+        <td><p>egfdec</p></td>
+        <td><p>Filter envelope decay rate</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>34</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>sus</p></td>
+        <td><p>egfsus</p></td>
+        <td><p>Filter envelope sustain level</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>35</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>rel</p></td>
+        <td><p>egfrel</p></td>
+        <td><p>Filter envelope release level</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>36</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>end</p></td>
+        <td><p>egfend</p></td>
+        <td><p>Filter envelope final level</p></td>
+    </tr><tr valign="top">
+        <td><p>37</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>ty</p></td>
+        <td><p>egfty</p></td>
+        <td><p>Filter envelope curve type</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>53</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>cr</p></td>
+        <td><p>crt</p></td>
+        <td><p>Filter coefficient recalculation rate (in samples)</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>40</p></td>
+        <td><p>lfo</p></td>
+        <td><p>frq</p></td>
+        <td><p>lfofrq</p></td>
+        <td><p>LFO Frequency</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>41</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>wt</p></td>
+        <td><p>lfowt</p></td>
+        <td><p>LFO wavetable index</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>42</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>rt</p></td>
+        <td><p>lfoatk</p></td>
+        <td><p>LFO envelope attack rate</p></td>
+    </tr>
+    <tr valign="top">
+        <td><p>43</p></td>
+        <td><p>&nbsp;</p></td>
+        <td><p>amp</p></td>
+        <td><p>lfoamp</p></td>
+        <td><p>LFO level</p></td>
+    </tr>
+     <tr valign="top">
+      <td>50</td>
+      <td>pb</td>
+      <td>pbamp</td>
+      <td>pbamp</td>
+      <td><p>Pitch bend amount (semitones)</p></td>
+     </tr>
+     <tr valign="top">
+      <td><p>51</p></td>
+      <td><p>&nbsp;</p></td>
+      <td><p>pbwt</p></td>
+      <td><p>pbwt</p></td>
+      <td><p>Pitch bend wavetable</p></td>
+     </tr>
+     <tr valign="top">
+      <td><p>52</p></td>
+      <td><p>&nbsp;</p></td>
+      <td><p>pbdur</p></td>
+      <td><p>pbdur</p></td>
+      <td><p>Pitch bend duration</p></td>
+     </tr>
+     <tr valign="top">
+      <td><p>54</p></td>
+      <td><p>&nbsp;</p></td>
+      <td><p>pbdly</p></td>
+      <td><p>pbdly</p></td>
+      <td><p>Pitch bend delay</p></td>
+     </tr>
+     <tr valign="top">
+      <td><p>55</p></td>
+      <td><p>&nbsp;</p></td>
+      <td><p>pbmode</p></td>
+      <td><p>pbmode</p></td>
+      <td><p>Pitch bend mode (1=absolute,0=scaled)</p></td>
+     </tr>
+</table>
+<p>The recalculation rate defines the number of samples to generate
+before recalculating the filter coefficients. A value of 0 or 1 causes the coefficients to potentially
+be recalculated on each sample. Coeffcients are not recalculated unless the filter cutoff frequency
+changes, thus this value is irrelevant when the frequency is not changing.
+For quickly changing filter frequencies this value should be small (0-10) to avoid large jumps in the filter effect. 
+When the cutoff frequency changes slowly, setting the value to (50-100) can
+improve performance of the filter without affecting sound quality.</p> 
+<hr />
+<p>The XML format for the instrument is shown below.</p>
+<pre>
+&lt;instr id=&quot;&quot; type=&quot;SubSynth&quot; name=&quot; &quot;&gt;
+  &lt;osc frq=&quot;&quot; vol=&quot;&quot; mix=&quot;&quot; fg=&quot;&quot; wt=&quot;&quot; /&gt;
+  &lt;egs st=&quot;&quot; atk=&quot;&quot; pk=&quot;&quot; dec=&quot;&quot; sus=&quot;&quot; rel=&quot;&quot; end=&quot;&quot; ty=&quot;&quot; /&gt;
+  &lt;egf st=&quot;&quot; atk=&quot;&quot; pk=&quot;&quot; dec=&quot;&quot; sus=&quot;&quot; rel=&quot;&quot; end=&quot;&quot; ty=&quot;&quot; cr=&quot;&quot;  /&gt;
+  &lt;lfo frq=&quot;&quot; wt=&quot;&quot; rt=&quot;&quot; amp=&quot;&quot; /&gt;
+  &lt;pb pbamp=&quot;&quot; pbwt=&quot;&quot; pbdur=&quot;&quot; pbdly=&quot;&quot; pbmode=&quot;&quot; /&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

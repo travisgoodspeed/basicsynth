@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="FLTK" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option platforms="Windows;" />
+				<Option output="./BSsynthComposerFLTK" prefix_auto="1" extension_auto="1" />
+				<Option object_output="debugi686" />
+				<Option external_deps="../Lib/CoreD.a;../../../Lib/CommonD.a;../../../Lib/InstrumentsD.a;../../../Lib/NotelistD.a;" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-mthreads" />
+					<Add option="-D_WIN32" />
+					<Add option="-DDEBUG" />
+					<Add directory="$(#fltk)" />
+				</Compiler>
+				<Linker>
+					<Add option="-mthreads" />
+					<Add library="CoreD" />
+					<Add library="InstrumentsD" />
+					<Add library="NotelistD" />
+					<Add library="CommonD" />
+					<Add library="libfltk_images" />
+					<Add library="libfltk_jpeg" />
+					<Add library="libfltk_png" />
+					<Add library="fltk_z" />
+					<Add library="libfltk" />
+					<Add library="regex" />
+					<Add library="winmm" />
+					<Add library="wsock32" />
+					<Add library="comctl32" />
+					<Add library="uuid" />
+					<Add library="ole32" />
+					<Add directory="$(#fltk)/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option platforms="Windows;" />
+				<Option output="./BSsynthComposerFLTK" prefix_auto="1" extension_auto="1" />
+				<Option object_output="releasei686" />
+				<Option external_deps="../Lib/Core.a;../../../Lib/Instruments.a;../../../Lib/Notelist.a;../../../Lib/Common.a;" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-mthreads" />
+					<Add option="-D_WIN32" />
+					<Add option="-DNDEBUG" />
+					<Add directory="$(#fltk)" />
+				</Compiler>
+				<Linker>
+					<Add option="-mthreads" />
+					<Add library="Core" />
+					<Add library="Instruments" />
+					<Add library="Notelist" />
+					<Add library="Common" />
+					<Add library="fltk_images" />
+					<Add library="fltk_jpeg" />
+					<Add library="fltk_png" />
+					<Add library="fltk_z" />
+					<Add library="fltk" />
+					<Add library="regex" />
+					<Add library="winmm" />
+					<Add library="wsock32" />
+					<Add library="comctl32" />
+					<Add library="uuid" />
+					<Add library="ole32" />
+					<Add directory="$(#fltk)/lib" />
+				</Linker>
+			</Target>
+			<Target title="Debug UNIX">
+				<Option platforms="Unix;" />
+				<Option output="./bsynthcomposerfltk" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccDebug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-pthread" />
+					<Add option="`fltk-config --cxxflags`" />
+					<Add option="-DUNIX" />
+					<Add option="-DGCC" />
+					<Add option="-DDEBUG" />
+					<Add directory="$(#fltk)" />
+				</Compiler>
+				<Linker>
+					<Add option="-pthread" />
+					<Add option="`fltk-config --ldflags --use-images`" />
+					<Add library="CoreD" />
+					<Add library="InstrumentsD" />
+					<Add library="NotelistD" />
+					<Add library="CommonD" />
+					<Add library="libfltk_images" />
+					<Add library="libfltk_jpeg" />
+					<Add library="libfltk_png" />
+					<Add library="fltk_z" />
+					<Add library="libfltk" />
+					<Add library="regex" />
+					<Add library="winmm" />
+					<Add library="wsock32" />
+					<Add library="comctl32" />
+					<Add library="uuid" />
+					<Add library="ole32" />
+					<Add directory="$(#fltk)/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release UNIX">
+				<Option platforms="Unix;" />
+				<Option output="./bsynthcomposerfltk" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccRelease/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-pthread" />
+					<Add option="`fltk-config --cxxflags`" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DUNIX" />
+					<Add option="-DGCC" />
+				</Compiler>
+				<Linker>
+					<Add option="-pthread" />
+					<Add option="`fltk-config --ldflags --use-images`" />
+					<Add library="Core" />
+					<Add library="Instruments" />
+					<Add library="Notelist" />
+					<Add library="Common" />
+					<Add library="`pkg-config --libs alsa`" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DGCC" />
+			<Add option="-DUSE_TINYXML" />
+			<Add directory="../Core" />
+			<Add directory="$(#BSHOME)/Include" />
+			<Add directory="$(#BSHOME)/Src/Instruments" />
+			<Add directory="$(#BSHOME)/Src/Notelist" />
+		</Compiler>
+		<Linker>
+			<Add directory="../Lib" />
+			<Add directory="$(#BSHOME)/Lib" />
+		</Linker>
+		<Unit filename="../Core/ProjectOptionsFile.cpp" />
+		<Unit filename="FindReplDlgFltk.cpp" />
+		<Unit filename="FindReplDlgFltk.h" />
+		<Unit filename="FormEditorFltk.cpp" />
+		<Unit filename="FormEditorFltk.h" />
+		<Unit filename="KbdGenDlg2.cpp" />
+		<Unit filename="KbdGenDlg2.h" />
+		<Unit filename="MainFrm.cpp" />
+		<Unit filename="MainFrm.h" />
+		<Unit filename="MainMenu.cpp" />
+		<Unit filename="MainMenu.h" />
+		<Unit filename="OptionsDlg.cpp" />
+		<Unit filename="OptionsDlg.h" />
+		<Unit filename="ProjectTreeFltk.cpp" />
+		<Unit filename="ProjectTreeFltk.h" />
+		<Unit filename="PropertiesDlgFltk.cpp" />
+		<Unit filename="PropertiesDlgFltk.h" />
+		<Unit filename="SoundBankSelectFltk.cpp" />
+		<Unit filename="SoundBankSelectFltk.h" />
+		<Unit filename="SynthProjectFltk.cpp" />
+		<Unit filename="SynthWidgetFltk.cpp" />
+		<Unit filename="TabsView.cpp" />
+		<Unit filename="TabsView.h" />
+		<Unit filename="TextEditorFltk.cpp" />
+		<Unit filename="TextEditorFltk.h" />
+		<Unit filename="WvtableSelectDlg.cpp" />
+		<Unit filename="WvtableSelectDlg.h" />
+		<Unit filename="globinc.h">
+			<Option compile="1" />
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

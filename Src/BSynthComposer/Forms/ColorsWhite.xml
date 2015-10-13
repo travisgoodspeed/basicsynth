@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap>
+  <color name="bg" val="#ffffffff" />
+  <color name="fg" val="#ff000000" />
+  <color name="label" val="#ff101010" />
+  <color name="btnlabel" val="#fff0f0f0" />
+  <color name="grpfr" val="#ff202020" />
+  <color name="grpbk" val="#fff0f0f0" />
+  <color name="freq"  val="#ffffffff" />
+  <color name="freqlo" val="#fff0f0f0" />
+  <color name="freqhi" val="#ffffffff" />
+  <color name="volume" val="#ffffffff" />
+  <color name="vollo" val="#fff0f0f0" />
+  <color name="volhi" val="#ffffffff" />
+  <color name="modlo" val="#fff0f0f0" />
+  <color name="modhi" val="#ffffffff" />
+  <color name="mod" val="#ffffffff" />
+  <color name="ratehi" val="#ffffffff" />
+  <color name="ratelo" val="#fff0f0f0" />
+  <color name="rate" val="#ffffffff" />
+  <color name="eglin" val="#fff0f080" />
+  <color name="egexp" val="#ff800000" />
+  <color name="eglog" val="#ff202080" />
+  <color name="shinyhi" val="#fff0f0f0" />
+  <color name="shinylo" val="#fff0f0f0" />
+  <color name="shiny" val="#ffc0c0a0" />
+  <color name="silverhi" val="#fff0f0f0" />
+  <color name="silverlo" val="#fff0f0f0" />
+  <color name="silver" val="#ffa0a0a0" />
+  <color name="mattehi" val="#fff0f0f0" />
+  <color name="mattelo" val="#ff202028" />
+  <color name="wtsel" val="#ffffffff" />
+  <color name="cmd" val="#ff000000" />
+  <color name="hdr" val="#fff8f8f8" />
+  <color name="glmphi" val="#ff80f080" />
+  <color name="glmplo" val="#ff008000" />
+  <color name="rlmplo" val="#ff602020" />
+  <color name="rlmphi" val="#fff04040" />
+  <color name="blmplo" val="#ff000080" />
+  <color name="blmphi" val="#ff8080f0" />
+  <color name="ylmplo" val="#ff808000" />
+  <color name="ylmphi" val="#fff0f080" />
+  <color name="swuphi" val="#ffa0a0a0" />
+  <color name="swuplo" val="#ffb0b0b0" />
+  <color name="swdnhi" val="#ff404040" />
+  <color name="swdnlo" val="#ff303030" />
+
+  <color name="white" val="#ffffffff" />
+  <color name="black" val="#ff000000" />
+  <color name="gray" val="#ff808080" />
+  <color name="red" val="#ffff0000" />
+  <color name="green"  val="#ff00ff00"/>
+  <color name="blue" val="#ff0000ff" />
+  <color name="yellow" val="#ffffff00" />
+  <color name="cyan" val="#ff00ffff" />
+  <color name="magenta" val="#ffff00ff" />
+  <color name="kwup" val="#ffffffff" />
+  <color name="kwdn" val="#ffc8c8c8" />
+  <color name="kbup" val="#ff080808" />
+  <color name="kbdn" val="#ff303030" />
+</colormap>

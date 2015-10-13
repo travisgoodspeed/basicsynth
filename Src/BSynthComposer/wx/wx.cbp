@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="wx" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option show_notes="0">
+			<notes>
+				<![CDATA[The Win32 targets are used when wxWidgets is built using Msys on Windows.
+The mingw32 targets can be used when wxWidgets was built using makefile.gcc]]>
+			</notes>
+		</Option>
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="./bsynthcomposerwx" prefix_auto="0" extension_auto="1" />
+				<Option object_output="debugi686" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-mthreads" />
+					<Add option="-DDEBUG" />
+					<Add option="-D_WIN32" />
+					<Add option="-D__WXMSW__" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/lib/wx/include/msw-unicode-static-2.9" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-mthreads" />
+					<Add library="CoreD" />
+					<Add library="NotelistD" />
+					<Add library="InstrumentsD" />
+					<Add library="CommonD" />
+					<Add library="wx_mswu_xrc-2.9" />
+					<Add library="wx_mswu_stc-2.9" />
+					<Add library="wx_mswu_richtext-2.9" />
+					<Add library="wx_mswu_gl-2.9" />
+					<Add library="wx_mswu_html-2.9" />
+					<Add library="wx_mswu_adv-2.9" />
+					<Add library="wx_mswu_core-2.9" />
+					<Add library="wx_baseu_xml-2.9" />
+					<Add library="wx_baseu-2.9" />
+					<Add library="wxscintilla-2.9" />
+					<Add library="wxregexu-2.9" />
+					<Add library="wxexpat-2.9" />
+					<Add library="wxtiff-2.9" />
+					<Add library="wxjpeg-2.9" />
+					<Add library="wxpng-2.9" />
+					<Add library="wxzlib-2.9" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+					<Add library="kernel32" />
+					<Add library="user32" />
+					<Add library="gdi32" />
+					<Add library="comdlg32" />
+					<Add library="winspool" />
+					<Add library="winmm" />
+					<Add library="shell32" />
+					<Add library="comctl32" />
+					<Add library="ole32" />
+					<Add library="oleaut32" />
+					<Add library="uuid" />
+					<Add library="rpcrt4" />
+					<Add library="advapi32" />
+					<Add library="wsock32" />
+					<Add directory="$(#wx)/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="./bsynthcomposerwx" prefix_auto="1" extension_auto="1" />
+				<Option object_output="releasei686" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-mthreads" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_WIN32" />
+					<Add option="-D__WXMSW__" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/lib/wx/include/msw-unicode-static-2.9" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-mthreads" />
+					<Add library="Core" />
+					<Add library="Notelist" />
+					<Add library="Instruments" />
+					<Add library="Common" />
+					<Add library="wx_mswu_xrc-2.9" />
+					<Add library="wx_mswu_stc-2.9" />
+					<Add library="wx_mswu_richtext-2.9" />
+					<Add library="wx_mswu_gl-2.9" />
+					<Add library="wx_mswu_html-2.9" />
+					<Add library="wx_mswu_adv-2.9" />
+					<Add library="wx_mswu_core-2.9" />
+					<Add library="wx_baseu_xml-2.9" />
+					<Add library="wx_baseu-2.9" />
+					<Add library="wxscintilla-2.9" />
+					<Add library="wxregexu-2.9" />
+					<Add library="wxexpat-2.9" />
+					<Add library="wxtiff-2.9" />
+					<Add library="wxjpeg-2.9" />
+					<Add library="wxpng-2.9" />
+					<Add library="wxzlib-2.9" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+					<Add library="kernel32" />
+					<Add library="user32" />
+					<Add library="gdi32" />
+					<Add library="comdlg32" />
+					<Add library="winspool" />
+					<Add library="winmm" />
+					<Add library="shell32" />
+					<Add library="comctl32" />
+					<Add library="ole32" />
+					<Add library="oleaut32" />
+					<Add library="uuid" />
+					<Add library="rpcrt4" />
+					<Add library="advapi32" />
+					<Add library="wsock32" />
+					<Add directory="$(#wx)/lib" />
+				</Linker>
+			</Target>
+			<Target title="Debug mingw">
+				<Option output="./bsynthcomposerwx" prefix_auto="0" extension_auto="1" />
+				<Option object_output="debugMingw" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Option projectIncludeDirsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-mthreads" />
+					<Add option="-DDEBUG" />
+					<Add option="-D_WIN32" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/lib/gcc_lib/mswud" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/include/wx/msw" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-mthreads" />
+					<Add library="CoreD" />
+					<Add library="NotelistD" />
+					<Add library="InstrumentsD" />
+					<Add library="CommonD" />
+					<Add library="wxmsw29ud_xrc" />
+					<Add library="wxmsw29ud_stc" />
+					<Add library="wxmsw29ud_html" />
+					<Add library="wxmsw29ud_adv" />
+					<Add library="wxmsw29ud_core" />
+					<Add library="wxbase29ud" />
+					<Add library="wxbase29ud_xml" />
+					<Add library="wxscintillad" />
+					<Add library="wxregexud" />
+					<Add library="wxexpatd" />
+					<Add library="wxtiffd" />
+					<Add library="wxjpegd" />
+					<Add library="wxpngd" />
+					<Add library="wxzlibd" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+					<Add library="kernel32" />
+					<Add library="user32" />
+					<Add library="gdi32" />
+					<Add library="comdlg32" />
+					<Add library="winspool" />
+					<Add library="winmm" />
+					<Add library="shell32" />
+					<Add library="comctl32" />
+					<Add library="ole32" />
+					<Add library="oleaut32" />
+					<Add library="uuid" />
+					<Add library="rpcrt4" />
+					<Add library="advapi32" />
+					<Add library="wsock32" />
+					<Add directory="$(#wx)/lib/gcc_lib" />
+				</Linker>
+			</Target>
+			<Target title="Release mingw">
+				<Option output="./bsynthcomposerwx" prefix_auto="0" extension_auto="1" />
+				<Option object_output="releaseMingw" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Option projectIncludeDirsRelation="2" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-mthreads" />
+					<Add option="-DDEBUG" />
+					<Add option="-D_WIN32" />
+					<Add directory="$(#wx)/include" />
+					<Add directory="$(#wx)/lib/gcc_lib/mswu" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(#wx)/include/wx/msw" />
+				</ResourceCompiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-mthreads" />
+					<Add library="Core" />
+					<Add library="Notelist" />
+					<Add library="Instruments" />
+					<Add library="Common" />
+					<Add library="wxmsw29u_xrc" />
+					<Add library="wxmsw29u_stc" />
+					<Add library="wxmsw29u_html" />
+					<Add library="wxmsw29u_adv" />
+					<Add library="wxmsw29u_core" />
+					<Add library="wxbase29u_xml" />
+					<Add library="wxbase29u" />
+					<Add library="wxscintillad" />
+					<Add library="wxregexu" />
+					<Add library="wxexpat" />
+					<Add library="wxtiff" />
+					<Add library="wxjpeg" />
+					<Add library="wxpng" />
+					<Add library="wxzlib" />
+					<Add library="opengl32" />
+					<Add library="glu32" />
+					<Add library="kernel32" />
+					<Add library="user32" />
+					<Add library="gdi32" />
+					<Add library="comdlg32" />
+					<Add library="winspool" />
+					<Add library="winmm" />
+					<Add library="shell32" />
+					<Add library="comctl32" />
+					<Add library="ole32" />
+					<Add library="oleaut32" />
+					<Add library="uuid" />
+					<Add library="rpcrt4" />
+					<Add library="advapi32" />
+					<Add library="wsock32" />
+					<Add directory="$(#wx)/lib/gcc_lib" />
+				</Linker>
+			</Target>
+			<Target title="Debug UNIX">
+				<Option output="./bsynthcomposerwx" prefix_auto="0" extension_auto="1" />
+				<Option object_output="gccDebug" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="2" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Option projectIncludeDirsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="`wx-config --cppflags`" />
+					<Add option="-DDEBUG" />
+					<Add option="-DUNIX" />
+					<Add option="-DGCC" />
+				</Compiler>
+				<Linker>
+					<Add option="`wx-config --libs all`" />
+					<Add library="CoreD" />
+					<Add library="NotelistD" />
+					<Add library="InstrumentsD" />
+					<Add library="CommonD" />
+					<Add library="asound" />
+				</Linker>
+			</Target>
+			<Target title="Release UNIX">
+				<Option output="./bsynthcomposerwx" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccRelease" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="`wx-config --cppflags`" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DUNIX" />
+					<Add option="-DGCC" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="`wx-config --libs all`" />
+					<Add library="Core" />
+					<Add library="Notelist" />
+					<Add library="Instruments" />
+					<Add library="Common" />
+					<Add library="asound" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-DGCC" />
+			<Add option="-DUSE_TINYXML" />
+			<Add directory="../Core" />
+			<Add directory="$(#BSHOME)/Include" />
+			<Add directory="$(#BSHOME)/Src/Instruments" />
+			<Add directory="$(#BSHOME)/Src/Notelist" />
+		</Compiler>
+		<Linker>
+			<Add directory="../Lib" />
+			<Add directory="$(#BSHOME)/Lib" />
+		</Linker>
+		<Unit filename="AboutDlg.h" />
+		<Unit filename="FindReplDlg.cpp" />
+		<Unit filename="FindReplDlg.h" />
+		<Unit filename="FormEditor.cpp" />
+		<Unit filename="FormEditor.h" />
+		<Unit filename="GenerateDlg.cpp" />
+		<Unit filename="GenerateDlg.h" />
+		<Unit filename="InitRes.cpp" />
+		<Unit filename="ItemPropertiesDlg.cpp" />
+		<Unit filename="ItemPropertiesDlg.h" />
+		<Unit filename="KeyboardDlg.cpp" />
+		<Unit filename="KeyboardDlg.h" />
+		<Unit filename="MainFrame.cpp" />
+		<Unit filename="MainFrame.h" />
+		<Unit filename="MixerSetupDlg.cpp" />
+		<Unit filename="MixerSetupDlg.h" />
+		<Unit filename="ModSynthDlg.cpp" />
+		<Unit filename="ModSynthDlg.h" />
+		<Unit filename="OptionsDlg.cpp" />
+		<Unit filename="OptionsDlg.h" />
+		<Unit filename="ProjectItemDlg.h" />
+		<Unit filename="ProjectOptionsWX.cpp" />
+		<Unit filename="ProjectPropertiesDlg.cpp" />
+		<Unit filename="ProjectPropertiesDlg.h" />
+		<Unit filename="QueryValueDlg.cpp" />
+		<Unit filename="QueryValueDlg.h" />
+		<Unit filename="ScoreErrorsDlg.cpp" />
+		<Unit filename="ScoreErrorsDlg.h" />
+		<Unit filename="SoundBankSelect.cpp" />
+		<Unit filename="SoundBankSelect.h" />
+		<Unit filename="SynthWidgetWx.cpp" />
+		<Unit filename="SynthWidgetWxDC.cpp" />
+		<Unit filename="TextEditor.cpp" />
+		<Unit filename="TextEditor.h" />
+		<Unit filename="TextEditorStc.cpp" />
+		<Unit filename="TextEditorStc.h" />
+		<Unit filename="WavetableSelectDlg.cpp" />
+		<Unit filename="WavetableSelectDlg.h" />
+		<Unit filename="globinc.h">
+			<Option compile="1" />
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="main.cpp" />
+		<Unit filename="resource.h" />
+		<Unit filename="wx.rc">
+			<Option compilerVar="WINDRES" />
+			<Option target="Debug Win32" />
+			<Option target="Release Win32" />
+			<Option target="Debug mingw" />
+			<Option target="Release mingw" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

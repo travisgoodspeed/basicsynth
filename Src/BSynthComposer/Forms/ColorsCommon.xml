@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap name="common">
+  <!-- this file sets some commonly used colors -->
+  <!-- and is intended to be included in other files -->
+  <color name="glmphi" val="#ff80f080" />
+  <color name="glmplo" val="#ff008000" />
+  <color name="rlmplo" val="#ff602020" />
+  <color name="rlmphi" val="#fff04040" />
+  <color name="blmplo" val="#ff000080" />
+  <color name="blmphi" val="#ff8080f0" />
+  <color name="ylmplo" val="#ff808000" />
+  <color name="ylmphi" val="#fff0f080" />
+  <color name="white" val="#ffffffff" />
+  <color name="black" val="#ff000000" />
+  <color name="gray" val="#ff808080" />
+  <color name="red" val="#ffff0000" />
+  <color name="green"  val="#ff00ff00"/>
+  <color name="blue" val="#ff0000ff" />
+  <color name="yellow" val="#ffffff00" />
+  <color name="cyan" val="#ff00ffff" />
+  <color name="magenta" val="#ffff00ff" />
+  <color name="kwup" val="#ffffffe0" />
+  <color name="kwdn" val="#ffc8c8c0" />
+  <color name="kbup" val="#ff080808" />
+  <color name="kbdn" val="#ff303030" />
+  <color name="glmphi" val="#ff80f080" />
+  <color name="glmplo" val="#ff008000" />
+  <color name="rlmplo" val="#ff602020" />
+  <color name="rlmphi" val="#fff04040" />
+  <color name="blmplo" val="#ff000080" />
+  <color name="blmphi" val="#ff8080f0" />
+  <color name="ylmplo" val="#ff808000" />
+  <color name="ylmphi" val="#fff0f080" />
+  <color name="swuphi" val="#ffa0a0a8" />
+  <color name="swuplo" val="#ff404048" />
+  <color name="swdnhi" val="#ff9090a8" />
+  <color name="swdnlo" val="#ff202038" />
+
+  <color name="white" val="#ffffffff" />
+  <color name="black" val="#ff000000" />
+  <color name="gray" val="#ff808080" />
+  <color name="red" val="#ffff0000" />
+  <color name="green"  val="#ff00ff00"/>
+  <color name="blue" val="#ff0000ff" />
+  <color name="yellow" val="#ffffff00" />
+  <color name="cyan" val="#ff00ffff" />
+  <color name="magenta" val="#ffff00ff" />
+
+  <color name="kwup" val="#ffffffe0" />
+  <color name="kwdn" val="#ffc8c8c0" />
+  <color name="kbup" val="#ff080808" />
+  <color name="kbdn" val="#ff303030" />
+</colormap>

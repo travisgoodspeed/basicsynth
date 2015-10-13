@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<synthprj>
+  <name>Test Project</name>
+  <desc>A Test of BSynth</desc>
+  <author>Composer Name</author>
+  <cpyrgt>Copyright stuff</cpyrgt>
+  <out type="1">testprj.wav</out>
+  <synth sr="44100" wt="16384" usr="1">
+    <wvtable ndx="10" parts="2" >
+      <part mul="2" amp="0.5" phs="0"/>
+      <part mul="4" amp="0.2" phs="0"/>
+    </wvtable>
+  </synth>
+  <mixer chnls="4" fxunits="1" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="0.5" pan="0"/>
+    <chnl cn="1" on="1" vol="0.5" pan="0"/>
+    <chnl cn="2" on="1" vol="0.5" pan="0.5"/>
+    <chnl cn="3" on="1" vol="0.5" pan="-0.5"/>
+    <reverb unit="0" vol="0.1" rvt="2.5" pan="0">
+      <send cn="0" amt="0"/>
+      <send cn="1" amt="0"/>
+      <send cn="2" amt="0.1"/>
+      <send cn="3" amt="0.1"/>
+    </reverb>
+  </mixer>
+  <libdir></libdir>
+  <libfile name="TestInstr" desc="Test of instrument library">testinst.xml</libfile>
+  <instrlib>
+    <instr id="13" type="Tone" name="Pulse" desc="">
+      <osc frq="440.0" wt="4" />
+      <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+    </instr>
+  </instrlib>
+  <score name="Test" dbg="0">test.nl</score>
+  <score name="Test2">test2.nl</score>
+</synthprj>

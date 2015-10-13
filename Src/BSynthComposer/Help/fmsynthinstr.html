@@ -1,0 +1,565 @@
+<html>
+<head>
+<title>FM Synthesis Instrument</title>
+</head>
+<body>
+<h2><a name="_FM_Synthesis_Instrument"></a>FM Synthesis Instrument</h2>
+<p>The <i>FMSynth</i> instrument combines three tone generators in one of 
+four arrangements: </p>
+    <ol>
+        <li>Generator II modulates Generator I, Generator III not used</li>
+        <li>Generator III modulates Generator II, Generator II modulates to Generator I</li>
+        <li>Generator II and III both modulate Generator I.</li>
+        <li>Generator III modulates both Generator I and II (two carrier).</li>
+    </ol>
+<p>A noise generator can be
+mixed with the FM signal to simulate noise transients in the sound. Both the FM
+signal and noise signal can be fed to a feedback delay line to add resonance and/or echo
+to the sound.</p>
+<h3>Patch Diagram</h3>
+<img src="images/fmsynthdiag.jpg" alt="FMSynth diagram" />
+<h3>Configuration</h3>
+<p>The <em>FMSynth</em> instrument editor is shown below.</p>
+<img src="images/fmsynthedit.jpg" alt="tone editor" />
+<h4>Generators</h4>
+<p>
+The four generators (GEN I, II, III and Noise) have separate frequency and envelope configurations.
+The frequency setting for the oscillators sets a multiple of the note frequency. The <b>Freq. X</b>
+knob sets the integer multiple of the frequency while the <b>Fine</b> knob sets the fractional part
+of the frequency. The oscillator frequency is the note pitch multiplied by the sum of the integer and
+fractional parts (f = note * (FreqX + Find)). The <b>WT</b> selection sets the wavetable (waveform)
+for each oscillator. The <b>Select</b> button allows selection of any waveform defined for the 
+synthesizer. (See <a href="step2.html">Configuring Wavetables</a> for information on defining new waveforms.)
+</p>
+<p>
+The Noise generator provides a variable noise sampling rate and a ring modulator that can be
+applied to the noise signal. The <b>Osc</b> knob sets the frequency 
+of the ring modulation oscillator while the <b>Rnd-H</b> knob sets the rate at which random values are
+generated. These two settings in combination affect the "color" of the noise.
+</p>
+<h4>Envelopes</h4>
+<p>
+The envelope for each signal generator is set independently. 
+The envelope controls amplitude of the oscillator. For GEN I (carrier) and Noise, this is the volume
+level. For GEN II and III the envelope value is the index of modulation.
+The <b>Start</b> knob sets the starting level. For GEN I (carrier) this is usually set to 0.
+For a modulator the start level is often greater than 0 and sets the initial index of modulation.
+The <b>Attack</b> knob sets the attack time in seconds.
+The <b>Peak</b> knob sets the envelop level at the end of the attack. 
+The <b>Decay</b> knob sets the amount of time the envelope takes to move from the peak level to the sustain level.
+The <b>Sustain</b> knob sets the level held over the note duration.
+The <b>Release</b> knob sets the final release time in seconds. Release is initiated when the note is stopped
+and is the time the envelope takes to decay from the current note level to the end level.
+The <b>End</b> knob sets the final level of the envelope. 
+The <b>Curve</b> selects linear, exponential or logarithmic envelopes.
+</p>
+<h4>Modulation Algorithm</h4>
+<p>The buttons to the right of the editor select the internal connections between the oscillators.
+Each generator is labeled in the diagram. The top switch sends the output of GEN II to the frequency
+input of GEN I. The second button sends the output of GEN III to the input of GEN II, which is then
+applied to the frequency of GEN I. The third button applies the sum of GEN II and III to the frequency
+of GEN I. The fourth button applies the output of GEN III to both GEN I and II, and adds the output
+of GEN I and II. Note that in this configuration, the envelope for GEN II specifies volume level, not
+modulation.
+</p>
+<h4>LFO</h4>
+<p>
+The LFO (Low Frequency Oscillator) produces vibrato. The <b>Frequency</b> knob sets the vibrato rate in Hz.
+The <b>Attack</b> knob sets the time in second for the vibrato to become active. The <b>Depth</b> knob sets
+the amount of vibrato in semitones. A value of 1 indicates a half-step in pitch. Fractional values can be used
+to set vibrato to cents of pitch, e.g., 0.1 is equivalent to 10 cents. The buttons to the left of the <b>Depth</b>
+knob select the LFO waveform. Use the <b>Select</b> button to choose a waveform other than a sine wave.
+LFO is applied to each of GEN I, II, and III.
+</p>
+<h4>Delay Line</h4>
+<p>The <b>Delay</b>, <b>Decay</b>, and <b>Mix</b> knobs next to the LFO set the parameters of a delay line.
+The <b>Delay</b> value sets the length of the delay line in seconds. The <b>Decay</b> knob sets the feedback
+level as the time it takes the feedback level to decay 60dB. The <b>Mix</b> knob sets the amount of the signal
+from the delay line that is added to the final output.</p>
+<h4>Signal Mixer</h4>
+<p>The group of knobs to the right of the delay line sets the mix of oscillator, noise and delay.
+The <b>FM Mix</b> knob sets the amount of the oscillator output applied to the final output.
+The <b>FM Dly</b> knob sets the amount of the oscillator output applied to the delay line input.
+The <b>NZ Mix</b> knob sets the amount of the noise output applied to the final output.
+The <b>NZ Dly</b> knob sets the amount of the noise output applied to the delay line input.
+The <b>Pan</b> switch enables internall panning. When ON, the output is panned by the setting of the
+<b>Pan</b> knob instead of the main mixer pan setting.
+</p>
+
+<h4>Project and Notelist ID Values</h4>
+<p>The following table shows the parameter numbers and the
+equivalent XML tag and attribute values for the <i>FMSynth</i> instrument. </p>
+
+<table border="1" cellspacing="0" cellpadding="4">
+ <tr valign="top" style="background-color: Black; color: White;">
+  <td><p align="center"><b>Parameter</b></p></td>
+  <td><p align="center"<b>Tag</b></p></td>
+  <td><p align="center"<b>Attribute</b></p></td>
+  <td><p align="center"><b>Name</b><p></td>
+  <td><p align="center"<b>Use</b></p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>16</p></td>
+  <td><p>fm</p></td>
+  <td><p>mix</p></td>
+  <td><p>fmmix</p></td>
+  <td><p>Mix of FM signal in output</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>17</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dly</p></td>
+  <td><p>fmdly</p></td>
+  <td><p>FM signal sent to delay line.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>18</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>alg</p></td>
+  <td><p>fmalg</p></td>
+  <td><p>FM algorithm</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>19</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pon</p></td>
+  <td><p>fmpon</p></td>
+  <td><p>Panning on</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>20</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pan</p></td>
+  <td><p>fmpan</p></td>
+  <td><p>Pan setting</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>30</p></td>
+  <td><p>gen1</p></td>
+  <td><p>mul</p></td>
+  <td><p>gen1mul</p></td>
+  <td><p>Gen. 1 frequency multiplier</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>31</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>st</p></td>
+  <td><p>gen1st</p></td>
+  <td><p>Gen. 1 envelope start value</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>32</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>gen1atk</p></td>
+  <td><p>Gen. 1 envelope attack rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>33</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pk</p></td>
+  <td><p>gen1pk</p></td>
+  <td><p>Gen. 1 envelope attack level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>34</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>gen1dec</p></td>
+  <td><p>Gen. 1 envelope decay rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>35</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>gen1sus</p></td>
+  <td><p>Gen. 1 envelope sustain level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>36</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rel</p></td>
+  <td><p>gen1rel</p></td>
+  <td><p>Gen. 1 envelope release rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>37</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>end</p></td>
+  <td><p>gen1end</p></td>
+  <td><p>Gen. 1 envelope final level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>38</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>gen1ty</p></td>
+  <td><p>Gen. 1 envelope curve type</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>39</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>gen1wt</p></td>
+  <td><p>Gen. 1 wavetable index</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>40</p></td>
+  <td><p>gen2</p></td>
+  <td><p>mul</p></td>
+  <td><p>gen2mul</p></td>
+  <td><p>Gen. 2 frequency multiplier</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>41</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>st</p></td>
+  <td><p>gen2st</p></td>
+  <td><p>Gen. 2 envelope start value</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>42</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>gen2atk</p></td>
+  <td><p>Gen. 2 envelope attack rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>43</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pk</p></td>
+  <td><p>gen2pk</p></td>
+  <td><p>Gen. 2 envelope attack level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>44</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>gen2dec</p></td>
+  <td><p>Gen. 2 envelope decay rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>45</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>gen2sus</p></td>
+  <td><p>Gen. 2 envelope sustain level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>46</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rel</p></td>
+  <td><p>gen2rel</p></td>
+  <td><p>Gen. 2 envelope release rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>47</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>end</p></td>
+  <td><p>gen2end</p></td>
+  <td><p>Gen. 2 envelope final level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>48</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>gen2ty</p></td>
+  <td><p>Gen. 2 envelope curve type</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>49</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>gen2wt</p></td>
+  <td><p>Gen. 2 wavetable index</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>50</p></td>
+  <td><p>gen3</p></td>
+  <td><p>mul</p></td>
+  <td><p>gen3mul</p></td>
+  <td><p>Gen. 3 frequency multiplier</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>51</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>st</p></td>
+  <td><p>gen3st</p></td>
+  <td><p>Gen. 3 envelope start value</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>52</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>gen3atk</p></td>
+  <td><p>Gen. 3 envelope attack rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>53</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pk</p></td>
+  <td><p>gen3pk</p></td>
+  <td><p>Gen. 3 envelope attack level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>54</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>gen3dec</p></td>
+  <td><p>Gen. 3 envelope decay rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>55</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>gen3sus</p></td>
+  <td><p>Gen. 3 envelope sustain level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>56</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rel</p></td>
+  <td><p>gen3mul</p></td>
+  <td><p>Gen. 3 envelope release rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>57</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>end</p></td>
+  <td><p>gen3end</p></td>
+  <td><p>Gen. 3 envelope final level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>58</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>gen3ty</p></td>
+  <td><p>Gen. 3 envelope curve type</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>59</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>gen3wt</p></td>
+  <td><p>Gen. 3 wavetable index</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>60</p></td>
+  <td><p>nz</p></td>
+  <td><p>mix</p></td>
+  <td><p>nzmix</p></td>
+  <td><p>Mix of noise signal in output</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>61</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dly</p></td>
+  <td><p>nzdly</p></td>
+  <td><p>Noise signal to delay line</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>62</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fr</p></td>
+  <td><p>nzfr</p></td>
+  <td><p>Noise frequency (deprecated - use fh)</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>62</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fh</p></td>
+  <td><p>nzfr</p></td>
+  <td><p>H-rate for noise generator. This is a fraction of the current sample rate and indicates how often
+  a new random value is generated. A value of 1 generates a new value on every sample.</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>63</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>fo</p></td>
+  <td><p>nzfo</p></td>
+  <td><p>Oscillator frequency</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>64</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>st</p></td>
+  <td><p>nzst</p></td>
+  <td><p>Noise envelope starting value</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>65</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>nzatk</p></td>
+  <td><p>Noise envelope attack rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>66</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pk</p></td>
+  <td><p>nzpk</p></td>
+  <td><p>Noise envelope attack level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>67</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>nzdec</p></td>
+  <td><p>Noise envelope decay rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>68</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>nzsus</p></td>
+  <td><p>Noise envelope sustain level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>69</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rel</p></td>
+  <td><p>nzrel</p></td>
+  <td><p>Noise envelope release rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>70</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>end</p></td>
+  <td><p>nzend</p></td>
+  <td><p>Noise envelope final level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>71</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>nzty</p></td>
+  <td><p>Noise envelope curve type</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>80</p></td>
+  <td><p>dlyn</p></td>
+  <td><p>mix</p></td>
+  <td><p>dlymix</p></td>
+  <td><p>Amount of delay line output </p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>81</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dly</p></td>
+  <td><p>dlylen</p></td>
+  <td><p>Delay line length in seconds</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>82</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>dlydec</p></td>
+  <td><p>Delay line decay multiplier</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>90</p></td>
+  <td><p>lfo</p></td>
+  <td><p>frq</p></td>
+  <td><p>lfofrq</p></td>
+  <td><p>LFO frequency</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>91</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>lfowt</p></td>
+  <td><p>LFO wavetable index</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>92</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>lfoatk</p></td>
+  <td><p>LFO envelope attack rate</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>93</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>amp</p></td>
+  <td><p>lfoamp</p></td>
+  <td><p>LFO level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>100</p></td>
+  <td><p>pb</p></td>
+  <td><p>on</p></td>
+  <td><p>pbon</p></td>
+  <td><p>Pitch bend on (1) or off (0).</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>101</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>r1</p></td>
+  <td><p>pbr1</p></td>
+  <td><p>Rate between a1 and a2</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>102</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>r2</p></td>
+  <td><p>pbr2</p></td>
+  <td><p>Rate between a2 and a3</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>103</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>a1</p></td>
+  <td><p>pba1</p></td>
+  <td><p>Pitch bend start amount</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>104</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>a2</p></td>
+  <td><p>pba2</p></td>
+  <td><p>Pitch bend middle amount</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>105</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>a3</p></td>
+  <td><p>pba3</p></td>
+  <td><p>Pitch bend end amount</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>106</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbamp</p></td>
+  <td><p>pbamp</p></td>
+  <td><p>Pitch bend WT amount</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>107</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>pbwt</p></td>
+  <td><p>Pitch bend wavetable</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>108</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>*</p></td>
+  <td><p>pbfrq</p></td>
+  <td><p>Pitch bend WT rate (only settable during performance)</p></td>
+ </tr>
+</table>
+<h3>XML Format</h3>
+    <pre>
+&lt;instr id=&quot;&quot; type=&quot;FMSynth&quot; name=&quot;&quot;&gt;
+  &lt;fm mix=&quot;&quot; dly=&quot;&quot; alg=&quot;&quot; pon=&quot;&quot; pan=&quot;&quot; /&gt;
+  &lt;gen1 mul=&quot;&quot; wt=&quot;&quot; st=&quot;&quot; atk=&quot;&quot; pk=&quot;&quot; dec=&quot;&quot; sus=&quot;&quot; rel=&quot;&quot; end=&quot;&quot; ty=&quot;&quot;/&gt;
+  &lt;gen2 mul=&quot;&quot; wt=&quot;&quot; st=&quot;&quot; atk=&quot;&quot; pk=&quot;&quot; dec=&quot;&quot; sus=&quot;&quot; rel=&quot;&quot; end=&quot;&quot; ty=&quot;&quot;/&gt;
+  &lt;gen3 mul=&quot;&quot; wt=&quot;&quot; st=&quot;&quot; atk=&quot;&quot; pk=&quot;&quot; dec=&quot;&quot; sus=&quot;&quot; rel=&quot;&quot; end=&quot;&quot; ty=&quot;&quot;/&gt;
+  &lt;nz mix=&quot;&quot; dly=&quot;&quot; fr=&quot;&quot; fo=&quot;&quot; st=&quot;&quot; atk=&quot;&quot; pk=&quot;&quot; dec=&quot;&quot; sus=&quot;&quot; rel=&quot;&quot; end=&quot;&quot; ty=&quot;&quot;/&gt;
+  &lt;dln mix=&quot;&quot; dly=&quot;&quot; dec=&quot;&quot; /&gt;
+  &lt;lfo frq=&quot;&quot; wt=&quot;&quot; rt=&quot;&quot; amp=&quot;&quot;/&gt;
+  &lt;pb on=&quot;&quot; a1=&quot;&quot; a2=&quot;&quot; a3=&quot;&quot; r1=&quot;&quot; r2=&quot;&quot; /&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

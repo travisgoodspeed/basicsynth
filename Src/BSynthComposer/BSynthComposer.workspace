@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="Workspace">
+		<Project filename="Core/Core.cbp" />
+		<Project filename="../Common/Common.cbp" />
+		<Project filename="../Instruments/Instruments.cbp" />
+		<Project filename="../Notelist/Notelist.cbp" />
+		<Project filename="wx/wx.cbp" active="1">
+			<Depends filename="Core/Core.cbp" />
+			<Depends filename="../Common/Common.cbp" />
+			<Depends filename="../Instruments/Instruments.cbp" />
+			<Depends filename="../Notelist/Notelist.cbp" />
+		</Project>
+	</Workspace>
+</CodeBlocks_workspace_file>

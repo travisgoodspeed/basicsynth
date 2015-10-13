@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<synthprj>
+  <name>Test Project</name>
+  <desc>A Test of FMSynth params</desc>
+  <author>Daniel Mitchell</author>
+  <cpyrgt>Copyright stuff</cpyrgt>
+  <out type="1" lead="0" tail="0.5">fmsynth.wav</out>
+  <synth sr="44100" wt="16384" usr="1">
+    <wvtable ndx="10" parts="3" >
+      <part mul="1" amp="1.0" phs="0"/>
+      <part mul="2" amp="0.5" phs="0"/>
+      <part mul="4" amp="0.2" phs="0"/>
+    </wvtable>
+  </synth>
+  <mixer chnls="4" fxunits="1" lft="1" rgt="1">
+    <chnl cn="0" on="1" vol="0.707" pan="0"/>
+    <chnl cn="1" on="1" vol="0.707" pan="0"/>
+    <reverb unit="0" vol="0.4" rvt="2.5" pan="0">
+      <send cn="0" amt="0"/>
+      <send cn="1" amt="0"/>
+    </reverb>
+  </mixer>
+  <instrlib>
+    <instr id="1" type="FMSynth" name="Test">
+      <fm mix="1" alg="1" dly="0" pon="0" pan="0" />
+      <gen1 mul="1.0" st="0" atk="0.1" pk="1.0" dec="0.1" sus="0.8" rel="0.2" end="0" ty="1" />
+      <gen2 mul="1.0" st="0" atk="0.1" pk="2.0" dec="0.1" sus="1.0" rel="0.2" end="0" ty="1" />
+      <gen3 mul="2.0" st="0" atk="0.1" pk="2.0" dec="0.1" sus="1.0" rel="0.2" end="0" ty="1" />
+      <nz mix="0.0" fr="0" fo="0" st="0" atk="0.1" pk="2.0" dec="0.1" sus="1.0" rel="0.2" end="0" ty="1" />
+      <dln mix="0.5" dly="0.01" dec="0.8" />
+      <lfo frq="3.8" wt="1" atk="0" amp="0" />
+    </instr>
+  </instrlib>
+  <score name="FMSynth" dbg="0">tstfmsynth.nl</score>
+</synthprj>

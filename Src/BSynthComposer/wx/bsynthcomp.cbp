@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="bsynthcomp" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug UNIX">
+				<Option output="../../../Bin/bsynthcompwx" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccDebug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-w" />
+					<Add option="-g" />
+					<Add option="`wx-config --cxxflags --unicode=no --debug=yes`" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-lasound" />
+					<Add option="`wx-config --libs --unicode=no --debug=yes`" />
+					<Add library="../Lib/CoreD.a" />
+					<Add library="../../../Lib/InstrumentsD.a" />
+					<Add library="../../../Lib/NotelistD.a" />
+					<Add library="../../../Lib/CommonD.a" />
+				</Linker>
+			</Target>
+			<Target title="Release UNIX">
+				<Option output="../../../Bin/bsynthcompwx" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccRelease/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="`wx-config --cxxflags --unicode=no --debug=no`" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="`wx-config --libs --unicode=no --debug=no`" />
+					<Add option="-lasound" />
+					<Add library="../Lib/Core.lib" />
+					<Add library="../../../Lib/Instruments.a" />
+					<Add library="../../../Lib/Notelist.a" />
+					<Add library="../../../Lib/Common.a" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-DUNIX" />
+			<Add option="-DUSE_TINYXML" />
+			<Add option="-DGCC" />
+			<Add directory="../../../Include/" />
+			<Add directory="../Core/" />
+			<Add directory="../../Instruments/" />
+			<Add directory="../../Notelist/" />
+		</Compiler>
+		<Unit filename="AboutDlg.h" />
+		<Unit filename="FindReplDlg.cpp" />
+		<Unit filename="FindReplDlg.h" />
+		<Unit filename="FormEditor.cpp" />
+		<Unit filename="FormEditor.h" />
+		<Unit filename="GenerateDlg.cpp" />
+		<Unit filename="GenerateDlg.h" />
+		<Unit filename="ItemPropertiesDlg.cpp" />
+		<Unit filename="ItemPropertiesDlg.h" />
+		<Unit filename="KeyboardDlg.cpp" />
+		<Unit filename="KeyboardDlg.h" />
+		<Unit filename="MainFrame.cpp" />
+		<Unit filename="MainFrame.h" />
+		<Unit filename="MixerSetupDlg.cpp" />
+		<Unit filename="MixerSetupDlg.h" />
+		<Unit filename="ModSynthDlg.cpp" />
+		<Unit filename="ModSynthDlg.h" />
+		<Unit filename="OptionsDlg.cpp" />
+		<Unit filename="OptionsDlg.h" />
+		<Unit filename="ProjectItemDlg.h" />
+		<Unit filename="ProjectOptionsWX.cpp" />
+		<Unit filename="ProjectPropertiesDlg.cpp" />
+		<Unit filename="ProjectPropertiesDlg.h" />
+		<Unit filename="QueryValueDlg.cpp" />
+		<Unit filename="QueryValueDlg.h" />
+		<Unit filename="ScoreErrorsDlg.cpp" />
+		<Unit filename="ScoreErrorsDlg.h" />
+		<Unit filename="SoundBankSelect.cpp" />
+		<Unit filename="SoundBankSelect.h" />
+		<Unit filename="SynthWidgetWx.cpp" />
+		<Unit filename="TextEditor.cpp" />
+		<Unit filename="TextEditor.h" />
+		<Unit filename="WavetableSelectDlg.cpp" />
+		<Unit filename="WavetableSelectDlg.h" />
+		<Unit filename="globinc.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="resource.cpp" />
+		<Unit filename="resource.h" />
+		<Unit filename="resource.xml">
+			<Option compiler="gcc" use="1" buildCommand="wxrc -c resource.cpp" />
+		</Unit>
+		<Extensions>
+			<code_completion>
+				<search_path add="../../../Include/" />
+			</code_completion>
+			<debugger>
+				<search_path add="/usr/include/wx-2.8" />
+			</debugger>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

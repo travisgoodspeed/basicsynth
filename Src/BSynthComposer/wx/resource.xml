@@ -1,0 +1,1942 @@
+<?xml version="1.0"?>
+<resource>
+	<object class="wxToolBar" name= "TB_MAINFRAME">
+		<style>wxTB_FLAT</style>
+    <size>270,40d</size>
+    <object class="tool" name= "ID_PROJECT_NEW">
+			<bitmap>res/NewProject32.png</bitmap>
+			<tooltip>New</tooltip>
+			<longhelp>Create a new project</longhelp>
+		</object>
+		<object class="tool" name= "ID_PROJECT_OPEN">
+			<bitmap>res/OpenProject32.png</bitmap>
+			<tooltip>Open</tooltip>
+			<longhelp>Open a project</longhelp>
+		</object>
+		<object class="tool" name= "ID_PROJECT_SAVE">
+			<bitmap>res/SaveProject32.png</bitmap>
+			<tooltip>Save All</tooltip>
+			<longhelp>Save all items in the project</longhelp>
+		</object>
+		<object class="separator"/>
+		<object class="tool" name= "wxID_CUT">
+				<tooltip>Cut</tooltip>
+				<longhelp>Cut the selection and put it on the Clipboard</longhelp>
+				<bitmap>res/Cut32.png</bitmap>
+		</object>
+		<object class="tool" name= "wxID_COPY">
+				<tooltip>Copy</tooltip>
+				<longhelp>Copy the selection and put it on the Clipboard</longhelp>
+				<bitmap>res/Copy32.png</bitmap>
+		</object>
+		<object class="tool" name= "wxID_PASTE">
+				<tooltip>Paste</tooltip>
+				<longhelp>Insert Clipboard contents</longhelp>
+				<bitmap>res/Paste32.png</bitmap>
+		</object>
+		<object class="tool" name= "wxID_UNDO">
+			  <tooltip>Undo</tooltip>
+			  <longhelp>Undo the last action</longhelp>
+			  <bitmap>res/Undo32.png</bitmap>
+		</object>
+		<object class="tool" name= "ID_EDIT_REDO">
+			  <tooltip>Redo</tooltip>
+			  <longhelp>Redo the previously undone action</longhelp>
+			  <bitmap>res/Redo32.png</bitmap>
+		</object>
+		<object class="tool" name= "ID_EDIT_FIND">
+				<tooltip>Find</tooltip>
+				<longhelp>Find the specified text</longhelp>
+				<bitmap>res/Find32.png</bitmap>
+		</object>
+		<object class="tool" name= "ID_EDIT_FINDNEXT">
+			<tooltip>Find next</tooltip>
+			<longhelp>Find the specified text</longhelp>
+			<bitmap>res/FindNext32.png</bitmap>
+		</object>
+		<object class="separator"/>
+		<object class="tool" name= "ID_ITEM_EDIT">
+			<bitmap>res/EditItem32.png</bitmap>
+			<tooltip>Edit</tooltip>
+			<longhelp>Open the item editor</longhelp>
+		</object>
+		<object class="tool" name= "ID_ITEM_SAVE">
+			<bitmap>res/Save32.png</bitmap>
+			<tooltip>Save</tooltip>
+			<longhelp>Save the current item</longhelp>
+		</object>
+		<object class="tool" name= "ID_ITEM_CLOSE">
+			<bitmap>res/CloseItem32.png</bitmap>
+			<tooltip>Close</tooltip>
+			<longhelp>Close the current editor</longhelp>
+		</object>
+		<object class="tool" name= "ID_ITEM_PROPERTIES">
+			<tooltip>Properties</tooltip>
+			<longhelp>Edit item properties</longhelp>
+			<bitmap>res/ItemProperties32.png</bitmap>
+		</object>
+		<object class="separator"/>
+			<object class="tool" name= "ID_PROJECT_GENERATE">
+			<tooltip>Generate</tooltip>
+			<longhelp>Generate to wave file.</longhelp>
+			<bitmap>res/CD32.png</bitmap>
+		</object>
+		<object class="tool" name= "ID_PROJECT_PLAY">
+			<tooltip>Play</tooltip>
+			<longhelp>Start/Stop the keyboard player</longhelp>
+			<bitmap>res/Keyboard32.png</bitmap>
+		</object>
+		<object class="tool" name= "ID_PROJECT_OPTIONS">
+			<tooltip>Options</tooltip>
+			<longhelp>Set the global project options</longhelp>
+			<bitmap>res/ProjectProperties32.png</bitmap>
+		</object>
+		<object class="separator"/>
+		<object class="tool" name= "ID_HELP_CONTENTS">
+			<tooltip>Help</tooltip>
+			<longhelp>Display program help</longhelp>
+			<bitmap>res/Help32_1.png</bitmap>
+		</object>
+	</object>
+  <object class="wxToolBar" name= "TB_MAINFRAME16">
+    <style>wxTB_FLAT</style>
+    <object class="tool" name= "ID_PROJECT_NEW">
+      <bitmap>res/NewProject16.png</bitmap>
+      <tooltip>New</tooltip>
+      <longhelp>Create a new project</longhelp>
+    </object>
+    <object class="tool" name= "ID_PROJECT_OPEN">
+      <bitmap>res/OpenProject16.png</bitmap>
+      <tooltip>Open</tooltip>
+      <longhelp>Open a project</longhelp>
+    </object>
+    <object class="tool" name= "ID_PROJECT_SAVE">
+      <bitmap>res/SaveProject16.png</bitmap>
+      <tooltip>Save All</tooltip>
+      <longhelp>Save all items in the project</longhelp>
+    </object>
+    <object class="separator"/>
+    <object class="tool" name= "wxID_CUT">
+      <tooltip>Cut</tooltip>
+      <longhelp>Cut the selection and put it on the Clipboard</longhelp>
+      <bitmap>res/Cut16.png</bitmap>
+    </object>
+    <object class="tool" name= "wxID_COPY">
+      <tooltip>Copy</tooltip>
+      <longhelp>Copy the selection and put it on the Clipboard</longhelp>
+      <bitmap>res/Copy16.png</bitmap>
+    </object>
+    <object class="tool" name= "wxID_PASTE">
+      <tooltip>Paste</tooltip>
+      <longhelp>Insert Clipboard contents</longhelp>
+      <bitmap>res/Paste16.png</bitmap>
+    </object>
+    <object class="tool" name= "wxID_UNDO">
+      <tooltip>Undo</tooltip>
+      <longhelp>Undo the last action</longhelp>
+      <bitmap>res/Undo16.png</bitmap>
+    </object>
+    <object class="tool" name= "ID_EDIT_REDO">
+      <tooltip>Redo</tooltip>
+      <longhelp>Redo the previously undone action</longhelp>
+      <bitmap>res/Redo16.png</bitmap>
+    </object>
+    <object class="tool" name= "ID_EDIT_FIND">
+      <tooltip>Find</tooltip>
+      <longhelp>Find the specified text</longhelp>
+      <bitmap>res/Find16.png</bitmap>
+    </object>
+    <object class="tool" name= "ID_EDIT_FINDNEXT">
+      <tooltip>Find next</tooltip>
+      <longhelp>Find the specified text</longhelp>
+      <bitmap>res/FindNext16.png</bitmap>
+    </object>
+    <object class="separator"/>
+    <object class="tool" name= "ID_ITEM_EDIT">
+      <bitmap>res/EditItem16.png</bitmap>
+      <tooltip>Edit</tooltip>
+      <longhelp>Open the item editor</longhelp>
+    </object>
+    <object class="tool" name= "ID_ITEM_SAVE">
+      <bitmap>res/Save16.png</bitmap>
+      <tooltip>Save</tooltip>
+      <longhelp>Save the current item</longhelp>
+    </object>
+    <object class="tool" name= "ID_ITEM_CLOSE">
+      <bitmap>res/CloseItem16.png</bitmap>
+      <tooltip>Close</tooltip>
+      <longhelp>Close the current editor</longhelp>
+    </object>
+    <object class="tool" name= "ID_ITEM_PROPERTIES">
+      <tooltip>Properties</tooltip>
+      <longhelp>Edit item properties</longhelp>
+      <bitmap>res/ItemProperties16.png</bitmap>
+    </object>
+    <object class="separator"/>
+    <object class="tool" name= "ID_PROJECT_GENERATE">
+      <tooltip>Generate</tooltip>
+      <longhelp>Generate to wave file.</longhelp>
+      <bitmap>res/CD16.png</bitmap>
+    </object>
+    <object class="tool" name= "ID_PROJECT_PLAY">
+      <tooltip>Play</tooltip>
+      <longhelp>Enable keyboard player</longhelp>
+      <bitmap>res/Keyboard16.png</bitmap>
+    </object>
+    <object class="tool" name= "ID_PROJECT_OPTIONS">
+      <tooltip>Options</tooltip>
+      <longhelp>Set the global project options</longhelp>
+      <bitmap>res/ProjectProperties16.png</bitmap>
+    </object>
+    <object class="separator"/>
+    <object class="tool" name= "ID_HELP_CONTENTS">
+      <tooltip>Help</tooltip>
+      <longhelp>Display program help</longhelp>
+      <bitmap>res/Help16_1.png</bitmap>
+    </object>
+  </object>
+  <object class="wxMenuBar" name= "MB_MAINFRAME">
+		<object class="wxMenu" name= "Menu_15">
+			<label>$File</label>
+			<object class="wxMenuItem" name= "ID_PROJECT_NEW">
+			<label>$New Project...\tShift+Ctrl+N</label>
+			<help>Create a new project</help>
+			<bitmap>res/NewProject16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_PROJECT_OPEN">
+			<label>$Open Project...\tShift+Ctrl+O</label>
+			<help>Open an existing project</help>
+			<bitmap>res/OpenProject16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_PROJECT_SAVE">
+			<label>Sa$ve Project\tShift+Ctrl+S</label>
+			<help>Save the project to disk</help>
+			<bitmap>res/SaveProject16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_PROJECT_SAVEAS">
+			<label>Save Project As...</label>
+			<help>Save the project with a new name</help>
+			<bitmap>res/SaveProjectAs16.png</bitmap>
+		</object>
+		<object class="separator"/>
+		<object class="wxMenuItem" name= "ID_ITEM_SAVE">
+			<label>$Save File\tCtrl+S</label>
+			<help>Save changes to this item</help>
+			<bitmap>res/Save16.png</bitmap>
+		</object>
+			<object class="wxMenuItem" name= "ID_ITEM_CLOSE">
+			<label>$Close File\tCtrl+F4</label>
+			<help>Close the editor for this item.</help>
+			<bitmap>res/CloseItem16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_WINDOW_CLOSE_ALL">
+			<label>Close $All Files</label>
+			<help>Close all file editors.</help>
+		</object>
+		<object class="separator"/>
+			<object class="wxMenu" name= "ID_MRU_LIST">
+				<label>Recent Projects</label>
+			</object>
+			<object class="separator"/>
+			<object class="wxMenuItem" name= "wxID_EXIT">
+				<label>E$xit</label>
+				<help>Quit the application; prompts to save the project if changed.</help>
+			</object>
+		</object>
+		<object class="wxMenu" name= "Menu_16">
+			<label>$Edit</label>
+			<object class="wxMenuItem" name= "wxID_UNDO">
+			<label>$Undo\tCtrl+Z</label>
+			<help>Undo the last action</help>
+			<bitmap>res/Undo16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_EDIT_REDO">
+			<label>$Redo\tCtrl+Y</label>
+			<help>Redo the previously undone action</help>
+			<bitmap>res/Redo16.png</bitmap>
+		</object>
+		<object class="separator"/>
+		<object class="wxMenuItem" name= "wxID_CUT">
+			<label>Cu$t\tCtrl+X</label>
+			<help>Cut the selection and put it on the Clipboard</help>
+			<bitmap>res/Cut16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "wxID_COPY">
+			<label>$Copy\tCtrl+C</label>
+			<help>Copy the selection and put it on the Clipboard</help>
+			<bitmap>res/Copy16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "wxID_PASTE">
+			<label>$Paste\tCtrl+V</label>
+			<help>Insert Clipboard contents</help>
+			<bitmap>res/Paste16.png</bitmap>
+		</object>
+		<object class="separator"/>
+		<object class="wxMenuItem" name= "ID_EDIT_SELECTALL">
+			<label>Select $All\tCtrl+A</label>
+			<help>Select all text in the documnet</help>
+		</object>
+		<object class="wxMenuItem" name= "ID_EDIT_FIND">
+			<label>$Find and Replace...\tCtrl+F</label>
+			<help>Find the specified text</help>
+			<bitmap>res/Find16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_EDIT_FINDNEXT">
+			<label>Find $Next\tF3</label>
+			<help>Find the next instance</help>
+			<bitmap>res/FindNext16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_EDIT_GOTOLINE">
+			<label>$Goto line\tCtrl+G</label>
+			<help>Go to a specific line in the file.</help>
+		</object>
+    <object class="separator"/>
+    <object class="wxMenuItem" name= "ID_MARKER_SET">
+      <label>Set/Clear bookmark\tCtrl-F2</label>
+      <help>Set/clear marker on the current line.</help>
+    </object>
+    <object class="wxMenuItem" name="ID_MARKER_NEXT">
+      <label>Next bookmark\tF2</label>
+      <help>Goto next marked line</help>
+    </object>
+    <object class="wxMenuItem" name="ID_MARKER_PREV">
+      <label>Previos bookmark\tShift-F2</label>
+      <help>Goto previous marked line</help>
+    </object>
+    <object class="wxMenuItem" name="ID_MARKER_CLEAR">
+      <label>Clear bookmarks</label>
+      <help>Clear all markers</help>
+    </object>
+  </object>
+	<object class="wxMenu" name= "Menu_17">
+		<label>Item</label>
+		<object class="wxMenuItem" name= "ID_ITEM_EDIT">
+			<label>$Edit...</label>
+			<help>Open the item editor</help>
+			<bitmap>res/EditItem16.png</bitmap>
+		</object>
+		<object class="separator"/>
+		<object class="wxMenuItem" name= "ID_ITEM_NEW">
+			<label>$New...</label>
+			<help>Add a new item of this type</help>
+			<bitmap>res/NewItem16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_ITEM_ADD">
+			<label>$Add...</label>
+			<help>Add an existing item of this type</help>
+			<bitmap>res/AddItem16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_ITEM_COPY">
+			<label>C$opy...</label>
+			<help>Make a copy of this item.</help>
+			<bitmap>res/CopyItem16.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_ITEM_REMOVE">
+			<label>$Remove</label>
+			<help>Remove this item.</help>
+			<bitmap>res/DeleteItem16.png</bitmap>
+		</object>
+		<object class="separator"/>
+		<object class="wxMenuItem" name= "ID_ITEM_PROPERTIES">
+			<label>$Properties...</label>
+			<help>Edit the item properties (name, description, etc.)</help>
+			<bitmap>res/ItemProperties16.png</bitmap>
+		</object>
+	</object>
+	<object class="wxMenu" name= "Menu_18">
+		<label>$Project</label>
+		<object class="wxMenuItem" name= "ID_PROJECT_GENERATE">
+			<label>$Generate...\tF5</label>
+			<help>Generate the wave file</help>
+			<bitmap>res/CD16.png</bitmap>
+		</object>
+			<object class="wxMenuItem" name= "ID_PROJECT_PLAY">
+			<label>$Play\tF7</label>
+			<help>Start/Stop the keyboard player</help>
+			<bitmap>res/Keyboard16.png</bitmap>
+		</object>
+			<object class="separator"/>
+			<object class="wxMenuItem" name= "ID_PROJECT_OPTIONS">
+			<label>$Options...</label>
+			<help>Set the global project options</help>
+			<bitmap>res/ProjectProperties16.png</bitmap>
+		</object>
+	</object>
+	<object class="wxMenu" name= "Menu_19">
+		<label>$View</label>
+		<object class="wxMenuItem" name= "ID_VIEW_PROJECT">
+			<label>$Project</label>
+			<checkable>1</checkable>
+			<help>Show or hide the project tree</help>
+		</object>
+		<object class="wxMenuItem" name= "ID_VIEW_KEYBOARD">
+			<label>$Keyboard</label>
+			<checkable>1</checkable>
+			<help>Show or hide the keyboard window</help>
+		</object>
+		<object class="wxMenuItem" name= "ID_ITEM_ERRORS">
+			<label>Score $errors...</label>
+			<checkable>1</checkable>
+			<help>Get error information</help>
+		</object>
+		<object class="wxMenuItem" name= "ID_VIEW_TOOLBAR">
+			<label>$Toolbar</label>
+			<checkable>1</checkable>
+			<help>Show or hide the toolbar</help>
+		</object>
+		<object class="wxMenuItem" name= "ID_VIEW_STATUS_BAR">
+			<label>$Status Bar</label>
+			<checkable>1</checkable>
+			<help>Show or hide the status bar</help>
+		</object>
+		<object class="separator"/>
+		<object class="wxMenuItem" name= "ID_NEXT_PANE">
+			<label>$Next Window\tCtrl+F6</label>
+			<help>Move to next editor window.</help>
+			<bitmap>res/Next16.png</bitmap>
+      </object>
+      <object class="wxMenuItem" name= "ID_PREV_PANE">
+        <label>Previous $Window\tShift+F6</label>
+        <help>Move to previous editor window.</help>
+        <bitmap>res/Previous16.png</bitmap>
+      </object>
+    </object>
+		<object class="wxMenu" name= "Menu_21">
+			<label>$Help</label>
+			<object class="wxMenuItem" name= "wxID_ABOUT">
+			<label>$About...</label>
+			<help>Display program information, version number and copyright</help>
+			<bitmap>res/Info16_1.png</bitmap>
+		</object>
+		<object class="wxMenuItem" name= "ID_HELP_CONTENTS">
+			<label>Contents...</label>
+			<help>Display program help</help>
+			<bitmap>res/Help16_1.png</bitmap>
+		</object>
+	</object>
+</object>
+<object class="wxMenu" name= "ctxTabMenu">
+  <label>TabMenu</label>
+  <object class="wxMenuItem" name= "ID_ITEM_SAVE">
+    <label>$Save\tCtrl+S</label>
+    <help>Save this item.</help>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_CLOSE">
+    <label>$Close\tCtrl+F4</label>
+    <help>Close the item editor.</help>
+  </object>
+</object>
+<object class="wxMenu" name= "ctxProject">
+  <label>Project</label>
+  <object class="wxMenuItem" name= "ID_PROJECT_GENERATE">
+    <label>$Generate wave file...\tF5</label>
+    <help>Generate the wave file on disk</help>
+  </object>
+  <object class="wxMenuItem" name= "ID_PROJECT_PLAY">
+    <label>Start the $keyboard player</label>
+    <help>Start the keyboard player</help>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_PROJECT_SAVE">
+    <label>$Save\tCtrl+Shift+S</label>
+    <help>Save the project to disk</help>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_PROJECT_PROPERTIES">
+    <label>$Properties...</label>
+    <help>Edit the project properties</help>
+  </object>
+</object>
+
+<object class="wxMenu" name= "ctxSynth">
+  <label>Synth</label>
+  <object class="wxMenuItem" name= "ID_ITEM_NEW">
+    <label>$New wavetable</label>
+    <help>Add a new item of this type</help>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_ITEM_PROPERTIES">
+    <label>$Properties...</label>
+    <help>Edit the project properties</help>
+  </object>
+</object>
+<object class="wxMenu" name= "ctxWaveout">
+  <label>Waveout</label>
+  <object class="wxMenuItem" name= "ID_PROJECT_GENERATE">
+    <label>$Generate wave file...</label>
+    <help>Generate the wave file on disk</help>
+  </object>
+  <object class="wxMenuItem" name= "ID_PROJECT_PLAY">
+    <label>Start the $keyboard player</label>
+    <help>Start the keyboard player</help>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_ITEM_PROPERTIES">
+    <label>$Properties...</label>
+    <help>Edit the project properties</help>
+  </object>
+</object>
+<object class="wxMenu" name= "ctxFileList">
+  <label>Filelist</label>
+  <object class="wxMenuItem" name= "ID_ITEM_NEW">
+    <label>$New file</label>
+    <help>Add a new item of this type</help>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_ADD">
+    <label>$Add existing file</label>
+    <help>Add an existing item of this type</help>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_ITEM_PROPERTIES">
+    <label>$Properties...</label>
+    <help>Edit the item properties (name, description, etc.)</help>
+  </object>
+</object>
+<object class="wxMenu" name= "ctxProjectItems">
+  <label>ProjectItems</label>
+  <object class="wxMenuItem" name= "ID_ITEM_EDIT">
+    <label>$Edit...</label>
+    <help>Open the item editor</help>
+    <bitmap>res/EditItem16.png</bitmap>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_SAVE">
+    <label>$Save\tCtrl+S</label>
+    <help>Save changes to this item</help>
+    <bitmap>res/Save16.png</bitmap>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_CLOSE">
+    <label>$Close\tCtrl+F4</label>
+    <help>Close the editor for this item.</help>
+    <bitmap>res/CloseItem16.png</bitmap>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_ITEM_NEW">
+    <label>$New...</label>
+    <help>Add a new item of this type</help>
+    <bitmap>res/NewItem16.png</bitmap>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_ADD">
+    <label>$Add...</label>
+    <help>Add an existing item of this type</help>
+    <bitmap>res/AddItem16.png</bitmap>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_COPY">
+    <label>C$opy...</label>
+    <help>Make a copy of this item.</help>
+    <bitmap>res/CopyItem16.png</bitmap>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_REMOVE">
+    <label>$Remove</label>
+    <help>Remove this item.</help>
+    <bitmap>res/DeleteItem16.png</bitmap>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_ITEM_PROPERTIES">
+    <label>$Properties...</label>
+    <help>Edit the item properties (name, description, etc.)</help>
+    <bitmap>res/ItemProperties16.png</bitmap>
+  </object>
+</object>
+<object class="wxMenu" name= "ctxLibItems">
+  <label>LibItems</label>
+  <object class="wxMenuItem" name= "ID_ITEM_SAVE">
+    <label>$Save library</label>
+    <help>Save changes to this item</help>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_ADD">
+    <label>$Add to library</label>
+    <help>Add an existing item of this type</help>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_COPY">
+    <label>$Copy to project</label>
+    <help>Make a copy of this item.</help>
+  </object>
+  <object class="wxMenuItem" name= "ID_ITEM_REMOVE">
+    <label>$Remove library</label>
+    <help>Remove this item.</help>
+  </object>
+  <object class="separator"/>
+  <object class="wxMenuItem" name= "ID_ITEM_PROPERTIES">
+    <label>$Properties...</label>
+    <help>Edit the item properties (name, description, etc.)</help>
+  </object>
+</object>
+
+<object class="wxDialog" name= "DLG_ABOUTBOX">
+	<pos>0,0d</pos> 
+	<size>270,140d</size>
+	<center>1</center>
+	<title>About BasicSynth</title>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>210,120d</pos>
+		<size>50,14d</size>
+		<label>Close</label>
+	</object>
+	<object class="wxStaticBitmap" name= "IDC_STATIC">
+		<pos>5,5d</pos>
+		<size>30,28d</size>
+		<bitmap>res/Logo48.png</bitmap>
+	</object>
+	<object class="wxStaticText" name="IDC_STATIC">
+		<style>wxALIGN_CENTRE |wxBORDER_SUNKEN </style>
+		<pos>40,5d</pos>
+		<size>155,30d</size>
+		<label>BasicSynth Composer</label>
+	</object>
+	<object class="wxStaticBitmap" name= "IDC_STATIC">
+		<pos>205,10d</pos>
+		<size>59,19d</size>
+		<center>1</center>
+		<bitmap>res/cclic.png</bitmap>
+	</object>
+	<object class="wxStaticText" name="IDC_COPYRIGHT">
+		<style>wxALIGN_CENTRE |wxBORDER_SUNKEN </style>
+		<pos>5,40d</pos>
+		<size>260,75d</size>
+		<label>Copyright 2008-2010 Daniel R. Mitchell\nFor latest information and updates visit http://basicsynth.com \n\nThis work is licensed under a Creative Commons\nAttribution-Share Alike 3.0 United States License\n(http://creativecommons.org/licenses/by-sa/3.0/us/)\n\nFor information on wxWidgets, http://wxwidgets.org</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_FINDREPL">
+	<pos>0,0d</pos>
+	<size>212,131d</size>
+	<title>Find/Replace</title>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,7d</pos>
+		<size>40,14d</size>
+		<label>Find:</label>
+	</object>
+	<object class="wxComboBox" name= "IDC_FIND_TEXT">
+		<pos>45,5d</pos>
+		<size>160,14d</size>
+		<style>wxCB_SORT</style>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,26d</pos> 
+		<size>30,14d</size>
+		<label>Replace:</label>
+	</object>
+	<object class="wxComboBox" name= "IDC_REPL_TEXT">
+		<pos>45,25d</pos>
+		<size>160,14d</size>
+		<style>wxCB_SORT</style>
+	</object>
+	<object class="wxCheckBox" name= "IDC_MATCH_CASE">
+		<pos>5,45d</pos>
+		<size>52,10d</size>
+		<label>$Match case</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_WHOLE_WORD">
+		<pos>5,60d</pos>
+		<size>69,10d</size>
+		<label>$Whole word only</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_START_WORD">
+		<pos>5,75d</pos>
+		<size>59,10d</size>
+		<label>S$tart of word</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_REGEXP">
+		<pos>5,90d</pos>
+		<size>77,10d</size>
+		<label>Regular $Expression</label>
+	</object>
+	<object class="wxButton" name= "IDC_FIND_NEXT">
+		<pos>125,45d</pos>
+		<size>80,14d</size>
+		<label>$Find Next</label>
+	</object>
+	<object class="wxButton" name= "IDC_REPLACE">
+		<pos>125,60d</pos>
+		<size>80,14d</size>
+		<label>$Replace</label>
+	</object>
+	<object class="wxButton" name= "IDC_REPLACE_ALL">
+		<pos>125,75d</pos>
+		<size>80,14d</size>
+		<label>Replace $All</label>
+	</object>
+	<object class="wxButton" name= "IDC_REPLACE_SELALL">
+		<pos>125,90d</pos> 
+		<size>80,14d</size>
+		<label>Replace $Selection</label>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>165,110d</pos>
+		<size>40,14d</size>
+		<label>Close</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STAT_TEXT">
+		<pos>5,110d</pos>
+		<size>155,15d</size>
+		<label>Static</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_PROJECT_PROPERTIES">
+	<pos>0,0d</pos> 
+	<size>315,276d</size>
+	<center>1</center>
+	<title>Project Properties</title>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,5d</pos>
+		<size>35,14d</size>
+		<label>Name</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_NAME">
+		<pos>45,5d</pos>
+		<size>265,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,25d</pos>
+		<size>35,14d</size>
+		<label>Composer</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_COMPOSER">
+		<pos>45,25d</pos>
+		<size>110,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>160,25d</pos>
+		<size>38,14d</size>
+		<label>Copyright</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_COPYRIGHT">
+		<pos>200,25d</pos>
+		<size>110,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,45d</pos>
+		<size>38,8d</size>
+		<label>Description</label>
+  </object>
+  <object class="wxTextCtrl" name= "IDC_PROJECT_DESCR">
+    <pos>45,45d</pos>
+    <size>265,30d</size>
+    <style>wxTE_MULTILINE</style>
+  </object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,80d</pos>
+		<size>38,14d</size>
+		<label>Project File</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_FILE">
+		<pos>45,80d</pos> <size>240,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_PROJECT_IN_BROWSE">
+		<pos>290,80d</pos>
+		<size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,100d</pos>
+		<size>36,14d</size>
+		<label>Output File</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_OUTPUT">
+		<pos>45,100d</pos>
+		<size>240,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_PROJECT_OUT_BROWSE">
+		<pos>290,100d</pos>
+		<size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,121d</pos>
+		<size>45,14d</size>
+		<label>Sample Rate</label>
+	</object>
+	<object class="wxComboBox" name= "IDC_PROJECT_SAMPLERATE">
+		<pos>55,121d</pos>
+		<size>75,14d</size>
+		<style>wxCB_SORT</style>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,135d</pos>
+		<size>45,14d</size>
+		<label>Format</label>
+	</object>
+	<object class="wxComboBox" name= "IDC_PROJECT_SAMPLEFMT">
+		<style>wxCB_SORT</style>
+		<pos>55,135d</pos>
+		<size>75,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>235,121d</pos>
+		<size>31,14d</size>
+		<label>WT Size</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_WTSIZE">
+		<pos>270,121d</pos>
+		<size>40,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>235,134d</pos>
+		<size>28,14d</size>
+		<label>User WT</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_WTUSER">
+		<pos>270,134d</pos>
+		<size>40,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>140,120d</pos>
+		<size>41,12d</size>
+		<label>Leader (sec)</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_LEAD">
+		<pos>185,120d</pos>
+		<size>40,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>140,135d</pos>
+		<size>41,12d</size>
+		<label>Tail (sec)</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_TAIL">
+		<pos>185,135d</pos>
+		<size>40,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,155d</pos>
+		<size>300,9d</size>
+		<label>File Folders</label>
+	</object>
+	<object class="wxListBox" name= "IDC_PROJECT_PATH">
+		<pos>5,166d</pos>
+		<size>250,60d</size>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PROJECT_PATH_ADD">
+		<pos>260,165d</pos>
+		<size>25,22d</size>
+		<label>+</label>
+		<bitmap>res/Add32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PROJECT_PATH_REM">
+		<pos>285,165d</pos>
+		<size>25,22d</size>
+		<label>-</label>
+		<bitmap>res/Remove32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PROJECT_PATH_UP">
+		<pos>260,200d</pos> 
+		<size>25,22d</size>
+		<label>^</label>
+		<bitmap>res/Up32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PROJECT_PATH_DN">
+		<pos>285,200d</pos>
+		<size>25,22d</size>
+		<label>v</label>
+		<bitmap>res/Down32.png</bitmap>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,233d</pos> 
+		<size>40,12d</size>
+		<label>Wave files</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PROJECT_WVPATH">
+		<pos>45,235d</pos>
+		<size>240,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_PROJECT_WV_BROWSE">
+		<pos>290,235d</pos>
+		<size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>205,255d</pos> <size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>260,255d</pos>
+		<size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_FILE_PROPERTIES">
+	<pos>0,0d</pos> 
+  <size>316,102d</size>
+  <center>1</center>
+	<title>Properties</title>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,5d</pos> <size>35,14d</size>
+		<label>Name</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_NAME">
+		<pos>45,5d</pos> <size>265,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,25d</pos> <size>36,8d</size>
+		<label>Description</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_DESCR">
+		<pos>45,25d</pos> <size>265,30d</size>
+		 <style>wxTE_MULTILINE</style>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,60d</pos> <size>35,14d</size>
+		<label>File</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_FILE_NAME">
+		<pos>45,60d</pos> <size>240,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_FILE_BROWSE">
+		<pos>290,60d</pos> <size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_FILE_INCLUDE">
+		<pos>45,80d</pos> <size>100,10d</size>
+		<label>Include in output</label>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>205,80d</pos> <size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>260,80d</pos> <size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_GENERATE">
+	<pos>0,0d</pos>
+	<size>325,210d</size>
+	<center>1</center>
+	<title>Generate</title>
+	<object class="wxBitmapButton" name= "IDC_START">
+		<pos>5,5d</pos>
+		<size>28,24d</size>
+		<label>Start</label>
+		<bitmap>res/Start32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_STOP">
+		<pos>34,5d</pos>
+		<size>28,24d</size>
+		<label>Stop</label>
+		<bitmap>res/Stop32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PAUSE">
+		<pos>63,5d</pos>
+		<size>28,24d</size>
+		<label>Pause</label>
+		<bitmap>res/Pause32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PLAY_LIVE">
+		<pos>95,5d</pos>
+		<size>28,24d</size>
+		<label>Live</label>
+		<bitmap>res/Speaker32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_DISK">
+		 <pos>124,5d</pos>
+		  <size>28,24d</size>
+		  <label>Disk</label>
+		  <bitmap>res/CD32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PLAY_ALL">
+		<pos>155,5d</pos>
+		<size>28,24d</size>
+		<label>All</label>
+		<bitmap>res/All32.png</bitmap>
+	</object>
+	<object class="wxBitmapButton" name= "IDC_PLAY_SOME">
+		<pos>185,5d</pos>
+		<size>28,24d</size>
+		<label>Part</label>
+		<bitmap>res/Part32.png</bitmap>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>215,5d</pos>
+		<size>20,12d</size>
+		<label>From</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PLAY_FROM">
+		<pos>235,5d</pos>
+		<size>40,12d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>215,18d</pos>
+		<size>20,12d</size>
+		<label>To</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_PLAY_TO">
+		<pos>235,18d</pos>
+		<size>40,12d</size>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>280,5d</pos>
+		<size>40,14d</size>
+		<label>Close</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_TIME_ON">
+		<pos>5,35d</pos>
+		<size>30,12d</size>
+		<label>Time</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_TIME">
+		<pos>40,35d</pos>
+		<size>40,12d</size>
+		<style>wxTE_READONLY </style>
+	</object>
+	<object class="wxCheckBox" name ="IDC_PEAK_ON">
+		<pos>5,55d</pos>
+		<size>30,12d</size>
+		<label>Peak</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>40,55d</pos>
+		<size>10,12d</size>
+		<label>L.</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_LEFT_PEAK">
+		<pos>50,55d</pos>
+		<size>30,12d</size>
+		<style>wxTE_READONLY </style>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>145,55d</pos>
+		<size>10,12d</size>
+		<label>R.</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_RIGHT_PEAK">
+		<pos>157,55d</pos>
+		<size>30,12d</size>
+		<style>wxTE_READONLY </style>
+	</object>
+	<object class="wxComboBox" name= "IDC_RATE">
+		<pos>260,55d</pos>
+		<size>60,12d</size>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_TEXT">
+		<pos>5,75d</pos>
+		<size>315,130d</size>
+		<style>wxTE_MULTILINE</style>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_WT_SELECT">
+	<pos>0,0d</pos>
+  <size>342,151d</size>
+  <center>1</center>
+	<title>Wavetable Selection</title>
+	<object class="wxListBox" name= "IDC_WT_LIST">
+		<pos>5,5d</pos>
+		<size>95,125d</size>
+	</object>
+	<object class="wxStaticBox" name= "IDC_WT_GRAPH">
+		<pos>105,5d</pos>
+		<size>230,125d</size>
+		<label>Static</label>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>230,135d</pos> 
+		<size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>285,135d</pos> 
+		<size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_GET_VALUE">
+	<pos>0,0d</pos> <size>172,46d</size>
+	<title>Value</title>
+	<object class="wxTextCtrl" name= "IDC_VALUE">
+		<pos>5,5d</pos>
+		<size>160,14d</size>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>30,25d</pos>
+		<size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>90,25d</pos> 
+		<size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_INSTR_PROPERTIES">
+	<pos>0,0d</pos>
+	<size>316,146d</size>
+	<center>1</center>
+	<title>Instrument Properties</title>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,5d</pos>
+		<size>35,14d</size>
+		<label>Name</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_NAME">
+		<pos>45,5d</pos> 
+		<size>265,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,25d</pos>
+		<size>36,8d</size>
+		<label>Description</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_DESCR">
+		<pos>45,25d</pos>
+		<size>265,30d</size>
+		 <style>wxTE_MULTILINE</style>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,60d</pos> 
+		<size>35,14d</size>
+		<label>Type</label>
+	</object>
+	<object class="wxListBox" name= "IDC_INST_TYPE">
+		<pos>45,60d</pos> 
+		<size>265,60d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,125d</pos> 
+		<size>26,8d</size>
+		<label>Number</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_INST_NUM">
+		<pos>45,125d</pos>
+		<size>65,14d</size>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>205,125d</pos>
+		<size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>260,125d</pos>
+		<size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_LIB_PROPERTIES">
+	<pos>0,0d</pos>
+	<size>316,116d</size>
+	<center>1</center>
+	<title>Library Properties</title>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,5d</pos>
+    <size>35,14d</size>
+		<label>Name</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_NAME">
+		<pos>45,5d</pos> 
+    <size>265,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,25d</pos>
+    <size>36,8d</size>
+		<label>Description</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_DESCR">
+		<pos>45,25d</pos>
+    <size>265,30d</size>
+		<style>wxTE_MULTILINE</style>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,60d</pos>
+    <size>35,14d</size>
+		<label>File</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_FILE_NAME">
+		<pos>45,60d</pos>
+    <size>240,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_FILE_BROWSE">
+		<pos>290,60d</pos>
+    <size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,80d</pos>
+    <size>35,14d</size>
+		<label>Start ID</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_INST_NUM">
+		<pos>45,80d</pos>
+    <size>95,14d</size>
+	</object>
+	<object class="wxCheckBox" name= "IDC_RENUMBER">
+		<pos>150,80d</pos> 
+    <size>90,15d</size>
+		<label>Renumber library</label>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>205,100d</pos>
+    <size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>260,100d</pos> <size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_FILE_INCLUDE">
+		<pos>45,100d</pos> <size>100,10d</size>
+		<label>Add to instrument manager</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_SELECT_INSTR">
+	<pos>70,70d</pos> 
+  <size>207,182d</size>
+  <center>1</center>
+	<title>Select Instrument</title>
+	<object class="wxListBox" name= "IDC_INST_LIST">
+		<pos>5,5d</pos> 
+    <size>195,155d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,167d</pos> 
+    <size>8,8d</size>
+		<label>ID</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_INST_NUM">
+		<pos>20,165d</pos> 
+    <size>40,14d</size>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>95,165d</pos> 
+    <size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>145,165d</pos> 
+    <size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_OPTIONS">
+	<pos>0,0d</pos> 
+  <size>367,251d</size>
+  <center>1</center>
+	<title>Settings</title>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,5d</pos>
+    <size>45,14d</size>
+		<label>Composer</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_DEF_AUTHOR">
+		<pos>55,5d</pos>
+    <size>305,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,25d</pos>
+    <size>45,14d</size>
+		<label>Copyright</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_DEF_COPYRIGHT">
+		<pos>55,25d</pos>
+    <size>305,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,50d</pos> 
+    <size>67,15d</size>
+		<label>Project Tree Options</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_INCL_NOTELIST">
+		<pos>90,50d</pos> <size>60,15d</size>
+		<label>Notelists</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_INCL_SEQUENCE">
+		<pos>160,50d</pos> <size>60,15d</size>
+		<label>Sequences</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_INCL_SCRIPTS">
+		<pos>230,50d</pos> <size>60,15d</size>
+		<label>Script files</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_INCL_TEXTFILES">
+		<pos>300,50d</pos> <size>60,15d</size>
+		<label>Text files</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_INCL_LIBRARIES">
+		<pos>90,70d</pos> <size>60,15d</size>
+		<label>Libraries</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_INCL_SOUNDFONTS">
+		<pos>160,70d</pos> <size>60,15d</size>
+		<label>SoundFonts</label>
+	</object>
+	<object class="wxCheckBox" name= "IDC_INCL_MIDI">
+		<pos>230,70d</pos> <size>60,15d</size>
+		<label>MIDI</label>
+	</object>
+	<object class="wxStaticBox" name= "IDC_STATIC">
+		<pos>5,90d</pos> <size>355,110d</size>
+		<label>Default Folders</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>10,100d</pos> <size>45,14d</size>
+		<label>Projects</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_DEF_PROJECTS">
+		<pos>60,100d</pos> <size>275,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_BROWSE_PROJECTS">
+		<pos>335,100d</pos>
+  <size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>10,120d</pos>
+  <size>45,14d</size>
+		<label>Wave Files</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_DEF_WAVEIN">
+		<pos>60,120d</pos>
+  <size>275,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_BROWSE_WAVEIN">
+		<pos>335,120d</pos> <size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>10,140d</pos> <size>45,14d</size>
+		<label>Forms</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_DEF_FORMS">
+		<pos>60,140d</pos> <size>275,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_BROWSE_FORMS">
+		<pos>335,140d</pos> <size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>10,160d</pos> <size>45,14d</size>
+		<label>Colors</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_DEF_COLORS">
+		<pos>60,160d</pos> <size>275,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_BROWSE_COLORS">
+		<pos>335,160d</pos> <size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>10,180d</pos> <size>45,14d</size>
+		<label>Libraries</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_DEF_LIBRARIES">
+		<pos>60,180d</pos> <size>275,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_BROWSE_LIBRARIES">
+		<pos>335,180d</pos> <size>20,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,230d</pos> <size>45,14d</size>
+		<label>Play Latency</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_LATENCY">
+		<pos>60,230d</pos>
+    <size>75,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>25,205d</pos>
+    <size>30,14d</size>
+		<label>MIDI In</label>
+	</object>
+	<object class="wxComboBox" name= "IDC_MIDI_IN">
+		<pos>60,206d</pos>
+    <size>125,14d</size>
+	</object>
+  <object class="wxStaticText" name= "IDC_STATIC">
+    <pos>195,205d</pos>
+    <size>40,14d</size>
+    <label>Wave Out</label>
+  </object>
+  <object class="wxComboBox" name= "IDC_WAVE_OUT">
+    <pos>235,205d</pos>
+    <size>125,14d</size>
+  </object>
+  <object class="wxButton" name= "wxID_OK">
+		<pos>255,235d</pos> <size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>310,235d</pos> <size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_WVF_PROPERTIES">
+	<pos>0,0d</pos> 
+  <size>316,116d</size>
+  <center>1</center>
+	<title>WaveFile Properties</title>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,5d</pos>
+    <size>35,14d</size>
+		<label>Name</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_NAME">
+		<pos>45,5d</pos>
+    <size>265,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>30,82d</pos>
+    <size>8,8d</size>
+		<label>ID</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_WVF_ID">
+		<pos>45,80d</pos>
+    <size>40,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,25d</pos>
+    <size>36,8d</size>
+		<label>Description</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_DESCR">
+		<pos>45,25d</pos> 
+    <size>265,30d</size>
+		 <style>wxTE_MULTILINE</style>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,60d</pos> 
+    <size>35,14d</size>
+		<label>File</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_FILE_NAME">
+		<pos>45,60d</pos> 
+    <size>235,14d</size>
+	</object>
+	<object class="wxButton" name= "IDC_FILE_BROWSE">
+		<pos>285,60d</pos> 
+    <size>24,14d</size>
+		<label>...</label>
+	</object>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>205,100d</pos> 
+    <size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>259,100d</pos> 
+    <size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+</object>
+
+<object class="wxDialog" name= "DLG_NAME_PROPERTIES">
+  <pos>0,0d</pos>
+  <size>316,86d</size>
+  <title>Properties</title>
+  <center>1</center>
+	<object class="wxButton" name= "wxID_OK">
+		<pos>200,65d</pos> 
+    <size>50,14d</size>
+		<label>OK</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>255,65d</pos> 
+    <size>50,14d</size>
+		<label>Cancel</label>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,5d</pos>
+    <size>35,14d</size>
+		<label>Name</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_NAME">
+		<pos>45,5d</pos> 
+    <size>265,14d</size>
+	</object>
+	<object class="wxStaticText" name= "IDC_STATIC">
+		<pos>5,25d</pos>
+    <size>36,8d</size>
+		<label>Description</label>
+	</object>
+	<object class="wxTextCtrl" name= "IDC_ITEM_DESCR">
+		<pos>45,25d</pos> 
+    <size>265,30d</size>
+		<style>wxTE_MULTILINE</style>
+	</object>
+</object>
+<object class="wxDialog" name= "DLG_SCORE_ERRORS">
+	<pos>0,0d</pos> 
+  <size>277,196d</size>
+	<title>Score Errors</title>
+	<object class="wxComboBox" name= "IDC_ERROR_ITEMS">
+		<pos>5,5d</pos>
+    <size>265,14d</size>
+	</object>
+	<object class="wxListBox" name= "IDC_ERROR_LIST">
+		<pos>5,20d</pos>
+    <size>265,150d</size>
+	</object>
+	<object class="wxButton" name= "IDC_ERROR_PREV">
+		<pos>5,175d</pos>
+    <size>19,14d</size>
+		<label>&lt;</label>
+	</object>
+	<object class="wxButton" name= "IDC_ERROR_GOTO">
+		<pos>25,175d</pos>
+    <size>45,14d</size>
+		<label>Goto error</label>
+	</object>
+	<object class="wxButton" name= "IDC_ERROR_NEXT">
+		<pos>70,175d</pos> 
+    <size>19,14d</size>
+		<label>&gt;</label>
+	</object>
+	<object class="wxButton" name= "IDC_ERROR_CHECK">
+		<pos>95,175d</pos> 
+    <size>40,14d</size>
+		<label>Check</label>
+	</object>
+	<object class="wxButton" name= "IDC_ERROR_REFRESH">
+		<pos>140,175d</pos>
+    <size>40,14d</size>
+		<label>Refresh</label>
+	</object>
+	<object class="wxButton" name= "IDC_ERROR_MARK">
+		<pos>185,175d</pos>
+    <size>40,14d</size>
+		<label>Mark</label>
+	</object>
+	<object class="wxButton" name= "wxID_CANCEL">
+		<pos>230,175d</pos>
+    <size>40,14d</size>
+		<label>Close</label>
+	</object>
+</object>
+	<object class="wxDialog" name= "DLG_MODSYNTH_CONFIG">
+			<pos>0,0d</pos> <size>192,215d</size>
+       <center>1</center>
+		<title>ModSynth Configuration</title>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,5d</pos> 
+      <size>19,8d</size>
+			<label>Name</label>
+		</object>
+		<object class="wxTextCtrl" name= "IDC_MS_NAME">
+			<pos>35,5d</pos> 
+      <size>155,14d</size>
+		</object>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,25d</pos>
+      <size>25,8d</size>
+			<label>Type</label>
+		</object>
+		<object class="wxListBox" name= "IDC_MS_TYPE">
+			<pos>35,25d</pos>
+      <size>155,60d</size>
+		</object>
+    <object class="wxBitmapButton" name= "IDC_MS_ADD">
+			<pos>5,90d</pos>
+			<size>25,22d</size>
+			<label>Add</label>
+			<bitmap>res/Add32.png</bitmap>
+		</object>
+    <object class="wxBitmapButton" name= "IDC_MS_REM">
+      <pos>5,112d</pos>
+      <size>25,22d</size>
+      <label>Rem</label>
+      <bitmap>res/Remove32.png</bitmap>
+    </object>
+    <object class="wxBitmapButton" name= "IDC_MS_MVUP">
+			<pos>5,145d</pos>
+			<size>25,22d</size>
+			<label>^</label>
+			<bitmap>res/Up32.png</bitmap>
+		</object>
+		<object class="wxBitmapButton" name= "IDC_MS_MVDN">
+			<pos>5,168d</pos>
+			<size>25,22d</size>
+			<label>v</label>
+			<bitmap>res/Down32.png</bitmap>
+		</object>
+    <object class="wxListBox" name= "IDC_MS_UGENS">
+      <pos>35,90d</pos>
+      <size>155,100d</size>
+    </object>
+    <object class="wxButton" name= "wxID_OK">
+			<pos>80,195d</pos>
+      <size>50,14d</size>
+			<label>OK</label>
+		</object>
+		<object class="wxButton" name= "wxID_CANCEL">
+			<pos>135,195d</pos> 
+      <size>50,14d</size>
+			<label>Cancel</label>
+		</object>
+	</object>
+	<object class="wxDialog" name= "DLG_MODSYNTH_CONNECT">
+		<pos>0,0d</pos> <size>277,217d</size>
+		<center>1</center>
+		<title>ModSynth Connect</title>
+    <object class="wxStaticText" name= "IDC_STATIC">
+      <pos>5,5d</pos>
+      <size>100,8d</size>
+      <label>Source Unit (Output)</label>
+    </object>
+    <object class="wxListBox" name= "IDC_MC_SRC">
+			<pos>5,15d</pos>
+      <size>100,75d</size>
+		</object>
+    <object class="wxStaticText" name= "IDC_STATIC">
+      <pos>110,5d</pos>
+      <size>100,8d</size>
+      <label>Destination Unit (Input)</label>
+    </object>
+    <object class="wxListBox" name= "IDC_MC_DST">
+			<pos>110,15d</pos> <size>100,75d</size>
+		</object>
+    <object class="wxStaticText" name= "IDC_STATIC">
+      <pos>215,5d</pos>
+      <size>55,8d</size>
+      <label>Parameter</label>
+    </object>
+    <object class="wxListBox" name= "IDC_MC_PARAM">
+			<pos>215,15d</pos>
+      <size>55,75d</size>
+		</object>
+		<object class="wxBitmapButton" name= "IDC_MC_ADD">
+			<pos>5,105d</pos>
+			<size>25,22d</size>
+			<label>Add</label>
+			<bitmap>res/Add32.png</bitmap>
+		</object>
+		<object class="wxBitmapButton" name= "IDC_MC_REM">
+			<pos>5,130d</pos> 
+			<size>25,22d</size>
+			<label>Rem</label>
+			<bitmap>res/Remove32.png</bitmap>
+		</object>
+    <object class="wxStaticText" name= "IDC_STATIC">
+      <pos>35,95d</pos>
+      <size>55,8d</size>
+      <label>Connections</label>
+    </object>
+    <object class="wxListBox" name= "IDC_MC_CONN">
+      <pos>35,105d</pos>
+      <size>235,80d</size>
+      <style>wxLB_MULTIPLE</style>
+    </object>
+    <object class="wxButton" name= "wxID_OK">
+			<pos>220,195d</pos> <size>50,14d</size>
+			<label>Done</label>
+		</object>
+	</object>
+	<object class="wxDialog" name= "DLG_FILE_ORDER">
+		<pos>0,0d</pos> <size>257,166d</size>
+		<center>1</center>
+		<title>File Order</title>
+		<object class="wxListBox" name= "IDC_FILE_LIST">
+			<pos>5,5d</pos> 
+			<size>245,130d</size>
+		</object>
+		<object class="wxBitmapButton" name= "IDC_FILE_UP">
+			<pos>5,140d</pos>
+			<size>25,22d</size>
+			<label>^</label>
+			<bitmap>res/Up32.png</bitmap>
+		</object>
+		<object class="wxBitmapButton" name= "IDC_FILE_DN">
+			<pos>30,140d</pos> 
+			<size>25,22d</size>
+			<label>v</label>
+			<bitmap>res/Down32.png</bitmap>
+		</object>
+		<object class="wxButton" name= "wxID_OK">
+			<pos>145,140d</pos>
+			<size>50,14d</size>
+			<label>OK</label>
+		</object>
+		<object class="wxButton" name= "wxID_CANCEL">
+			<pos>200,140d</pos>
+			<size>50,14d</size>
+			<label>Cancel</label>
+		</object>
+	</object>
+	<object class="wxDialog" name= "DLG_SOUNDBANK_SEL">
+			<pos>0,0d</pos> <size>232,180d</size>
+       <center>1</center>
+		<title></title>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,10d</pos> <size>40,8d</size>
+			<label>File</label>
+		</object>
+		<object class="wxComboBox" name= "IDC_SB_FILE">
+			<pos>50,5d</pos> <size>175,14d</size>
+			<style>wxCB_SORT</style>
+
+		</object>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,30d</pos> <size>40,8d</size>
+			<label>Bank</label>
+		</object>
+		<object class="wxListBox" name= "IDC_SB_BANK">
+			<pos>5,40d</pos> <size>40,115d</size>
+
+		</object>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>50,30d</pos> <size>180,8d</size>
+			<label>Preset</label>
+		</object>
+		<object class="wxListBox" name= "IDC_SB_PRESET">
+			<pos>50,40d</pos> <size>175,115d</size>
+
+		</object>
+		<object class="wxButton" name= "wxID_OK">
+			<pos>120,160d</pos> <size>50,14d</size>
+			<label>OK</label>
+		</object>
+		<object class="wxButton" name= "wxID_CANCEL">
+			<pos>175,160d</pos> <size>50,14d</size>
+			<label>Cancel</label>
+		</object>
+	</object>
+	<object class="wxDialog" name= "DLG_SOUNDBANK_PROPERTIES">
+			<pos>0,0d</pos> <size>316,121d</size>
+		<title></title>
+       <center>1</center>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,5d</pos> <size>35,14d</size>
+			<label>Name</label>
+		</object>
+		<object class="wxTextCtrl" name= "IDC_ITEM_NAME">
+			<pos>45,5d</pos> <size>265,14d</size>
+		</object>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,25d</pos> <size>36,8d</size>
+			<label>Description</label>
+		</object>
+		<object class="wxTextCtrl" name= "IDC_ITEM_DESCR">
+			<pos>45,25d</pos> <size>265,30d</size>
+			 <style>wxTE_MULTILINE</style>
+		</object>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,60d</pos> <size>35,14d</size>
+			<label>File</label>
+		</object>
+		<object class="wxTextCtrl" name= "IDC_FILE_NAME">
+			<pos>45,60d</pos> <size>240,14d</size>
+		</object>
+		<object class="wxButton" name= "IDC_FILE_BROWSE">
+			<pos>290,60d</pos> <size>20,14d</size>
+			<label>...</label>
+		</object>
+		<object class="wxStaticText" name= "IDC_STATIC">
+			<pos>5,80d</pos> <size>60,14d</size>
+			<label>Scale Attenuation:</label>
+		</object>
+		<object class="wxTextCtrl" name= "IDC_SB_SCALE">
+			<pos>75,80d</pos> <size>60,14d</size>
+		</object>
+		<object class="wxCheckBox" name= "IDC_SB_PRELOAD">
+			<pos>150,80d</pos> <size>68,14d</size>
+			<label>Preload Samples</label>
+		</object>
+		<object class="wxCheckBox" name= "IDC_FILE_INCLUDE">
+			<pos>230,80d</pos> <size>80,14d</size>
+			<label>Include in project</label>
+		</object>
+		<object class="wxButton" name= "wxID_OK">
+			<pos>205,100d</pos> <size>50,14d</size>
+			<label>OK</label>
+		</object>
+		<object class="wxButton" name= "wxID_CANCEL">
+			<pos>260,100d</pos> <size>50,14d</size>
+			<label>Cancel</label>
+		</object>
+	</object>
+  <object class="wxDialog" name= "DLG_MIXER_SETUP">
+   <pos>0,0d</pos>
+    <size>237,201d</size>
+    <title>Mixer Setup</title>
+    <object class="wxStaticText" name= "IDC_STATIC">
+     <pos>5,8d</pos>
+      <size>35,8d</size>
+      <label>Inputs</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_INPUTS">
+     <pos>50,5d</pos>
+      <size>30,14d</size>
+    </object>
+    <object class="wxRadioButton" name= "IDC_PAN_LIN">
+     <pos>90,5d</pos>
+      <size>41,14d</size>
+      <label>Lin. Pan</label>
+      <style>wxRB_GROUP</style>
+    </object>
+    <object class="wxRadioButton" name= "IDC_PAN_TRIG">
+     <pos>140,5d</pos>
+      <size>42,14d</size>
+      <label>Trig Pan</label>
+    </object>
+    <object class="wxRadioButton" name= "IDC_PAN_SQRT">
+     <pos>185,5d</pos>
+      <size>46,14d</size>
+      <label>Sqrt. Pan</label>
+    </object>
+    <object class="wxStaticBox" name= "IDC_STATIC">
+     <pos>5,25d</pos>
+      <size>230,155d</size>
+      <label>Effects</label>
+    </object>
+    <object class="wxStaticText" name= "IDC_STATIC">
+      <pos>10,35d</pos>
+      <size>95,8d</size>
+      <label>Name</label>
+    </object>
+    <object class="wxStaticText" name= "IDC_STATIC">
+      <pos>110,35d</pos>
+      <size>90,8d</size>
+      <label>Type</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_FX_NAME">
+      <pos>10,45d</pos>
+      <size>95,12d</size>
+    </object>
+    <object class="wxComboBox" name= "IDC_FX_TYPE">
+      <pos>110,45d</pos>
+      <size>90,12d</size>
+    </object>
+    <object class="wxListBox" name= "IDC_FX_LIST">
+     <pos>10,60d</pos>
+      <size>185,120d</size>
+
+    </object>
+    <object class="wxBitmapButton" name= "IDC_FX_ADD">
+      <pos>205,38d</pos>
+      <size>25,22d</size>
+      <label>+</label>
+      <bitmap>res/Add32.png</bitmap>
+    </object>
+    <object class="wxBitmapButton" name= "IDC_FX_REM">
+      <pos>205,60d</pos>
+      <size>25,22d</size>
+      <label>-</label>
+      <bitmap>res/Remove32.png</bitmap>
+    </object>
+    <object class="wxBitmapButton" name= "IDC_FX_UP">
+     <pos>205,93d</pos>
+      <size>25,22d</size>
+      <label>^</label>
+      <bitmap>res/Up32.png</bitmap>
+    </object>
+    <object class="wxBitmapButton" name= "IDC_FX_DN">
+     <pos>205,115d</pos>
+      <size>25,22d</size>
+      <label>v</label>
+      <bitmap>res/Down32.png</bitmap>
+    </object>
+    <object class="wxBitmapButton" name= "IDC_FX_EDIT">
+     <pos>205,150d</pos>
+      <size>25,22d</size>
+      <label>...</label>
+      <bitmap>res/Info32_1.png</bitmap>
+    </object>
+    <object class="wxButton" name= "wxID_OK">
+     <pos>125,185d</pos>
+      <size>50,14d</size>
+      <label>OK</label>
+    </object>
+    <object class="wxButton" name= "wxID_CANCEL">
+     <pos>180,185d</pos>
+      <size>50,14d</size>
+      <label>Cancel</label>
+    </object>
+  </object>
+  <object class="wxDialog" name= "DLG_EFFECTS">
+   <pos>0,0d</pos>
+    <size>147,206d</size>
+    <title>Effects Properties</title>
+    <object class="wxStaticText" name= "IDC_NAME_LBL">
+     <pos>5,8d</pos>
+      <size>19,8d</size>
+      <label>Name</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_ITEM_NAME">
+     <pos>55,5d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxStaticText" name= "IDC_NAME_LBL2">
+     <pos>5,25d</pos>
+      <size>36,8d</size>
+      <label>Description</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_ITEM_DESCR">
+     <pos>55,25d</pos>
+      <size>80,14d</size>
+      <style>wxTE_MULTILINE</style>
+    </object>
+    <object class="wxStaticText" name= "IDC_VOL_LBL">
+     <pos>5,48d</pos>
+      <size>45,8d</size>
+      <label>Volume</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_VOL">
+     <pos>55,45d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxStaticText" name= "IDC_PAN_LBL">
+     <pos>5,68d</pos>
+      <size>45,8d</size>
+      <label>Pan</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_PAN">
+     <pos>55,65d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxStaticText" name= "IDC_VAL1">
+     <pos>5,88d</pos>
+      <size>45,8d</size>
+      <label>Reverb Time</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_EDIT1">
+     <pos>55,85d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxStaticText" name= "IDC_VAL2">
+     <pos>5,108d</pos>
+      <size>39,8d</size>
+      <label>Loop Time 1</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_EDIT2">
+     <pos>55,105d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxStaticText" name= "IDC_VAL3">
+     <pos>5,128d</pos>
+      <size>39,8d</size>
+      <label>Loop Time 2</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_EDIT3">
+     <pos>55,125d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxStaticText" name= "IDC_VAL4">
+     <pos>5,148d</pos>
+      <size>39,8d</size>
+      <label>Loop Time 3</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_EDIT4">
+     <pos>55,145d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxStaticText" name= "IDC_VAL5">
+     <pos>5,168d</pos>
+      <size>39,8d</size>
+      <label>Loop Time 4</label>
+    </object>
+    <object class="wxTextCtrl" name= "IDC_EDIT5">
+     <pos>55,165d</pos>
+      <size>80,14d</size>
+    </object>
+    <object class="wxButton" name= "IDC_RESET">
+     <pos>5,190d</pos>
+      <size>40,14d</size>
+      <label>Reset</label>
+    </object>
+    <object class="wxButton" name= "wxID_OK">
+     <pos>51,190d</pos>
+      <size>40,14d</size>
+      <label>OK</label>
+    </object>
+    <object class="wxButton" name= "wxID_CANCEL">
+		<pos>95,190d</pos>
+      <size>40,14d</size>
+      <label>Cancel</label>
+    </object>
+  </object>
+</resource>

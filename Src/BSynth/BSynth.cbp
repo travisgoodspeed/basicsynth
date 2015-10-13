@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BSynth" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="$(#BSHOME)/Bin/BSynth" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccDebug" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-W" />
+					<Add option="-O0" />
+					<Add option="-mthreads" />
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-D_WINDOWS" />
+				</Compiler>
+				<Linker>
+					<Add library="InstrumentsD" />
+					<Add library="NotelistD" />
+					<Add library="CommonD" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="$(#BSHOME)/Bin/BSynth" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccRelease" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-W" />
+					<Add option="-mthreads" />
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-D_WINDOWS" />
+				</Compiler>
+				<Linker>
+					<Add library="Instruments" />
+					<Add library="Notelist" />
+					<Add library="Common" />
+				</Linker>
+			</Target>
+			<Target title="Debug UNIX">
+				<Option output="$(#BSHOME)/Bin/BSynth" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccDebug" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-g" />
+					<Add option="-W -pthread" />
+					<Add option="-DUNIX" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="InstrumentsD" />
+					<Add library="NotelistD" />
+					<Add library="CommonD" />
+					<Add library="asound" />
+				</Linker>
+			</Target>
+			<Target title="Release UNIX">
+				<Option output="$(#BSHOME)/Bin/BSynth" prefix_auto="1" extension_auto="1" />
+				<Option object_output="gccRelease" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-W -pthread" />
+					<Add option="-DUNIX" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add library="Instruments" />
+					<Add library="Notelist" />
+					<Add library="Common" />
+					<Add library="asound" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-DUSE_TINYXML" />
+			<Add option="-DGCC" />
+			<Add directory="$(#BSHOME)/Include" />
+			<Add directory="$(#BSHOME)/Src/Instruments" />
+			<Add directory="$(#BSHOME)/Src/Notelist" />
+		</Compiler>
+		<Linker>
+			<Add directory="$(#BSHOME)/Lib" />
+		</Linker>
+		<ExtraCommands>
+			<Add after="$(CMD_CP) testnl.xml $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) testnl.nl $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) testinst.xml $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) testprj.xml  $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) test.nl  $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) test2.nl  $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) tstaddsynth.* $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) tstfmsynth.* $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) tstmatsynth.* $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) tstsubsynth.* $(TARGET_OUTPUT_DIR)" />
+			<Add after="$(CMD_CP) tsttonesynth.* $(TARGET_OUTPUT_DIR)" />
+		</ExtraCommands>
+		<Unit filename="BSynth.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="test.nl" />
+		<Unit filename="testinst.xml" />
+		<Unit filename="testnl.nl" />
+		<Unit filename="testnl.xml" />
+		<Unit filename="testprj.xml" />
+		<Unit filename="tstaddsynth.nl" />
+		<Unit filename="tstaddsynth.xml" />
+		<Unit filename="tstfmsynth.nl" />
+		<Unit filename="tstfmsynth.xml" />
+		<Unit filename="tstmatsynth.nl" />
+		<Unit filename="tstmatsynth.xml" />
+		<Unit filename="tstsubsynth.nl" />
+		<Unit filename="tstsubsynth.xml" />
+		<Unit filename="tsttonesynth.nl" />
+		<Unit filename="tsttonesynth.xml" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

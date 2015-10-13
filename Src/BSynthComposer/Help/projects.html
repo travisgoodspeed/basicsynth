@@ -1,0 +1,439 @@
+<html>
+<head>
+<title>Project Files</title>
+</head>
+<body>
+<h1>Project Files</h1>
+<p>A <em>BasicSynth</em> project file is an XML format file that contains general information
+about the composition, synthesizer settings, instrument definitions, score files, and parameters
+ that control the format of the output. Generally, project files are not edited by hand since 
+ all entries in the file can be set from the program. An template project file is shown below.
+</p>
+
+<pre>
+&lt;synthprj&gt;
+  &lt;name&gt;Composition name&lt;/name&gt;
+  &lt;author&gt;Composer name&lt;/author&gt;
+  &lt;desc&gt;Description of the composition&lt;/desc&gt;
+  &lt;cpyrgt&gt;Copyright notice&lt;/cpyrgt&gt;
+  &lt;wvdir&gt;wave file path&lt;/wvdir&gt;
+  &lt;libdir&gt;path to find libraries&lt;/libdir&gt;
+  &lt;synth sr=&quot;44100&quot; fmt=&quot;0&quot; wt=&quot;16384&quot; usr=&quot;0&quot; &gt;
+    &lt;wvtable ndx=&quot;&quot; id=&quot;&quot; parts=&quot;&quot; gibbs=&quot;&quot; type=&quot;&quot; &gt;
+      &lt;part mul=&quot;&quot; amp=&quot;&quot; phs=&quot;&quot;/&gt;
+    &lt;/wvtable&gt;
+  &lt;/synth&gt;
+  &lt;midi&gt;
+    &lt;chnl cn=&quot;&quot; bnk=&quot;&quot; prg=&quot;&quot; vol=&quot;&quot; pan=&quot;&quot; /&gt;
+  &lt;/midi&gt;
+  &lt;out type=&quot;1&quot; lead=&quot;&quot; tail=&quot;&quot;&gt;
+    output file path
+  &lt;/out&gt;
+  &lt;wvfile id=&quot;&quot; name=&quot;&quot; desc=&quot;&quot; &gt;file name&lt;/wvfile&gt;
+  &lt;mixer chnls=&quot;&quot; fxunits=&quot;&quot; lft=&quot;&quot; rgt=&quot;&quot;&gt;
+    &lt;chnl cn=&quot;&quot; on=&quot;&quot; vol=&quot;&quot; pan=&quot;&quot;/&gt;
+    &lt;reverb unit=&quot;&quot; vol=&quot;&quot; rvt=&quot;&quot; pan=&quot;&quot; &gt;
+      &lt;send chnl=&quot;&quot; amt=&quot;&quot;/&gt;
+    &lt;/reverb&gt;
+    &lt;flanger unit=&quot;&quot; lvl=&quot;&quot; mix=&quot;&quot; fb=&quot;&quot; 
+      cntr=&quot;&quot; depth=&quot;&quot; sweep=&quot;&quot; pan=&quot;&quot; &gt;
+      &lt;send chnl=&quot;&quot; amt=&quot;&quot; /&gt;
+    &lt;/flanger&gt;
+    &lt;echo unit=&quot;&quot; tm=&quot;&quot; dec=&quot;&quot; &gt;
+      &lt;send chnl=&quot;&quot; amt=&quot;&quot; /&gt;
+    &lt;/echo&gt;
+  &lt;/mixer&gt;
+  &lt;libfile&gt;instrument library file&lt;/libfile&gt;
+  &lt;sndbnk name=&quot;&quot; inc=&quot;1&quot; pre=&quot;&quot;>
+    path to sound bank (SF2/DLS)
+  &lt;/sndbnk&gt;
+  &lt;instrlib&gt;
+    &lt;instr&gt; instrument definition (specific to each instrument)&lt;/instr&gt;
+  &lt;/instrlib&gt;
+  &lt;seq name=&quot;&quot;&gt;a sequencer file&lt;/seq&gt;
+  &lt;score name=&quot;&quot; dbg=&quot;&quot;&gt;a notelist file&lt;/score&gt;
+  &lt;text&gt;file associated with the project&lt;/text&gt;
+&lt;/synthprj&gt;
+</pre>
+ 
+<table border="1" cellspacing="0" cellpadding="1" style="border: solid black 1.0pt;">
+<tr style='background:black;color:white;'>
+ <th>Tag</th>
+ <th>Attribute</th>
+ <th>Use</th>
+ </tr>
+<tr>
+    <td>synthprj</td>
+    <td>&nbsp;</td>
+    <td>Document root tag</td>
+</tr>
+<tr>
+    <td>name</td>
+    <td>&nbsp;</td>
+    <td>Name of the composition</td>
+</tr>
+<tr>
+    <td>author</td>
+    <td>&nbsp;</td>
+    <td>Composer name</td>
+</tr>
+<tr>
+    <td>desc</td>
+    <td>&nbsp;</td>
+    <td>Description</td>
+</tr>
+<tr>
+    <td>cpyrgt</td>
+    <td>&nbsp;</td>
+    <td>Copyright notice</td>
+</tr>
+<tr>
+    <td>out</td>
+    <td>&nbsp;</td>
+    <td>Output file path</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>type</td>
+    <td>1 = WAVE file, 2 channel. (This is the only file type current supported)</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>fmt</td>
+    <td>Data format, 0=16-bit PCM, 1=32-bit float.</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>lead</td>
+    <td>Seconds of silence at beginning of the file</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>tail</td>
+    <td>Seconds of silence at end of file. When reverb is enabled, this should be at least as long as RVT.</td>
+</tr>
+<tr>
+    <td>libdir</td>
+    <td>&nbsp;</td>
+    <td>Path to libraries</td>
+</tr>
+<tr>
+    <td>wvdir</td>
+    <td>&nbsp;</td>
+    <td>Path to wave files</td>
+</tr>
+<tr>
+    <td>synth</td>
+    <td>sr</td>
+    <td>Sample rate (default 44100)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>wt</td>
+<td>Wavetable length (default 16k. Values greater than 16k may cause problems.)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>usr</td>
+<td>Number of user defined wave tables, defined by <i>wvtable</i> tags</td>
+</tr>
+<tr>
+<td>wvtable</td>
+<td>ndx</td>
+<td>Wavetable index number (0-9 are reserved for library use)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>id</td>
+<td>Wavetable ID, same as index for pre-defined tables.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>parts</td>
+<td>Number of partials</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>gibbs</td>
+<td>Apply adjustment for Gibbs effect, 1=apply, 0=don't apply (only used for sum of sin waves)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>type</td>
+<td>Wave type, 1=sum of sines, 2=linear segments</td>
+</tr>
+<tr>
+<td>part</td>
+<td>mul</td>
+<td>Partial number (1-n) (not used for linear segments)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>amp</td>
+<td>Amplitude for this partial/segment</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>phs</td>
+<td>Starting phase of this partial, in radians (optional), or segment duration</td>
+</tr>
+<tr>
+<td>mixer</td>
+<td>chnls</td>
+<td>Number of mixer inputs</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>fxunits</td>
+<td>Number of effects units</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>lft</td>
+<td>Master volume left</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>rgt</td>
+<td>Master volume right</td>
+</tr>
+<tr>
+<td>chnl</td>
+<td>cn</td>
+<td>Mixer input channel number</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>on</td>
+<td>Channel on (1) or off (0)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>pan</td>
+<td>Channel pan (-1 to +1)</td>
+</tr>
+<tr>
+<td>reverb</td>
+<td>unit</td>
+<td>Effects unit number</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>vol</td>
+<td>Output volume level</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>rvt</td>
+<td>Reverb time</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>pan</td>
+<td>Pan for the reverb</td>
+</tr>
+<tr>
+<td>send</td>
+<td>chnl</td>
+<td>Input channel to send from</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>amt</td>
+<td>Amplitude to send to effects unit</td>
+</tr>
+<tr>
+<td>flanger</td>
+<td>unit</td>
+<td>Effects unit number</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>fb</td>
+<td>Flanger feedback amount</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>center</td>
+<td>Flanger center delay (seconds)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>depth</td>
+<td>Flanger delay sweep depth (seconds)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>lvl</td>
+<td>Flanger output level</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>mix</td>
+<td>Mix of input to flanger output</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>sweep</td>
+<td>Sweep rate in Hz</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>pan</td>
+<td>Pan position for flanger output</td>
+</tr>
+<tr>
+<td>echo</td>
+<td>unit</td>
+<td>Effects unit number</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>tm</td>
+<td>Echo delay time</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>dec</td>
+<td>Echo decay value</td>
+</tr>
+<tr>
+<td>wvfile</td>
+<td>&nbsp;</td>
+<td>Wave file to load</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>id</td>
+<td>ID to associate with the file</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>name</td>
+<td>Display name</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>desc</td>
+<td>Description</td>
+</tr>
+<tr>
+<td>libfile</td>
+<td>&nbsp;</td>
+<td>Instrument library</td>
+</tr>
+<tr>
+<td>instrlib</td>
+<td>&nbsp;</td>
+<td>In-line instrument library</td>
+</tr>
+<tr>
+<td>instr</td>
+<td>*</td>
+<td>See the definition of each instrument in the <a href="Instruments.html">Instrument Library</a></td>
+</tr>
+<tr>
+<td>seq</td>
+<td>&nbsp;</td>
+<td>A sequencer events file (See <a href="seqfile.html">Sequencer Files</a>)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>name</td>
+<td>Display name for the file</td>
+</tr>
+<tr>
+<td>score</td>
+<td>&nbsp;</td>
+<td>A Notelist file (See <a href="notelist.html">Notelist)</a></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>name</td>
+<td>Display name for the file</td>
+</tr>
+<tr>
+<td>text</td>
+<td>&nbsp;</td>
+<td>File associated with the project</td>
+</tr>
+</table>
+    <p>
+        The <em>name, author, desc, copyright, synth, mixer, wvdir</em> and <em>out</em>
+        tags should appear once. The other tags can be repeated as many times as needed.</p>
+    <p>
+        The synthesizer parameters must be set prior to loading instruments, and instruments
+        must be loaded prior to processing score or sequence files. The <em>BSynth</em>
+        program insures the proper order by making three scans of the project file. The
+        first scan looks for synth and mixer nodes. The second scan loads instruments and
+        instrument libraries. The third scan processes score and sequence files.</p>
+    <h3>
+        Wave Tables</h3>
+    <p>
+        The synthesizer defines a set of common wavetables automatically. To include additional
+        tables, the <i>usr</i> attribute of the synthesizer node must indicate how many
+        user wave tables should be allocated. Each wave table is defined in a <i>wvtable</i>
+        node.</p>
+    <p>
+        The wavetable is identifed by index and ID values. The index value indicates a specific
+        position in the wavetable array maintained by the <i>wtSet</i> object. The first
+        10 entries are pre-defined, and, although they can be reloaded with user defined
+        values, they should typically be left as-is. User wavetables thus begin with index
+        10. The wavetable oscillators use the wave table ID, but since the predefined entries
+        have ID values equal to the index, either the index or ID may be used. The index
+        and ID values can be the same for user tables as well. However, when wavetables
+        are defined in an instrument library file, the ID should be indicated and used in
+        order to avoid number conflicts with other libraries.</p>
+    <p>
+        User wave tables defined in the project file may be one of two types. Type 1 wavetables
+        are constructed as a series of sin waves and are typically used as audio waveforms.
+        The <i>amp</i>, <i>mul</i> and <i>phs</i> attributes on each partial represent the
+        amplitude, frequency multiple and initial phase of each sin. Note that the <i>mul</i>
+        values must be positive integers. The <i>phs</i> values are in radians. Amplitude
+        values can be in any convenient range and represent relative amplitude levels. The
+        wavetable will be rescaled so that the peak amplitude is normalized to [-1,+1]</p>
+    <p>
+        Type 2 wavetables are defined as a series of line segments and are typically used
+        for LFO and pitch bend modulation effects. The <i>amp</i> attribute indicates the
+        end amplitude of the segment (normalized to +/-1.0), while the <i>phs</i> attribute
+        indicates the duration of the segment specified as a fraction of the wavetable length.
+        For example, a part with phs=0.5 would create a segment equal to half the wavetable
+        length. The starting value for the wavetable is 0. To start the wavetable at some
+        other value, the first segment should indicate the starting amplitude value and
+        use a duration (phs) of 0.</p>
+    <h3>
+        Wave Files</h3>
+    <p>
+        The WFSynth instrument is used to playback pre-recorded sounds stored in wave files.
+        Each wave file must be included
+        in the project using a <i>wvfile</i> node. Wave files are typically 2-channel, PCM
+        format (16-bit at 44100k sample rate) but 32-bit float formats can be used as well.
+        Sample rates are automatically converted to the synthesizer sample rate by either
+        skipping or duplicating samples as needed. However, it is better to use a sound
+        file editor to convert the file sample rate to the synthesizer sample rate since
+        the sound file editor can apply more sophisticated sample rate conversion algorithms.</p>
+    <p>
+        Since wave files may be located in a shared directory, the project may also specify
+        the path to wave files using the <i>wvdir</i> node. A default path for all projects
+        may also be specified
+        in the project options (Project-&gt;Options on the main menu.)</p>
+    <h3>
+        Instrument Library Files</h3>
+    <p>
+        Typically, the instruments used in a composition are defined in the project file.
+        However, instruments that are used by multiple compositions can be collected into
+        an instrument library file and then incorporated by reference using the <i>libfile</i>
+        tag. An instrument library is an XML file with a root node of <i>instrlib</i> and
+        child nodes with tag <i>instr</i>. In addition, wavefile and wavetable nodes can
+        be embedded into the library. Wavefiles should be given ID values that will not
+        overlap other instrument definitions. Likewise, wavetables should be given ID attibute
+        values that are unique from other instrument libraries. </p>
+    <p>
+        Instruments located in the library can be given ID values that are unique, or can
+        be given the same ID (e.g., 0) and the instrument manager will automatically assign
+        a unique number to the instrument. It is also good practice to create a unique prefix
+        for library instrument names so that the names do not duplicate instrument names
+        from othe library or project files.</p>
+ 
+</body>
+</html>

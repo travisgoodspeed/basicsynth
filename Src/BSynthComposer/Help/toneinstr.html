@@ -1,0 +1,223 @@
+<html>
+<head>
+<title>Tone Instrument</title>
+</head>
+<body>
+<h2>Tone Instrument</h2>
+<p>The <i>Tone</i> instrument
+contains a single wavetable oscillator, ADSR envelope generator, LFO generator and pitch bend. The
+waveform for the oscillator is selectable, providing for a variety of sounds.
+Although limited in abilty to produce a dyamic timbre, it is fast to execute and very easy to configure.</p>
+<p>To create a <i>Tone</i> instrument, right-click on <b>Instruments</b> in the
+project tree and select <b>New</b>. Enter a neame for the instrument and select 
+the <b>Tone</b> type in the list box at the bottom of the instrument properties form.
+</p>
+<hr/>
+<h3>Patch Diagram</h3>
+<img src="images/tonediag.jpg" alt="tone diagram" />
+<hr /><h3>Configuration</h3>
+<p>The Tone instrument editor is shown below.</p>
+<img src="images/toneedit.jpg" alt="tone editor" />
+<h4>Oscillator</h4>
+<p>The buttons on the left side select the oscillator waveform. Four of the builtin waveforms are available 
+with buttons. You can select any configured waveform by pressing the <b>Select</b> button and then select
+the waveform from the popup dialog.</p>
+<h4>Envelope</h4>
+<p>The envelope is set using the four knobs on the top row. The <b>Attack</b> knob sets the attack time in seconds.
+The <b>Peak</b> knob sets the envelop level at the end of the attack. Typically this is set to 1.0. However, it is
+allowable to set the "peak" to a value less than "sustain" in order to create a two-segment attack. 
+The <b>Decay</b> knob sets the amount of time the envelope takes to move from the peak level to the sustain level.
+The <b>Sustain</b> knob sets the level held over the note duration.
+The <b>Release</b> knob sets the final release time in seconds. Release is initiated when the note is stopped
+and is the time the envelope takes to decay from the current note level to silence.
+</p>
+<h4>LFO</h4>
+<p>
+The LFO (Low Frequency Oscillator) produces vibrato. The <b>Frequency</b> knob sets the vibrato rate in Hz.
+The <b>Attack</b> knob sets the time in second for the vibrato to become active. The <b>Depth</b> knob sets
+the amount of vibrato in semitones. A value of 1 indicates a half-step in pitch. Fractional values can be used
+to set vibrato to cents of pitch, e.g., 0.1 is equivalent to 10 cents. The buttons to the left of the <b>Depth</b>
+knob select the LFO waveform. Use the <b>Select</b> button to choose a waveform other than a sine wave.
+</p>
+<h4>Pitch Bend</h4>
+<p>
+Pitch bend applies a waveform to the pitch of the sound over the duration of the note. 
+Wavetables are "normalized" to a range of -1 to +1 and multiplied by the pitch bend amount.
+The <b>Amount</b> knob sets the scaling for the waveform in semitones.
+The <b>Curve</b> button selects the wavetable
+The <b>Delay</b> knob sets the amount of time before the pitch bend begins to affect the pitch.
+The <b>Duration</b> knob sets the time taken to scan the wavetable.
+Depending on the setting for duration, the wavetable can be scanned at a constant rate,
+or scannned at a rate scaled by the note length. When the <b>Abs.</b> button is depressed, the
+delay and duration values are absolute values in seconds. When the <b>Scl.</b> button is depressed,
+the delay and duration values represent a multiplier for the actual note duration. For example, if
+the note length is 1/2 second, delay is 0.1 and duration is 0.5, pitch bend will start 1/20th second
+after the note starts and then finish 1/4 second later.
+</p>
+<h4>Project and Notelist ID Values</h4>
+<p>The following table shows the parameter ID numbers and the
+equivalent XML tag and attribute values for the <i>Tone</i> instrument. </p>
+
+<table border="1" cellspacing="0" cellpadding="4">
+ <tr valign="top" style="background-color:Black;color:White;">
+  <td><p align="center"><b>Parameter</b></p></td>
+  <td><p align="center"><b>Tag</b></p></td>
+  <td><p align="center"><b>Attribute</b></p></td>
+  <td><p align="center"><b>Name</b><p></td>
+  <td><p align="center"><b>Use</b></p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>5</p></td>
+  <td><p>osc</p></td>
+  <td><p>frq</p></td>
+  <td><p>oscfrq</p></td>
+  <td><p>Initial frequency of the oscillator</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>6</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>vol</p></td>
+  <td><p>oscvol</p></td>
+  <td><p>Overall volume level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>16</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>oscwt</p></td>
+  <td><p>Wave table ID</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>17</p></td>
+  <td><p>env</p></td>
+  <td><p>st</p></td>
+  <td><p>envst</p></td>
+  <td><p>Start level for envelope</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>18</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>envatk</p></td>
+  <td><p>Attack rate in seconds</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>19</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pk</p></td>
+  <td><p>envpk</p></td>
+  <td>  <p>Peak amplitude level after attack</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>20</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>dec</p></td>
+  <td><p>envdec</p></td>
+  <td><p>Decay time to sustain level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>21</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>sus</p></td>
+  <td><p>envsus</p></td>
+  <td><p>Sustain level</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>22</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>rel</p></td>
+  <td><p>envrel</p></td>
+  <td><p>Release rate in seconds</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>23</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>end</p></td>
+  <td><p>envend</p></td>
+  <td><p>End level for envelope</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>24</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>ty</p></td>
+  <td><p>envty</p></td>
+  <td><p>Envelope curve type:<br />
+  1 = linear<br />
+  2 = exponential<br />
+  3 = log</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>25</p></td>
+  <td><p>lfo</p></td>
+  <td><p>frq</p></td>
+  <td><p>lfofrq</p></td>
+  <td><p>LFO Frequency</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>26</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>wt</p></td>
+  <td><p>lfowt</p></td>
+  <td><p>Wave table index</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>27</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>atk</p></td>
+  <td><p>lfoatk</p></td>
+  <td><p>LFO envelope attack time</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>28</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>amp</p></td>
+  <td><p>lfoamp</p></td>
+  <td><p>LFO depth (amplitude)</p></td>
+ </tr>
+ <tr valign="top">
+  <td>40</td>
+  <td>pb</td>
+  <td>pbamp</td>
+  <td>pbamp</td>
+  <td><p>Pitch bend amount (semitones)</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>41</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbwt</p></td>
+  <td><p>pbwt</p></td>
+  <td><p>Pitch bend wavetable</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>42</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbdur</p></td>
+  <td><p>pbdur</p></td>
+  <td><p>Pitch bend duration</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>43</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbdly</p></td>
+  <td><p>pbdly</p></td>
+  <td><p>Pitch bend delay</p></td>
+ </tr>
+ <tr valign="top">
+  <td><p>44</p></td>
+  <td><p>&nbsp;</p></td>
+  <td><p>pbmode</p></td>
+  <td><p>pbmode</p></td>
+  <td><p>Pitch bend mode (1=absolute,0=scaled)</p></td>
+ </tr>
+</table>
+<h3>XML Format</h3>
+<pre>
+&lt;instr id=&quot;&quot; type=&quot;Tone&quot; name=&quot;&quot; desc=&quot;&quot;&gt;
+  &lt;osc frq=&quot;&quot; wt=&quot;&quot; vol=&quot;&quot; /&gt;
+  &lt;env st=&quot;&quot; atk=&quot;&quot; pk=&quot;&quot; dec=&quot;&quot; sus=&quot;&quot; rel=&quot;&quot; end=&quot;&quot; ty=&quot;&quot; /&gt;
+  &lt;lfo frq=&quot;&quot; wt=&quot;&quot; atk=&quot;&quot; amp=&quot;&quot;/&gt;
+  &lt;pb pbamp=&quot;&quot; pbwt=&quot;&quot; pbdur=&quot;&quot; pbdly=&quot;&quot; pbmode=&quot;&quot;/&gt;
+&lt;/instr&gt;
+</pre>
+</body>
+</html>

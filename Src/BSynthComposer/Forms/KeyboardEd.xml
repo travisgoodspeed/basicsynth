@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout type="Keyboard" x="0" y="0" w="0" h="0" bg="bg" fg="fg">
+  <box name="instrlist" id="1" x="5" y="5" w="180" h="150" style="0" bg="bg" />
+  <group id="20" x="195" y="5" w="60" h="145" bord="1" fr="grpfr" bg="grpbk">
+    <label id="21" x="5" y="5" w="50" h="15" th="10" lbl="Volume" fg="label" bg="bg" />
+    <baseknob id="22" x="5" y="25" w="50" h="50" val="1.0" lo="0" hi="1" prec="3" hiclr="shinyhi" loclr="shinylo" />
+    <label id="23" x="5" y="80" w="50" h="15" th="12" align="1" filled="1" edit="1" bg="black" fg="volume"/>
+    <label id="24" x="5" y="100" w="50" h="15" th="10" align="1" lbl="Channel" bg="bg" fg="label"/>
+    <label id="25" x="5" y="120" w="30" h="15" th="12" fmt="%2.f" lbl="0" align="1" filled="1" edit="1" bg="black" fg="volume"/>
+    <pushbutton id="26" x="35" y="120" w="20" h="15" lbl="+" fg="btnlabel" />
+    <pair knb="22" lbl="23" />
+  </group>
+
+  <lamp id="30" x="265" y="15" w="60" h="25" lbl="On" hi="#ffa0ffa0" lo="#ff00ff00" />
+  <lamp id="46" x="325" y="15" w="60" h="25" lbl="MIDI" hi="#ffa0a0ff" lo="#ff0000ff" />
+  <switchgroup id="31" x="400" y="5" w="250" h="50" val="1" >
+    <imageswitch id="32" x="0" y="0" w="50" h="50" val="1" fg="label" off="whole.png" on="whole.png" />
+    <imageswitch id="33" x="50" y="0" w="50" h="50" val="2" fg="label" off="half.png" on="half.png"/>
+    <imageswitch id="34" x="100" y="0" w="50" h="50" val="4" fg="label" off="quarter.png" on="quarter.png"/>
+    <imageswitch id="35" x="150" y="0" w="50" h="50" val="8" fg="label" off="eighth.png" on="eighth.png"/>
+    <imageswitch id="36" x="200" y="0" w="50" h="50" val="16" fg="label" off="sixteenth.png" on="sixteenth.png"/>
+  </switchgroup>
+  <group id="43" x="695" y="5" w="190" h="50" bord="0" >
+    <imageswitch id="37" x="0" y="0" w="50" h="50" fg="btnlabel"  on="recon.png" off="recoff.png" />
+    <imageswitch id="38" x="50" y="0" w="50" h="50" fg="btnlabel" on="notegroup.png" off="notegroup.png" />
+    <switchgroup id="39" x="100" y="0" w="25" h="50" bord="0" val="0" >
+      <imageswitch id="40" x="0" y="0" w="25"  h="25" val="1" fg="btnlabel" on="sharp.png" off="sharp.png" />
+      <imageswitch id="41" x="0" y="25" w="25" h="25" val="0" fg="btnlabel" on="flat.png" off="flat.png" />
+    </switchgroup>
+    <imagebutton id="42" x="125" y="0" w="50" h="50" fg="label" on="notecopy.png" off="notecopy.png" />
+  </group>
+  <imagebutton id="44" x="900" y="5" w="50" h="50" on="playspkr.png" off="playspkr.png" />
+  <imagebutton id="45" x="950" y="5" w="50" h="50" on="playdisk.png" off="playdisk.png" />
+  <keyboard id="2" x="265" y="60" h="90" w="737" octs="7" base="12" />
+</layout>

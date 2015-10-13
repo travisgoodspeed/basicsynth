@@ -1,0 +1,165 @@
+<?xml version="1.0" ?>
+<instrlib>
+ <instr id="0" type="Tone" name="SineWave" desc="">
+  <osc frq="440.0" wt="0" />
+  <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+ </instr>
+ <instr id="1" type="Tone" name="SawWave" desc="">
+  <osc frq="440.0" wt="1" />
+  <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="2" />
+ </instr>
+ <instr id="2" type="Tone" name="SqrWave" desc="">
+  <osc frq="440.0" wt="2" />
+  <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="3" />
+ </instr>
+ <instr id="3" type="Tone" name="TriWave" desc="">
+  <osc frq="440.0" wt="3" />
+  <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+ </instr>
+ <instr id="4" type="Tone" name="Pulse" desc="">
+  <osc frq="440.0" wt="4" />
+  <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+ </instr>
+  <instr id="5" type="ToneFM" name="FMFixed" desc="">
+    <osc frq="440.0" mnx="2.0" mul="3.0" vol="1.0" />
+    <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+    <lfo frq="3.5" wt="1" atk="0.01" amp="0" />
+    <pb on="0" r1="0" r2="0" a1="0" a2="0" a3="0" />
+  </instr>
+  <instr id="6" type="Tone" name="PulseBend" desc="">
+    <osc frq="440.0" wt="4" />
+    <env st="0" atk="0.1" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+    <lfo frq="3.5" wt="1" atk="0.1" amp="0" />
+    <pb on="1" r1="0.05" r2="0.05" a1="1" a2="0" a3="-0.2" />
+  </instr>
+  <instr id="7" type="AddSynth" name="plink" parts="3" >
+  <part pn="0"  mul="1">
+   <osc frq="440.0" wt="0" />
+   <env segs="2" st="0" son="0">
+    <seg sn="0" rt="0.05" lvl="1.0" ty="2" />
+    <seg sn="1" rt="0.25" lvl="0.0" ty="2" />
+   </env>
+  </part>
+  <part pn="1"  mul="3">
+   <osc frq="880.0" wt="0" />
+   <env segs="2" st="0" son="0">
+    <seg sn="0" rt="0.05" lvl="0.4" ty="2" />
+    <seg sn="1" rt="0.20" lvl="0.0" ty="2" />
+   </env>
+  </part>
+  <part pn="2"  mul="6">
+   <osc frq="880.0" wt="0" />
+   <env segs="2" st="0" son="0">
+    <seg sn="0" rt="0.05" lvl="0.1" ty="2" />
+    <seg sn="1" rt="0.10" lvl="0.0" ty="2" />
+   </env>
+  </part>
+ </instr>
+ <instr id="8" type="SubSynth" >
+  <osc frq="440" vol="1.0" mix="1.0" fg="1.0" fr="0.9" ft="0" wt="1" />
+  <egs st="0" atk="0.05" pk="1.0" dec="0.2" sus="0.8" rel="0.1" end="0" ty="1" />
+  <egf st="100" atk="0.1" pk="4000.0" dec="0.5" sus="500" rel="0.1" end="100" ty="1" />
+  <lfo frq="3.5" wt="1" atk="0.1" amp="0.2" />
+ </instr>
+ <instr id="9" type="FMSynth" name="Basic FM" >
+  <fm mix="0.6" alg="3" dly="0" />
+  <gen1 mul="1.0" st="0" atk="0.2" pk="1.0" dec="0.2" sus="0.9" rel="0.2" end="0" ty="1"/>
+  <gen2 mul="1.0" st="0" atk="0.1" pk="1" dec="0.2" sus="0.8" rel="0.2" end="0" ty="1"/>
+  <gen3 mul="2.0" st="2" atk="0.1" pk="1" dec="0.2" sus="0.8" rel="0.2" end="0" ty="1"/>
+  <lfo frq="2.7" wt="1" atk="0.01" amp="0.2" />
+ </instr>
+ <instr id="10" type="FMSynth" name="Noisy piano" >
+  <fm mix="0.7" dly="0.5" alg="2" />
+  <gen1 mul="1" st="0" atk="0.01" pk="1.0" dec="3.0" sus="0" rel="0.1" end="0" ty="2" />
+  <gen2 mul="3.0" st="3" atk="0.01" pk="1" dec="2" sus="0.6" rel="0.15" end="0.2" ty="2" />
+  <gen3 mul="5.0" st="2" atk="0.01" pk="1.5" dec="1" sus="0.2" rel="0.1" end="0.1" ty="2" />
+  <nz mix="0.3" dly="0.3" fo="200" fr="400" st="0" atk="0.001" pk="1.0" dec="0.2" sus="0" rel="0.1" end="0" ty="2" />
+  <dln mix="0.3" dly="0.05" dec="0.8" />
+  <lfo frq="3.5" wt="1" atk="0.2" amp="0.01" />
+ </instr>
+ <instr id="11" type="FMSynth" name="Plain piano" >
+  <fm mix="0.7" dly="1.0" alg="2" />
+  <gen1 mul="1" st="0" atk="0.01" pk="1.0" dec="3.0" sus="0" rel="0.1" end="0" ty="2" />
+  <gen2 mul="3.0" st="3" atk="0.01" pk="1" dec="2" sus="0.6" rel="0.15" end="0.2" ty="2" />
+  <gen3 mul="5.0" st="2" atk="0.01" pk="1.5" dec="1" sus="0.2" rel="0.1" end="0.1" ty="2" />
+  <nz mix="0.0" fr="100" fo="100" st="0" atk="0.05" pk="1.0" dec="0.1" sus="0" rel="0.1" end="0" ty="1" />
+  <dln mix="0.0" dly="0.01" dec="0.1" />
+  <lfo frq="3.5" wt="1" atk="0.0" amp="0.0" />
+ </instr>
+ <instr id="12" type="MatrixSynth" >
+  <mat frq="440.0" vol="1" />
+  <gen gn="0" out="1100000000000000" mod="00000000" frq="440" wt="2" mul="1" mnx="1" vol="0.8" eg="0" lfo="1" />
+  <env en="0" segs="4" st="0" sus="1">
+    <seg sn="0" rt="0.01" lvl="1.0" ty="1" />
+    <seg sn="1" rt="0.10" lvl="0.8" ty="1" />
+    <seg sn="2" rt="0.30" lvl="0.5" ty="1" />
+    <seg sn="3" rt="0.10" lvl="0.0" ty="1" />
+  </env>
+  <lfo frq="3.5" wt="0" atk="0.0" amp="0.1" />
+ </instr>
+ <instr id="13" type="MatrixSynth" desc="Tone and Bell">
+  <mat frq="440.0" vol="0.5" />
+  <gen gn="0" out="1100000000000001" mod="01000000" wt="0" mul="1" mnx="1" vol="0.8" eg="0" pan="-0.7" />
+  <gen gn="1" out="1000000000000000" mod="00000000" wt="0" mul="2.0" mnx="1" vol="0" eg="1"  />
+  <gen gn="2" out="1100000000000001" mod="00010000" wt="0" mul="1.0" mnx="1" vol="0.4" eg="2"  pan="0.7"/>
+  <gen gn="3" out="1000000000000000" mod="00000000" wt="0" mul="1.4" mnx="2" vol="0" eg="3" />
+  <env en="0" segs="4" st="0" sus="1">
+   <seg sn="0" rt="0.01" lvl="1.0" ty="1" />
+   <seg sn="1" rt="0.10" lvl="0.8" ty="1" />
+   <seg sn="2" rt="0.30" lvl="0.5" ty="1" />
+   <seg sn="3" rt="0.10" lvl="0.0" ty="1" />
+  </env>
+  <env en="1" segs="4" st="0" sus="1">
+   <seg sn="0" rt="0.01" lv1="1.0" ty="1" />
+   <seg sn="1" rt="0.10" lv1="0.8" ty="1" />
+   <seg sn="2" rt="0.30" lv1="0.5" ty="1" />
+   <seg sn="3" rt="0.10" lv1="0.0" ty="1" />
+  </env>
+  <env en="2" segs="4" st="0" sus="1">
+   <seg sn="0" rt="0.001" lvl="1.0" ty="1" />
+   <seg sn="1" rt="0.100" lvl="0.8" ty="1" />
+   <seg sn="2" rt="1.000" lvl="0.0" ty="1" />
+   <seg sn="3" rt="0.050" lvl="0.0" ty="1" />
+  </env>
+  <env en="3" segs="4" st="0" sus="1">
+   <seg sn="0" rt="0.005" lvl="1.0" ty="1" />
+   <seg sn="1" rt="0.100" lvl="0.9" ty="1" />
+   <seg sn="2" rt="1.000" lvl="0.1" ty="1" />
+   <seg sn="3" rt="0.100" lvl="0.1" ty="1" />
+  </env>
+  <lfo frq="3.5" wt="0" atk="0.0" amp="0.05" />
+ </instr>
+ <instr id="14" type="WFSynth" >
+   <wvf fn="1" lp="0" pa="1" />
+   <env ar="0" rr="0" />
+   <file name="test1.wav" id="1" />
+ </instr>
+ <instr id="15" type="WFSynth" >
+   <wvf fn="2" lp="1" pa="0" />
+   <env ar="0.25" rr="0.25" />
+   <file name="test2.wav" id="2" />
+ </instr>
+  <instr id="16" type="ModSynth" name="mstone" desc="Simple tone generator">
+    <ugen id="16" type="ENVAR" name="eg" scale="1.0" attack="0.1" peak="1.0" sustain="1" release="0.1" curve="1" time="1" />
+    <ugen id="17" type="OSCIL" name="osc" amplitude="1" frequency="220" multiple="1" wavetable="1" />
+    <connect src="@frq" dst="osc.frequency" />
+    <connect src="eg" dst="osc.amplitude" />
+    <connect src="osc" dst="out.in" />
+  </instr>
+  <instr id="17" type="BuzzSynth" name="Buzzer" desc="Pulse wave instrument">
+    <gen gn="0" mod="305" vol="0.8">
+      <osc frq="440.0" fr="1" fscl="0" harm="10" amp="0.5" ascl="0" />
+      <flt fc="1200" fscl="4800" q="1" />
+      <egv rt0="0" lv0="0" rt1="0.01" lv1="1.0" rt2="0.1" lv2="0.9" rt3="0.1" ty="1" son="1"/>
+      <egm rt0="0" lv0="0" rt1="0.01" lv1="1.0" rt2="0.1" lv2="0.5" rt3="0.1" ty="1" son="1"/>
+    </gen>
+    <gen gn="1" mod="288" vol="0.2">
+      <osc frq="440.0" fr="1" fscl="1200" harm="5" amp="0.5" ascl="0"/>
+      <flt fc="0" fscl="0" q="1" />
+      <egv rt0="0" lv0="0" rt1="0.01" lv1="1.0" rt2="0.1" lv2="0.9" rt3="0.1" ty="1" son="1"/>
+      <egm rt0="0" lv0="0" rt1="0.01" lv1="1.0" rt2="0.1" lv2="0.9" rt3="0.1" ty="1" son="1"/>
+    </gen>
+    <lfo frq="3.5" wt="0" atk="0.0" amp="0" />
+    <pb pbamp="0" pbwt="0" pbdur="1" pbdly="0" pbmode="0"/>
+  </instr>
+</instrlib>
